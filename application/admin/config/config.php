@@ -17,7 +17,9 @@ if (!defined('BASEPATH'))
   | path to your installation.
   |
  */
-$config['base_url'] = 'http://crm.checksample.co.uk/';
+//global $DWS_SERVER_NAME;
+$config['base_url'] = 'http://localhost/landlord/admin/';
+$config['site_url'] = 'http://localhost/landlord/';
 
 /*
   |--------------------------------------------------------------------------
@@ -94,7 +96,7 @@ $config['charset'] = 'UTF-8';
   | setting this variable to TRUE (boolean).  See the user guide for details.
   |
  */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 
 /*
@@ -247,14 +249,14 @@ $config['encryption_key'] = '*E()*#WQFKJIV&$ NJCU*(*($56799>/,?":';
   | 'sess_time_to_update'		= how many seconds between CI refreshing Session Information
   |
  */
-$config['sess_cookie_name'] = 'desktopdeli';
+$config['sess_cookie_name'] = 'landloadadmin';
 $config['sess_expiration'] = 7200;
 $config['sess_expire_on_close'] = FALSE;
 $config['sess_encrypt_cookie'] = TRUE;
 $config['sess_use_database'] = TRUE;
 $config['sess_table_name'] = 'session';
 $config['sess_match_ip'] = FALSE;
-$config['sess_match_useragent'] = TRUE;
+$config['sess_match_useragent'] = FALSE;
 $config['sess_time_to_update'] = 300;
 
 /*
@@ -268,8 +270,7 @@ $config['sess_time_to_update'] = 300;
   | 'cookie_secure' =  Cookies will only be set if a secure HTTPS connection exists.
   |
  */
-$config['cookie_prefix'] = "";
-//$config['cookie_domain'] = ".desktopdeli.co.uk";
+$config['cookie_prefix'] = "admin";
 $config['cookie_domain'] = "";
 $config['cookie_path'] = "/";
 $config['cookie_secure'] = FALSE;
@@ -283,7 +284,7 @@ $config['cookie_secure'] = FALSE;
   | COOKIE data is encountered
   |
  */
-$config['global_xss_filtering'] = TRUE;
+$config['global_xss_filtering'] = false;
 
 /*
   |--------------------------------------------------------------------------
