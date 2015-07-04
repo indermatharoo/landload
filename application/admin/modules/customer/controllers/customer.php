@@ -76,9 +76,9 @@ class Customer extends CommonController {
             $this->load->view($this->customer, $page);
         } else {
             if (isset($_POST['editCutomer']) && !empty($_POST['editCutomer'])) {
-                $this->Customermodel->updateRecord(null);
+                $user_id = $this->Customermodel->updateRecord(null);
             } else {
-                $this->Customermodel->insertRecord(null);
+                $user_id = $this->Customermodel->insertRecord(null);
             }
             $this->session->set_flashdata('SUCCESS', 'customer_updated');
             redirect("customer/customer/index/", 'location');

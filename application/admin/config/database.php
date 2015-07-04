@@ -51,9 +51,9 @@ $active_group = 'default';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
-$db['default']['username'] = 'user_crm';
-$db['default']['password'] = 'Xbvt54*2';
-$db['default']['database'] = 'admin_crm1';
+$db['default']['username'] = 'root';
+$db['default']['password'] = '123456';
+$db['default']['database'] = 'landlord';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = 'dpd_';
 $db['default']['pconnect'] = FALSE;
