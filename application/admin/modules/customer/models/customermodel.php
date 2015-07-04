@@ -73,6 +73,10 @@ class Customermodel extends CI_Model {
         
         $user_id = $this->aauth->create_user($data['email'], $data['passwd'], $data['first_name'], 6, 0,$this->aauth->get_user()->id, false, 0, array('internal' => true));
         if ($user_id) {
+            echo "<pre>";
+            var_dump($user_id);
+            $data['customer_id'] = $user_id;
+
             $data['auth_user_id'] = $user_id;
             $this->db->insert('customer', $data);
             $customer_user_id = $this->db->insert_id();
@@ -83,30 +87,10 @@ class Customermodel extends CI_Model {
     //update record
     function updateRecord($customer) {
         $data = array();
-        $data['first_name'] = $this->input->post('first_name', TRUE);
-        $data['last_name'] = $this->input->post('last_name', TRUE);
-        $data['email'] = $this->input->post('email', TRUE);
-        $data['passwd'] = $this->input->post('passwd', TRUE);
-        $data['auth_user_id'] = $this->input->post('auth_user_id', TRUE);
-        // $data['store_id'] = false;
-        $datas['editCutomer'] = $this->input->post('editCutomer', TRUE);
-        $data['linkedin'] = $this->input->post('linkedin', TRUE);
-        $data['twitter'] = $this->input->post('twitter', TRUE);
-        $data['facebook'] = $this->input->post('facebook', TRUE);
-        $data['delivery_address1'] = $this->input->post('delivery_address1', TRUE);
-        $data['delivery_address2'] = $this->input->post('delivery_address2', TRUE);
-        $data['delivery_phone'] = $this->input->post('delivery_phone', TRUE);
-        $data['delivery_city'] = $this->input->post('delivery_city', TRUE);
-        $data['delivery_zipcode'] = $this->input->post('delivery_zipcode', TRUE);
-
-
-        $this->aauth->update_user($data['auth_user_id'], $data['email'], $data['passwd'], $data['first_name'], FALSE);
-        $this->db->where('auth_user_id', $data['auth_user_id'])
+        $data = rSF('customer');
+        $this->aauth->update_user($data['auth_user_id'], arrIndex($data, 'email'), arrIndex($data, 'passwd'), arrIndex($data, 'first_name'), FALSE);
+        $this->db->where('auth_user_id', arrIndex($data, 'auth_user_id'))
                 ->update('customer', $data);
-        $this->db->where('customer_id', $datas['editCutomer'])
-                ->delete('customer_children');
-
-
         return;
     }
 
