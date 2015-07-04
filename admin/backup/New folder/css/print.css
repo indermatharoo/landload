@@ -1,0 +1,120 @@
+/* Common */
+body {
+	font: normal 14px Arial, Helvetica, sans-serif;
+	color: #000;
+	margin: 0px;
+	padding: 0px;
+	text-align: center;
+}
+div {
+	margin: 0px;
+	padding: 0px;
+}
+p {
+	margin: 0px 0px 14px;
+	padding: 0px;
+	line-height: 1.3em;
+}
+a img {
+	border-width: 0px;
+	border-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+a {
+	color: #0C0B07;
+	text-decoration: none;
+}
+img {
+	vertical-align: baseline;
+}
+
+a:hover {
+	color: #3B2314;
+	text-decoration: none;
+}
+form {
+	margin: 0px;
+	padding: 0px;
+}
+h1 {
+	margin: 10px 0px 10px;
+	padding: 0px;
+	font: normal 20px Arial, Helvetica, sans-serif;
+	color: #000;
+	text-decoration: underline;
+}
+h2 {
+	margin: 15px 0px 4px;
+	padding: 0px;
+	font: normal 18px Besign, Arial, Helvetica, sans-serif;
+	color: #000;
+}
+h3 {
+	margin: 15px 0px 4px;
+	padding: 0px;
+	font: normal 16px Arial, Helvetica, sans-serif;
+	color: #000;
+}
+h4 {
+	margin: 0px 0px 4px;
+	padding: 0px;
+	font: normal 14px Arial, Helvetica, sans-serif;
+	color: #5C5C5C;
+}
+h5 {
+	margin: 0px 0px 4px;
+	padding: 0px;
+	font: normal 12px Verdana, Arial, Helvetica, sans-serif;
+	color: #000000;
+}
+.hr_solid {
+	margin: 10px 0px;
+	padding: 0px;
+	border-top: 1px solid #BABABC;
+}
+.hr_dotted {
+	margin: 10px 0px;
+	padding: 0px;
+	border-top: 1px dashed #BABABC;
+}
+.err_icon {
+	position: absolute;
+	right: 8px;
+	padding-top: 4px;
+}
+.brown_color {
+	color: #5a4942;
+}
+.blue_color {
+	color: #4a82cf;
+}
+.white_color {
+	color: #FFFFFF;
+}
+.error {
+	color: #ff0000;
+}
+
+/* table grid */
+.grid {
+	margin-top: 0px;
+	margin-bottom: 15px;
+}
+.grid th {
+	padding-top: 1px;
+	padding-bottom: 1px;
+	border-bottom: 2px solid #403F41;
+}
+.grid td {
+	padding-top: 1px;
+	padding-bottom: 1px;
+}
+
+/* Layout */
+#container {
+	margin: 0px auto;
+	padding: 10px;
+	padding-top: 20px;
+	text-align: left;
+}

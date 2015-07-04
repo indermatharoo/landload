@@ -1,0 +1,78 @@
+/* Invoice Content Info */
+#invoice_content {
+	max-width: 750px;
+	margin: 0px auto;
+}
+#invoice_content h1 {
+	margin-bottom: 0px;
+	margin-top: 0px;
+	color: #868687;
+	font: normal 30px "Trebuchet MS", Arial, sans-serif;
+}
+#invoice_content h2 {
+	color: #868687;
+	margin-bottom: 8px;
+	margin-top: 0px;
+	font: normal 20px "Trebuchet MS", Arial, sans-serif;
+}
+#invoice_header {
+	padding-top: 14px;
+	padding-bottom: 14px;
+}
+#invoice_box_top {
+	margin-bottom: 20px;
+	padding-left: 8px;
+	border-top: 1px solid #929392;
+	border-right: 1px solid #929392;
+	border-bottom: 1px solid #929392;
+	border-left: 1px solid #929392;
+}
+#invoice_box_top th {
+	border-top: 1px solid #929392;
+	border-left: 1px solid #929392;
+	border-right: 1px solid #929392;
+	background: #cecfcf;
+	text-align: left;
+	padding: 8px;
+	color: #000000;
+}
+#invoice_box_top th.first {
+	border-top: 0px none;
+}
+#invoice_box_top td {
+	border-top: 1px solid #929392;
+	/*border-right: 1px solid #929392;*/
+	text-align: left;
+	padding: 8px;
+}#invoice_box_top td.first {
+	border-top: 0px none;
+}
+
+#branch_box {
+margin: 0px;
+padding: 0px;
+}
+#branch_box p {
+margin-bottom: 14px;
+line-height: 1.5em;
+}
+#branch_box table {
+	border-top: 1px solid #929392;
+	border-right: 0px none #929392;
+	border-bottom: 0px none #929392;
+	border-left: 1px solid #929392;
+}
+#branch_box th {
+	border-bottom: 1px solid #929392;
+	border-right: 1px solid #929392;
+	background: #cecfcf;
+	text-align: left;
+	padding: 8px;
+	color: #000000;
+}
+#branch_box td {
+	border-right: 1px solid #929392;
+	border-bottom: 1px solid #929392;
+	padding: 8px;
+}
+/* Invoice Content Info End */

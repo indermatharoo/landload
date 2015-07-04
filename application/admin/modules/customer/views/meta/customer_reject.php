@@ -1,0 +1,1 @@
+<title>Admin -   Reject Pending Registration</title>

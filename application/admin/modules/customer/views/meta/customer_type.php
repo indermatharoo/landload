@@ -1,0 +1,1 @@
+<title>Admin - Approve Customer Registration</title>

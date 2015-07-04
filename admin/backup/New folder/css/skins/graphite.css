@@ -1,0 +1,44 @@
+.graphite .accordion{font: bold 14px Arial, sans-serif; border-top: 1px solid #111; border-right: 1px solid #111; border-left: 1px solid #111;}
+.graphite .accordion, .graphite .accordion li {margin: 0; padding: 0; border: none;}
+//.graphite .accordion a {padding: 10px 10px 10px 50px; background: #0C0C0C url(images/bg_black.png) repeat-x 0 -1px; text-decoration:none; display: block; color: #ddd; border-bottom: 1px solid #222; border-top: 1px solid #777; position: relative;}
+//.graphite .accordion ul a {background: #424549;}
+//.graphite .accordion a.dcjq-parent, .graphite .accordion a.dcjq-parent:hover {background: #0C0C0C url(images/bg_black.png) repeat-x 0 -1px;}
+//.graphite .accordion a.dcjq-parent.active {}
+//.graphite .accordion a .dcjq-icon {position: absolute; top: 50%; left: 14px; width: 34px; margin-top: -17px; height: 34px; background: url(images/arrow_black_right.png) no-repeat 0 center;}
+//.graphite .accordion a.dcjq-parent.active .dcjq-icon {background: url(images/arrow_black_down.png) no-repeat 0 center;}
+.graphite .accordion a:hover {color: #fff;}
+.graphite .accordion a:active{}
+.graphite .accordion a{
+    text-decoration: none;
+    color: #fff;
+    text-transform: uppercase;
+    text-align: center;
+}
+.accordion > li > ul > li {
+    text-decoration: none;
+    width: 100%;
+    padding: 7px !important;
+    color: #138FCB;
+    text-align: center;
+    font-family: verdana;
+    font-weight: 100;
+}
+.accordion > li > ul > li:hover {
+    color:#fff !important;
+    background: #56B74C;
+    cursor: pointer;
+}
+.accordion > li > ul > li:hover a {
+    color:#fff !important;
+
+}
+.dcjq-parent-li{
+    background: #8AC342;
+}
+.dcjq-parent-li li:first-child {
+    border-top: 1px solid #fff !important;
+    border-bottom: 1px solid #fff !important;
+}
+.dcjq-parent-li li{
+    border-bottom: 1px solid #fff !important;
+}

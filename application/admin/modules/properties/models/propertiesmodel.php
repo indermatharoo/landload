@@ -1,0 +1,109 @@
+<?php
+
+class Propertiesmodel extends Basemodel {
+
+    function __construct() {
+        // Call the Model constructor
+        parent::__construct();
+    }
+    function countAll() {
+        $this->db->from('properties');
+        return $this->db->count_all_results();
+    }
+    function getPropertiesType()
+    {
+        $res = $this->db->get('properties_type');
+        return $res->result_array();
+    }
+    function listAll($offset,$limit)
+    {
+        if ($offset)
+            $this->db->offset($offset);
+        if ($limit)
+            $this->db->limit($limit);
+        
+        return $this->db->get('properties')->result_array();
+    }
+    function getPropertDetails($id)
+    {
+        $this->db->where('id',$id);
+        $res = $this->db->get('properties');
+        if($res->num_rows()>0)
+        {
+            return $res->row_array();
+        }
+        else
+        {
+            redirect('properties/index');
+        }
+    }
+    function getPropertiesList()
+    {
+        $this->db->select('id,pname');
+        $res = $this->db->get('properties');
+        return $res->result_array();
+    }
+    function insertRecord()
+    {
+        $data = array();
+        $data['pname'] = $this->input->post('pname');
+        $data['type'] = $this->input->post('ptype');
+        $data['units'] = $this->input->post('units');
+        $data['owner'] = $this->input->post('owner');
+        $data['country'] = $this->input->post('country');
+        $data['street'] = $this->input->post('street');
+        $data['city'] = $this->input->post('city');
+        $data['state'] = $this->input->post('state');
+        $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['overwrite'] = FALSE;
+        $this->load->library('upload', $config);
+        if (count($_FILES) > 0) {
+            if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                if (!$this->upload->do_upload('photo')) {
+                    show_error($this->upload->display_errors('<p class="err">', '</p>'));
+                    return FALSE;
+                } else {
+                    $upload_data = $this->upload->data();
+                    $data['photo'] = $upload_data['file_name'];
+                }
+            }
+        }
+        $this->db->insert('properties',$data);
+        return $this->db->insert_id();
+    }
+    function updateRecord($id)
+    {
+        $data = array();
+        $data['pname'] = $this->input->post('pname');
+        $data['type'] = $this->input->post('ptype');
+        $data['units'] = $this->input->post('units');
+        $data['owner'] = $this->input->post('owner');
+        $data['country'] = $this->input->post('country');
+        $data['street'] = $this->input->post('street');
+        $data['city'] = $this->input->post('city');
+        $data['state'] = $this->input->post('state');
+        $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['overwrite'] = FALSE;
+        $this->load->library('upload', $config);
+        if (count($_FILES) > 0) {
+            if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                if (!$this->upload->do_upload('photo')) {
+                    //show_error($this->upload->display_errors('<p class="err">', '</p>'));
+                    //return FALSE;
+                } else {
+                    $upload_data = $this->upload->data();
+                    $data['photo'] = $upload_data['file_name'];
+                }
+            }
+        }
+        $this->db->where('id',$id);
+        $this->db->update('properties',$data);
+    }
+    function DeleteRecord($id)
+    {
+       $this->db->where('id',$id);
+       $this->db->delete('properties');
+    }
+}
