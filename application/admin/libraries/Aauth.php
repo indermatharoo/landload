@@ -676,7 +676,7 @@ class Aauth {
      * @param string|bool $name User's name, or false if not to be updated
      * @return bool Update fails/succeeds
      */
-    public function update_user($user_id, $email = FALSE, $pass = FALSE, $name = FALSE, $package=FALSE, $store_id = false, $image = false) {
+    public function update_user($user_id, $email = FALSE, $pass = FALSE, $name = FALSE, $package=FALSE, $image = false) {
         
         $data = array();
 
@@ -696,11 +696,8 @@ class Aauth {
             $data['package'] = $package;
         }
 
-//        if ($store_id != FALSE) {
-//            $data['store_id'] = $store_id;
-//        }
-//        if ($image)
-//            $data['pic'] = $image;
+        if ($image)
+            $data['pic'] = $image;
 
         $this->CI->db->where('id', $user_id);
         return $this->CI->db->update($this->config_vars['users'], $data);

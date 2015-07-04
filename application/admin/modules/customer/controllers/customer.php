@@ -45,14 +45,14 @@ class Customer extends CommonController {
 
         //validation check
         $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('last_name', 'Last Name', 'trim');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-        $this->form_validation->set_rules('delivery_address1', 'Address1', 'trim|required');
-        $this->form_validation->set_rules('delivery_address2', 'Address2', 'trim');
-        $this->form_validation->set_rules('delivery_phone', 'Phone', 'trim|required');
-        $this->form_validation->set_rules('delivery_city', 'City', 'trim|required');
-        $this->form_validation->set_rules('delivery_zipcode', 'Post Code', 'trim|required');
-        $this->form_validation->set_error_delimiters('<li>', '</li>');
+        $this->form_validation->set_rules('last_name', 'Last Name', 'trim|required');
+//        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[aauth_users.email]');
+        $this->form_validation->set_rules('address1', 'address1', 'trim|required');
+        $this->form_validation->set_rules('address2', 'address2', 'trim|required');
+        $this->form_validation->set_rules('city', 'city', 'trim|required');
+        $this->form_validation->set_rules('zipcode', 'zipcode', 'trim|required');
+        $this->form_validation->set_rules('phone', 'phone', 'trim|required|integer');
+        $this->form_validation->set_rules('passwd', 'Phone', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
@@ -60,7 +60,6 @@ class Customer extends CommonController {
             $offset = '';
             $inner = $this->getBasicListing();
             $inner['customerDet'] = $customerDet;
-            $inner['customerDetChild'] = $this->Customermodel->listAllChildren($cid);
             $inner['isEdit'] = '1';
             $customer = $this->getBasicListing();
             $inner['customer'] = $customer['customers'];

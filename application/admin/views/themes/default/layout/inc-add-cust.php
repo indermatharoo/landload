@@ -36,8 +36,8 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-12">
-                    <input  name="delivery_address1" 
-                            value="<?php echo setDefault($customerDet['delivery_address1'], ''); ?>" 
+                    <input  name="address1" 
+                            value="<?php echo setDefault($customerDet['address1'], ''); ?>" 
                             type="text" 
                             placeholder="Address Line 1" r
                             equired="" class="form-control">
@@ -45,8 +45,8 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-12">
-                    <input  name="delivery_address2" 
-                            value="<?php echo setDefault($customerDet['delivery_address2'], ''); ?>" 
+                    <input  name="address2" 
+                            value="<?php echo setDefault($customerDet['address2'], ''); ?>" 
                             type="text" 
                             placeholder="Address Line 2" 
                             required="" 
@@ -55,13 +55,13 @@
             </div>
             <div class="form-group">
                 <div class="col-lg-6">
-                    <input name="delivery_city" 
-                           value="<?php echo setDefault($customerDet['delivery_city'], ''); ?>" 
+                    <input name="city" 
+                           value="<?php echo setDefault($customerDet['city'], ''); ?>" 
                            type="text" placeholder="Town" required="" class="form-control">
                 </div>
                 <div class="col-lg-6">
-                    <input name="delivery_zipcode" 
-                           value="<?php echo setDefault($customerDet['delivery_zipcode'], ''); ?>" 
+                    <input name="zipcode" 
+                           value="<?php echo setDefault($customerDet['zipcode'], ''); ?>" 
                            type="text" placeholder="Post Code" required="" class="form-control">
                 </div>
             </div>
@@ -72,8 +72,8 @@
                            type="text" placeholder="Email" required="" class="form-control">
                 </div>
                 <div class="col-lg-6">
-                    <input name="delivery_phone" 
-                           value="<?php echo setDefault($customerDet['delivery_phone'], ''); ?>" 
+                    <input name="phone" 
+                           value="<?php echo setDefault($customerDet['phone'], ''); ?>" 
                            type="text" placeholder="Telephone" required="" class="form-control">
                 </div>
             </div>
