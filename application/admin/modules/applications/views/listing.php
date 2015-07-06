@@ -31,7 +31,7 @@
             <?php foreach ($Listing as $item): ?>
                 <tr>
                     <td><?= arrIndex($item, 'fname'); ?></td>
-                 
+
                     <td><a href="<?= createUrl('applications/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; ?>
@@ -45,5 +45,5 @@
         </tfoot>
     </table>
 </div>
-<p align="center"><?php echo $pagination;?></p>
+<p align="center"><?php echo $pagination; ?></p>
 

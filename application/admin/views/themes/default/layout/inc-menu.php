@@ -26,5 +26,6 @@ $path = $this->router->fetch_class() . '/' . $this->router->fetch_method();
 <!--        <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'page/index') ? 'active-btn' : ''; ?>"><a href="cms/page"><i class="fa fa-file-text-o siz"></i><h3>Content</h3></a></div></div>-->
     <?php } ?>
     <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'settings/index') ? 'active-btn' : ''; ?>"><a href="setting/settings"><i class="fa fa-cog siz"></i><h3>Settings</h3></a></div></div>    
+    <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'applications/index') ? 'active-btn' : ''; ?>"><a href="applications/applications"><i class="fa fa-cog siz"></i><h3>Applications</h3></a></div></div>    
 
 </div>
