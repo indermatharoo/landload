@@ -30,7 +30,7 @@
         <tbody>
             <?php foreach ($Listing as $item): ?>
                 <tr>
-                    <td><?= arrIndex($item, 'fname'); ?></td>
+                    <td><?= arrIndex($item, 'fname').' '. arrIndex($item, 'lname'); ?></td>
 
                     <td><a href="<?= createUrl('applications/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
