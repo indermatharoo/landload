@@ -17,7 +17,14 @@
         });
         $('.carousel').carousel();
     });
+    $(function () {
+        $('.required-icon').tooltip({
+            placement: 'left',
+            title: 'Required field'
+        });
+    });
 </script>
+
 <?php
 $CI->assets->addCSS('css/animate.css');
 $CI->assets->addCSS('css/bootstrap-theme.css');
@@ -26,6 +33,7 @@ $CI->assets->addCSS('css/font-awesome.css');
 $CI->assets->addCSS('css/isotope.css');
 $CI->assets->addCSS('css/overwrite.css');
 $CI->assets->addCSS('css/style.css');
+$CI->assets->addCSS('css/bs_style.css');
 
 $CI->assets->addFooterJS('js/modernizr-2.6.2-respond-1.1.0.min.js');
 //$CI->assets->addFooterJS('js/jquery.js');

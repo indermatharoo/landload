@@ -422,7 +422,7 @@ class virtcab extends Admin_Controller {
                         ($setDelPer ? '<div><span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="editPermission fa fa-send-o"></span> 
                                             <span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="removeFile fa fa-remove"></span>
                                         </div>' : '' )
-                        . '<div class="img-doc"><a  target="blank" href="' . $virCabPath . $kval['visible_name'] .
+                        . '<div class="img-doc"><a  target="blank" download href="' . $virCabPath . $kval['visible_name'] .
                         '" ><img src="' . $extImgArray[$typeext] . '" class="img-responsive"/></a></div>'
                         . '<div class="name-doc">' . $newImgName . '</div>'
                         . '</div> </li>';
@@ -434,7 +434,7 @@ class virtcab extends Admin_Controller {
                         ($setDelPer ? '<div><span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="editPermission fa fa-send-o"></span> 
                                             <span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="removeFile fa fa-remove"></span>
                                         </div>' : '' )
-                        . '<div class="img-doc"><a href="' . $virCabPath . $kval['visible_name'] . '" class="html5lightbox">'
+                        . '<div class="img-doc"><a download href="' . $virCabPath . $kval['visible_name'] . '" class="html5lightbox">'
                         . '<img src="' . $extImgArray[$typeext] . '" class="img-responsive"/></a></div>'
                         . '<div class="name-doc">' . $newImgName . '</div>'
                         . '</div> </li>';

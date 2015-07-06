@@ -64,17 +64,23 @@ class InvoiceModel extends CI_Model {
     function getWeeklyUsers() {
 
         //$date = date("Y-m-d");
+        
         $today_date = date("Y-m-d");
+        $weekday = date('l', strtotime($today_date));
+        
         $this->db->select('*');
-        $this->db->from('user_extra_detail');
-        $this->db->join('aauth_users', 'user_extra_detail.id = aauth_users.id');
-        $this->db->where('user_extra_detail.mon_fee_type', 'W');
-        $this->db->where('user_extra_detail.last_installment', $today_date);
+        $this->db->from('applications');
+        $this->db->join('applicants', 'applications.applicant_id = applicants.applicant_id');
+        $this->db->where('applications.is_deal_start', '1');
+        $this->db->where('applications.is_active', '1');
+        $this->db->where('applications.invoice_type', 'W');
+        $this->db->where('applications.day_of_week', $weekday);
         //$this->db->limit(1);
         $query = $this->db->get();
-
+        //echo $this->db->last_query();
+        //exit;
         if ($query->num_rows) {
-            return $query->result();
+            return $query->result_array();
         }
         
         return FALSE;
@@ -85,16 +91,20 @@ class InvoiceModel extends CI_Model {
 
         //$date = date("Y-m-d");
         $today_date = date("Y-m-d");
+                
         $this->db->select('*');
-        $this->db->from('user_extra_detail');
-        $this->db->join('aauth_users', 'user_extra_detail.id = aauth_users.id');
-        $this->db->where('user_extra_detail.mon_fee_type', 'M');
-        $this->db->where('user_extra_detail.last_installment', $today_date);
+        $this->db->from('applications');
+        $this->db->join('applicants', 'applications.applicant_id = applicants.applicant_id');
+        $this->db->where('applications.is_deal_start', '1');
+        $this->db->where('applications.is_active', '1');
+        $this->db->where('applications.invoice_type', 'M');
+        $this->db->where('applications.date_of_month', $today_date);
         //$this->db->limit(1);
         $query = $this->db->get();
-
+        //echo $this->db->last_query();
+        //exit;
         if ($query->num_rows) {
-            return $query->result();
+            return $query->result_array();
         }
         
         return FALSE;
@@ -137,13 +147,15 @@ class InvoiceModel extends CI_Model {
         return FALSE;
     }
 
-    function getInvoice($fid = NULL,$installment_fees,$amt_after_vat) {
-        $franchise_id = $fid;
+    function getInvoice($fid = NULL,$com_id,$installment_fees,$amt_after_vat) {
+        $applicant_id = $fid;
+        $company_id = $com_id;
         $today_date = date("Y-m-d");
         $due_date = date('Y-m-d', strtotime("+5 days"));
         
         $data = array(
-            'id' => $franchise_id,
+            'applicant_id' => $applicant_id,
+            'company_id' => $com_id,
             'installment_fees'=>$installment_fees,
             'vat'=>'20',
             'total_amount' => $amt_after_vat,
@@ -194,15 +206,15 @@ class InvoiceModel extends CI_Model {
         return $price_with_vat;
     }
     
-    function updatevirtualcabnet($fid=NULL,$filename) {
+    function updatevirtualcabnet($appId=NULL,$comId=NULL,$filename) {
        $date = date("Y-m-d h:i:s");
         $data = array(
             "visible_name"=>$filename.'.pdf',
             "filetype"=>'pdf',
             "actual_name"=>$filename.'.pdf',
-            "creator_id"=>'1',
+            "creator_id"=>$comId,
             "assigne_grp"=>'3',
-            "assignes"=>$fid,
+            "assignes"=>$appId,
             "create_dtime"=>$date,
             "update_dtime"=>$date
         ); 

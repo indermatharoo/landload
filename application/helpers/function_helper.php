@@ -207,3 +207,12 @@ function latestFeed($numrows=5){
 //        return $server_output;
         return json_decode($server_output, 1);
     }
+    
+function getCompany($id) {
+    getThis()->db->select('*')
+            ->from('properties')
+            ->join('aauth_users','properties.company_id=aauth_users.id');
+    $result = getThis()->db->get();
+    $result = $result->row();
+    return $result;
+}

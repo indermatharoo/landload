@@ -22,11 +22,10 @@
                 <select name="property_id" class="form-control">
                     <option></option>
                     <?php
-                    foreach($propertyList as $list)
-                    {
+                    foreach ($propertyList as $list) {
                         ?>
-                    <option value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
-                        <?php 
+                        <option value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
+                        <?php
                     }
                     ?>
                 </select>
@@ -43,13 +42,13 @@
             </div>
             <div class="col-sm-6">
                 <label>Status</label><br>
-                <?php foreach($status as $st=>$stval){ ?>
-                <input type="radio" name="status" value="<?php echo $st ?>"><?php echo $stval ?><br />
+                <?php foreach ($status as $st => $stval) { ?>
+                    <input type="radio" name="status" value="<?php echo $st ?>"><?php echo $stval ?><br />
                 <?php } ?>
             </div>
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
-                 <input type="text" class="form-control" name="area"  placeholder="Area">
+                <input type="text" class="form-control" name="area"  placeholder="Area">
             </div>
             <div class="col-sm-6">
                 <label>Room</label>
@@ -66,13 +65,22 @@
             <div class="col-sm-6">
                 <label>Features</label>
                 <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:350px;" name="features[]" tabindex="4">
-                      <?php foreach($features as $feature){ ?>
-                           <option value="<?php echo $feature['id'] ?>"><?php echo $feature['tag'] ?></option>
-                      <?php } ?>
+                    <?php foreach ($features as $feature) { ?>
+                        <option value="<?php echo $feature['id'] ?>"><?php echo $feature['tag'] ?></option>
+                    <?php } ?>
                 </select>
-            </div>  
+            </div>
+            <div class="col-sm-6">
+                <label>Rent Types</label>
+                <select name="amount_type" class="form-control">
+                    <option>Select</option>
+                    <?php foreach (Unitsmodel::$types as $val => $type): ?>
+                        <option value="<?php echo $val ?>"><?php echo $type ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
         </div>
-        
+
         <div class="form-group">
             <div class="col-sm-12 text-center">
                 Fields mark with <span class="error">*</span> required
@@ -85,12 +93,12 @@
         </div>
     </form>
 </div>
-<?php //$this->load->view('headers/user_add'); ?>
-  <script type="text/javascript">
+<?php //$this->load->view('headers/user_add');  ?>
+<script type="text/javascript">
     var config = {
-      '.chosen-select'           : {}
+        '.chosen-select': {}
     }
     for (var selector in config) {
-      $(selector).chosen(config[selector]);
+        $(selector).chosen(config[selector]);
     }
-  </script>
+</script>

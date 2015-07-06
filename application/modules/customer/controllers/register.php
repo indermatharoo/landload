@@ -23,9 +23,12 @@ class Register extends Cms_Controller {
         return true;
     }
 
+  
+
     //Validation Functions Ends ****************************************************************
 
     function index() {
+
         $this->load->model('Customermodel');
         $this->load->library('form_validation');
         $this->load->helper('string');
@@ -36,10 +39,14 @@ class Register extends Cms_Controller {
         $this->load->helper('form');
 
         //Validation checks
-        $this->form_validation->set_rules('first_name', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|strtolower|valid_email|callback_email_check');
-        $this->form_validation->set_rules('telephone', 'Telephone', 'trim|required');
-        $this->form_validation->set_rules('zipcode', 'Zip Code', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('cpassword', 'Confirm Password', 'required|matches[password]');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+
         $this->form_validation->set_error_delimiters('<li>', '</li>');
 
         //Render View

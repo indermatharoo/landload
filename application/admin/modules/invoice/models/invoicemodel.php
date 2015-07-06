@@ -55,18 +55,34 @@ class Invoicemodel extends CI_Model {
     }
 
     function countAll() {
-        return $this->db->count_all_results('user_extra_detail');
+        return $this->db->count_all_results('dpd_applications');
 //        $this->db->get('user_extra_detail');
 //        return $this->db->count_all_results();
     }
     
     function getWeeklyInvoice(){
-        $sql_query = $this->db->query("SELECT invoice_id,id,invoice_code,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W'  GROUP BY test");
+        if($this->aauth->isUser()){
+            $company_id = curUsrPid();
+        }
+        else {
+            $company_id = curUsrId();
+        }
+    
+        
+        $sql_query = $this->db->query("SELECT company_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' and company_id='$company_id'  GROUP BY test");
         return $sql_query->result_array();
     }
     
     function getMonthlyInvoice(){
-        $sql_query = $this->db->query("SELECT  invoice_id,id,invoice_code,concat(month(created_on),year(created_on)) as test, month(created_on) as month, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='M'  GROUP BY test");
+        if($this->aauth->isUser()){
+            $company_id = curUsrPid();
+        }
+        else {
+            $company_id = curUsrId();
+        }
+    
+        
+        $sql_query = $this->db->query("SELECT company_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='M' and company_id='$company_id'  GROUP BY test");
         return $sql_query->result_array();
     }
     

@@ -6,6 +6,12 @@ class Unitsmodel extends Basemodel {
         // Call the Model constructor
         parent::__construct();
     }
+    
+    static public $types = array(
+        1 => 'Weekly',
+        2 => 'Monthly'
+    );
+            
     function countAll() {
         $this->db->from('units');
         return $this->db->count_all_results();
@@ -37,13 +43,8 @@ class Unitsmodel extends Basemodel {
     function insertRecord()
     {
         $data = array();
-        $data['property_id'] = $this->input->post('property_id');
-        $data['unit_number'] = $this->input->post('unit_number');
-        $data['status'] = $this->input->post('status');
-        $data['area'] = $this->input->post('area');
-        $data['room'] = $this->input->post('room');
-        $data['bathroom'] = $this->input->post('bathroom');
-        $data['amount'] = $this->input->post('amount');
+        $data = rSF('units');
+//        e($data);
         $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
