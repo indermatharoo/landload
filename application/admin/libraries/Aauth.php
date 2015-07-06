@@ -60,7 +60,7 @@ class Aauth {
      * Constructor
      */
     public function __construct() {
-
+        ini_set('display_errors','On');
         // get main CI object
         $this->CI = & get_instance();
 
@@ -83,14 +83,13 @@ class Aauth {
         $this->CI->config->load('aauth');
         $this->config_vars = $this->CI->config->item('aauth');
         $this->user_group = array(
-            'franchisor' => '2',
-            'franchisee' => '3',
+            'admin' => '2',
+            'company' => '3',
             'user' => '5',
             'customer' => '6'
         );
-        $this->isFranchisor = false;
-        $this->isFranchisee = false;
-        $this->isFrsUser = false;
+        $this->isAdmin = false;
+        $this->isComapny = false;
         $this->isUser = false;
         $this->isCustomer = false;
     }
@@ -213,31 +212,28 @@ class Aauth {
                 $group = self::getUserGroup($row->id);
             }
             if ($group) {
-//                e($group);
                 switch ($group) {
                     case 2:
-                        $this->isFranchisor = true;
+                        $this->isAdmin = true;
                         break;
                     case 3:
-                        $this->isFranchisee = true;
+                        $this->isCompany = true;
                         break;
                     case 5:
                         $this->isUser = true ;
                         break;
-//                    case 6:
-//                        $this->isCustomer = true;
-//                        break;
+                    case 6:
+                        $this->isCustomer = true;
+                        break;
                 }
             }
-//            e($this);
             $data = array(
                 'id' => $row->id,
                 'name' => $row->name,
                 'email' => $row->email,
                 'loggedin' => TRUE,
-                'isFranchisor' => $this->isFranchisor,
-                'isFranchisee' => $this->isFranchisee,
-                'isFrsUser' => $this->isFrsUser,
+                'isAdmin' => $this->isAdmin,
+                'isCompany' => $this->isCompany,
                 'isUser' => $this->isUser,
                 'isCustomer' => $this->isCustomer,
                 'pid' => $row->pid
@@ -2127,46 +2123,30 @@ class Aauth {
         return $query->row('group_id');
     }
 
+
     /*
      * return bool true if current login use is admin
      */
 
-    public function isAdmin() {
-        return $this->CI->session->userdata('id') == 1;
-    }
-
-    /*
-     * return bool true if current login use is franchisor
-     */
-
-    public function isFranshisor($id = null) {
+    public function isAdmin($id = null) {
+//        e($this->CI->session->all_userdata());
         if ($id)
-            return $this->user_group['franchisor'] == self::getUserGroup($id);
+            return $this->user_group['admin'] == self::getUserGroup($id);
         else {
-            return $this->CI->session->userdata('isFranchisor');
+            return $this->CI->session->userdata('isAdmin');
         }
     }
 
-    /*
-     * return bool true is current user is franchisor user
-     */
-
-    public function isFrsUser($id = false) {
-        if ($id)
-            return $this->user_group['user'] == self::getUserGroup($id) && (self::isFranshisor(self::get_user($id)->pid));
-        else
-            return $this->CI->session->userdata('isFrsUser');
-    }
 
     /*
      * return bool true if current login use is super franchisee
      */
 
-    public function isFranshisee($id = null) {
+    public function isCompany($id = null) {
         if ($id) {
-            return $this->user_group['franchisee'] == self::getUserGroup($id);
+            return $this->user_group['company'] == self::getUserGroup($id);
         } else
-            return $this->CI->session->userdata('isFranchisee');
+            return $this->CI->session->userdata('isCompany');
     }
 
     /*

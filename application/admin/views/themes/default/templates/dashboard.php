@@ -19,22 +19,15 @@
         [if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
         <![endif]-->
-        <?php if ($this->aauth->isFranshisor() || $this->aauth->isFranshisee()): ?>           
-<!--            <link type="text/css" href="http://localhost/cometchat/cometchatcss.php" rel="stylesheet" charset="utf-8"/>
-            <script type="text/javascript" src="http://localhost/cometchat/cometchatjs.php" charset="utf-8"></script>-->
-        <?php endif; ?>
     </head>
     <body>
         <header id='header' class='pageTop'>
-            
-            <?php
-           
-            $this->load->view(THEME . 'layout/inc-header'); ?>
+            <?php $this->load->view(THEME . 'layout/inc-header'); ?>
         </header>
         <section id='main-content'>
             <div class="container">
                 <div class="content-main">
-                    <?php //echo $this->aauth->isFranshisor(curUsrId()); ?>
+                    <?php //echo $this->aauth->isFranshisor(curUsrId());  ?>
                     <?php echo $content; ?>
                 </div>
             </div>    

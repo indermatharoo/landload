@@ -30,7 +30,7 @@ class Invoice extends Admin_Controller {
 //*************************************validation End********************************
 
     function index($arg = "") {
-
+            
         if ($arg == '') {
             $this->load->library('form_validation');
             $this->load->helper('form');
@@ -43,16 +43,7 @@ class Invoice extends Admin_Controller {
                 $this->utility->accessDenied();
                 return;
             }
-
-            ///Setup pagination
             
-            $types = $this->invoicemodel->getFranshiseType();
-            $temp = array();
-            foreach ($types as $type):
-                $temp[arrIndex($type, 'mon_fee_type')] = $type;
-            endforeach;
-
-            $inner["row"] = $temp;
             $inner["total"] = $this->invoicemodel->countAll();
             $inner["weekly_data"] = $this->invoicemodel->getWeeklyInvoice();
             $page = array();

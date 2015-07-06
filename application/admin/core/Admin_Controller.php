@@ -17,11 +17,11 @@ class Admin_Controller extends CMS_Controller {
     }
 
     function init() {
-        if ($this->aauth->isFranshisee()):
-            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrId());
-        elseif ($this->aauth->isUser()):
-            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrPid());
-        endif;
+//        if ($this->aauth->isFranshisee()):
+//            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrId());
+//        elseif ($this->aauth->isUser()):
+//            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrPid());
+//        endif;
     }
 
     function _checkAuth() {

@@ -17,8 +17,8 @@ class Applicationsmodel extends Basemodel {
             $this->db->offset($offset);
         if ($limit)
             $this->db->limit($limit);
-        
-        return $this->db->get('applications')->result_array();
+        echo '<pre>';
+        print_R($this->db->get('applications')->result_array());
     }
     function getApplicationType()
     {
