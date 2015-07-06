@@ -25,7 +25,7 @@ class Login extends Cms_Controller {
 
                 exit;
             }
-            if ($row['password'] == md5($this->input->post('password', TRUE))) {
+            if ($row['password'] == ($this->input->post('password', TRUE))) {
 
                 // $this->traditional_login($this->input->post('username', TRUE),$this->input->post('password', TRUE));
 //                     $this->do_post_request($this->input->post('username', TRUE),$this->input->post('password', TRUE));
