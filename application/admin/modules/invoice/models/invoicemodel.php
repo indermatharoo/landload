@@ -55,7 +55,7 @@ class Invoicemodel extends CI_Model {
     }
 
     function countAll() {
-        return $this->db->count_all_results('user_extra_detail');
+        return $this->db->count_all_results('dpd_applications');
 //        $this->db->get('user_extra_detail');
 //        return $this->db->count_all_results();
     }
