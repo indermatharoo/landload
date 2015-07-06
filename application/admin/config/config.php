@@ -18,8 +18,8 @@ if (!defined('BASEPATH'))
   |
  */
 //global $DWS_SERVER_NAME;
-$config['base_url'] = 'http://localhost/landlord/admin/';
-$config['site_url'] = 'http://localhost/landlord/';
+$config['base_url'] = 'http://landlord.webnseo.co.uk/admin/';
+$config['site_url'] = 'http://landlord.webnseo.co.uk/';
 
 /*
   |--------------------------------------------------------------------------
