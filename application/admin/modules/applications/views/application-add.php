@@ -26,16 +26,11 @@
                 <select class="form-control" name="applicant_id">
                     <option></option>
                     <?php foreach ($allApplicants as $applicant) { ?>
-                        <option value="<?php echo $applicant['id'] ?>"><?php echo $applicant['fname'] . ' ' . $applicant['lname'] ?></option>
+                        <option value="<?php echo $applicant['applicant_id'] ?>"><?php echo $applicant['fname'] . ' ' . $applicant['lname'] ?></option>
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-sm-6">
-                <label>Appliction Status</label><br>
-                <?php foreach ($applicationType as $atype) { ?>
-                    <input type="radio" name="application_status" value="<?php echo $atype['code'] ?>"><?php echo $atype['status']; ?><br>
-                <?php } ?>
-            </div>
+
             <div class="col-sm-6">
                 <label>Property </label>
                 <select class="form-control" name="property_id">
@@ -51,12 +46,7 @@
                     <option></option>
                 </select>
             </div>            
-            <div class="col-sm-6">
-                <label>Lease Type</label><br>
-                <?php foreach ($leaseTypes as $leasetype) { ?>
-                    <input type="radio" name="lease_type" value="<?php echo $leasetype['code'] ?>"><?php echo $leasetype['type']; ?><br>
-                <?php } ?>
-            </div>
+
             <div class="col-sm-6">
                 <label>Total number of occupants</label>
                 <input type="text" class="form-control" name="occupants" placeholder="Occupants *">
@@ -91,17 +81,30 @@
                 <label>Security Deposit Date </label>
                 <input type="text" class="form-control datepicker" name="security_deposit_date"  placeholder="Security Deposit Date*">
             </div>  
+            
+            <div class="col-sm-6">
+                <label>Application Status</label><br>
+                <?php foreach ($applicationType as $atype) { ?>
+                    <input type="radio" name="application_status" value="<?php echo $atype['code'] ?>"><?php echo $atype['status']; ?><br>
+                <?php } ?>
+            </div>
+            <div class="col-sm-6">
+                <label>Lease Type</label><br>
+                <?php foreach ($leaseTypes as $leasetype) { ?>
+                    <input type="radio" name="lease_type" value="<?php echo $leasetype['code'] ?>"><?php echo $leasetype['type']; ?><br>
+                <?php } ?>
+            </div>
             <div class="col-sm-6">
                 <label>Emergency Contact </label>
-                <textarea class="form-control " name="emeregency_contact"></textarea>
+                <textarea class="form-control " name="emeregency_contact" rows="4"></textarea>
             </div> 
             <div class="col-sm-6">
                 <label>Co-signer Details </label>
-                <textarea class="form-control " name="cosigner"></textarea>
+                <textarea class="form-control " name="cosigner" rows="4"></textarea>
             </div>
             <div class="col-sm-6">
                 <label>Notes </label>
-                <textarea class="form-control " name="notes"></textarea>
+                <textarea class="form-control " name="notes" rows="4"></textarea>
             </div>  
         </div>
 

@@ -30,12 +30,7 @@
                     <?php } ?>
                 </select>
             </div>
-            <div class="col-sm-6">
-                <label>Appliction Status</label><br>
-                <?php foreach ($applicationType as $atype) { ?>
-                    <input type="radio" name="application_status" <?php echo ($atype['code'] == $details['application_status']) ? 'checked' : '' ?> value="<?php echo $atype['code'] ?>"><?php echo $atype['status']; ?><br>
-                <?php } ?>
-            </div>
+            
             <div class="col-sm-6">
                 <label>Property </label>
                 <select class="form-control" name="property_id">
@@ -59,12 +54,7 @@
                     <?php } ?>
                 </select>
             </div>            
-            <div class="col-sm-6">
-                <label>Lease Type</label><br>
-                <?php foreach ($leaseTypes as $leasetype) { ?>
-                    <input type="radio" name="lease_type" <?php echo ($leasetype['code'] == $details['lease_type']) ? 'checked' : '' ?> value="<?php echo $leasetype['code'] ?>"><?php echo $leasetype['type']; ?><br>
-                <?php } ?>
-            </div>
+            
             <div class="col-sm-6">
                 <label>Total number of occupants</label>
                 <input type="text" class="form-control" name="occupants" placeholder="Occupants *" value="<?php echo $details['occupants']; ?>">
@@ -99,6 +89,18 @@
                 <label>Security Deposit Date </label>
                 <input type="text" class="form-control datepicker" name="security_deposit_date" value="<?php echo $details['security_date']; ?>" placeholder="Security Deposit Date*">
             </div>  
+            <div class="col-sm-6">
+                <label>Application Status</label><br>
+                <?php foreach ($applicationType as $atype) { ?>
+                    <input type="radio" name="application_status" <?php echo ($atype['code'] == $details['application_status']) ? 'checked' : '' ?> value="<?php echo $atype['code'] ?>"><?php echo $atype['status']; ?><br>
+                <?php } ?>
+            </div>
+            <div class="col-sm-6">
+                <label>Lease Type</label><br>
+                <?php foreach ($leaseTypes as $leasetype) { ?>
+                    <input type="radio" name="lease_type" <?php echo ($leasetype['code'] == $details['lease_type']) ? 'checked' : '' ?> value="<?php echo $leasetype['code'] ?>"><?php echo $leasetype['type']; ?><br>
+                <?php } ?>
+            </div>
             <div class="col-sm-6">
                 <label>Emergency Contact </label>
                 <textarea class="form-control " name="emeregency_contact"><?php echo $details['emergency_contact']; ?></textarea>
