@@ -22,6 +22,7 @@ $path = $this->router->fetch_class() . '/' . $this->router->fetch_method();
         $link = pageFranchise(curUsrId());
         ?>
         <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'page/index') ? 'active-btn' : ''; ?>"><a href="cms/page/edit/<?= arrIndex($link, 'page_id'); ?>/2"><i class="fa fa-tachometer siz"></i><h3>Content</h3></a></div></div>
+        <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'invoice/index') || ($path == 'invoice/manual') || ($path == 'invoice/invoicedetail') ? 'active-btn' : ''; ?>"><a href="invoice"><i class="fa fa-gbp siz"></i><h3>Invoices</h3></a></div></div>
     <?php } else { ?>
 <!--        <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'page/index') ? 'active-btn' : ''; ?>"><a href="cms/page"><i class="fa fa-file-text-o siz"></i><h3>Content</h3></a></div></div>-->
     <?php } ?>

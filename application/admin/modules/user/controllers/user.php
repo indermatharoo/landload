@@ -7,7 +7,7 @@ class User extends Admin_Controller {
 
     function __construct() {
         parent::__construct();
-        $this->load->model('calender/event');
+       // $this->load->model('calender/event');
         $this->load->model('Usermodel');
     }
 
@@ -269,6 +269,7 @@ class User extends Admin_Controller {
         $this->session->sess_destroy();
         redirect("/welcome/");
         exit();
+       // echo "This is called";
     }
 
     function profile($id) {

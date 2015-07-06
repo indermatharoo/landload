@@ -13,7 +13,7 @@
                           <tr>
                             <td width="67%" align="right">
                                 <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#0087d4; font-size:21.5px; text-transform:uppercase;">
-                                    <strong>The Creation Station </strong>
+                                    <strong>Landlord Masters </strong>
                                 </font>
                             </td>
                             
@@ -21,12 +21,12 @@
                               <tr>
                             <td width="67%" align="right">
                                 <font style="font-family: 'Arial' , sans-serif; color:#68696a; font-size:11.5px;font-weight: 100;">
-                                    <span>Inspiration House </span><br/>
-                                    <span>Creativity Drive</span><br/>
-                                    <span>Unit 16, Woodbury Business Park</span><br/>
-                                    <span>Woodbury, Exeter EX5 1LD</span><br/><br/>
-                                    <span style="font-weight:600; color:#000;">Telephone: 01395 239700</span><br/>
-                                    <span style="font-weight:600;color:#000;">enquiries@thecreationstation.co.uk</span><br/>
+                                    <span>Address 1 </span><br/>
+                                    <span>Address 2</span><br/>
+                                    <span>Address 3</span><br/>
+                                    <span>Address 4</span><br/><br/>
+                                    <span style="font-weight:600; color:#000;">Telephone: 0000</span><br/>
+                                    <span style="font-weight:600;color:#000;">enquiries@example.com</span><br/>
                                 </font>
                             </td>
                             
@@ -90,7 +90,7 @@
                         <td width="25%" align="left" style="line-height: 22px">
                             <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
                                
-                                <span><?php echo $businessaddress;?></span>
+                                <span><?php echo $homeaddress;?></span>
                             </font>
                         </td>
                         <td width="25%" align="right" style="line-height: 22px">
@@ -100,22 +100,6 @@
                             </font>
                         </td>
                     </tr>
-                    
-                    <tr>
-                        <td width="25%" align="left" style="line-height: 22px">
-                            <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
-                                
-                                <span><?php echo $country; ?></span>
-                            </font>
-                        </td>
-                        <td width="25%" align="right" style="line-height: 22px">
-                            
-                        </td>
-                    </tr>
-                    
-                    
-                    
-                    
                     
             </table>
             </td>    
