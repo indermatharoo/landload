@@ -37,8 +37,6 @@ class Units extends Admin_Controller {
             'state' => 'State',
             0 => 'Action'
         );
-//        e($inner['labels'],0);
-//        e($Listing);
         $inner['Listing'] = $Listing;
 
         $inner['pagination'] = $this->pagination->create_links();
