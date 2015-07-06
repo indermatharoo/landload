@@ -18,51 +18,47 @@ class Customermodel extends CI_Model {
         return false;
     }
 
-
     //Insert customer
     function insertRecord() {
 
         $data = array();
-        $data['first_name'] = $this->input->post('first_name', TRUE);
+        $data['fname'] = $this->input->post('fname', TRUE);
+        $data['lname'] = $this->input->post('lname', TRUE);
         $data['email'] = $this->input->post('email', TRUE);
-        $data['telephone'] = $this->input->post('telephone', TRUE);
-        $data['zipcode'] = $this->input->post('zipcode', TRUE);
-
-//        $data['address1'] = $this->input->post('address1', TRUE);
-//        $data['address2'] = $this->input->post('address2', TRUE);
-//        $data['city'] = $this->input->post('city', TRUE);
-//        $data['state'] = $this->input->post('state', TRUE);
-//        $data['passwd'] = $this->encrypt->encode($this->input->post('passwd', TRUE));
-        //$data['act_code'] = md5(random_string('unique'));
-        $data['registration_time'] = time();
-        $data['last_login'] = 0;
-        $data['cactive'] = 0;
-
+        $data['phone'] = $this->input->post('phone', TRUE);
+        $data['password'] = $this->encrypt->encode($this->input->post('password', TRUE));
+        $data['address'] = $this->input->post('address', TRUE);
+        $data['is_active'] = 1;
+        $data['license'] = 0;
+        $data['monthly_gross'] = 0;
+        $data['asset'] = 0;
+        $data['type'] = 'applicant';
+//        $data['auth_user_id'] = 0;
+        
         //insert data into database
-        $this->db->insert('customer', $data);
+        $status = $this->db->insert('applicants', $data);
 
-
-//        $customer_id = $this->db->insert_id();
-        //echo $customer_id; exit();
-        //Send Confirmation email
-        $emailData = array();
-        $emailData['DATE'] = date("jS F, Y");
-        $emailData['BODY'] = DWS_EMAIL_BODY;
-        $emailData['NAME'] = $data['first_name'];
-        $emailData['PASSWORD'] = $this->input->post('passwd', TRUE);
+        if ($status = 1) {
+            //Send Confirmation email
+            $emailData = array();
+            $emailData['DATE'] = date("jS F, Y");
+//            $emailData['BODY'] = DWS_EMAIL_BODY;
+            $emailData['NAME'] = $data['fname'] . ' ' . $data['lname'];
+            $emailData['USERID'] = $data['email'];
+            $emailData['PASSWORD'] = $this->input->post('password', TRUE);
 
 //        EMAIL_BODY
-        $emailBody = $this->parser->parse('customer/emails/account-created', $emailData, TRUE);
-//        print_r($emailBody); exit;
-//print_r($this->config->item('EMAIL_CONFIG')); exit();
-        $this->email->initialize($this->config->item('EMAIL_CONFIG'));
-        $this->email->from(DWS_EMAIL_NOREPLY, DWS_EMAIL_FROM);
-        $this->email->to($data['email']);
-        //$this->email->to('test@darsh.com');
-        $this->email->subject(DWS_EMAIL_SUBJECT);
-        $this->email->message($emailBody);
-        if ($this->email->send() == true) {
-            return true;
+            $emailBody = $this->parser->parse('customer/emails/account-created', $emailData, TRUE);
+           
+            $this->email->initialize($this->config->item('EMAIL_CONFIG'));
+            $this->email->from(DWS_EMAIL_NOREPLY, DWS_EMAIL_FROM);
+            $this->email->to($data['email']);
+            //$this->email->to('test@darsh.com');
+            $this->email->subject('Success Registeration Mail');
+            $this->email->message($emailBody);
+            if ($this->email->send() == true) {
+                return true;
+            }
         }
     }
 
