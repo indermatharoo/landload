@@ -67,8 +67,6 @@ class Customermodel extends CI_Model {
         $data['twitter'] = $this->input->post('twitter', TRUE);
         $data['facebook'] = $this->input->post('facebook', TRUE);
         $data['user_id'] = curUsrId();
-        print_R($_POST);
-        die();
        // echo matches[passconf]; 
         
         $user_id = $this->aauth->create_user($data['email'], $data['passwd'], $data['first_name'], 6, 0,$this->aauth->get_user()->id, false, 0, array('internal' => true));

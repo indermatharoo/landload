@@ -54,6 +54,11 @@ class Propertiesmodel extends Basemodel {
         $data['street'] = $this->input->post('street');
         $data['city'] = $this->input->post('city');
         $data['state'] = $this->input->post('state');
+        if($this->aauth->isCompany()):
+            $data['company_id'] = curUsrId();
+        elseif($this->aauth->isUser()):            
+            $data['company_id'] = curUsrPid();
+        endif;
         $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
