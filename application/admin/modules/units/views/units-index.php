@@ -1,9 +1,3 @@
-<?php
-//echo "<pre>";
-//print_r($Listing);
-//die();
-?> 
-
 <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <header class="panel-heading">
@@ -30,13 +24,17 @@
         </thead>
         <tbody>
             <?php foreach ($Listing as $item): ?>
-                <tr>
-                    <td><?= arrIndex($item, 'pname'); ?></td>
-                    <td><?= $item['status']; ?></td>
-                    <td><?= arrIndex($item, 'unit_number'); ?></td>
-                    <td><a href="<?= createUrl('units/edit/') . arrIndex($item, 'unit_id'); ?>">Edit</a>  | <a href="<?= createUrl('units/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this unit?');">Delete</a> </td>
-                </tr>
+                <?php foreach ($labels as $key => $value): ?>
+                    <?php
+                    $data = arrIndex($item, $key, FALSE);
+                    if (!$data) {
+                        $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                    }
+                    ?>
+                <td><?php echo $data ?></td>
             <?php endforeach; ?>
+            </tr>
+        <?php endforeach; ?>
         </tbody>
         <tfoot>
             <tr>                        
@@ -47,5 +45,5 @@
         </tfoot>
     </table>
 </div>
-<p align="center"><?php echo $pagination;?></p>
+<p align="center"><?php echo $pagination; ?></p>
 
