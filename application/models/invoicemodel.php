@@ -206,6 +206,7 @@ class InvoiceModel extends CI_Model {
             "assigne_grp"=>'3',
             "assignes"=>$appId,
             "create_dtime"=>$date,
+            "is_applicant"=>1,
             "update_dtime"=>$date
         ); 
         
