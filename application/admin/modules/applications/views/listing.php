@@ -28,11 +28,16 @@
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($Listing as $item): ?>
+            <?php
+            foreach ($Listing as $item):
+                //echo '<pre>'; print_r($item);
+                ?>
                 <tr>
-                    <td><?= arrIndex($item, 'fname').' '. arrIndex($item, 'lname'); ?></td>
-
-                    <td><a href="<?= createUrl('applications/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
+                    <td><?= arrIndex($item, 'fname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                    <td><?= arrIndex($item, 'pname') ?></td>
+                    <td><?= arrIndex($item, 'company_name') ?></td>
+                    <td><?= arrIndex($item, 'lease_from') ?></td>
+                    <td><a href="<?= createUrl('applications/manage/') . arrIndex($item, 'id'); ?>">Manage</a>  |<a href="<?= createUrl('applications/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

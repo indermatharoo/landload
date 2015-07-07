@@ -24,11 +24,13 @@ class Applications extends Admin_Controller {
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
 
-        $Listing = $this->Applicationsmodel->listAll($offset, $perpage);
-
+        $Listing = $this->Applicationsmodel->listAll();
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',
+            'property' => 'Property',
+            'compnay_name' => 'Company Name',
+            'applied_date' => 'Applied Date',
             'Action' => 'Action',
         );
         $inner['Listing'] = $Listing;
@@ -94,6 +96,8 @@ class Applications extends Admin_Controller {
     }
 
     function edit($offset) {
+        
+        
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->helper('string');
@@ -103,6 +107,7 @@ class Applications extends Admin_Controller {
 
 
         $details = $this->Applicationsmodel->getApplicationDetails($offset);
+        
         $AllApplicants = $this->Applicantsmodel->getAllApplicants();
         $ApplicationType = $this->Applicationsmodel->getApplicationType();
         $propertiesList = $this->Propertiesmodel->getPropertiesList();
@@ -133,6 +138,52 @@ class Applications extends Admin_Controller {
             $inner['leaseTypes'] = $LeaseTypes;
             $page = array();
             $page['content'] = $this->load->view('application-edit', $inner, TRUE);
+            $this->load->view($this->customer, $page);
+        } else {
+
+            $userid = $this->Applicationsmodel->updateRecord($offset);
+
+            $this->session->set_flashdata('SUCCESS', 'application_updated');
+            redirect(createUrl('applications/index/'));
+        }
+    }
+
+    function manage($id) {
+//        echo '<pre>';
+//        print_r($id);
+//        exit;
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->load->helper('string');
+        $this->load->library('encrypt');
+        $this->load->library('parser');
+        $this->load->library('email');
+
+
+        $userDetail = $this->Applicationsmodel->getUserDetails($id);
+        
+
+        $this->form_validation->set_rules('applicant_id', 'Applicant/Tenant', 'trim|required|integer');
+        $this->form_validation->set_rules('property_id', 'Property', 'trim|required|integer');
+        $this->form_validation->set_rules('lease_type', 'Lease Type', 'trim|required');
+        $this->form_validation->set_rules('charges_frequence', 'Recurring Charges frequency', 'trim|required');
+        $this->form_validation->set_rules('rental_amount', 'Rental Amount', 'trim|required|integer');
+        $this->form_validation->set_rules('security_deposit_date', 'Rental Amount', 'trim|required|callback_valid_date');
+        $this->form_validation->set_rules('application_status', 'Co-signer Detail', 'trim|required');
+        $this->form_validation->set_rules('unit_id', 'Unit', 'trim|required|integer');
+        $this->form_validation->set_rules('occupants', 'Occupants', 'trim|required|integer');
+        $this->form_validation->set_rules('lease_from', 'Lease from', 'trim|required|callback_valid_date');
+        $this->form_validation->set_rules('lease_to', 'Lease to', 'trim|required|callback_valid_date');
+        $this->form_validation->set_rules('next_due', 'Next Due Date', 'trim|required|callback_valid_date');
+        $this->form_validation->set_rules('security_amount', 'Security Amount', 'trim|required|integer');
+        $this->form_validation->set_rules('emeregency_contact', 'Emergency Contact', 'trim|required');
+        $this->form_validation->set_rules('notes', 'Notes', 'trim|required');
+
+        if ($this->form_validation->run() == FALSE) {
+            $inner = array();
+            $inner['details'] = $userDetail;
+            $page = array();
+            $page['content'] = $this->load->view('application-manage', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
 
