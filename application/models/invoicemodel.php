@@ -153,7 +153,7 @@ class InvoiceModel extends CI_Model {
             'is_paid' => '0'
         );
         
-        e($data);
+       // e($data);
         
         $this->db->insert('invoice_new', $data);
         $insert_id = $this->db->insert_id();
