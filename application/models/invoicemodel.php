@@ -20,44 +20,30 @@ class InvoiceModel extends CI_Model {
         
     }
     
-    function updateIsFirst($fid=NULL,$type=NULL,$invoiceid=NULL){
+    function updateIsFirst($appid=NULL){
         
         
         $today = date("Y-m-d");
         $time = strtotime($today);
         
-        if($type=='W'){
-            $final = date("Y-m-d", strtotime("+1 week", $time));
-            $invoice_type="W";
-        }
-        if($type=='M'){
-            $final = date("Y-m-d", strtotime("+1 month", $time));
-            $invoice_type="M";
-        }
-        if($type=='Q'){
-            $final = date("Y-m-d", strtotime("+4 month", $time));
-            $invoice_type="Q";
-        }
-        if($type=='HF'){
-            $final = date("Y-m-d", strtotime("+6 month", $time));
-            $invoice_type="HF";
-        }
-        
-        $data = array(
-            "is_paid_first" =>'Y',
-            "last_installment"=>$final
-        );
+       
+        $final = date("Y-m-d", strtotime("+1 month", $time));
+                
+//        if($type=='Q'){
+//            $final = date("Y-m-d", strtotime("+4 month", $time));
+//            $invoice_type="Q";
+//        }
+//        if($type=='HF'){
+//            $final = date("Y-m-d", strtotime("+6 month", $time));
+//            $invoice_type="HF";
+//        }
         
         $data1 = array(
-            "invoice_type"=>$invoice_type
+            "date_of_month"=>$final
         );
         
-        $this->db->where('id', $fid);
-        $this->db->update('user_extra_detail', $data);
-        
-        
-        $this->db->where('invoice_code', $invoiceid);
-        $this->db->update('invoice_new', $data1);
+        $this->db->where('id', $appid);
+        $this->db->update('applications', $data1);
         
     }
     
@@ -147,13 +133,14 @@ class InvoiceModel extends CI_Model {
         return FALSE;
     }
 
-    function getInvoice($fid = NULL,$com_id,$installment_fees,$amt_after_vat) {
+    function getInvoice($applicaton_id=NULL,$fid = NULL,$com_id,$installment_fees,$amt_after_vat) {
         $applicant_id = $fid;
         $company_id = $com_id;
         $today_date = date("Y-m-d");
         $due_date = date('Y-m-d', strtotime("+5 days"));
         
         $data = array(
+            'application_id' => $applicaton_id,
             'applicant_id' => $applicant_id,
             'company_id' => $com_id,
             'installment_fees'=>$installment_fees,

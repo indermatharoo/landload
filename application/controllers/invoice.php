@@ -27,6 +27,7 @@ class Invoice extends CI_Controller {
                
         foreach($data as $rows){
             //echo $rows['property_id'];
+            $application_id = $rows['id'];
             $company_detail = getCompany($rows['property_id']);
             $comId = $company_detail->company_id;
             $applicantId = $rows['applicant_id'];
@@ -36,7 +37,7 @@ class Invoice extends CI_Controller {
             $addvat = $this->invoicemodel->vat($payable_install_fees);
             $without_value = $this->invoicemodel->withoutvat($payable_install_fees);
             
-            $invoicedata = $this->invoicemodel->getInvoice($applicantId,$comId,$payable_install_fees,$addvat);
+            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat);
             $sendto = $rows['email'];
             $fname = $rows['fname'];
             $lname = $rows['lname'];
@@ -82,7 +83,7 @@ class Invoice extends CI_Controller {
             $this->email->message($msg_body);
 
             if ($this->email->send()) {
-               //$this->invoicemodel->updateIsFirst($fid,'W',$invoice_ref_code);
+               //$this->invoicemodel->updateIsFirst($application_id,'W',$invoice_ref_code);
                echo "sent";
             } else {
                 show_error($this->email->print_debugger());
@@ -106,6 +107,7 @@ class Invoice extends CI_Controller {
                
         foreach($data as $rows){
             //echo $rows['property_id'];
+            $application_id = $rows['id'];
             $company_detail = getCompany($rows['property_id']);
             $comId = $company_detail->company_id;
             $applicantId = $rows['applicant_id'];
@@ -115,7 +117,7 @@ class Invoice extends CI_Controller {
             $addvat = $this->invoicemodel->vat($payable_install_fees);
             $without_value = $this->invoicemodel->withoutvat($payable_install_fees);
             
-            $invoicedata = $this->invoicemodel->getInvoice($applicantId,$comId,$payable_install_fees,$addvat);
+            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat);
             $sendto = $rows['email'];
             $fname = $rows['fname'];
             $lname = $rows['lname'];
@@ -161,7 +163,7 @@ class Invoice extends CI_Controller {
             $this->email->message($msg_body);
 
             if ($this->email->send()) {
-               //$this->invoicemodel->updateIsFirst($fid,'M',$invoice_ref_code);
+               $this->invoicemodel->updateIsFirst($application_id);
                echo "sent";
             } else {
                 show_error($this->email->print_debugger());

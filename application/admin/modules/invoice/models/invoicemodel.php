@@ -11,7 +11,7 @@ class Invoicemodel extends CI_Model {
         if($this->aauth->isUser()){
             $this->company_id = curUsrPid();
         }
-        else{
+        else if($this->aauth->isCompany()){
             $this->company_id = curUsrId();
         }
         
