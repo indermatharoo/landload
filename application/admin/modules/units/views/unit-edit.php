@@ -40,7 +40,7 @@
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
-                <input type="file"  name="photo"  >
+                <input type="file"  name="photo[]" multiple="" >
             </div>
             <div class="col-sm-6">
                 <label>Status</label><br>
@@ -48,6 +48,14 @@
                 <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st==$details['status'])?'checked':''; ?>><?php echo $stval ?><br />
                 <?php } ?>
             </div>
+            <div class="col-sm-6">
+                <label>Unit Type</label><br>
+                <?php
+                
+                foreach ($unitsType as $st => $stval) { ?>
+                    <input type="radio" name="unit_type" value="<?php echo $stval['unit_code'] ?>" <?php echo ($stval['unit_code']==$details['unit_type'])?'checked':''; ?>  ><?php print_r( $stval['unit_type']) ?><br />
+                <?php } ?>
+            </div>   
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
                  <input type="text" class="form-control" name="area"  placeholder="Area" value="<?php echo $details['area']; ?>">
@@ -73,7 +81,13 @@
                     <option value="<?php echo $feature['id'] ?>" <?php echo (in_array( $feature['id'] ,$exp))?'selected':'' ?>><?php echo $feature['tag'] ?></option>
                       <?php } ?>
                 </select>
-            </div>  
+            </div> 
+            <div class="col-sm-6">
+                <?php foreach($images['result'] as $image){ ?>
+                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$image['image'] ?>" height="100px"  width="100px">
+                <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" >
+                <?php } ?>
+            </div>             
 
         </div>
         

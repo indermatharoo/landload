@@ -38,14 +38,22 @@
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
-                <input type="file"  name="photo"  >
+                <input type="file"  name="photo[]"  multiple >
             </div>
             <div class="col-sm-6">
                 <label>Status</label><br>
-                <?php foreach ($status as $st => $stval) { ?>
+                <?php
+                
+                foreach ($status as $st => $stval) { ?>
                     <input type="radio" name="status" value="<?php echo $st ?>"><?php echo $stval ?><br />
                 <?php } ?>
             </div>
+            <div class="col-sm-6">
+                <label>Unit Type</label><br>
+                <?php foreach ($unitsType as $st => $stval) { ?>
+                    <input type="radio" name="unit_type" value="<?php echo $stval['unit_code'] ?>"><?php print_r( $stval['unit_type']) ?><br />
+                <?php } ?>
+            </div>            
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
                 <input type="text" class="form-control" name="area"  placeholder="Area">
