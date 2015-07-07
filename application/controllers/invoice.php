@@ -17,7 +17,7 @@ class Invoice extends CI_Controller {
         
         $this->load->model('invoicemodel');
         $data = $this->invoicemodel->getWeeklyUsers();
-       // e($data);
+        e($data);
         $this->load->library('email');
         $config['charset'] = 'utf-8';
         $config['wordwrap'] = TRUE;
