@@ -60,7 +60,7 @@ class Aauth {
      * Constructor
      */
     public function __construct() {
-
+        ini_set('display_errors','On');
         // get main CI object
         $this->CI = & get_instance();
 
@@ -83,14 +83,13 @@ class Aauth {
         $this->CI->config->load('aauth');
         $this->config_vars = $this->CI->config->item('aauth');
         $this->user_group = array(
-            'franchisor' => '2',
-            'franchisee' => '3',
+            'admin' => '2',
+            'company' => '3',
             'user' => '5',
             'customer' => '6'
         );
-        $this->isFranchisor = false;
-        $this->isFranchisee = false;
-        $this->isFrsUser = false;
+        $this->isAdmin = false;
+        $this->isComapny = false;
         $this->isUser = false;
         $this->isCustomer = false;
     }
@@ -213,22 +212,28 @@ class Aauth {
                 $group = self::getUserGroup($row->id);
             }
             if ($group) {
-//                e($group);
                 switch ($group) {
+                    case 2:
+                        $this->isAdmin = true;
+                        break;
+                    case 3:
+                        $this->isCompany = true;
+                        break;
+                    case 5:
+                        $this->isUser = true ;
+                        break;
                     case 6:
                         $this->isCustomer = true;
                         break;
                 }
             }
-//            e($this);
             $data = array(
                 'id' => $row->id,
                 'name' => $row->name,
                 'email' => $row->email,
                 'loggedin' => TRUE,
-                'isFranchisor' => $this->isFranchisor,
-                'isFranchisee' => $this->isFranchisee,
-                'isFrsUser' => $this->isFrsUser,
+                'isAdmin' => $this->isAdmin,
+                'isCompany' => $this->isCompany,
                 'isUser' => $this->isUser,
                 'isCustomer' => $this->isCustomer,
                 'pid' => $row->pid
@@ -562,10 +567,11 @@ class Aauth {
      */
 
 //    public function create_user($email, $pass, $name, $groups = array(), $pid, $image = false, $store_id = false, $param = array()) {
-    public function create_user($email, $pass, $name, $groups = array(), $pid, $image = false, $store_id = false, $param = array()) {
-        $valid = true;
-//        $internalError = array();
+    public function create_user($email, $pass, $name, $groups = array(), $package, $pid, $image = false, $store_id = false, $param = array()) {
+        
+        //        $internalError = array();
         // if email is already exist
+        $valid = true;
         if ($this->user_exsist_by_email($email)) {
             $this->CI->session->set_flashdata('ERROR', 'email_taken');
 //            $this->error($this->CI->lang->line('email_taken'));             
@@ -583,6 +589,7 @@ class Aauth {
 //            $this->error($this->CI->lang->line('email_invalid'));
             $valid = false;
         }
+
         if (strlen($pass) < 5 or strlen($pass) > $this->config_vars['max']) {
             $this->CI->session->set_flashdata('ERROR', 'pass_invalid');
 //            $this->error($this->CI->lang->line('pass_invalid'));
@@ -599,52 +606,37 @@ class Aauth {
             $valid = false;
         }
 
-        if (!$valid && !$param['internal']) {
-            redirect(createUrl('user/add'));
+        if (!$valid ) {
+            redirect(createUrl('company/add'));
             return false;
         } elseif (!$valid && $param['internal']) {
-            redirect(createUrl('customer'));
+            redirect(createUrl('company'));
             return false;
         }
-
+        
+        
+        $datetime = date('Y-m-d H:i:s');
         $data = array(
             'email' => $email,
             'pass' => $this->hash_password($pass, 0), // Password cannot be blank but user_id required for salt, setting bad password for now
             'name' => $name,
             'pid' => $pid,
-            'store_id' => $store_id,
-            'createdon' => time()
+//            'store_id' => $store_id,
+            'package' => $package,
+            'register_date' => $datetime
         );
         if ($image)
             $data['pic'] = $image;
         if ($this->CI->db->insert($this->config_vars['users'], $data)) {
 
             $user_id = $this->CI->db->insert_id();
-            $this->CI->load->library('Notification');
-
-            $user_group = $this->getUsersIdRole();
-            $notify_data = array(
-                'class' => $this->CI->router->fetch_class(),
-                'method' => $this->CI->router->fetch_method(),
-                'creator_id' => $pid,
-                'creator_name' => $this->CI->session->userdata['name'],
-                'sender_id' => $pid,
-                'sender_name' => $this->CI->session->userdata['name'],
-                'assigne_grp' => '',
-                'assigne_id' => '',
-                'event_title' => '',
-                'filter' => $user_group[$groups[0]],
-                'event_id' => $user_id,
-            );
-
-            $this->CI->notification->notify($notify_data);
-
             // set default group
-//            $this->add_member($user_id, $this->config_vars['default_group']);
-            foreach ($groups as $group):
-                $this->add_member($user_id, $group);
-            endforeach;
-
+           $this->add_member($user_id, $groups);
+//            foreach ($groups as $group):
+//                echo "in".$group;
+//                //$this->add_member($user_id, $group);
+//            endforeach;
+//die;
             // if verification activated
             if ($this->config_vars['verification']) {
                 $data = null;
@@ -658,12 +650,11 @@ class Aauth {
             }
 
             // Update to correct salted password
-
             $data = null;
             $data['pass'] = $this->hash_password($pass, $user_id);
             $this->CI->db->where('id', $user_id);
             $this->CI->db->update($this->config_vars['users'], $data);
-die();
+
             return $user_id;
         } else {
             return "ERROR DURING ";
@@ -681,8 +672,8 @@ die();
      * @param string|bool $name User's name, or false if not to be updated
      * @return bool Update fails/succeeds
      */
-    public function update_user($user_id, $email = FALSE, $pass = FALSE, $name = FALSE, $store_id = false, $image = false) {
-
+    public function update_user($user_id, $email = FALSE, $pass = FALSE, $name = FALSE, $package=FALSE, $image = false) {
+        
         $data = array();
 
         if ($email != FALSE) {
@@ -696,10 +687,11 @@ die();
         if ($name != FALSE) {
             $data['name'] = $name;
         }
-
-        if ($store_id != FALSE) {
-            $data['store_id'] = $store_id;
+        
+        if($package != FALSE){
+            $data['package'] = $package;
         }
+
         if ($image)
             $data['pic'] = $image;
 
@@ -854,8 +846,8 @@ die();
         $this->CI->db->delete($this->config_vars['user_to_group']);
 
         // delete user vars
-        $this->CI->db->where('user_id', $user_id);
-        $this->CI->db->delete($this->config_vars['user_variables']);
+        $this->CI->db->where('id', $user_id);
+        $this->CI->db->delete('user_extra_detail');
     }
 
     //tested
@@ -1246,15 +1238,16 @@ die();
      * @return string Group name
      */
     public function get_group_name($group_id) {
-
         $query = $this->CI->db->where('id', $group_id);
         $query = $this->CI->db->get($this->config_vars['groups']);
-
+      
         if ($query->num_rows() == 0)
             return FALSE;
-
         $row = $query->row();
+       // echo $row->name;
+     //   die;
         return $row->name;
+       
     }
 
     //tested
@@ -2130,46 +2123,30 @@ die();
         return $query->row('group_id');
     }
 
+
     /*
      * return bool true if current login use is admin
      */
 
-    public function isAdmin() {
-        return $this->CI->session->userdata('id') == 1;
-    }
-
-    /*
-     * return bool true if current login use is franchisor
-     */
-
-    public function isFranshisor($id = null) {
+    public function isAdmin($id = null) {
+//        e($this->CI->session->all_userdata());
         if ($id)
-            return $this->user_group['franchisor'] == self::getUserGroup($id);
+            return $this->user_group['admin'] == self::getUserGroup($id);
         else {
-            return $this->CI->session->userdata('isFranchisor');
+            return $this->CI->session->userdata('isAdmin');
         }
     }
 
-    /*
-     * return bool true is current user is franchisor user
-     */
-
-    public function isFrsUser($id = false) {
-        if ($id)
-            return $this->user_group['user'] == self::getUserGroup($id) && (self::isFranshisor(self::get_user($id)->pid));
-        else
-            return $this->CI->session->userdata('isFrsUser');
-    }
 
     /*
      * return bool true if current login use is super franchisee
      */
 
-    public function isFranshisee($id = null) {
+    public function isCompany($id = null) {
         if ($id) {
-            return $this->user_group['franchisee'] == self::getUserGroup($id);
+            return $this->user_group['company'] == self::getUserGroup($id);
         } else
-            return $this->CI->session->userdata('isFranchisee');
+            return $this->CI->session->userdata('isCompany');
     }
 
     /*
@@ -2193,10 +2170,6 @@ die();
         } else {
             return $this->CI->session->userdata('isCustomer');
         }
-    }
-
-    public function getCustomerName() {
-        return $this->CI->session->userdata('name');
     }
 
 }

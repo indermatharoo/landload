@@ -133,7 +133,7 @@ class InvoiceModel extends CI_Model {
         return FALSE;
     }
 
-    function getInvoice($applicaton_id=NULL,$fid = NULL,$com_id,$installment_fees,$amt_after_vat) {
+    function getInvoice($applicaton_id=NULL,$fid = NULL,$com_id,$installment_fees,$amt_after_vat,$type) {
         $applicant_id = $fid;
         $company_id = $com_id;
         $today_date = date("Y-m-d");
@@ -149,20 +149,21 @@ class InvoiceModel extends CI_Model {
             'invoice_code' => '0',
             'created_on' => $today_date,
             'due_on' => $due_date,
+            'invoice_type' => $type,
             'paid_on' => '0000-00-00 00:00:00',
             'is_paid' => '0'
         );
-        
-       // e($data);
-        
+        //e($data);
         $this->db->insert('invoice_new', $data);
+       // echo $this->db->last_query();
+        //exit;
         $insert_id = $this->db->insert_id();
 
         $rand = rand(00000, 99999);
         $invoice_code = $rand . "" . $insert_id;
         $this->db->where('invoice_id', $insert_id);
         $this->db->update('invoice_new', array('invoice_code' => $invoice_code));
-
+        
         $array = array(
             "invoice_id" => $invoice_code,
             "created_date" => $today_date,

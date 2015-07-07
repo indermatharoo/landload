@@ -37,7 +37,7 @@ class Invoice extends CI_Controller {
             $addvat = $this->invoicemodel->vat($payable_install_fees);
             $without_value = $this->invoicemodel->withoutvat($payable_install_fees);
             
-            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat);
+            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat,'W');
             $sendto = $rows['email'];
             $fname = $rows['fname'];
             $lname = $rows['lname'];
@@ -117,7 +117,7 @@ class Invoice extends CI_Controller {
             $addvat = $this->invoicemodel->vat($payable_install_fees);
             $without_value = $this->invoicemodel->withoutvat($payable_install_fees);
             
-            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat);
+            $invoicedata = $this->invoicemodel->getInvoice($application_id,$applicantId,$comId,$payable_install_fees,$addvat,'M');
             $sendto = $rows['email'];
             $fname = $rows['fname'];
             $lname = $rows['lname'];
