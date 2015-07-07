@@ -36,7 +36,7 @@
                         <?php else : ?>
                             <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
                         <?php endif; ?>
-                        <?php $this->load->view(THEME . 'layout/inc-notifications'); ?>
+                        <?php //$this->load->view(THEME . 'layout/inc-notifications'); ?>
                     </div>
                 </div>    
             </div>

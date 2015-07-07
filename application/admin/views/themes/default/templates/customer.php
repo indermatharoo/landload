@@ -33,12 +33,12 @@
                     <div class="col-lg-5 pad-top20">
                         <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
                         <?php
-                        $path = $this->router->fetch_class().'/'.$this->router->fetch_method();
-                        if($path == 'customer/index' || $path == 'customer/addedit'){
-                           $this->load->view(THEME . 'layout/inc-add-cust');
+                        $path = $this->router->fetch_class() . '/' . $this->router->fetch_method();
+                        if ($path == 'customer/index' || $path == 'customer/addedit') {
+                            $this->load->view(THEME . 'layout/inc-add-cust');
                         }
                         ?>
-                    
+
                     </div>
                 </div>    
             </div>

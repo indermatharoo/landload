@@ -30,7 +30,7 @@ class Invoice extends Admin_Controller {
 //*************************************validation End********************************
 
     function index($arg = "") {
-            
+
         if ($arg == '') {
             $this->load->library('form_validation');
             $this->load->helper('form');
@@ -44,12 +44,15 @@ class Invoice extends Admin_Controller {
                 return;
             }
             
+            ///Setup pagination            
             $inner["total"] = $this->invoicemodel->countAll();
+           
+            $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly();
+            $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly();
             $inner["weekly_data"] = $this->invoicemodel->getWeeklyInvoice();
+           
             $page = array();
-            if ($this->aauth->isFranshisor()) {
-                $page['content'] = $this->load->view('invoice-index.php', $inner, TRUE);
-            }
+            $page['content'] = $this->load->view('invoice-index', $inner, TRUE);
             $this->load->view($this->default, $page);
         } else {
             $this->load->library('form_validation');
@@ -68,59 +71,46 @@ class Invoice extends Admin_Controller {
             $perpage = 20;
             $config['base_url'] = base_url() . "invoice/index/detail/";
             $config['uri_segment'] = 3;
-            $config['total_rows'] = $this->invoicemodel->countAllWeekly();
+            $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly();
+            $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly();
             $config['per_page'] = $perpage;
             $this->pagination->initialize($config);
             
-            
-            $types = $this->invoicemodel->getFranshiseType();
-            $temp = array();
-            foreach ($types as $type):
-                $temp[arrIndex($type, 'mon_fee_type')] = $type;
-            endforeach;
-
-            $inner["row"] = $temp;
             $inner["total"] = $this->invoicemodel->countAll();
             $inner['pagination'] = $this->pagination->create_links();
             $inner["weekly_data_detail"] = $this->invoicemodel->getWeeklyDetailInvoice();
             $page = array();
-            if ($this->aauth->isFranshisor()) {
-                $page['content'] = $this->load->view('invoice-index-detail', $inner, TRUE);
-            }
+            $page['content'] = $this->load->view('invoice-index-detail', $inner, TRUE);
             $this->load->view($this->default, $page);
         }
     }
 
     function monthly($arg = "") {
-
-        if ($arg == '') {
+        
+         if ($arg == '') {
             $this->load->library('form_validation');
             $this->load->helper('form');
             $this->load->library('pagination');
+            $this->load->model('invoicemodel');
+            
+           
 
             if (!$this->checkAccess('MANAGE_USERS')) {
                 $this->utility->accessDenied();
                 return;
             }
-
-            ///Setup pagination
-            $this->load->model('invoicemodel');
-            $types = $this->invoicemodel->getFranshiseType();
-            $temp = array();
-            foreach ($types as $type):
-                $temp[arrIndex($type, 'mon_fee_type')] = $type;
-            endforeach;
-
-            $inner["row"] = $temp;
+            
+            ///Setup pagination            
             $inner["total"] = $this->invoicemodel->countAll();
+           
+            $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly();
+            $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly();
             $inner["monthly_data"] = $this->invoicemodel->getMonthlyInvoice();
+           //e($inner);
             $page = array();
-            if ($this->aauth->isFranshisor()) {
-                $page['content'] = $this->load->view('invoice-monthly', $inner, TRUE);
-            }
+            $page['content'] = $this->load->view('invoice-monthly', $inner, TRUE);
             $this->load->view($this->default, $page);
         } else {
-
             $this->load->library('form_validation');
             $this->load->helper('form');
             $this->load->library('pagination');
@@ -129,24 +119,27 @@ class Invoice extends Admin_Controller {
                 $this->utility->accessDenied();
                 return;
             }
-
+            
             ///Setup pagination
             $this->load->model('invoicemodel');
-            $types = $this->invoicemodel->getFranshiseType();
-            $temp = array();
-            foreach ($types as $type):
-                $temp[arrIndex($type, 'mon_fee_type')] = $type;
-            endforeach;
-
-            $inner["row"] = $temp;
+            
+             ///Setup pagination
+            $perpage = 20;
+            $config['base_url'] = base_url() . "invoice/monthly/detail/";
+            $config['uri_segment'] = 3;
+            $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly();
+            $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly();
+            $config['per_page'] = $perpage;
+            $this->pagination->initialize($config);
+            
             $inner["total"] = $this->invoicemodel->countAll();
+            $inner['pagination'] = $this->pagination->create_links();
             $inner["monthly_data_detail"] = $this->invoicemodel->getMonthlyDetailInvoice();
             $page = array();
-            if ($this->aauth->isFranshisor()) {
-                $page['content'] = $this->load->view('invoice-monthly-detail', $inner, TRUE);
-            }
+            $page['content'] = $this->load->view('invoice-monthly-detail', $inner, TRUE);
             $this->load->view($this->default, $page);
         }
+      
     }
 
     function quaterly($arg = "") {

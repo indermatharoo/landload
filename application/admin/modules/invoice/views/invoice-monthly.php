@@ -43,34 +43,19 @@
                         return $count;
                         }
                         $total_records = $total;
-                        $week = arrIndex($row, 'W');
-                        $monthly = arrIndex($row, 'M');
-                        $quarterly = arrIndex($row, 'Q');
-                        $halfyearly = arrIndex($row, 'HF');
-                        if(!empty($week) || $week["total"]!='0'){
-                            $weekly_percent = percent($week["total"], $total_records);
-                        }
-                        else{
+//                        $week = arrIndex($row, 'W');
+//                        $monthly = arrIndex($row, 'M');
+//                        $quarterly = arrIndex($row, 'Q');
+//                        $halfyearly = arrIndex($row, 'HF');
+                       if (!empty($total_rows_weekly) || $total_rows_weekly != '0') {
+                            $weekly_percent = percent($total_rows_weekly, $total_records);
+                        } else {
                             $weekly_percent = "0";
                         }
-                        if(!empty($monthly) || $monthly["total"]!='0'){
-                            $monthly_percent = percent($monthly["total"], $total_records);
-                        }
-                        else{
+                        if (!empty($total_rows_monthly) || $total_rows_monthly != '0') {
+                            $monthly_percent = percent($total_rows_monthly, $total_records);
+                        } else {
                             $monthly_percent = "0";
-                        }
-                        if(!empty($quarterly) || $quarterly["total"]!='0'){
-                            $quarterly_percent = percent($quarterly["total"], $total_records);
-                        }
-                        else{
-                            $quarterly_percent = "0";
-                        }
-                        
-                        if(!empty($halfyearly) || $halfyearly["total"]!='0'){
-                            $halfyearly_percent = percent($halfyearly["total"], $total_records);
-                        }
-                        else{
-                            $halfyearly_percent = "0";
                         }
                         ?>
                         <a href="invoice/index">
@@ -93,7 +78,7 @@
                             </div>
                         </a>
                     </td>
-                    <td>
+                   <!--- <td>
                         <a href="invoice/quaterly">
                             <div class="circle">
                                 <div class="circle-inner">
@@ -112,7 +97,7 @@
                                 </div>
                             </div>
                         </a>
-                    </td>
+                    </td>--->
 
                 </tr>
 
