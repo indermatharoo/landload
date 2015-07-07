@@ -5,7 +5,7 @@
         <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-bottom: 1px solid rgb(206, 206, 206); padding-bottom: 10px;">
               <tr>
-                <td width="200"><a href= "#" target="_blank"><img src="http://crm.checksample.co.uk/images/logo.png" border="0" alt=""/></a></td>
+                <td width="200"><a href= "#" target="_blank"><img src="http://landlord.webnseo.co.uk/admin/images/logo.png" border="0" alt=""/></a></td>
                 <td width="250">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
