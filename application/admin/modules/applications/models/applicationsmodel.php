@@ -20,7 +20,7 @@ class Applicationsmodel extends Basemodel {
 
         $this->db->select('applications.*,applicants.fname,applicants.lname')
                 ->from('applications')
-                ->join('applicants', 'applications.applicant_id=applicants.applicant_id');
+                ->join('applicants', 'applications.applicant_id=applicants.id');
         $query = $this->db->get();
         if($query->num_rows()>0){
             return $query->result_array();
