@@ -63,8 +63,8 @@ class InvoiceModel extends CI_Model {
         $this->db->where('applications.day_of_week', $weekday);
         //$this->db->limit(1);
         $query = $this->db->get();
-        //echo $this->db->last_query();
-        //exit;
+        echo $this->db->last_query();
+        exit;
         if ($query->num_rows) {
             return $query->result_array();
         }
