@@ -133,7 +133,7 @@ class InvoiceModel extends CI_Model {
         return FALSE;
     }
 
-    function getInvoice($applicaton_id=NULL,$fid = NULL,$com_id,$installment_fees,$amt_after_vat) {
+    function getInvoice($applicaton_id=NULL,$fid = NULL,$com_id,$installment_fees,$amt_after_vat,$type) {
         $applicant_id = $fid;
         $company_id = $com_id;
         $today_date = date("Y-m-d");
@@ -149,6 +149,7 @@ class InvoiceModel extends CI_Model {
             'invoice_code' => '0',
             'created_on' => $today_date,
             'due_on' => $due_date,
+            'invoice_type' => $type,
             'paid_on' => '0000-00-00 00:00:00',
             'is_paid' => '0'
         );
