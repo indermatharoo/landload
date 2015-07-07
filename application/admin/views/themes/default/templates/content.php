@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-lg-5 pad-top20">
                         <?php $this->load->view(THEME . 'layout/inc-menu-cont'); ?>
-                        <?php $this->load->view(THEME . 'layout/inc-notifications'); ?>
+                        <?php // $this->load->view(THEME . 'layout/inc-notifications'); ?>
                     </div>
                 </div>    
             </div>

@@ -307,7 +307,7 @@ class Pagemodel extends CI_Model {
             $data['path'] = $parent_category['path'] . '.' . $this->input->post('parent_id', true);
         }
         $data['user_id'] = curUsrId();
-        if ($this->aauth->isFranshisor()):
+        if ($this->aauth->isAdmin()):
             $data['user_id'] = 0;
         endif;
         $status = $this->db->insert('page', $data);
