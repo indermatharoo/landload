@@ -96,8 +96,8 @@ class Applications extends Admin_Controller {
     }
 
     function edit($offset) {
-        
-        
+
+
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->helper('string');
@@ -107,7 +107,7 @@ class Applications extends Admin_Controller {
 
 
         $details = $this->Applicationsmodel->getApplicationDetails($offset);
-        
+
         $AllApplicants = $this->Applicantsmodel->getAllApplicants();
         $ApplicationType = $this->Applicationsmodel->getApplicationType();
         $propertiesList = $this->Propertiesmodel->getPropertiesList();
@@ -148,9 +148,13 @@ class Applications extends Admin_Controller {
         }
     }
 
+    function check_default($post_string) {
+        return $post_string == '0' ? FALSE : TRUE;
+    }
+
     function manage($id) {
 //        echo '<pre>';
-//        print_r($id);
+//        print_r($_POST);
 //        exit;
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -161,23 +165,25 @@ class Applications extends Admin_Controller {
 
 
         $userDetail = $this->Applicationsmodel->getUserDetails($id);
-        
 
-        $this->form_validation->set_rules('applicant_id', 'Applicant/Tenant', 'trim|required|integer');
-        $this->form_validation->set_rules('property_id', 'Property', 'trim|required|integer');
-        $this->form_validation->set_rules('lease_type', 'Lease Type', 'trim|required');
-        $this->form_validation->set_rules('charges_frequence', 'Recurring Charges frequency', 'trim|required');
-        $this->form_validation->set_rules('rental_amount', 'Rental Amount', 'trim|required|integer');
-        $this->form_validation->set_rules('security_deposit_date', 'Rental Amount', 'trim|required|callback_valid_date');
-        $this->form_validation->set_rules('application_status', 'Co-signer Detail', 'trim|required');
-        $this->form_validation->set_rules('unit_id', 'Unit', 'trim|required|integer');
-        $this->form_validation->set_rules('occupants', 'Occupants', 'trim|required|integer');
-        $this->form_validation->set_rules('lease_from', 'Lease from', 'trim|required|callback_valid_date');
-        $this->form_validation->set_rules('lease_to', 'Lease to', 'trim|required|callback_valid_date');
-        $this->form_validation->set_rules('next_due', 'Next Due Date', 'trim|required|callback_valid_date');
+
+        $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('current_job', 'Current Job', 'trim|required');
+        $this->form_validation->set_rules('previous_job', 'Previous Job', 'trim|required');
+        $this->form_validation->set_rules('experience', 'Experience', 'trim|required');
+        $this->form_validation->set_rules('property', 'Property', 'trim|required');
+        $this->form_validation->set_rules('lease_from', 'Applied Date', 'trim|required|callback_valid_date');
+        $this->form_validation->set_rules('checkbox', 'Agree to Agreement', 'trim|required');
+        $this->form_validation->set_rules('rent_amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('security_amount', 'Security Amount', 'trim|required|integer');
-        $this->form_validation->set_rules('emeregency_contact', 'Emergency Contact', 'trim|required');
-        $this->form_validation->set_rules('notes', 'Notes', 'trim|required');
+        $this->form_validation->set_rules('ptype', 'Payment Type', 'required|callback_check_default');
+        $this->form_validation->set_message('check_default', 'You need to select something other than the default');
+        $this->form_validation->set_rules('refund', 'Refundable', 'trim|required');
+
 
         if ($this->form_validation->run() == FALSE) {
             $inner = array();

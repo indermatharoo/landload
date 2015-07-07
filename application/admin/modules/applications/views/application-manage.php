@@ -83,7 +83,7 @@
                         <input type="text" class="form-control" id="current_job" name="current_job" value="" placeholder="">
                     </div>
                     <div class="col-sm-6">
-                        <label>Current Job</label>
+                        <label>Previous Job</label>
                         <input type="text" class="form-control" id="previous_job" name="previous_job" value="" placeholder="">
                     </div>
                 </div>
@@ -99,11 +99,11 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Property</label>
-                        <input type="text" class="form-control" id="current_job" name="current_job" value="<?= $details['pname']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="current_job" name="property" value="<?= $details['pname']; ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Applied Date</label>
-                        <input type="text" class="form-control" id="previous_job" name="previous_job" value="<?= $details['lease_from']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="previous_job" name="lease_from" value="<?= $details['lease_from']; ?>" placeholder="">
                     </div>
                 </div>
             </div>     
@@ -127,25 +127,25 @@
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Payment Type</label>
-                        <select class="form-control" id="ptype" name="ptype" value="1" placeholder="">
-                            <option>--Choose--</option>
+                        <select class="form-control" id="ptype" name="ptype" value="" placeholder="">
+                            <option value="0">--Choose--</option>
                             <option value="W">WEEK</option>
                             <option value="M">MONTH</option>
                         </select>
                     </div>
                     <div class="col-sm-6 week ftry" style="display: none">
                         <label>Day Of Week</label>
-                        <input type="text" class="form-control" id="security_amount" name="security_amount" value="<?= $details['day_of_week']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="security_amount" name="day_of_week" value="<?= $details['day_of_week']; ?>" placeholder="">
                     </div>
                     <div class="col-sm-6 month ftry" style="display: none">
                         <label>Date Of Month</label>
-                        <input type="text" class="form-control" id="security_amount" name="security_amount" value="<?= $details['date_of_month']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="security_amount" name="date_of_month" value="<?= $details['date_of_month']; ?>" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Refundable</label>
-                        &nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="yes" style="vertical-align: sub">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="sex" value="no" style="vertical-align: sub">&nbsp;&nbsp;No
+                        &nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="yes" style="vertical-align: sub">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="no" style="vertical-align: sub">&nbsp;&nbsp;No
                     </div>
                 </div>
             </div>     
