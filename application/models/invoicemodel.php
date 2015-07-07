@@ -155,14 +155,15 @@ class InvoiceModel extends CI_Model {
         );
         //e($data);
         $this->db->insert('invoice_new', $data);
+       // echo $this->db->last_query();
+        //exit;
         $insert_id = $this->db->insert_id();
 
         $rand = rand(00000, 99999);
         $invoice_code = $rand . "" . $insert_id;
         $this->db->where('invoice_id', $insert_id);
         $this->db->update('invoice_new', array('invoice_code' => $invoice_code));
-        echo $this->db->last_query();
-        exit;
+        
         $array = array(
             "invoice_id" => $invoice_code,
             "created_date" => $today_date,
