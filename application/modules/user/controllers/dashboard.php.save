@@ -1,0 +1,186 @@
+<?php
+
+if (!defined('BASEPATH'))
+    exit('No direct script access allowed');
+
+class Dashboard extends Admin_Controller {
+
+    function index($syear = 2014, $eyear = 2015) {
+        error_reporting(-1);
+        ini_set('display_errors', 'On');
+        if ($this->aauth->isCustomer()):
+            redirect('customer/dashboard');
+        endif;
+        $this->session->set_userdata('syear', $syear);
+        $this->session->set_userdata('eyear', $eyear);
+        $this->load->library('pagination');
+        $this->load->helper('text');
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $notification = $this->load->model('usermodel');
+        $notification = $this->load->model('calender/event');
+        $inner = array();
+        $page = array();
+        $inner['dasbBoardData'] = $this->usermodel->dasbBoardData($syear, $eyear, $this->ids);
+//        e($inner['dasbBoardData']);
+        $inner['franchises'] = $this->usermodel->getAllFranchise();
+        $inner['regions'] = $this->db->get('franchise_region')->result_array();
+        $inner['magentoDashboardData'] = self::loadmagentodata();
+        self::setUserSession($inner['regions'], $inner['franchises']);
+        $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
+//        e($this->dashboard);
+        $this->load->view($this->dashboard, $page);
+    }
+
+    function loadmagentodata() {
+        $rs = $this->commonmodel->getAll('user_extra_detail', 'store_id != 0', array(), false, 'store_id');
+        $ids = array();
+        foreach ($rs as $row):
+            $ids[] = arrIndex($row, 'store_id');
+        endforeach;
+        $sessionData = $this->session->all_userdata();
+        $params = array();
+        $params['fid'] = $ids;
+        $params['syear'] = arrIndex($sessionData, 'syear');
+        $params['eyear'] = arrIndex($sessionData, 'eyear');
+        $data = self::call('index/getFranchiseOrder', $params);
+        if (arrIndex($data, 'success') == false) {
+            return false;
+        }
+        $temp = array();
+        foreach ($data['data'] as $key => $result):
+            $temp[arrIndex($result, 'gid')] = $result;
+        endforeach;
+        return $temp;
+    }
+
+    public $url = 'http://www.thecreationstationstore.co.uk/crm/';
+
+    private function call($url, $params = array()) {
+        $params = http_build_query($params);
+        $ch = curl_init();
+//        echo $this->url . $url;
+//        exit;
+        curl_setopt($ch, CURLOPT_URL, $this->url . $url);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $server_output = curl_exec($ch);
+//        print_r($server_output);
+//        exit;
+//        return $server_output;
+        return json_decode($server_output, 1);
+    }
+
+    function setUserSession($regions, $franchises) {
+        $this->session->set_userdata('reporttype', 'default');
+        $temp = array();
+        foreach ($regions as $region):
+            $temp[] = arrIndex($region, 'id');
+        endforeach;
+        $this->session->set_userdata('regions', $temp);
+        $temp = array();
+        foreach ($franchises as $franchise):
+            $temp[] = arrIndex($franchise, 'id');
+        endforeach;
+        $this->session->set_userdata('franchises', $temp);
+    }
+
+    function password_check($str) {
+        $this->load->library('encrypt');
+
+        $this->db->where('user_id', $this->input->post('user_id', true));
+        $query = $this->db->get('user');
+        if ($query->num_rows() == 1) {
+            $row = $query->row_array();
+            if ($this->encrypt->decode($row['passwd']) == $str) {
+                return true;
+            }
+        }
+
+        $this->form_validation->set_message('password_check', 'Old Password is incorrect');
+        return false;
+    }
+
+    function changepassword() {
+        $this->load->library('encrypt');
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+
+        $this->security->init_csrf();
+        $this->security->csrf_verify();
+
+        //validation check
+        $this->form_validation->set_rules('old_passwd', 'Old Password', 'trim|required|callback_password_check');
+        $this->form_validation->set_rules('passwd', 'Password', 'trim|required');
+        $this->form_validation->set_rules('passwd1', 'Confirm Password', 'trim|required|matches[passwd]');
+        $this->form_validation->set_error_delimiters('<li>', '</li>');
+
+
+        if ($this->form_validation->run() == FALSE) {
+            $inner = array();
+            $page = array();
+            $inner['user'] = $this->getUser();
+            $page['content'] = $this->load->view('user/change-password', $inner, TRUE);
+            $this->load->view($this->shellFile, $page);
+        } else {
+            $this->Usermodel->updatePassword($this->getUser());
+
+            $this->session->set_flashdata('SUCCESS', 'admin_updated');
+
+            redirect("user/dashboard/changepassword/");
+            exit();
+        }
+    }
+
+    function logout() {
+        $this->session->unset_userdata('ADMIN_USER_ID');
+        $this->session->unset_userdata('COMPANY_ID');
+        $this->session->unset_userdata('BRANCH_ID');
+        $this->session->sess_destroy();
+        redirect("/welcome/");
+        exit();
+    }
+
+    function timeData($event = false, $customer = false, $quarter) {
+        $this->db->from('eventbooking_events');
+        switch ($quarter) {
+            case 1:
+                $where = 'event_start_ts > "2014-04-01 00:00:00" and event_start_ts < "2014-06-31 11:59:59"';
+                break;
+            case 2:
+                $where = 'event_start_ts > "2014-07-01 00:00:00" and event_start_ts < "2014-09-31 11:59:59"';
+                break;
+            case 3:
+                $where = 'event_start_ts > "2014-10-01 00:00:00" and event_start_ts < "2014-12-31 11:59:59"';
+                break;
+            case 4:
+                $where = 'event_start_ts > "2015-01-01 00:00:00" and event_start_ts < "2015-03-31 11:59:59"';
+                break;
+            case 12:
+                $where = 'event_start_ts > "2014-04-01 00:00:00" and event_start_ts < "2015-03-31 11:59:59"';
+                break;
+        }
+        $where .= ' and event_type_id = ' . $event;
+        if (!$this->aauth->isAdmin()) {
+//            $id = $this->aauth->get_user()->id;
+            $id = $this->session->userdata['id'];
+            $where .= ' AND user_id = ANY (select id from dpd_aauth_users where id = ' . $id . ' or pid = ' . $id . ')';
+        }
+        $query = $this->db->query("select * from dpd_eventbooking_events where $where");
+        if ($customer)
+            return 0;
+        else
+            return $query->num_rows();
+    }
+
+    function timePrice($event = false, $quarter) {
+        /*
+         * implementaion pending
+         */
+    }
+
+}
+
+?>
+

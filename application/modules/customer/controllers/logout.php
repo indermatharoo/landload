@@ -10,7 +10,8 @@ class Logout extends Cms_Controller {
     }
 
     function index() {
-        $this->aauth->logout();
+        $this->session->sess_destroy();
+//        $this->aauth->logout();
         redirect(base_url());
         exit();
     }
