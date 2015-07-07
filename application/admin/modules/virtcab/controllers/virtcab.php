@@ -53,7 +53,7 @@ class virtcab extends Admin_Controller {
         $inner['countfiles'] = $this->VirtualCabinetmodel->getAllGroupBy('filetype');
         $inner['allAvailGrps'] = $this->aauth->list_groups();
         foreach ($inner['allAvailGrps'] as $kval) {
-            if ($kval->id == '5' || $kval->id == '6') {
+            if ($kval->id != 6) {
                 continue;
             }
             $inner['AvailGrps'][$kval->id] = $kval->name;
@@ -272,7 +272,8 @@ class virtcab extends Admin_Controller {
     function getGrpUsers($grpId = null, $internal = array()) {
         if (!$grpId)
             return null;
-        $result = $this->Usermodel->listAllAsGrp(False, false, 'id, name', array('where' => 'group_id = ' . $grpId));
+//        $result = $this->Usermodel->listAllAsGrp(False, false, 'id, name', array('where' => 'group_id = ' . $grpId));
+        $result = $this->Usermodel->getApplicants($this->company_id);
         $datamsg = null;
         $selectRes = array();
         if ($result) {

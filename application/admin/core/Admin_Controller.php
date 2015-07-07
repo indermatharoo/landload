@@ -5,6 +5,7 @@ if (!defined('BASEPATH'))
 
 class Admin_Controller extends CMS_Controller {
 
+    protected $company_id;
     protected $ids = array();
 
     function __construct() {
@@ -17,11 +18,11 @@ class Admin_Controller extends CMS_Controller {
     }
 
     function init() {
-//        if ($this->aauth->isFranshisee()):
-//            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrId());
-//        elseif ($this->aauth->isUser()):
-//            $this->ids = $this->usermodel->getFranchiseUsersId(curUsrPid());
-//        endif;
+        if ($this->aauth->isCompany()):
+            $this->company_id = curUsrId();
+        elseif ($this->aauth->isUser()):
+            $this->company_id = curUsrPid();
+        endif;
     }
 
     function _checkAuth() {

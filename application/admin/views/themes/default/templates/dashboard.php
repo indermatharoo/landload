@@ -22,15 +22,12 @@
     </head>
     <body>
         <header id='header' class='pageTop'>
-            
-            <?php
-           
-            $this->load->view(THEME . 'layout/inc-header'); ?>
+            <?php $this->load->view(THEME . 'layout/inc-header'); ?>
         </header>
         <section id='main-content'>
             <div class="container">
                 <div class="content-main">
-                    <?php //echo $this->aauth->isFranshisor(curUsrId()); ?>
+                    <?php //echo $this->aauth->isFranshisor(curUsrId());  ?>
                     <?php echo $content; ?>
                 </div>
             </div>    

@@ -5,7 +5,7 @@
     </div>
     <div id="left-column" class="col-lg-7 pad-left30 pad-top20">
         <?php
-      //  $this->load->view('dashboard/filters');
+        //  $this->load->view('dashboard/filters');
         ?>
         <script>
             $(document).ready(function () {
@@ -25,13 +25,13 @@
         </div>
         <div class="table_cont">
             <div class="top-table">
-             
+
             </div>
             <div class="bott-table">
-                
+
             </div>
         </div>
-       
+
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
             <?php //$this->load->view("dashboard/chart"); ?>
         </div>

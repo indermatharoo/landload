@@ -52,10 +52,9 @@ class Usermodel extends Basemodel {
         $this->db->where('id !=', curUsrPid());
         $this->db->from(convertToAuthStr('users'));
         $this->db->join(
-                convertToAuthStr('user_to_group'), 
-                convertToAuthStr('user_to_group') . '.user_id = ' . convertToAuthStr('users') . '.id'
-                .' and dpd_'.convertToAuthStr('user_to_group').'.group_id!=6'
-                );
+                convertToAuthStr('user_to_group'), convertToAuthStr('user_to_group') . '.user_id = ' . convertToAuthStr('users') . '.id'
+                . ' and dpd_' . convertToAuthStr('user_to_group') . '.group_id!=6'
+        );
         $rs = $this->db->get();
         return $rs->result_array();
     }
@@ -79,6 +78,13 @@ class Usermodel extends Basemodel {
         return $rs->result_array();
     }
 
+    function getApplicants($company_id) {
+        $sql = "SELECT `t1`.*,DISTINCT(t1.email) FROM (`dpd_applicants` t1) left JOIN `dpd_applications` t2 ON `t2`.`applicant_id`=`t1`.`applicant_id` left JOIN `dpd_properties` t3 ON `t3`.`company_id`= $company_id and t3.id=t2.property_id";
+        $results = $this->db->query($sql);
+        $results = $results->result();
+        e($results);
+    }
+
     //List All Records
     function fetchAllRole() {
         $rs = $this->db->get('role');
@@ -90,7 +96,7 @@ class Usermodel extends Basemodel {
         $this->db->where('id', intval($uid));
         $this->db->where('is_active', 1);
         $rs = $this->db->get(convertToAuthStr('users'));
-        
+
         if ($rs && $rs->num_rows() == 1)
             return $rs->row_array();
 
@@ -177,28 +183,29 @@ class Usermodel extends Basemodel {
         }
         $this->db->dbprefix = $prefix;
     }
-    function getCountries()
-    {
-       $res = $this->db->get('country');
-       return $res->result_array();
+
+    function getCountries() {
+        $res = $this->db->get('country');
+        return $res->result_array();
     }
+
     //Add Insert User
     function insertRecord() {
-        
-        $user_id = $this->aauth->create_user(gParam('email'), gParam('pass'), gParam('name'), 5, 0,$this->aauth->get_user()->id);
+
+        $user_id = $this->aauth->create_user(gParam('email'), gParam('pass'), gParam('name'), 5, 0, $this->aauth->get_user()->id);
         $data = array();
         $data['contact_person'] = trim($this->input->post('name'));
-        $data['address'] = $this->input->post('address'); 
-        $data['city'] = $this->input->post('city'); 
-        $data['state'] = $this->input->post('state'); 
-        $data['country'] = $this->input->post('country'); 
-        $data['phone'] = $this->input->post('phone'); 
-        $data['mobile'] = $this->input->post('mobile'); 
-        $data['id'] = $user_id; 
-        
-        $this->db->insert('user_extra_detail',$data);
+        $data['address'] = $this->input->post('address');
+        $data['city'] = $this->input->post('city');
+        $data['state'] = $this->input->post('state');
+        $data['country'] = $this->input->post('country');
+        $data['phone'] = $this->input->post('phone');
+        $data['mobile'] = $this->input->post('mobile');
+        $data['id'] = $user_id;
+
+        $this->db->insert('user_extra_detail', $data);
         unset($data);
-        
+
         //deleted all the stuff in the array
         //Send Confirmation email
         $emailData = array();
@@ -216,30 +223,28 @@ class Usermodel extends Basemodel {
         $this->email->message($emailBody);
         $this->email->send();
         return $user_id;
-
-        }
+    }
 
     //Update User
     function updateRecord($uid) {
-        if($this->input->post('pass')!="") {
-            if(($this->input->post('pass')!=$this->input->post('pass1'))) {
+        if ($this->input->post('pass') != "") {
+            if (($this->input->post('pass') != $this->input->post('pass1'))) {
                 $this->session->set_flashdata('ERROR', 'pass_invalid');
-                redirect(createUrl('user/edit/'.$uid));
+                redirect(createUrl('user/edit/' . $uid));
             }
         }
         $this->aauth->update_user($uid, gParam('email'), gParam('pass'), gParam('name'), 0, 0);
         $data = array();
         $data['contact_person'] = trim($this->input->post('name'));
-        $data['address'] = $this->input->post('address'); 
-        $data['city'] = $this->input->post('city'); 
-        $data['state'] = $this->input->post('state'); 
-        $data['country'] = $this->input->post('country'); 
-        $data['phone'] = $this->input->post('phone'); 
-        $data['mobile'] = $this->input->post('mobile'); 
-        $this->db->where('id',$uid);
-        $this->db->update('user_extra_detail',$data);
-       // $data['']
-        
+        $data['address'] = $this->input->post('address');
+        $data['city'] = $this->input->post('city');
+        $data['state'] = $this->input->post('state');
+        $data['country'] = $this->input->post('country');
+        $data['phone'] = $this->input->post('phone');
+        $data['mobile'] = $this->input->post('mobile');
+        $this->db->where('id', $uid);
+        $this->db->update('user_extra_detail', $data);
+        // $data['']
     }
 
     function updateTargets($uid, $event, $customer, $target, $event_type, $exludeWeekEnd) {
@@ -986,14 +991,15 @@ class Usermodel extends Basemodel {
         $this->db->update('aauth_users', $array);
         return true;
     }
-    
-    function hasCurPageAccess($pid){
+
+    function hasCurPageAccess($pid) {
         $this->db->select('*');
-        $this->db->where('page_id',$pid);
-        $this->db->where('user_id',  curUsrId());
+        $this->db->where('page_id', $pid);
+        $this->db->where('user_id', curUsrId());
         $rs = $this->db->get('page')->result_array();
         return count($rs);
     }
+
 }
 
 ?>
