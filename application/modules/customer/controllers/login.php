@@ -20,11 +20,6 @@ class Login extends Cms_Controller {
         if ($query->num_rows() == 1) {
 
             $row = $query->row_array();
-            if ($_SERVER['REMOTE_ADDR'] == '203.134.215.73') {
-                print_r($_POST);
-
-                exit;
-            }
             if ($row['password'] == ($this->input->post('password', TRUE))) {
 
                 // $this->traditional_login($this->input->post('username', TRUE),$this->input->post('password', TRUE));
@@ -41,20 +36,24 @@ class Login extends Cms_Controller {
     //*****************************Validation Functions End ********************************************************************
 
     function index() {
-        
+
         $return['success'] = false;
-        if (!gParam('email') || !gParam('password'))
+        if (!gParam('email') || !gParam('password')) {
             echo json_encode($return);
-        $this->aauth->login(gParam('email'), gParam('password'));
-        $ar = array();
-        $ar = $this->aauth->get_user();
-        if (isset($ar->id)) {
-            $group = $this->aauth->get_user_groups($ar->id);
-            if ($group['group_id'] == 6) {
-                $return['success'] = true;
-            } else {
-                $this->aauth->logout();
-            }
+            return false;
+        }
+        
+        $this->db->from('applicants');
+        $this->db->where('email', gParam('email'));
+        $this->db->where('password', md5(gParam('password')));
+        $result = $this->db->get()->row_array();
+        if (count($result)) {
+            $result['isCustomer'] = true;
+            $result['isAdmin'] = false;
+            $result['isCompany'] = false;
+            $result['isUser'] = false;
+            $this->session->set_userdata($result);
+            $return['success'] = true;
         }
         echo json_encode($return);
     }

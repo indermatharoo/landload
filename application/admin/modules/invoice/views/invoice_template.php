@@ -26,7 +26,7 @@ function vat($price_without_vat=NULL) {
                           <tr>
                             <td width="67%" align="right">
                                 <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#0087d4; font-size:21.5px; text-transform:uppercase;">
-                                    <strong>The Creation Station </strong>
+                                    <strong>Landlord Masters </strong>
                                 </font>
                             </td>
                             
@@ -34,12 +34,12 @@ function vat($price_without_vat=NULL) {
                               <tr>
                             <td width="67%" align="right">
                                 <font style="font-family: 'Arial' , sans-serif; color:#68696a; font-size:11.5px;font-weight: 100;">
-                                    <span>Inspiration House </span><br/>
-                                    <span>Creativity Drive</span><br/>
-                                    <span>Unit 16, Woodbury Business Park</span><br/>
-                                    <span>Woodbury, Exeter EX5 1LD</span><br/><br/>
-                                    <span style="font-weight:600; color:#000;">Telephone: 01395 239700</span><br/>
-                                    <span style="font-weight:600;color:#000;">enquiries@thecreationstation.co.uk</span><br/>
+                                    <span>Address 1</span><br/>
+                                    <span>Address 2</span><br/>
+                                    <span>Address 3</span><br/>
+                                    <span>Address 4</span><br/><br/>
+                                    <span style="font-weight:600; color:#000;">Telephone: 01395 00000</span><br/>
+                                    <span style="font-weight:600;color:#000;">enquiries@example.co.uk</span><br/>
                                 </font>
                             </td>
                             
@@ -87,7 +87,7 @@ function vat($price_without_vat=NULL) {
                         <td width="25%" align="left" style="line-height: 22px">
                             <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
                                 
-                                <span><?php echo $invoice_detail["home_address"]; ?></span>
+                                <span><?php echo $invoice_detail["address"]; ?></span>
                             </font>
                         </td>
                         <td width="25%" align="right" style="line-height: 22px">
@@ -100,10 +100,10 @@ function vat($price_without_vat=NULL) {
                    
                    
                     <tr>
-                        <td width="25%" align="left" style="line-height: 22px">
+                        <<td width="25%" align="left" style="line-height: 22px">
                             <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
                                
-                                <span><?php echo $invoice_detail["bussiness_address"]; ?></span>
+                                <span><?php //echo $invoice_detail["bussiness_address"]; ?></span>
                             </font>
                         </td>
                         <td width="25%" align="right" style="line-height: 22px">
@@ -118,7 +118,7 @@ function vat($price_without_vat=NULL) {
                         <td width="25%" align="left" style="line-height: 22px">
                             <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
                                 
-                                <span><?php echo $invoice_detail["territory_name"]; ?></span>
+                                <span><?php //echo $invoice_detail["territory_name"]; ?></span>
                             </font>
                         </td>
                         <td width="25%" align="right" style="line-height: 22px">
@@ -177,7 +177,7 @@ function vat($price_without_vat=NULL) {
                 border-color: #000000 -moz-use-text-color #000000 #000000;
                 border-image: none;
                 border-style: solid none solid solid;
-                border-width: 1px 0 1px 1px;"> Installment Fees  </td>
+                border-width: 1px 0 1px 1px;"> Rent  </td>
         
                     <td width="" style="
                         border-color: #000000 -moz-use-text-color #000000 #000000;
