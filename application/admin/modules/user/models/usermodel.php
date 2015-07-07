@@ -79,10 +79,13 @@ class Usermodel extends Basemodel {
     }
 
     function getApplicants($company_id) {
-        $sql = "SELECT `t1`.*,DISTINCT(t1.email) FROM (`dpd_applicants` t1) left JOIN `dpd_applications` t2 ON `t2`.`applicant_id`=`t1`.`applicant_id` left JOIN `dpd_properties` t3 ON `t3`.`company_id`= $company_id and t3.id=t2.property_id";
+        $sql = "SELECT DISTINCT(t1.email),`t1`.* FROM (`dpd_applicants` t1) left JOIN "
+                . "`dpd_applications` t2 ON `t2`.`applicant_id`=`t1`.`applicant_id` left JOIN "
+                . "`dpd_properties` t3 ON `t3`.`company_id`= $company_id and t3.id=t2.property_id";
         $results = $this->db->query($sql);
-        $results = $results->result();
-        e($results);
+        $results = $results->result_array();
+//        e($results);
+        return $results;
     }
 
     //List All Records

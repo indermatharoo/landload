@@ -214,9 +214,8 @@ class virtcab extends Admin_Controller {
                         $data[$this->VirtualCabinetmodel->create_dtime] = date('Y-m-d H:i:s');
                         $data[$this->VirtualCabinetmodel->assignes] = is_null($usersAssignes) || empty($usersAssignes) ? 0 : $usersAssignes;
                         $data[$this->VirtualCabinetmodel->creator_id] = $userId;
+                        $data['is_applicant'] = 1;
                         $virtual_event_id = $this->VirtualCabinetmodel->insertRecord($data, true);
-//                        $this->load->library('Notification');
-//                        e(123);
                         $notify_data = array(
                             'class' => $this->router->fetch_class(),
                             'method' => $this->router->fetch_method(),
@@ -278,7 +277,7 @@ class virtcab extends Admin_Controller {
         $selectRes = array();
         if ($result) {
             foreach ($result as $key => $kval) {
-                $selectRes[$kval['id']] = $kval['name'];
+                $selectRes[$kval['applicant_id']] = $kval['email'];
             }
         }
         $selectedArr = array();
