@@ -26,13 +26,15 @@ class Customermodel extends CI_Model {
         $data['lname'] = $this->input->post('lname', TRUE);
         $data['email'] = $this->input->post('email', TRUE);
         $data['phone'] = $this->input->post('phone', TRUE);
-        $data['password'] = $this->encrypt->encode($this->input->post('password', TRUE));
+//        $data['password'] = $this->encrypt->encode($this->input->post('password', TRUE));
+        $data['password'] = md5($this->input->post('password', TRUE));
         $data['address'] = $this->input->post('address', TRUE);
         $data['is_active'] = 1;
         $data['license'] = 0;
         $data['monthly_gross'] = 0;
         $data['asset'] = 0;
         $data['type'] = 'applicant';
+//        e($data);
 //        $data['auth_user_id'] = 0;
         
         //insert data into database
@@ -57,8 +59,9 @@ class Customermodel extends CI_Model {
             $this->email->subject('Success Registeration Mail');
             $this->email->message($emailBody);
             if ($this->email->send() == true) {
-                return true;
+//                return true;
             }
+            return $status;
         }
     }
 
