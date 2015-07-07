@@ -2,11 +2,23 @@
 
 class Invoicemodel extends CI_Model {
 
+    public $company_id;
+    
     function __construct() {
         // Call the Model constructor
         parent::__construct();
+        //e($this->session->all_userdata());
+        if($this->aauth->isUser()){
+            $this->company_id = curUsrPid();
+        }
+        else if($this->aauth->isCompany()){
+            $this->company_id = curUsrId();
+        }
+        
     }
     function getFranshiseType($fid=NULL){
+        
+        
         if($fid==''){
             $this->db->select('count(*) as total,mon_fee_type');
             $this->db->from('user_extra_detail');
@@ -55,34 +67,34 @@ class Invoicemodel extends CI_Model {
     }
 
     function countAll() {
-        return $this->db->count_all_results('dpd_applications');
+        $this->db->select('*')
+                ->from('invoice_new')
+                ->where('company_id',$this->company_id);
+        return $this->db->count_all_results();
 //        $this->db->get('user_extra_detail');
 //        return $this->db->count_all_results();
     }
     
-    function getWeeklyInvoice(){
-        if($this->aauth->isUser()){
-            $company_id = curUsrPid();
-        }
-        else {
-            $company_id = curUsrId();
-        }
-    
+    function getAll(){
+        $this->db->select('*')
+                ->from('invoice_new')
+                ->where('company_id',$this->company_id);
         
-        $sql_query = $this->db->query("SELECT company_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' and company_id='$company_id'  GROUP BY test");
+        $query = $this->db->get();
+        if($query->num_rows()>0){
+            return $query->result_array();
+        }
+        return FALSE;
+        
+    }
+    
+    function getWeeklyInvoice(){
+        $sql_query = $this->db->query("SELECT concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' and company_id='$this->company_id'  GROUP BY test");
         return $sql_query->result_array();
     }
     
     function getMonthlyInvoice(){
-        if($this->aauth->isUser()){
-            $company_id = curUsrPid();
-        }
-        else {
-            $company_id = curUsrId();
-        }
-    
-        
-        $sql_query = $this->db->query("SELECT company_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='M' and company_id='$company_id'  GROUP BY test");
+        $sql_query = $this->db->query("SELECT concat(month(created_on),year(created_on)) as test, month(created_on) as month, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='M' and company_id='$this->company_id'  GROUP BY test");
         return $sql_query->result_array();
     }
     
@@ -100,7 +112,8 @@ class Invoicemodel extends CI_Model {
     function getMonthlyDetailInvoice(){
         $this->db->select("*")
                     ->from("invoice_new")
-                    ->where("invoice_type",'M');
+                    ->where("invoice_type",'M')
+                    ->where("company_id",$this->company_id);
         $query = $this->db->get();
         if ( $query->num_rows() > 0 )
         {
@@ -115,7 +128,8 @@ class Invoicemodel extends CI_Model {
     function getWeeklyDetailInvoice(){
         $this->db->select("*")
                     ->from("invoice_new")
-                    ->where("invoice_type",'W');
+                    ->where("invoice_type",'W')
+                    ->where("company_id",$this->company_id);
         $query = $this->db->get();
         if ( $query->num_rows() > 0 )
         {
@@ -162,7 +176,7 @@ class Invoicemodel extends CI_Model {
     function getInvoiceDetail($invoiceid){
         $this->db->select('*')
                 ->from('invoice_new')
-                ->join('user_extra_detail','user_extra_detail.id=invoice_new.id')
+                ->join('applicants','applicants.applicant_id=invoice_new.applicant_id')
                 ->where('invoice_new.invoice_id',$invoiceid);
         $query = $this->db->get();
       // e($this->db->last_query());
@@ -485,9 +499,19 @@ class Invoicemodel extends CI_Model {
     function countAllWeekly() {
         $this->db->select("*")
                     ->from("invoice_new")
-                    ->where("invoice_type",'W');
-        $query = $this->db->get();
+                    ->where("invoice_type",'W')
+                    ->where('company_id',$this->company_id);
+       // $query = $this->db->get();
+       // echo $this->db->last_query();
         return $this->db->count_all_results();
+    }
+    function countAllMonthly() {
+        $this->db->select("*")
+                    ->from("invoice_new")
+                    ->where("invoice_type",'M')
+                    ->where('company_id',$this->company_id);
+                    
+       return $this->db->count_all_results();
     }
     /*===============================================================*/
 
