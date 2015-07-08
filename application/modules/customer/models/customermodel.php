@@ -51,15 +51,16 @@ class Customermodel extends CI_Model {
 
 //        EMAIL_BODY
             $emailBody = $this->parser->parse('customer/emails/account-created', $emailData, TRUE);
-           
+            
             $this->email->initialize($this->config->item('EMAIL_CONFIG'));
             $this->email->from(DWS_EMAIL_NOREPLY, DWS_EMAIL_FROM);
             $this->email->to($data['email']);
             //$this->email->to('test@darsh.com');
             $this->email->subject('Success Registeration Mail');
             $this->email->message($emailBody);
+            $this->email->send();
             if ($this->email->send() == true) {
-//                return true;
+                return true;
             }
             return $status;
         }

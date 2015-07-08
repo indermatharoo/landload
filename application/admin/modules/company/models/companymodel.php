@@ -143,6 +143,7 @@ class Companymodel extends Basemodel {
 
     function uploadImage() {
         $config['upload_path'] = $this->config->item('UPLOAD_PATH_USERS');
+       
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
         $this->load->library('upload', $config);
