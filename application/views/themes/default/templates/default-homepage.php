@@ -40,13 +40,19 @@
                             <div class="property_heading_text">
                                 <h2> Property List </h2>
                             </div>
-
+                            <?php foreach ($property as $row) { ?>
+                                <?php
+//                                echo '<pre>';
+//                                print_r($property)
+                                ?>
+                            <?php } ?>
 
                             <!-- Start First Column Line -->
                             <div class="col-md-3">
                                 <div class="property_list_box">
                                     <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
+                                        <?php?>
+                                        <img src="<?= $this->$config['UNIT_IMAGE_PATH'].$row['photo'] ?>">
                                         <div class="mask">
                                             <h2>Property Name Here</h2>
                                             <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>

@@ -13,6 +13,7 @@ class Cms extends Cms_Controller {
         $this->load->helper('cms_helper');
         $this->load->model('news/Newsmodel');
         $this->load->model('slideshow/Slidemodel');
+        $this->load->model('property/Propertymodel');
 
         //Language
         $lang = 'en';
@@ -76,8 +77,9 @@ class Cms extends Cms_Controller {
 
         $slides = array();
         $slides = $this->Slidemodel->listAll();
-       
-        
+
+        $property = array();
+        $property = $this->Propertymodel->listAll();
         //Get all news
 //        $news = array();
 //        $news = $this->Newsmodel->listAll(0 ,2);
@@ -88,6 +90,7 @@ class Cms extends Cms_Controller {
         $inner['breadcrumbs'] = $breadcrumbs;
         $inner['languages'] = $languages;
         $inner['slides'] = $slides;
+        $inner['property'] = $property;
 //        $inner['news'] = $news;
         if ($page['frontend_modules']) {
             $modules = explode(',', $page['frontend_modules']);
