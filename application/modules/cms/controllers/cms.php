@@ -12,6 +12,7 @@ class Cms extends Cms_Controller {
         $this->load->model('Pagemodel');
         $this->load->helper('cms_helper');
         $this->load->model('news/Newsmodel');
+        $this->load->model('slideshow/Slidemodel');
 
         //Language
         $lang = 'en';
@@ -49,7 +50,7 @@ class Cms extends Cms_Controller {
         //Get Page Details
         $page = array();
         $page = $this->Pagemodel->getDetails($alias, $lang);
-        //print_r($page); exit();
+//        print_r($page); exit();
         if (!$page) {
             $this->http->show404();
             return;
@@ -74,10 +75,9 @@ class Cms extends Cms_Controller {
         $breadcrumbs = $this->Pagemodel->breadcrumbs($page['page_id']);
 
         $slides = array();
-        $homeslides = array();
         $slides = $this->Slidemodel->listAll();
-        $homeslides = $this->Slidemodel->ListHomeSlides();
-
+       
+        
         //Get all news
 //        $news = array();
 //        $news = $this->Newsmodel->listAll(0 ,2);
@@ -87,6 +87,7 @@ class Cms extends Cms_Controller {
         $inner['page'] = $page;
         $inner['breadcrumbs'] = $breadcrumbs;
         $inner['languages'] = $languages;
+        $inner['slides'] = $slides;
 //        $inner['news'] = $news;
         if ($page['frontend_modules']) {
             $modules = explode(',', $page['frontend_modules']);
