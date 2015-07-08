@@ -17,7 +17,7 @@ class VirtualCabinetmodel extends CI_Model {
         parent::__construct();
 
         $this->tblalias = 'virtualCab';
-        
+
         $this->id = 'id';
         $this->assignes = 'assignes';
         $this->filetype = 'filetype';
@@ -31,16 +31,16 @@ class VirtualCabinetmodel extends CI_Model {
 
     function insertRecord($param = array(), $insert = false) {
         if ($insert) {
-            $this->db->insert($this->tblalias, $param);                        
+            $this->db->insert($this->tblalias, $param);
             return $this->db->insert_id();
         }
     }
 
-    function updateRecord($param = array()) {     
+    function updateRecord($param = array()) {
         return $this->db->where('id', $param['id'])
-                ->update($this->tblalias, $param['data']);
+                        ->update($this->tblalias, $param['data']);
     }
-    
+
     function countAll() {
         $this->db->from($this->tblalias);
         return $this->db->count_all_results();
@@ -59,14 +59,15 @@ class VirtualCabinetmodel extends CI_Model {
         }
         if (isset($param[$this->creator_id])) {
             $this->db->where($this->creator_id, $param[$this->creator_id]);
+            $this->db->or_where($this->assignes, $this->assignes);
         }
         if (isset($param['searchKey'])) {
             $this->db->like($this->actual_name, $param['searchKey'], 'both');
         }
         if (isset($param[$this->assignes])) {
-            $this->db->like($this->assignes, $param[$this->assignes], 'after')
-                    ->or_like($this->assignes, ',' . $param[$this->assignes], 'before')
-                    ->or_like($this->assignes, ',' . $param[$this->assignes] . ',', 'both');
+            $this->db->like($this->assignes, ',' . $param[$this->assignes]);
+            $this->db->or_like($this->assignes, $param[$this->assignes] . ',');
+            $this->db->or_like($this->assignes, ',' . $param[$this->assignes] . ',');
         }
         if (isset($param['shared'])) {
             $this->db->join('applicants', $this->creator_id . '=applicants.applicant_id', 'LEFT');
@@ -107,8 +108,10 @@ class VirtualCabinetmodel extends CI_Model {
         if (!$fld)
             return false;
         $rs = $this->db->select('count(id) as total,' . $fld)
-                ->group_by($fld)->from($this->tblalias)->get();
-        if ($rs)return $rs->result_array();
+                        ->group_by($fld)->from($this->tblalias)->get();
+        if ($rs)
+            return $rs->result_array();
         return FALSE;
     }
+
 }
