@@ -23,8 +23,6 @@ class Register extends Cms_Controller {
         return true;
     }
 
-  
-
     //Validation Functions Ends ****************************************************************
 
     function index() {
@@ -40,7 +38,7 @@ class Register extends Cms_Controller {
 
         //Validation checks
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
-         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|strtolower|valid_email|callback_email_check');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
@@ -60,25 +58,7 @@ class Register extends Cms_Controller {
             $customer = $this->Customermodel->insertRecord();
 //             print_R($customer); exit(); 
             if ($customer) {
-//                //Auto login
-//                $this->session->set_userdata('CUSTOMER_ID', $customer['customer_id']);
-//
-//                $this->session->set_userdata('LOGIN_EMAIL', $customer['email']);
-//                $this->session->set_userdata('LOGIN_NAME', $customer['first_name']);
-//
-//                if ($this->session->userdata('REDIR_URL') != "") {
-//                    $url = $this->session->userdata('REDIR_URL');
-//
-//                    $this->session->unset_userdata('REDIR_URL');
-//                    header("location: " . base_url() . "$url");
-//                    exit();
-//                }
-//                redirect('customer/register/success');
-//                exit();
-
-                $output = array();
-                $output['message'] = 'Thank you <br> A member of our Jaspers Team will contact you shortly';
-                echo json_encode($output);
+                redirect('customer/register/success');
                 exit();
             }
             redirect('customer/register/error');

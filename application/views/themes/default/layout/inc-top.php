@@ -1,7 +1,10 @@
+<?php
+$user = $this->session->all_userdata();
+?>
 <div class="col-lg-12 col-sm-12 col-xs-12" style="padding-top: 3px;">
     <a href="http://blog.thecreationstation.co.uk/" target="_blank">Blog</a> &nbsp;|&nbsp; <a href="<?php echo createUrl('news') ?>">News</a> &nbsp;|&nbsp; <a href="<?php echo createUrl('contact') ?>">Contact</a>&nbsp;|&nbsp; 
     <?php if ($this->aauth->isCustomer()): ?>
-        <span class="" style="text-transform: capitalize"><?= $this->aauth->getCustomerName(); ?> | <a href="<?php echo createUrl('customer/logout') ?>">Logout</a></span>
+    <span class="" style="text-transform: capitalize"><?= arrIndex($user,'fname'); ?> | <a href="<?php echo createUrl('customer/logout') ?>">Logout</a></span>
     <?php else: ?>
         <span class="custom_login">Customer login</span>
     <?php endif; ?>
@@ -34,7 +37,7 @@
     }
     $(document).ready(function () {
         $('.login_success').hide();
-         $('.login_fail').hide();
+        $('.login_fail').hide();
         $('.subbmint').click(function () {
             var email = $('.bl-email').val();
             var password = $('.bl-pass').val();
@@ -47,7 +50,7 @@
                 var data = JSON.parse(response);                
                 if (data.success) {
                     $('.login_fail').hide();
-                    $('.custom_login').html('<a href="http://localhost/desktopdeli/customer/logout">Logout</a>');
+                    $('.custom_login').html('<a href="<?php echo createUrl('customer/logout') ?>">Logout</a>');
                     $('.login_success').show();
                     setTimeout(function () {
                         $('.cls').trigger('click');
@@ -56,7 +59,7 @@
                 }
                 else
                 {
-                $('.login_fail').show();
+                    $('.login_fail').show();
                 }
             });
             return false;

@@ -89,7 +89,7 @@ class Page extends Admin_Controller {
         $this->load->helper('form');
         $this->load->model('PageBlockmodel');
 
-        if (!$this->aauth->isFranshisor()) {
+        if (!$this->aauth->isAdmin()) {
             $this->utility->accessDenied();
             return;
         }
@@ -174,7 +174,7 @@ class Page extends Admin_Controller {
 
         $this->load->library('form_validation');
         $this->load->helper('form');
-        if (!($this->aauth->isFranshisor() || $this->usermodel->hasCurPageAccess($pid))) {
+        if (!($this->aauth->isAdmin() || $this->usermodel->hasCurPageAccess($pid))) {
             $this->utility->accessDenied();
             return;
         }
@@ -469,7 +469,7 @@ class Page extends Admin_Controller {
         $this->load->helper('form');
         $this->load->model('Pagemodel');
 
-        if (!$this->aauth->isFranshisor()) {
+        if (!$this->aauth->isAdmin()) {
             $this->utility->accessDenied();
             return;
         }
