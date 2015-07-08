@@ -15,7 +15,7 @@
 </header>
 <div class="col-lg-12 padding-0 mar-top15">
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
-    <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
+    <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
             <div class="col-sm-6">
                 <label>Property </label>
@@ -35,7 +35,7 @@
 
 
             <div class="col-sm-6">
-                <label>unit Number</label>
+                <label>Unit Name</label>
                 <input type="text" class="form-control" name="unit_number" value="<?php echo $details['unit_number']; ?>"  placeholder="units Number">
             </div>
             <div class="col-sm-6">
@@ -45,16 +45,16 @@
             <div class="col-sm-6">
                 <label>Status</label><br>
                 <?php foreach($status as $st=>$stval){ ?>
-                <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st==$details['status'])?'checked':''; ?>><?php echo $stval ?><br />
+                <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st==$details['status'])?'checked':''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
             <div class="col-sm-6">
-                <label>Unit Type</label><br>
-                <?php
-                
-                foreach ($unitsType as $st => $stval) { ?>
-                    <input type="radio" name="unit_type" value="<?php echo $stval['unit_code'] ?>" <?php echo ($stval['unit_code']==$details['unit_type'])?'checked':''; ?>  ><?php print_r( $stval['unit_type']) ?><br />
-                <?php } ?>
+                <label>Unit Type</label>
+                <select name="unit_type" class="form-control">
+                    <option <?php echo ($details['unit_type']=='s')?'selected="selected"':''; ?> value="s">Shop</option>
+                    <option <?php echo ($details['unit_type']=='f')?'selected="selected"':''; ?> value="f">Flat</option>
+                </select>
+               
             </div>   
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
@@ -82,6 +82,25 @@
                       <?php } ?>
                 </select>
             </div> 
+            <div class="col-sm-6">
+                <label>Rent Types</label>
+                <select name="amount_type" class="form-control">
+                    <option>Select</option>
+                    <?php foreach (Unitsmodel::$types as $val => $type): ?>
+                        <option <?php echo ($val==$details['amount_type'])?'selected="selected"':''; ?> value="<?php echo $val ?>"><?php echo $type ?></option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+           <div class="col-sm-6">
+                <label>Active</label><br />
+                <input type="radio" value="1" <?php echo ($details['is_active']==1)?'checked="checked"':''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active']==0)?'checked="checked"':''; ?>>&nbsp;&nbsp;No
+            </div>
+            
+            <div class="col-sm-12">
+                <label>Description</label>
+                <textarea name="description" class="form-control"><?php echo $details['description']; ?></textarea>
+            </div>
+            
             <div class="col-sm-6">
                 <?php foreach($images['result'] as $image){ ?>
                 <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$image['image'] ?>" height="100px"  width="100px">

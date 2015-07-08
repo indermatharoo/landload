@@ -25,10 +25,15 @@ $muser = $user;
             </div>
 
             <div class="col-sm-6">
-                <label>Property Type</label><br>
-                <?php foreach($propertiesType as $ptype){ ?>
-                <input type="radio" name="ptype" value="<?php echo $ptype['short_code'] ?>"><?php echo $ptype['type'] ?><br>
-                <?php } ?>
+                <label>Property Type</label>
+                <select name="ptype" class="form-control" autocomlete="off">
+                    <option value="">-Select Type-</option>
+                    <?php foreach($propertiesType as $ptype){ ?>
+                    <option value="<?php echo $ptype['short_code'] ?>"><?php echo $ptype['type'] ?></option>
+                    
+                    <?php } ?>
+                </select>
+                
             </div>
             <div class="col-sm-6">
                 <label>Number of units</label>
@@ -36,21 +41,22 @@ $muser = $user;
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
-                <input type="file"  name="photo"  >
+                <input type="file"  name="photo" style="height: 34px;" >
             </div>
             <div class="col-sm-6">
                 <label>Owner</label>
                 <input type="text" class="form-control" name="owner"  placeholder="Owner  *">
             </div>
-            <div class="col-sm-6">
+            
+            <!---<div class="col-sm-6">
                 <label>Country</label>
                 <select name="country"  class="form-control" >
                     <option value=""></option>
-                    <?php foreach($country as $val){ ?>
+                    <?php /* foreach($country as $val){ ?>
                     <option value="<?php echo $val['iso'] ?>" ><?php echo $val['nicename'] ?></option>
-                    <?php } ?>
+                    <?php } */ ?>
                 </select>
-            </div>
+            </div> -->
             
             <div class="col-sm-6">
                 <label>Street</label>
@@ -64,20 +70,29 @@ $muser = $user;
             </div>
 
             <div class="col-sm-6">
-                <label>State</label>
-                <input type="text" class="form-control"  name="state"  placeholder="State *">
+                <label>County</label>
+                <input type="text" class="form-control"  name="state"  placeholder="County *">
+            </div>
+            
+            <div class="col-sm-6">
+                <label>Post Code</label>
+                <input type="text" class="form-control"  name="postcode"  placeholder="Post Code *">
+            </div>
+            <div class="col-sm-6">
+                <label>Active</label><br />
+                <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
             </div>
             
         </div>
         
         <div class="form-group">
             <div class="col-sm-12 text-center">
-                Fields mark with <span class="error">*</span> required
+                Fields mark with <span class="error1">*</span> required
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-12 center">
-                <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Add</button>
+                <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Save</button>
             </div>
         </div>
     </form>

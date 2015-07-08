@@ -68,6 +68,7 @@ class Units extends Admin_Controller {
         $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
+        //$this->form_validation->set_rules('description', 'Rent Type', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
@@ -100,7 +101,7 @@ class Units extends Admin_Controller {
         $images = $this->Unitsmodel->getUnitImages($offset);
        
         $this->form_validation->set_rules('property_id', 'Property Type', 'trim|required');
-        $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
+        $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
 //        if(empty($_FILES['photo']['name'])){
 //            $this->form_validation->set_rules('photo', 'photo', 'trim|required');
 //        }

@@ -2158,3 +2158,7 @@ p {
     font-weight: 600;
     padding: 0 6px;
 }
+.error1{
+    color: #d32322;
+    font-size: 13px;
+}

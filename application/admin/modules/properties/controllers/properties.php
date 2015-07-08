@@ -60,11 +60,13 @@ class Properties extends Admin_Controller {
             $this->form_validation->set_rules('photo', 'photo', 'trim|required');
         }
         $this->form_validation->set_rules('owner', 'Owner', 'trim|required');
-        $this->form_validation->set_rules('country', 'Country', 'trim|required');
-        $this->form_validation->set_rules('street', 'Street', 'trim|required');
+        //
+        $this->form_validation->set_rules('street', 'County', 'trim|required');
         $this->form_validation->set_rules('city', 'City', 'trim|required');
         $this->form_validation->set_rules('state', 'State', 'trim|required');
-
+        $this->form_validation->set_rules('postcode', 'Post Code', 'trim|required');
+        //$this->form_validation->set_rules('country', 'Country', 'trim|required');
+        
         $Countries = $this->Usermodel->getCountries();
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
@@ -93,12 +95,15 @@ class Properties extends Admin_Controller {
         $details = $this->Propertiesmodel->getPropertDetails($offset);
         $this->form_validation->set_rules('pname', 'Name', 'trim|required');
         $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
-        $this->form_validation->set_rules('units', 'Number of units', 'trim|required|integer');
+        $this->form_validation->set_rules('units', 'Unit name', 'trim|required|integer');
         $this->form_validation->set_rules('owner', 'Owner', 'trim|required');
-        $this->form_validation->set_rules('country', 'Country', 'trim|required');
+        
         $this->form_validation->set_rules('street', 'Street', 'trim|required');
         $this->form_validation->set_rules('city', 'City', 'trim|required');
         $this->form_validation->set_rules('state', 'State', 'trim|required');
+        
+        $this->form_validation->set_rules('postcode', 'Post Code', 'trim|required');
+        
 
         $Countries = $this->Usermodel->getCountries();
         if ($this->form_validation->run() == FALSE) {
