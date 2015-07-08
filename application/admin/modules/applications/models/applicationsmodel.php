@@ -236,6 +236,6 @@ class Applicationsmodel extends Basemodel {
             {
                 $this->db->insert('unit_image',array('image'=>$images['file_name'],'unit_id'=>$unit_id));
             }
-        }s
+        }
     }
 }
