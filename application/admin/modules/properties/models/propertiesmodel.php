@@ -49,7 +49,7 @@ class Propertiesmodel extends Basemodel {
     }
     function getPropertiesList()
     {
-        $this->db->select('id,pname');
+        $this->db->select('id,pname,is_active');
         $res = $this->db->get('properties');
         return $res->result_array();
     }
@@ -60,16 +60,21 @@ class Propertiesmodel extends Basemodel {
         $data['type'] = $this->input->post('ptype');
         $data['units'] = $this->input->post('units');
         $data['owner'] = $this->input->post('owner');
-        $data['country'] = $this->input->post('country');
+        
         $data['street'] = $this->input->post('street');
         $data['city'] = $this->input->post('city');
         $data['state'] = $this->input->post('state');
+        $data['post_code'] = $this->input->post('postcode');
+        $data['is_active'] = $this->input->post('active');
+        $data['datetime'] = date('Y-m-d H:i:s');
+        //e($data);
         if($this->aauth->isCompany()):
             $data['company_id'] = curUsrId();
         elseif($this->aauth->isUser()):            
             $data['company_id'] = curUsrPid();
         endif;
-        $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
+       $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
+       
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
         $this->load->library('upload', $config);
@@ -85,6 +90,7 @@ class Propertiesmodel extends Basemodel {
             }
         }
         $this->db->insert('properties',$data);
+        echo $this->db->last_query();
         return $this->db->insert_id();
     }
     function updateRecord($id)
@@ -94,10 +100,12 @@ class Propertiesmodel extends Basemodel {
         $data['type'] = $this->input->post('ptype');
         $data['units'] = $this->input->post('units');
         $data['owner'] = $this->input->post('owner');
-        $data['country'] = $this->input->post('country');
+        
         $data['street'] = $this->input->post('street');
         $data['city'] = $this->input->post('city');
         $data['state'] = $this->input->post('state');
+        $data['post_code'] = $this->input->post('postcode');
+        $data['is_active'] = $this->input->post('active');
         $config['upload_path'] = $this->config->item('PROPERTY_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;

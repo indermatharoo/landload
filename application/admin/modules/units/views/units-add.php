@@ -22,9 +22,10 @@
                 <select name="property_id" class="form-control">
                     <option></option>
                     <?php
+                    
                     foreach ($propertyList as $list) {
                         ?>
-                        <option value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
+                        <option <?php if($list['is_active']!=1){ ?>disabled<?php } ?> value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
                         <?php
                     }
                     ?>
@@ -33,8 +34,8 @@
 
 
             <div class="col-sm-6">
-                <label>unit Number</label>
-                <input type="text" class="form-control" name="unit_number"  placeholder="units Number">
+                <label>Unit Name</label>
+                <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name">
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
@@ -45,7 +46,7 @@
                 <?php
                 
                 foreach ($status as $st => $stval) { ?>
-                    <input type="radio" name="status" value="<?php echo $st ?>"><?php echo $stval ?><br />
+                <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
             <div class="col-sm-6">
@@ -88,11 +89,21 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="col-sm-6">
+                <label>Active</label><br />
+                <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
+            </div>
+            
+            <div class="col-sm-12">
+                <label>Description</label>
+                <textarea name="description" class="form-control"></textarea>
+            </div>
+            
         </div>
 
         <div class="form-group">
             <div class="col-sm-12 text-center">
-                Fields mark with <span class="error">*</span> required
+                Fields mark with <span class="error1">*</span> required
             </div>
         </div>
         <div class="form-group">

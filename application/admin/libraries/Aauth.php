@@ -606,13 +606,13 @@ class Aauth {
             $valid = false;
         }
 
-        if (!$valid ) {
-            redirect(createUrl('company/add'));
-            return false;
-        } elseif (!$valid && $param['internal']) {
-            redirect(createUrl('company'));
-            return false;
-        }
+//        if (!$valid ) {
+//            redirect(createUrl('company/add'));
+//            return false;
+//        } elseif (!$valid && $param['internal']) {
+//            redirect(createUrl('company'));
+//            return false;
+//        }
         
         
         $datetime = date('Y-m-d H:i:s');

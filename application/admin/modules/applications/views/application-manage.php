@@ -1,5 +1,13 @@
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
+                        <?php 
+//                        echo "<pre>";
+//                        print_r($details['type']);
+//                        echo "</pre>";
+                        ?>
 <script type="text/javascript">
     $(document).ready(function () {
+        
         $("select").change(function () {
             $(this).find("option:selected").each(function () {
                 if ($(this).attr("value") == "M") {
@@ -10,13 +18,66 @@
                     $(".ftry").not(".week").hide();
                     $(".week").show();
                 }
-                else {
-                    $(".ftry").hide();
-                }
+
             });
         }).change();
     });
 </script>
+<script type="text/javascript" >
+function showLayer(id)
+{
+    
+    $('.tab-pane').removeClass('active');
+    $('#'+id).addClass('active');
+    
+    $(".nav-tabs li").removeClass('active')
+    $('.nav-tabs li a[href="'+'#'+id+'"]').parent().addClass('active');
+    
+    return false;
+    
+}
+
+function saveDetails(ajxurl,formdata)
+{
+    $('.errormsg , .successmsg').hide();
+    $.ajax({
+        url:ajxurl,
+        type:'post',
+        data:formdata,
+        dataType:'JSON'
+        
+    }).done(function(data){
+        
+       if(data.response=="true")
+       {
+           console.log(data.tab);
+           $('.successmsg').html(data.msg).show();
+           showLayer('tabs-'+data.tab+'');
+       }
+       else
+       {
+           $('.errormsg').html(data.msg).show();
+       }
+    })
+}
+$(document).ready(function(){
+    $('.datepicker').datepicker({dateFormat: 'yy-mm-dd'});
+    $('.saveUserDetails').on('click',function(){
+        saveDetails('applications/user_details/<?php echo arrIndex($details, 'applicant_id') ?>',$('#userDetails').serialize());
+    })
+    $('.jobDet').on('click',function(){
+         saveDetails('applications/job_details/<?php echo arrIndex($details, 'applicant_id') ?>',$('#jobDetails').serialize());
+    })
+    $('.propertiesDetail').on('click',function(){
+         saveDetails('applications/properties_details/<?php echo  arrIndex($details, 'id') ?>',$('#propDetails').serialize());
+    })
+    $('.agreement').on('click',function(){
+        
+         saveDetails('applications/agree_details/<?php echo  arrIndex($details, 'id') ?>',$('#agreeDetails').serialize());
+    })    
+})
+</script>
+
 <header class="panel-heading">
     <div class="row">
         <div class="col-sm-12" style="text-align: center">
@@ -24,8 +85,13 @@
         </div>
     </div>
 </header>
+<div class="errormsg alert alert-danger " style="display:none;">
+</div>
+<div class="successmsg alert alert-success " style="display:none;">
+</div>
+
 <div class="nav-tabs-custom">
-    <form name='applicant' action="" method="post">
+    
         <ul class="nav nav-tabs">
             <li data-id="1" class="active"><a href="#tabs-1" data-toggle="tab">User Information</a></li>
             <li data-id="2"><a href="#tabs-2" data-toggle="tab">Job Information</a></li>
@@ -35,129 +101,183 @@
         </ul>
         <div class="tab-content clearfix">
             <div class="tab-pane active" id="tabs-1">
+                <form name="userDetails" id="userDetails" action="applications" method="post" >
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>First Name</label>
-                        <input type="text" class="form-control" id="fname" name="fname" value="<?= $details['fname']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="fname" name="fname" value="<?= arrIndex($details, 'fname'); ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Last Name</label>
-                        <input type="text" class="form-control" id="lname" name="lname" value="<?= $details['lname']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="lname" name="lname" value="<?= arrIndex($details, 'lname'); ?>" placeholder="">
+                        <input type="hidden" name="offset" value="<?php echo $offset ?>" >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Email</label>
-                        <input type="text" class="form-control" id="email" name="email" value="<?= $details['email']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="email" name="email" value="<?= arrIndex($details, 'email'); ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Phone</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="<?= $details['phone']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="phone" name="phone" value="<?= arrIndex($details,'phone'); ?>" placeholder="">
                     </div>
                 </div>
+                    <div class="form-group">
+                            <div class="col-sm-6">
+                            <label> Status </label><br>
+                            <select name="status" class="form-control">
+                            <?php foreach($applicantsType as $type){ ?>
+                            <option   value="<?php echo $type['code'] ?>" <?php echo ($details['type']==$type['code'])?'selected':'' ?> ><?php echo $type['type'] ?></option>
+                            <?php } ?>
+                            </select>
+                        </div>    
+                    </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Address</label>
-                        <input type="text" class="form-control" id="address" name="address" value="<?= $details['address']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="address" name="address" value="<?= arrIndex($details,  'address'); ?>" placeholder="">
                     </div>
-                    <!--                        <div class="col-sm-6">
-                                                <label>City</label>
-                                                <input type="text" class="form-control" id="city" name="city" value="<?php echo set_value('city', $user['city']); ?>" placeholder="">
-                                            </div>
-                                        </div>
-                                        <div class="form-group">
-                                            <div class="col-sm-6">
-                                                <label>State</label>
-                                                <input type="text" class="form-control" id="state" name="state" value="<?php echo set_value('state', $user['state']); ?>" placeholder="">
-                                            </div>
-                                            <div class="col-sm-6">
-                                                <label>Company</label>
-                                                <input type="text" class="form-control" id="company" name="company" value="<?php echo set_value('company', $user['company']); ?>" placeholder="">
-                                            </div>-->
+                    <div class="col-sm-6">
+                        
+                        <input type="button" class="btn btn-primary pull-right saveUserDetails" style="margin-top: 23px"  value="Submit">
+                    </div>
                 </div>
+                    
+                </form>
             </div>
             <div class="tab-pane" id="tabs-2">
+                <form name="jobDetails" id="jobDetails" action="applications" method="post" >
                 <div class="form-group">
                     <div class="col-sm-6">
+
                         <label>Current Job</label>
-                        <input type="text" class="form-control" id="current_job" name="current_job" value="" placeholder="">
+                        <input type="text" class="form-control" id="current_job" name="current_job" value="<?php echo arrIndex($details, 'current_job') ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Previous Job</label>
-                        <input type="text" class="form-control" id="previous_job" name="previous_job" value="" placeholder="">
+                        <input type="text" class="form-control" id="previous_job" name="previous_job" value="<?php echo arrIndex($details, 'previous_job') ?>" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Experience</label>
-                        <input type="text" class="form-control" id="experience" name="experience" value="" placeholder="">
+                        <input type="text" class="form-control" id="experience" name="experience" value="<?php echo arrIndex($details, 'experience') ?>" placeholder="Experience">
                     </div>
-
+                    <div class="col-sm-6">
+                        
+                        <input type="button" class="btn btn-primary pull-right jobDet " style="margin-top: 23px"  value="Submit">
+                    </div>
                 </div>
+                </form>
             </div>     
             <div class="tab-pane" id="tabs-3">
+                <form name="propDetails" id="propDetails" action="applications" method="post" >
                 <div class="form-group">
                     <div class="col-sm-6">
-                        <label>Property</label>
-                        <input type="text" class="form-control" id="current_job" name="property" value="<?= $details['pname']; ?>" placeholder="">
+                <label>Property </label>
+                <select class="form-control" name="property_id">
+                    <option></option>
+                    <?php foreach ($propertiesList as $property) { ?>
+                        <option value="<?php echo $property['id'] ?>" <?php echo ($property['id'] == arrIndex($details, 'property_id')) ? 'selected' : '' ?>><?php echo $property['pname'] ?></option>
+                    <?php } ?>
+                </select>
                     </div>
                     <div class="col-sm-6">
+                <label>Unit Applied For </label>
+                <?php
+                $ci = &get_instance();
+                $ci->load->model('units/Unitsmodel');
+                $res = $ci->Unitsmodel->getUnitsByPropertyId(arrIndex($details,'property_id'));
+                ?>
+                <select class="form-control" name="unit_id">
+                    <option></option>
+                    <?php foreach ($res as $unit) { ?>
+                        <option value="<?php echo $unit['id'] ?>" <?php echo ($unit['id'] == arrIndex($details, 'unit_id') ) ? 'selected' : ''; ?>><?php echo $unit['unit_number'] ?></option>
+                    <?php } ?>
+                </select>
+                    </div>                    
+                    <div class="col-sm-6">
                         <label>Applied Date</label>
-                        <input type="text" class="form-control" id="previous_job" name="lease_from" value="<?= $details['lease_from']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="previous_job" disabled="" name="lease_from" value="<?= arrIndex($details, 'applied_date'); ?>" placeholder="">
                     </div>
+                    <div class="col-sm-6">
+                        
+                        <input type="button" class="btn btn-primary pull-right propertiesDetail" style="margin-top: 23px"   value="Submit">
+                    </div>  
+                    
                 </div>
+                </form>
             </div>     
             <div class="tab-pane" id="tabs-4">
+                 <form name="agreeDetails" id="agreeDetails" action="applications" method="post" >
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Agree to Agreement</label>
-                        &nbsp;<input type="checkbox" id="checkbox" name="checkbox" value="1" placeholder="" style="vertical-align: sub"> &nbsp;<a href='' class="html5lightbox"><span>click here to view</span></a>
+                        &nbsp;<input type="checkbox" id="checkbox" name="agree" value="1" placeholder="" style="vertical-align: sub"> &nbsp;<a href='' class="html5lightbox"><span>click here to view</span></a>
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Amount</label>
-                        <input type="text" class="form-control" id="rent_amount" name="rent_amount" value="<?= $details['rent_amount']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="rent_amount" name="rent_amount" value="<?= arrIndex($details, 'rent_amount'); ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Security Amount</label>
-                        <input type="text" class="form-control" id="security_amount" name="security_amount" value="<?= $details['security_amount']; ?>" placeholder="">
+                        <input type="text" class="form-control" id="security_amount" name="security_amount" value="<?= arrIndex($details, 'security_amount'); ?>" placeholder="">
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Payment Type</label>
                         <select class="form-control" id="ptype" name="ptype" value="" placeholder="">
-                            <option value="0">--Choose--</option>
-                            <option value="W">WEEK</option>
-                            <option value="M">MONTH</option>
+                            <option value="">--Choose--</option>
+                            <option value="W" <?php echo (arrIndex($details, 'invoice_type')=="W")?'selected':'' ?> >WEEK</option>
+                            <option value="M" <?php echo (arrIndex($details, 'invoice_type')=="M")?'selected':'' ?>>MONTH</option>
                         </select>
                     </div>
-                    <div class="col-sm-6 week ftry" style="display: none">
+                    
+                    <div class="col-sm-6 week ftry" style="display: <?php echo (arrIndex($details, 'invoice_type')=='W')?'block':'none' ?>">
                         <label>Day Of Week</label>
-                        <input type="text" class="form-control" id="security_amount" name="day_of_week" value="<?= $details['day_of_week']; ?>" placeholder="">
+
+                        <select name="day_of_week" class="form-control" >
+                           <?php foreach($days as $key=>$val){ ?>
+                            <option name="<?php echo $key ?>" <?php echo (strtolower(arrIndex($details, 'day_of_week'))==$key)?'selected':'' ?>><?php echo $val; ?></option>
+                           <?php } ?>
+                        </select>
                     </div>
-                    <div class="col-sm-6 month ftry" style="display: none">
+                    <div class="col-sm-6 month ftry" style="display: <?php echo (arrIndex($details, 'invoice_type')=='M')?'block':'none' ?>">
                         <label>Date Of Month</label>
-                        <input type="text" class="form-control" id="security_amount" name="date_of_month" value="<?= $details['date_of_month']; ?>" placeholder="">
+                        <input type="text" class="form-control datepicker" name="date_of_month"  placeholder="Date Of Month *" value="<?php echo arrIndex($details, 'date_of_month') ?>" >
                     </div>
                 </div>
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Refundable</label>
-                        &nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="yes" style="vertical-align: sub">&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="no" style="vertical-align: sub">&nbsp;&nbsp;No
+                        &nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="1" style="vertical-align: sub" <?php echo (arrIndex($details, 'refundable')==1)?'checked':'' ?>>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;<input type="radio" name="refund" value="0" <?php echo (arrIndex($details, 'refundable')==0)?'checked':'' ?> style="vertical-align: sub">&nbsp;&nbsp;No
                     </div>
+                    <div class="col-sm-6">
+                        <input type="button" class="btn btn-primary pull-right agreement "  style="margin-top: 23px"  value="Submit">
+                    </div>                      
                 </div>
+                 </form>
             </div>     
             <div class="tab-pane" id="tabs-5">
+                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document" method="post" >
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Upload Documents</label>
-                        <input type="file" name="document" id="document">
+                        <input type="file" name="document[]" multiple="" id="document">
+                        <input type="hidden" name="documents" >
                     </div>
                 </div>
+                    <div class="col-sm-6">
+                        <input type="submit" class="btn btn-primary pull-right " style="margin-top: 23px"  value="Submit">
+                    </div>  
+                </form>
             </div>     
         </div>
-        <p style="text-align: center; padding-bottom: 10px;"><button class="btn btn-primary">Submit</button></p>
-    </form>
+        <p style="text-align: center; padding-bottom: 10px;"></p>
+    
 </div>
+

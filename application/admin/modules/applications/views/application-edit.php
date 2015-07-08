@@ -19,6 +19,7 @@
 </header>
 <div class="col-lg-12 padding-0 mar-top15">
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
+  
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
             <div class="col-sm-6">

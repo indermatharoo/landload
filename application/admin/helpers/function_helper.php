@@ -265,3 +265,10 @@ function IsFirstTimeLogin() {
     $rs = getThis()->db->get()->row_array();    
     return arrIndex($rs,'first_time_login');
 }
+
+function getUnitsTypes()    {
+    return array(
+        's' => 's',
+        'f' => 'f'
+    );
+}

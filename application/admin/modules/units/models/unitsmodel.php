@@ -48,26 +48,16 @@ class Unitsmodel extends Basemodel {
     {
         $data = array();
         $data = rSF('units');
+        $data['is_active'] = $this->input->post('active');
+        $data['description'] = $this->input->post('description');
+        $data['datetime'] = date('Y-m-d H:i:s');
+        $data['amount_type'] = $this->input->post('amount_type');
 //        e($data);
         $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
 
- 
-//        if (count($_FILES['photo']) > 0) {
-//            if ($_FILES['photo[]']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo[]']['tmp_name'])) {
-//                if (!$this->upload->do_upload('photo[]')) {
-//                    show_error($this->upload->display_errors('<p class="err">', '</p>'));
-//                    return FALSE;
-//                } else {
-//                    $upload_data = $this->upload->data();
-//                //    $data['photo'] = $upload_data['file_name'];
-//                }
-//            }
-//        }
-        
-        
-           if(!empty($_POST['features']))
+        if(!empty($_POST['features']))
         {
             $data['features'] =  implode($_POST['features'],'|');
         }
@@ -121,7 +111,10 @@ class Unitsmodel extends Basemodel {
         $data['room'] = $this->input->post('room');
         $data['bathroom'] = $this->input->post('bathroom');
         $data['amount'] = $this->input->post('amount');
+        $data['amount_type'] = $this->input->post('amount_type');
         $data['unit_type'] = $this->input->post('unit_type');
+        $data['is_active'] = $this->input->post('active');
+        $data['description'] = $this->input->post('description');
        
         if(!empty($_POST['features']))
         {

@@ -30,6 +30,18 @@
                 <input type="text" class="form-control" name="email"  placeholder="Email *">
             </div>
             <div class="col-sm-6">
+                <label>password </label>
+                <input type="password" class="form-control" name="passwd"  placeholder="password *">
+            </div>            
+            <div class="col-sm-6">
+                <label>Confirm password </label>
+                <input type="password" class="form-control" name="conpasswd"  placeholder="password *">
+            </div>            
+            <div class="col-sm-6">
+                <label>Address </label>
+                <input type="text" class="form-control" name="address"  placeholder="Address *">
+            </div>   
+            <div class="col-sm-6">
                 <label>Phone </label>
                 <input type="text" class="form-control" name="phone"  placeholder="Phone *">
             </div>
