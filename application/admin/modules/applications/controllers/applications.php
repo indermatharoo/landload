@@ -273,8 +273,6 @@ class Applications extends Admin_Controller {
     function upload_document($id)
     {
         $this->load->library('form_validation');
-        echo "<pre>";
-        print_r($_FILES);
         foreach($_FILES['document']['name'] as $file)
         {
             if(trim($file)=="")
