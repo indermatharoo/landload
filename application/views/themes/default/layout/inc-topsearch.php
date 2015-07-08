@@ -11,12 +11,12 @@
 
                             </div>
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-gbp"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                 <input type="text" placeholder="Min Price" value="" name="email" class="form-control" id="email">                                        
                             </div>
 
                             <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-gbp"></i></span>
+                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                 <input type="text" placeholder="Max Price" value="" name="email" class="form-control" id="email">                                        
                             </div>
 

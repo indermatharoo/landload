@@ -41,269 +41,39 @@
                                 <h2> Property List </h2>
                             </div>
                             <?php foreach ($property as $row) { ?>
-                                <?php
-//                                echo '<pre>';
-//                                print_r($property)
-                                ?>
+                                <div class="col-md-3">
+                                    <div class="property_list_box">
+                                        <div class="view view-first property_img">
+                                            
+                                            <img src="<?= $this->config->item('UNIT_IMAGE_URL').$row['unit_image'] ?>">
+                                            <div class="mask">
+                                                <h2><?= $row['pname'] ?></h2>
+                                                <p><?= $row['description'] ?></p>
+                                                <p class="prop_price"><?= DWS_CURRENCY_SYMBOL.$row['amount'] ?></p>
+
+                                                <a class="info" href="property/detail/<?= $row['id'] ?>">Read More</a>
+                                            </div>
+                                        </div> 
+                                        <div class="property_text">
+                                            <div class="col-md-9"> 
+                                                <div class="property-city-name"><p>United States</p></div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="price-text-note"> <p><?= DWS_CURRENCY_SYMBOL.$row['amount'] ?></p></div> 
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                            <div class="col-md-9"> 
+                                                <div class="property-text-name"><h4><?= $row['unit_number'] ?></h4></div>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
                             <?php } ?>
-
-                            <!-- Start First Column Line -->
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <?php?>
-                                        <img src="<?= $this->$config['UNIT_IMAGE_PATH'].$row['photo'] ?>">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End First Column Line -->
-
-                            <!-- Start First Column Line -->
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-
-
-
-                            <div class="col-md-3">
-                                <div class="property_list_box">
-                                    <div class="view view-first property_img">
-                                        <img src="imgs/property/prop01.png">
-                                        <div class="mask">
-                                            <h2>Property Name Here</h2>
-                                            <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                            <p class="prop_price">     $1,599.000 </p>
-
-                                            <a class="info" href="#">Read More</a>
-                                        </div>
-                                    </div> 
-                                    <div class="property_text">
-                                        <div class="col-md-9"> 
-                                            <div class="property-city-name"><p>  United States</p></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-
-                                        <div class="col-md-9"> 
-                                            <div class="property-text-name"><h4> Property Tittle Name</h4></div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
-                                        </div>
-                                        <div class="clearfix"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- End First Column Line -->
                         </div>
                     </div>
                 </div>
