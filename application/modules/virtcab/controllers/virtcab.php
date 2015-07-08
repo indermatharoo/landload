@@ -73,7 +73,6 @@ class virtcab extends Cms_Controller {
             'order-field' => 'fname',
             'order-by' => 'desc',
         );
-
         $tab1 = ' active ';
         $tab2 = '';
         if (isset($_POST['searchfile'])) {
