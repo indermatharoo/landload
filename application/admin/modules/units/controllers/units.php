@@ -55,7 +55,7 @@ class Units extends Admin_Controller {
         $features = $this->Featuresmodel->getAllfeatures();
         $propertyList = $this->Propertiesmodel->getPropertiesList();
 
-        $unitsType = $this->Unitsmodel->getUnitType();
+        //$unitsType = $this->Unitsmodel->getUnitType();
         
         $this->form_validation->set_rules('property_id', 'Property ', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
@@ -68,13 +68,14 @@ class Units extends Admin_Controller {
         $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
+        //$this->form_validation->set_rules('description', 'Rent Type', 'trim|required|integer');
 
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['status'] = array('0' => 'Ocupied', '1' => 'Listed', '2' => 'Unlisted');
             $inner['features'] = $features;
             $inner['propertyList'] = $propertyList;
-            $inner['unitsType'] = $unitsType;
+           // $inner['unitsType'] = $unitsType;
             $page = array();
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
             $this->load->view($this->customer, $page);
@@ -100,7 +101,7 @@ class Units extends Admin_Controller {
         $images = $this->Unitsmodel->getUnitImages($offset);
        
         $this->form_validation->set_rules('property_id', 'Property Type', 'trim|required');
-        $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
+        $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
 //        if(empty($_FILES['photo']['name'])){
 //            $this->form_validation->set_rules('photo', 'photo', 'trim|required');
 //        }

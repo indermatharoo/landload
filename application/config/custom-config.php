@@ -102,3 +102,25 @@ $config['UPLOAD_URL_USERS'] = $this->config['base_url'] . 'upload/users/';
 
 $config['SIDELINKS'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/sidelinks/images/';
 $config['SIDELINKS_URL'] = $this->config['base_url'] . 'upload/sidelinks/images/';
+
+/**
+ * Virtual Cab
+ * img
+ * doc
+ * videos
+ */
+$config['UPLOAD_PATH_VIRCAB'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/virtcab/';
+$config['UPLOAD_PATH_VIRCAB_IMG'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/virtcab/img/';
+$config['UPLOAD_PATH_VIRCAB_DOC'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/virtcab/doc/';
+$config['UPLOAD_PATH_VIRCAB_MISC'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/virtcab/misc/';
+$config['UPLOAD_PATH_VIRCAB_VIDEO'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/virtcab/video/';
+
+$config['UPLOAD_URL_VIRCAB'] = site_url() . 'upload/virtcab/';
+$config['UPLOAD_URL_VIRCAB_IMG'] = site_url() . 'upload/virtcab/img/';
+$config['UPLOAD_URL_VIRCAB_DOC'] = site_url() . 'upload/virtcab/doc/';
+$config['UPLOAD_URL_VIRCAB_MISC'] = site_url() . 'upload/virtcab/misc/';
+$config['UPLOAD_URL_VIRCAB_VIDEO'] = site_url() . 'upload/virtcab/video/';
+
+
+$config['SLIDESHOW_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'slideshow/';
+$config['SLIDESHOW_IMAGE_URL'] = $config['UPLOAD_URL'] . 'slideshow/';

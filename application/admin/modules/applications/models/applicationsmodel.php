@@ -31,7 +31,7 @@ class Applicationsmodel extends Basemodel {
         $this->db->from('applications t1');
         $this->db->join('applicants t2', 't2.applicant_id=t1.applicant_id');
         $this->db->join('properties t3', 't3.id=t1.property_id');
-        $this->db->join('company t4', 't4.company_id=t3.company_id');
+        $this->db->join('user_extra_detail t4', 't4.id=t3.company_id');
         $results = $this->db->get()->result_array();
         return $results;
     }

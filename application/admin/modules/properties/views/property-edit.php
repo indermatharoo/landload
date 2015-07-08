@@ -27,31 +27,28 @@ $muser = $user;
 
             <div class="col-sm-6">
                 <label>Property Type</label><br>
-                <?php foreach($propertiesType as $ptype){ ?>
-                <input type="radio" name="ptype" value="<?php echo $ptype['short_code'] ?>" <?php echo ($ptype['short_code']==$details['type'])?'checked':''; ?>><?php echo $ptype['type'] ?><br>
-                <?php } ?>
+                <select name="ptype" class="form-control" autocomlete="off">
+                    <option value="">-Select Type-</option>
+                    <?php foreach($propertiesType as $ptype){ ?>
+                    <option value="<?php echo $ptype['short_code'] ?>" <?php echo ($ptype['short_code']==$details['type'])?'selected="selected"':''; ?>><?php echo $ptype['type'] ?></option>
+                    
+                    <?php } ?>
+                </select>
+                
             </div>
             <div class="col-sm-6">
-                <label>Number of units</label>
+                <label>Unit name</label>
                 <input type="text" class="form-control" name="units" value="<?= arrIndex($details, 'units'); ?>" placeholder="Number of units">
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
-                <input type="file"  name="photo" value="<?= arrIndex($details, 'state'); ?>" >
+                <input type="file"  name="photo" value="<?= arrIndex($details, 'state'); ?>" style="height: 34px;" >
             </div>
             <div class="col-sm-6">
                 <label>Owner</label>
                 <input type="text" class="form-control" name="owner" value="<?= arrIndex($details, 'owner'); ?>" placeholder="Owner  *">
             </div>
-            <div class="col-sm-6">
-                <label>Country</label>
-                <select name="country"  class="form-control" >
-                    <option value=""></option>
-                    <?php foreach($country as $val){ ?>
-                    <option value="<?php echo $val['iso'] ?>" <?php echo ( arrIndex($details, 'country')== $val['iso']) ?"selected":""; ?>><?php echo $val['nicename'] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
+          
             
             <div class="col-sm-6">
                 <label>Street</label>
@@ -65,8 +62,17 @@ $muser = $user;
             </div>
 
             <div class="col-sm-6">
-                <label>State</label>
-                <input type="text" class="form-control"  name="state" value="<?= arrIndex($details, 'state'); ?>" placeholder="State *">
+                <label>County</label>
+                <input type="text" class="form-control"  name="state" value="<?= arrIndex($details, 'state'); ?>" placeholder="County *">
+            </div>
+            
+            <div class="col-sm-6">
+                <label>Post Code</label>
+                <input type="text" class="form-control"  name="postcode" value="<?= arrIndex($details, 'post_code'); ?>"  placeholder="Post Code *">
+            </div>
+            <div class="col-sm-6">
+                <label>Active</label><br />
+                <input type="radio" value="1" <?php echo ($details['is_active']==1)?'checked="checked"':''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active']==0)?'checked="checked"':''; ?>>&nbsp;&nbsp;No
             </div>
             
         </div>

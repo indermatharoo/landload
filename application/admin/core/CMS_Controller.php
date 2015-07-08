@@ -11,7 +11,8 @@ class CMS_Controller extends CI_Controller {
     protected $user_id = false;
     protected $member_data = false;
     protected $shellFile;
-
+    protected $default;
+            
     function __construct() {
         parent::__construct();
         $this->module_path = realpath(APPPATH . '/views/' . $this->router->directory . '../');

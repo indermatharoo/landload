@@ -108,6 +108,7 @@ class virtcab extends Admin_Controller {
 //        }
 //        exit; 
 //        e($inne)
+//        e($this->default);
         $page['content'] = $this->load->view('index', $inner, TRUE);
         $this->load->view($this->default, $page);
     }

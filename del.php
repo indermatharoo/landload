@@ -1,9 +1,5 @@
 <?php
-$msg = "this ios a test";
-$s = mail("balwinder@multichannelcreative.co.uk","My subject",$msg);
 
-if($s){
-    echo 123;
-}   else {
-    echo 321;
-}
+$output = exec('git pull origin master 2>&1');
+print_r($output);
+exit;

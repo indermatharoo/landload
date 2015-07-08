@@ -44,7 +44,7 @@ class Menu extends Admin_Controller {
         $this->load->helper('form');
         $this->load->library('pagination');
 
-        if (!($this->aauth->isFranshisor() || $this->aauth->isFrsUser())) {
+        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
             $this->utility->accessDenied();
             return;
         }
@@ -77,7 +77,7 @@ class Menu extends Admin_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
 
-        if (!($this->aauth->isFranshisor() || $this->aauth->isFrsUser())) {
+        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
             $this->utility->accessDenied();
             return;
         }
@@ -108,7 +108,7 @@ class Menu extends Admin_Controller {
         $this->load->helper('form');
         $this->load->model('Menumodel');
 
-        if (!($this->aauth->isFranshisor() || $this->aauth->isFrsUser())) {
+        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
             $this->utility->accessDenied();
             return;
         }
@@ -191,7 +191,7 @@ class Menu extends Admin_Controller {
     function delete($mid) {
         $this->load->model('Menumodel');
 
-        if (!($this->aauth->isFranshisor() || $this->aauth->isFrsUser())) {
+        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
             $this->utility->accessDenied();
             return;
         }

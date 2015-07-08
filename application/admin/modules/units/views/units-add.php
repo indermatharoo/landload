@@ -22,9 +22,10 @@
                 <select name="property_id" class="form-control">
                     <option></option>
                     <?php
+                    
                     foreach ($propertyList as $list) {
                         ?>
-                        <option value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
+                        <option <?php if($list['is_active']!=1){ ?>disabled<?php } ?> value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
                         <?php
                     }
                     ?>
@@ -33,8 +34,8 @@
 
 
             <div class="col-sm-6">
-                <label>unit Number</label>
-                <input type="text" class="form-control" name="unit_number"  placeholder="units Number">
+                <label>Unit Name</label>
+                <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name">
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
@@ -45,14 +46,15 @@
                 <?php
                 
                 foreach ($status as $st => $stval) { ?>
-                    <input type="radio" name="status" value="<?php echo $st ?>"><?php echo $stval ?><br />
+                <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
             <div class="col-sm-6">
                 <label>Unit Type</label><br>
-                <?php foreach ($unitsType as $st => $stval) { ?>
-                    <input type="radio" name="unit_type" value="<?php echo $stval['unit_code'] ?>"><?php print_r( $stval['unit_type']) ?><br />
-                <?php } ?>
+               <select name="unit_type" class="form-control">
+                    <option value="s">Shop</option>
+                    <option value="f">Flat</option>
+                </select>
             </div>            
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
@@ -72,7 +74,7 @@
             </div>
             <div class="col-sm-6">
                 <label>Features</label>
-                <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:350px;" name="features[]" tabindex="4">
+                <select data-placeholder="Choose a Feature..." class="chosen-select form-control" multiple style="width:327px;" name="features[]" tabindex="4">
                     <?php foreach ($features as $feature) { ?>
                         <option value="<?php echo $feature['id'] ?>"><?php echo $feature['tag'] ?></option>
                     <?php } ?>
@@ -87,11 +89,21 @@
                     <?php endforeach; ?>
                 </select>
             </div>
+            <div class="col-sm-6">
+                <label>Active</label><br />
+                <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
+            </div>
+            
+            <div class="col-sm-12">
+                <label>Description</label>
+                <textarea name="description" class="form-control"></textarea>
+            </div>
+            
         </div>
 
         <div class="form-group">
             <div class="col-sm-12 text-center">
-                Fields mark with <span class="error">*</span> required
+                Fields mark with <span class="error1">*</span> required
             </div>
         </div>
         <div class="form-group">

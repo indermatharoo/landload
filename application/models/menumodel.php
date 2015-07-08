@@ -239,8 +239,7 @@ class Menumodel extends CI_Model {
 //            e($output);    
             $output .= "</li>\r\n";
         }
-       $output .= '<li class="root_menu"><a href="http://www.thecreationstationstore.co.uk/" target="_blank"><span>Shop</span></a>
-</li>';
+       
        
 
         if ($parent_id > 0) {
