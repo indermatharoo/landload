@@ -25,7 +25,7 @@
         </header>
 
         <section id="slider">
-            <?php $this->load->view("themes/" . THEME . "/layout/inc-slider"); ?>
+            <?php $this->load->view("themes/" . THEME . "/layout/inc-slideshow"); ?>
         </section>
 
         <section id="topsearch">

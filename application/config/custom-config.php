@@ -120,3 +120,7 @@ $config['UPLOAD_URL_VIRCAB_IMG'] = site_url() . 'upload/virtcab/img/';
 $config['UPLOAD_URL_VIRCAB_DOC'] = site_url() . 'upload/virtcab/doc/';
 $config['UPLOAD_URL_VIRCAB_MISC'] = site_url() . 'upload/virtcab/misc/';
 $config['UPLOAD_URL_VIRCAB_VIDEO'] = site_url() . 'upload/virtcab/video/';
+
+
+$config['SLIDESHOW_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'slideshow/';
+$config['SLIDESHOW_IMAGE_URL'] = $config['UPLOAD_URL'] . 'slideshow/';
