@@ -232,7 +232,7 @@ class Applications extends Admin_Controller {
                  $this->Applicationsmodel->saveUserDetails($offset);
              }
     }
-    function job_details($offset)
+    function job_details($offset="")
     {
         $this->Applicationsmodel->saveJobDetails($offset);
     }
