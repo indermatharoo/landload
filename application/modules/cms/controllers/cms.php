@@ -73,6 +73,11 @@ class Cms extends Cms_Controller {
         $breadcrumbs = array();
         $breadcrumbs = $this->Pagemodel->breadcrumbs($page['page_id']);
 
+        $slides = array();
+        $homeslides = array();
+        $slides = $this->Slidemodel->listAll();
+        $homeslides = $this->Slidemodel->ListHomeSlides();
+
         //Get all news
 //        $news = array();
 //        $news = $this->Newsmodel->listAll(0 ,2);
@@ -146,7 +151,6 @@ class Cms extends Cms_Controller {
             }
         }
     }
-
 
 }
 
