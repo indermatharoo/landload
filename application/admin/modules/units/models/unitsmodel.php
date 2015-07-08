@@ -53,10 +53,7 @@ class Unitsmodel extends Basemodel {
         $data['datetime'] = date('Y-m-d H:i:s');
         $data['amount_type'] = $this->input->post('amount_type');
 //        e($data);
-        $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
-        $config['allowed_types'] = 'gif|jpg|png';
-        $config['overwrite'] = FALSE;
-
+ 
         if(!empty($_POST['features']))
         {
             $data['features'] =  implode($_POST['features'],'|');
@@ -65,16 +62,29 @@ class Unitsmodel extends Basemodel {
         {
             $data['features']='';
         }
-         
+        $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
+        $config['allowed_types'] = 'gif|jpg|png';
+        $config['overwrite'] = FALSE;
+        $this->load->library('upload', $config);
+        if (count($_FILES) > 0) {
+            if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                if (!$this->upload->do_upload('photo')) {
+                    show_error($this->upload->display_errors('<p class="err">', '</p>'));
+                    return FALSE;
+                } else {
+                    $upload_data = $this->upload->data();
+                     $data['unit_image'] = $upload_data['file_name'];
+                }
+            }
+        }
         $this->db->insert('units',$data);
         $unit_id = $this->db->insert_id(); 
-        $this->load->library('upload', $config);
         $this->upload->initialize(array(
             "upload_path"   => $this->config->item('UNIT_IMAGE_PATH'),
             'allowed_types'=>'gif|jpg|png'
                 
         ));
-        if($this->upload->do_multi_upload("photo")) {
+        if($this->upload->do_multi_upload("galleryImages")) {
             //Print data for all uploaded files.
             print_r($this->upload->get_multi_upload_data());
             foreach($this->upload->get_multi_upload_data() as $images)
@@ -82,7 +92,8 @@ class Unitsmodel extends Basemodel {
                 $this->db->insert('unit_image',array('image'=>$images['file_name'],'unit_id'=>$unit_id));
             }
         }
-       // return $this->db->insert_id();
+
+
     }
     function getImageName($id)
     {
@@ -102,8 +113,29 @@ class Unitsmodel extends Basemodel {
                 $this->db->delete('unit_image');
             }
         }
-
-        $data = array();
+              $data = array();
+        if(!empty($_FILES['photo']['name']))
+        {
+            
+            $mainimage = $this->getUnitDetails($id);
+            @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['unit_image']);
+            $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
+             $config['allowed_types'] = 'gif|jpg|png';
+             $config['overwrite'] = FALSE;
+             $this->load->library('upload', $config);
+             if (count($_FILES) > 0) {
+                 if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                     if (!$this->upload->do_upload('photo')) {
+                         show_error($this->upload->display_errors('<p class="err">', '</p>'));
+                         return FALSE;
+                     } else {
+                         $upload_data = $this->upload->data();
+                          $data['unit_image'] = $upload_data['file_name'];
+                     }
+                 }
+        }
+        }
+  
         $data['property_id'] = $this->input->post('property_id');
         $data['unit_number'] = $this->input->post('unit_number');
         $data['status'] = $this->input->post('status');
@@ -115,7 +147,7 @@ class Unitsmodel extends Basemodel {
         $data['unit_type'] = $this->input->post('unit_type');
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
-       
+
         if(!empty($_POST['features']))
         {
             $data['features'] =  implode($_POST['features'] ,'|');
@@ -133,9 +165,9 @@ class Unitsmodel extends Basemodel {
             'allowed_types'=>'gif|jpg|png'
                 
         ));
-        if($this->upload->do_multi_upload("photo")) {
+        if($this->upload->do_multi_upload("galleryImages")) {
             //Print data for all uploaded files.
-            print_r($this->upload->get_multi_upload_data());
+           
             foreach($this->upload->get_multi_upload_data() as $images)
             {
                 $this->db->insert('unit_image',array('image'=>$images['file_name'],'unit_id'=>$id));
@@ -144,8 +176,23 @@ class Unitsmodel extends Basemodel {
     }
     function DeleteRecord($id)
     {
+       $mainimage = $this->getUnitDetails($id);
+       @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['unit_image']);        
        $this->db->where('id',$id);
        $this->db->delete('units');
+       
+       $imgar = $this->getUnitImages($id);
+       print_r($imgar);
+       foreach($imgar['result'] as $img)
+       {
+            @unlink($this->config->item('UNIT_IMAGE_PATH').$img['image']);
+       }
+         
+   
+        
+       $this->db->where('unit_id',$id);
+       $this->db->delete('unit_image');
+     
     }
     function getUnitImages($id)
     {

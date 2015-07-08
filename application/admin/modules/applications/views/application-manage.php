@@ -85,6 +85,7 @@ $(document).ready(function(){
         </div>
     </div>
 </header>
+<?php $this->load->view(THEME . 'messages/inc-messages'); ?>
 <div class="errormsg alert alert-danger " style="display:none;">
 </div>
 <div class="successmsg alert alert-success " style="display:none;">
@@ -263,7 +264,7 @@ $(document).ready(function(){
                  </form>
             </div>     
             <div class="tab-pane" id="tabs-5">
-                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document" method="post" >
+                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document/<?php echo  arrIndex($details, 'id') ?>" method="post" >
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Upload Documents</label>

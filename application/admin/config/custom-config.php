@@ -86,6 +86,9 @@ $config['PROPERTY_IMAGE_URL'] = $config['UPLOAD_URL'] . 'property/images/';
 $config['UNIT_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'property/units/';
 $config['UNIT_IMAGE_URL'] = $config['UPLOAD_URL'] . 'property/units/';
 
+$config['VIRT_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'virtcab/img/';
+$config['VIRT_IMAGE_URL'] = $config['UPLOAD_URL'] . 'virtcab/img/';
+
 $config['CASESTUDY_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'casestudy/images/';
 $config['CASESTUDY_IMAGE_URL'] = $config['UPLOAD_URL'] . 'casestudy/images/';
 
