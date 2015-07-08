@@ -55,7 +55,7 @@ class Units extends Admin_Controller {
         $features = $this->Featuresmodel->getAllfeatures();
         $propertyList = $this->Propertiesmodel->getPropertiesList();
 
-        $unitsType = $this->Unitsmodel->getUnitType();
+        //$unitsType = $this->Unitsmodel->getUnitType();
         
         $this->form_validation->set_rules('property_id', 'Property ', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
@@ -74,7 +74,7 @@ class Units extends Admin_Controller {
             $inner['status'] = array('0' => 'Ocupied', '1' => 'Listed', '2' => 'Unlisted');
             $inner['features'] = $features;
             $inner['propertyList'] = $propertyList;
-            $inner['unitsType'] = $unitsType;
+           // $inner['unitsType'] = $unitsType;
             $page = array();
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
             $this->load->view($this->customer, $page);

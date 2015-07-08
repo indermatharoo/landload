@@ -50,9 +50,10 @@
             </div>
             <div class="col-sm-6">
                 <label>Unit Type</label><br>
-                <?php foreach ($unitsType as $st => $stval) { ?>
-                    <input type="radio" name="unit_type" value="<?php echo $stval['unit_code'] ?>"><?php print_r( $stval['unit_type']) ?><br />
-                <?php } ?>
+               <select name="unit_type" class="form-control">
+                    <option value="s">Shop</option>
+                    <option value="f">Flat</option>
+                </select>
             </div>            
             <div class="col-sm-6">
                 <label>Area(sq.feet)</label>
@@ -72,7 +73,7 @@
             </div>
             <div class="col-sm-6">
                 <label>Features</label>
-                <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:350px;" name="features[]" tabindex="4">
+                <select data-placeholder="Choose a Feature..." class="chosen-select form-control" multiple style="width:327px;" name="features[]" tabindex="4">
                     <?php foreach ($features as $feature) { ?>
                         <option value="<?php echo $feature['id'] ?>"><?php echo $feature['tag'] ?></option>
                     <?php } ?>
