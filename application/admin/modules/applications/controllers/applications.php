@@ -25,6 +25,7 @@ class Applications extends Admin_Controller {
         $this->pagination->initialize($config);
 
         $Listing = $this->Applicationsmodel->listAll();
+        
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',
@@ -163,10 +164,12 @@ class Applications extends Admin_Controller {
         $this->load->library('parser');
         $this->load->library('email');
 
-
+        //$details = $this->Applicationsmodel->getApplicationDetails($id);
+        
         $userDetail = $this->Applicationsmodel->getUserDetails($id);
-
-
+        $ApplicationType = $this->Applicationsmodel->getApplicationType();
+        $propertiesList = $this->Propertiesmodel->getPropertiesList();
+          $applicantsType = $this->Applicantsmodel->getApplicantType();
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
@@ -184,10 +187,23 @@ class Applications extends Admin_Controller {
         $this->form_validation->set_message('check_default', 'You need to select something other than the default');
         $this->form_validation->set_rules('refund', 'Refundable', 'trim|required');
 
-
+        $days = array(
+            'sunday'=>'Sunday',
+            'monday'=>'Monday',
+            'tuesday'=>'Tuesday',
+            'wednesday'=>'Wednesday',
+            'thursday'=>'Thursday',
+            'friday'=>'Friday',
+            'satureday'=>'Satureday'
+            );
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['details'] = $userDetail;
+            $inner['propertiesList'] = $propertiesList;
+            $inner['applicationType'] = $ApplicationType;
+            $inner['applicantsType'] = $applicantsType;
+            $inner['days'] = $days;
+            $inner['offset'] = $id;
             $page = array();
             $page['content'] = $this->load->view('application-manage', $inner, TRUE);
             $this->load->view($this->customer, $page);
@@ -199,11 +215,78 @@ class Applications extends Admin_Controller {
             redirect(createUrl('applications/index/'));
         }
     }
-
+    function user_details($offset)
+    {
+          $this->load->library('form_validation');
+        $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+             if ($this->form_validation->run() == FALSE) {
+                 echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
+             }
+             else
+             {
+                 
+                 $this->Applicationsmodel->saveUserDetails($offset);
+             }
+    }
+    function job_details($offset)
+    {
+        $this->Applicationsmodel->saveJobDetails($offset);
+    }
+    function properties_details($offset)
+    {
+          $this->load->library('form_validation');
+        $this->form_validation->set_rules('property_id', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('unit_id', 'Last Name', 'trim|required');
+       
+      if ($this->form_validation->run() == FALSE) {
+                  echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
+             }
+             else
+             {
+                 $this->Applicationsmodel->savePropertyDetails($offset);
+             }        
+    }
+    function agree_details($offset)
+    {
+       $this->load->library('form_validation');
+       $this->form_validation->set_rules('agree', 'Agree to Agreement', 'trim|required');
+       $this->form_validation->set_rules('rent_amount', 'Rent Amount', 'trim|required|integer');
+       $this->form_validation->set_rules('security_amount', 'Security Amount', 'trim|required|integer');
+       $this->form_validation->set_rules('ptype', 'Payment Amount', 'trim|required');
+       $this->form_validation->set_rules('refund', 'Refund Amount', 'trim|required');
+       if($this->input->post('ptype')=="M")
+       {
+           $this->form_validation->set_rules('date_of_month', 'Day Of Month', 'trim|required|callback_valid_date');
+       }
+      if ($this->form_validation->run() == FALSE) {
+                   echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
+             }
+             else
+             {
+                 $this->Applicationsmodel->saveAgreeDetails($offset);
+             }        
+    }   
+    function upload_document()
+    {
+        $this->load->library('form_validation');
+        echo "<pre>";
+        print_r($_FILES);
+        foreach($_FILES['document']['name'] as $file)
+        {
+            if(trim($file)=="")
+            {
+                $this->form_validation->set_rules('documents', 'Documents', 'trim|required');
+            }
+        }
+    }
     function delete($id) {
-        $this->Applicantsmodel->DeleteRecord($id);
+        $this->Applicationsmodel->DeleteRecord($id);
         $this->session->set_flashdata('SUCCESS', 'application_deleted');
         redirect(createUrl('applications/index/'));
     }
-
+    
 }

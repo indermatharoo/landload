@@ -17,7 +17,7 @@ class Applicantsmodel extends Basemodel {
             $this->db->offset($offset);
         if ($limit)
             $this->db->limit($limit);
-        $this->db->join('applicant_type','applicant_type.code=applicants.status');
+        $this->db->join('applicant_type','applicant_type.code=applicants.type');
         return $this->db->get('applicants')->result_array();
     }
     function getApplicantType()
@@ -35,7 +35,7 @@ class Applicantsmodel extends Basemodel {
     }
     function getApplicantDetails($id)
     {
-        $this->db->where('id',$id);
+        $this->db->where('applicant_id',$id);
         $res = $this->db->get('applicants');
         if($res->num_rows()>0)
         {
@@ -55,10 +55,12 @@ class Applicantsmodel extends Basemodel {
         $data['phone'] = $this->input->post('phone');
         $data['birthdate'] = date('Y-m-d',strtotime($this->input->post('birth_date')));
         $data['license'] = $this->input->post('license');
+        $data['password'] = md5($this->input->post('passwd'));
+        $data['address'] = $this->input->post('address');
         $data['monthly_gross'] = $this->input->post('monthly_gross');
         if(trim($this->input->post('additional_income'))!=""){$data['additional'] = $this->input->post('additional_income');}else{$data['additional']=NULL;}
         $data['asset'] = $this->input->post('assets');
-        $data['status'] = $this->input->post('status');
+        $data['type'] = $this->input->post('status');
         $this->db->insert('applicants',$data);
         return $this->db->insert_id();
     }
@@ -71,11 +73,17 @@ class Applicantsmodel extends Basemodel {
         $data['phone'] = $this->input->post('phone');
         $data['birthdate'] = date('Y-m-d',strtotime($this->input->post('birth_date')));
         $data['license'] = $this->input->post('license');
+        
+        
+        if(trim($this->input->post('passwd'))!=""){
+             $data['password'] = md5($this->input->post('passwd'));
+        }
+        $data['address'] = $this->input->post('address');   
         $data['monthly_gross'] = $this->input->post('monthly_gross');
         if(trim($this->input->post('additional_income'))!=""){$data['additional'] = $this->input->post('additional_income');}else{$data['additional']=NULL;}
         $data['asset'] = $this->input->post('assets');
-        $data['status'] = $this->input->post('status');
-        $this->db->where('id',$id);
+        $data['type'] = $this->input->post('status');
+        $this->db->where('applicant_id',$id);
         $this->db->update('applicants',$data);
         return $this->db->insert_id();
     }

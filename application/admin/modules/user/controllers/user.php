@@ -135,13 +135,13 @@ class User extends Admin_Controller {
         //validation check
 //        $this->form_validation->set_rules('role_id', 'Role', 'trim|required');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
-        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check|is_unique[aauth_users.email]');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
         $this->form_validation->set_rules('pass', 'Password', 'trim|required');
         $this->form_validation->set_rules('pass1', 'confirm Password', 'trim|required|matches[pass]');
         $this->form_validation->set_rules('city', 'City', 'trim|required');
         $this->form_validation->set_rules('state', 'State', 'trim|required');
         $this->form_validation->set_rules('country', 'Country', 'trim|required');
-//        $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
+
          $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');       
         $this->form_validation->set_error_delimiters('<li>', '</li>');

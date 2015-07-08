@@ -30,6 +30,18 @@
                 <input type="text" class="form-control" name="email"  placeholder="Email *" value="<?= $details['email']?>">
             </div>
             <div class="col-sm-6">
+                <label>password </label>
+                <input type="password" class="form-control" name="passwd"  placeholder="password *">
+            </div>            
+            <div class="col-sm-6">
+                <label>Confirm password </label>
+                <input type="password" class="form-control" name="conpasswd"  placeholder="password *">
+            </div>            
+            <div class="col-sm-6">
+                <label>Address </label>
+                <input type="text" class="form-control" name="address"  placeholder="Address *" value="<?= $details['address']?>">
+            </div>               
+            <div class="col-sm-6">
                 <label>Phone </label>
                 <input type="text" class="form-control" name="phone"  placeholder="Phone *" value="<?= $details['phone']?>">
             </div>
@@ -56,7 +68,7 @@
             <div class="col-sm-6">
                 <label> Status </label><br>
                 <?php foreach($applicantsType as $type){ ?>
-                <input type="radio" name="status" value="<?php echo $type['code'] ?>" <?php echo ($type['code']==$details['status'])?'checked':''; ?> ><?php echo $type['type'] ?><br>
+                <input type="radio" name="status" value="<?php echo $type['code'] ?>" <?php echo ($type['code']==$details['type'])?'checked':''; ?> ><?php echo $type['type'] ?><br>
                 <?php } ?>
             </div>                  
         </div>

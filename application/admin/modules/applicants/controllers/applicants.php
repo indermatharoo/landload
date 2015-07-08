@@ -75,6 +75,9 @@ class Applicants extends Admin_Controller {
         $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
         $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        $this->form_validation->set_rules('passwd', 'password', 'trim|required');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
+        $this->form_validation->set_rules('conpasswd', 'confirm password', 'trim|required|matches[passwd]');
         // get applicant type
         
         $applicantsType = $this->Applicantsmodel->getApplicantType();
@@ -114,10 +117,17 @@ class Applicants extends Admin_Controller {
         
              $this->form_validation->set_rules('additional_income', 'Additional Income', 'trim|required|integer');
         }
+        if(trim($this->input->post('passwd'))!=""){
+            
+             $this->form_validation->set_rules('conpasswd', 'confirm password', 'trim|required|matches[passwd]');
+        }   
+        
         $this->form_validation->set_rules('license', 'Driving License Number', 'trim|required');
         $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
         $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
+        
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
         
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
