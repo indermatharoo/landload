@@ -43,6 +43,10 @@
                 <input type="file"  name="photo[]" multiple="" >
             </div>
             <div class="col-sm-6">
+                <label>Gallery Images</label>
+                <input type="file"  name="galleryImages[]" multiple  >
+            </div>               
+            <div class="col-sm-6">
                 <label>Status</label><br>
                 <?php foreach($status as $st=>$stval){ ?>
                 <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st==$details['status'])?'checked':''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;

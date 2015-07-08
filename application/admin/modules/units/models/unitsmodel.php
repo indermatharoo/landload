@@ -113,8 +113,12 @@ class Unitsmodel extends Basemodel {
                 $this->db->delete('unit_image');
             }
         }
+              $data = array();
         if(!empty($_FILES['photo']['name']))
         {
+            
+            $mainimage = $this->getUnitDetails($id);
+            @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['unit_image']);
             $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
              $config['allowed_types'] = 'gif|jpg|png';
              $config['overwrite'] = FALSE;
@@ -131,7 +135,7 @@ class Unitsmodel extends Basemodel {
                  }
         }
         }
-        $data = array();
+  
         $data['property_id'] = $this->input->post('property_id');
         $data['unit_number'] = $this->input->post('unit_number');
         $data['status'] = $this->input->post('status');
@@ -172,8 +176,23 @@ class Unitsmodel extends Basemodel {
     }
     function DeleteRecord($id)
     {
+       $mainimage = $this->getUnitDetails($id);
+       @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['unit_image']);        
        $this->db->where('id',$id);
        $this->db->delete('units');
+       
+       $imgar = $this->getUnitImages($id);
+       print_r($imgar);
+       foreach($imgar['result'] as $img)
+       {
+            @unlink($this->config->item('UNIT_IMAGE_PATH').$img['image']);
+       }
+         
+   
+        
+       $this->db->where('unit_id',$id);
+       $this->db->delete('unit_image');
+     
     }
     function getUnitImages($id)
     {
