@@ -270,7 +270,7 @@ class Applications extends Admin_Controller {
                  $this->Applicationsmodel->saveAgreeDetails($offset);
              }        
     }   
-    function upload_document()
+    function upload_document($id)
     {
         $this->load->library('form_validation');
         echo "<pre>";
@@ -279,7 +279,8 @@ class Applications extends Admin_Controller {
         {
             if(trim($file)=="")
             {
-                $this->form_validation->set_rules('documents', 'Documents', 'trim|required');
+              $this->session->set_flashdata('ERROR', 'required_document');
+               redirect(createUrl('applications/manage/'.$id));
             }
         }
     }

@@ -59,9 +59,9 @@ class Units extends Admin_Controller {
         
         $this->form_validation->set_rules('property_id', 'Property ', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
-//        if (empty($_FILES['photo']['name'])) {
-//            $this->form_validation->set_rules('photo', 'photo', 'trim|required');
-//        }
+        if (empty($_FILES['photo']['name'])) {
+            $this->form_validation->set_rules('photo', 'photo', 'trim|required');
+        }
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
         $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
@@ -82,7 +82,7 @@ class Units extends Admin_Controller {
         } else {
 
             $userid = $this->Unitsmodel->insertRecord();
-            $this->session->set_flashdata('SUCCESS', 'property_added');
+            $this->session->set_flashdata('SUCCESS', 'unit_added');
             redirect(createUrl('units/index/'));
         }
     }

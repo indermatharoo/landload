@@ -14,4 +14,5 @@ $lang['email_taken'] = 'Email ID Already Exist.';
 $lang['enquiry_insert_error'] = 'Error occoured during save.';
 
 $lang['forum_post_not_exist'] = 'Forum post not exist';
+$lang['required_document'] = 'Please Select Required Documents';
 ?>
