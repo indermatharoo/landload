@@ -12,13 +12,28 @@
 <form  name="form" enctype="multipart/form-data" method="post" action="">
     <?php foreach ($model as $key => $value): ?>
         <?php
-//        e($key,0);
-//        e($value);
-        ?>
-        <?php
         if ($key == 'id'):
             ?>
             <input  type="hidden" name="<?php echo $key ?>" value="<?php echo $value ?>">
+            <?php
+            continue;
+        endif;
+        ?>
+        <?php
+        $unit_type = arrIndex($model, 'unit_type');
+        if ($key == 'unit_type'):
+            ?>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label>Attribute Type</label>
+                    <select name="<?php echo $key ?>" class="form-control">
+                        <option>Select</option>
+                        <?php foreach (getUnitsTypes() as $key => $value): ?>
+                            <option <?php echo ($unit_type == $key) ? 'selected="true"' : ''  ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
             <?php
             continue;
         endif;

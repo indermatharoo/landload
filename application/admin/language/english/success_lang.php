@@ -204,6 +204,10 @@ $lang['property_added'] = 'Property Added Successfully.';
 $lang['property_updated'] = 'Property Updated Successfully.';
 $lang['property_deleted'] = 'Property Deleted Successfully.';
 
+$lang['attribute_added'] = 'Attribute Added Successfully';
+$lang['attribute_updated'] = 'Attribute Updated Successfully.';
+$lang['attribute_deleted'] = 'Attribute Deleted Successfully.';
+
 $lang['unit_added'] = 'Unit Added Successfully.';
 $lang['unit_updated'] = 'Unit Updated Successfully.';
 $lang['unit_deleted'] = 'Unit Deleted Successfully.';

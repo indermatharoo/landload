@@ -15,7 +15,7 @@ class Attributes extends Admin_Controller {
             'name' => 'Name',
             'label' => 'Label',
             'sort' => 'Sort',
-            0 => 'Action'
+            -1 => 'Action'
         );
         $page['content'] = $this->load->view('attributes/index', $inner, true);
         $this->load->view('themes/default/templates/customer', $page);
@@ -27,15 +27,23 @@ class Attributes extends Admin_Controller {
         self::save($model);
     }
 
-    function update($id) {
+    function edit($id) {
         $model = $this->commonmodel->getByPk($id, 'units_attributes');
         self::save($model);
     }
 
+    function delete($id) {
+        $this->commonmodel->delete($id, 'units_attributes');
+        $this->session->set_flashdata('SUCCESS', 'attribute_deleted');
+        redirect('units/attributes');
+    }
+
     function save($model) {
-//        e($model);
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('sort', 'Property ', 'numeric');
+        $this->form_validation->set_rules('name', 'Name', 'required');
+        $this->form_validation->set_rules('label', 'Label', 'required');
+        $this->form_validation->set_rules('unit_type', 'Attribute Type', 'required');
+        $this->form_validation->set_rules('sort', 'Sort Order', 'numeric');
         $this->form_validation->set_error_delimiters('<li>', '</li>');
         if ($this->form_validation->run() == FALSE) {
             $inner = $page = array();
@@ -43,7 +51,8 @@ class Attributes extends Admin_Controller {
             $page['content'] = $this->load->view('attributes/form', $inner, true);
             $this->load->view('themes/default/templates/customer', $page);
         } else {
-            echo 'ok';exit;
+            $this->attributesmodel->save();
+            redirect('units/attributes');
         }
     }
 

@@ -24,11 +24,12 @@
         </thead>
         <tbody>
             <?php foreach ($attributes as $item): ?>
+            
                 <?php foreach ($labels as $key => $value): ?>
                     <?php
                     $data = arrIndex($item, $key, FALSE);
-                    if (!$data) {
-                        $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                    if ($key == -1) {
+                        $data = '<a href=' . createUrl('units/attributes/edit/') . arrIndex($item, 'id') . '>Edit</a> |  <a href=' . createUrl('units/attributes/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
                     }
                     ?>
                 <td><?php echo $data ?></td>
