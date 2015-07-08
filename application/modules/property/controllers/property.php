@@ -16,6 +16,7 @@ class Property extends Cms_Controller {
 
         $inner = array();
         $inner['property'] = $property;
+        e($inner);
         //$inner['territory'] = $territory;
         //$inner['mapFranchisee'] = $map;
         $shell['contents'] = $this->load->view("property-index", $inner, true);
