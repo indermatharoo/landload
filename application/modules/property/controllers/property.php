@@ -20,7 +20,7 @@ class Property extends Cms_Controller {
         //$inner['territory'] = $territory;
         //$inner['mapFranchisee'] = $map;
         $shell['contents'] = $this->load->view("property-index", $inner, true);
-        $this->load->view("themes/" . THEME . "/templates/map", $shell);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
 
     function detail($uid) {
@@ -32,7 +32,7 @@ class Property extends Cms_Controller {
         
         $inner['uid'] = $uid;
         $shell['contents'] = $this->load->view("detail", $inner, true);
-        $this->load->view("themes/" . THEME . "/templates/franchisee", $shell);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
 
     function event() {

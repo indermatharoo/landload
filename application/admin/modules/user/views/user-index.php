@@ -1,9 +1,4 @@
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<?php
-//echo "<Pre>";
-//print_r($users); 
-//die();
-?>
 <header class="panel-heading">
     <div class="row">
         <div class="col-sm-1">

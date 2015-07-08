@@ -39,8 +39,12 @@
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
-                <input type="file"  name="photo[]"  multiple >
+                <input type="file"  name="photo"   >
             </div>
+            <div class="col-sm-6">
+                <label>Gallery Images</label>
+                <input type="file"  name="galleryImages[]" multiple  >
+            </div>            
             <div class="col-sm-6">
                 <label>Status</label><br>
                 <?php
