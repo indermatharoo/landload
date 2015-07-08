@@ -74,7 +74,7 @@
             </div> 
             <div class="col-sm-6">
                 <label>Features</label>
-                <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:350px;" name="features[]" tabindex="4">
+                <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:324px;" name="features[]" tabindex="4">
                       <?php
                       $exp = explode('|',$details['features']);
                       foreach($features as $feature){ ?>

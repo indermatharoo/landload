@@ -1,10 +1,20 @@
 <?php
 
 class Propertiesmodel extends Basemodel {
-
+    public $company_id;
     function __construct() {
         // Call the Model constructor
         parent::__construct();
+        
+        if($this->aauth->isUser()){
+            $this->company_id = curUsrPid();
+        }
+        else if($this->aauth->isCompany()){
+            $this->company_id = curUsrId();
+        }
+        else if($this->aauth->isAdmin()){
+            
+        }
     }
     function countAll() {
         $this->db->from('properties');
@@ -21,7 +31,7 @@ class Propertiesmodel extends Basemodel {
             $this->db->offset($offset);
         if ($limit)
             $this->db->limit($limit);
-        
+            
         return $this->db->get('properties')->result_array();
     }
     function getPropertDetails($id)
