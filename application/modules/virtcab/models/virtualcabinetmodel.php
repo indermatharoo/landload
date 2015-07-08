@@ -65,7 +65,7 @@ class VirtualCabinetmodel extends CI_Model {
             $this->db->like($this->actual_name, $param['searchKey'], 'both');
         }
         if (isset($param[$this->assignes])) {
-            $this->db->like($this->assignes, ',' . $param[$this->assignes]);
+            $this->db->or_like($this->assignes, ',' . $param[$this->assignes]);
             $this->db->or_like($this->assignes, $param[$this->assignes] . ',');
             $this->db->or_like($this->assignes, ',' . $param[$this->assignes] . ',');
         }
