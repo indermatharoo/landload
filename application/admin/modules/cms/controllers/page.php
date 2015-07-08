@@ -73,7 +73,7 @@ class Page extends Admin_Controller {
 
         $page = array();
         $page['content'] = $this->load->view('page-index', $inner, TRUE);
-        $this->load->view($this->default, $page);
+        $this->load->view($this->content, $page);
     }
 
     //Function Add
@@ -142,7 +142,7 @@ class Page extends Admin_Controller {
             $inner['page_templates'] = $page_templates;
 
             $page['content'] = $this->load->view('page-add', $inner, TRUE);
-            $this->load->view($this->default, $page);
+            $this->load->view($this->content, $page);
         } else {
             $page_id = $this->Pagemodel->insertRecord($this->config->item('DEFAULT_LANG'));
             $selectedBlocks = $this->input->post('blockadd', TRUE);

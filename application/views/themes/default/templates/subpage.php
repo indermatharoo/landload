@@ -14,11 +14,12 @@
         $this->load->view("themes/" . THEME . "/headers/global.php");
         echo $CI->assets->renderHead();
         ?>
-        <link rel="stylesheet" href="skin/default.css">
     </head>
 
     <body>
-        <?php $this->load->view("themes/" . THEME . "/layout/inc-header"); ?>
+        <header id="header">
+            <?php $this->load->view("themes/" . THEME . "/layout/inc-header"); ?>
+        </header>
         <section class="content-area">
             <div class="container"> 
                 <div class="row mar-bot40">
@@ -30,12 +31,12 @@
                 </div>
             </div>
         </section>
-        <footer id="footer" class="section footer">
-            <div class="container">
-                <?php $this->load->view("themes/" . THEME . "/layout/inc-footer"); ?>
-            </div>
-        </footer>
-        <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>	
+        <footer>
+            <?php $this->load->view("themes/" . THEME . "/layout/inc-footer"); ?>
+        </footer>   
         <?php echo $CI->assets->renderFooter(); ?>
+
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
     </body>
 </html>

@@ -1,19 +1,33 @@
-<header>
-    <div class="top-menu">
-        <div class="container">
-            <div class="col-lg-6 col-sm-12 col-xs-12 right padding-0">
-                <?php $this->load->view("themes/" . THEME . "/layout/inc-top"); ?>
+<div class="full_topbar_container">
+    <div class="container">
+        <div class="row">
+            <div class="topbar_left_section">
+                <div class="col-md-6">
+                    <ul class="list-unstyled list-inline">
+                        <li> <i class="fa fa-phone"></i><?= DWS_CONTACT_NUMBER; ?> </li>
+                        <li> <a href="mailto:<?= DWS_EMAIL_ADMIN; ?>"><i class="fa fa-envelope-o "></i><?= DWS_EMAIL_ADMIN; ?></a> </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="topbar_left_section text-right">
+                <div class="col-md-6">
+                    <ul class="list-unstyled list-inline">
+                        <li>Open 24 hrs 7 days a week  | </li> 
+                        <li>Mon - Sat: 7.00 - 18.00 - Sunday: Closed</li>
+                    </ul>
+
+                </div>
             </div>
         </div>
     </div>
-    <div class="redbg">
-        <div class="container">
-            <div class="col-lg-3 col-sm-2 col-xs-6">
-                <a href="<?php echo base_url(); ?>"><img src="<?php echo base_url(); ?>images/logo.png" alt="The Creationstation" class="img-responsive logo"/></a>
-            </div>
-            <div class="col-lg-9 col-sm-10 col-xs-12 padding-0">
-                <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); ?>
-            </div>
-        </div>
+</div>
+<div class="clearfix"></div>
+
+
+<!-- Static navbar -->
+<nav class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); ?>
     </div>
-</header>
+</nav>

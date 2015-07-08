@@ -158,4 +158,7 @@ $config['RESIZED_IMAGES_URL'] = $this->config['base_url'] . 'images/resized/';
 
 $config['SIDELINKS'] = str_replace('\\', '/', realpath(BASEPATH . '../')) . '/upload/sidelinks/images/';
 $config['SIDELINKS_URL'] = $this->config['base_url'] . 'upload/sidelinks/images/';
+
+$config['SLIDESHOW_IMAGE_PATH'] = $config['UPLOAD_PATH'] . 'slideshow/';
+$config['SLIDESHOW_IMAGE_URL'] = $config['UPLOAD_URL'] . 'slideshow/';
 ?>
