@@ -6,421 +6,649 @@
     <head>
         <!-- BASICS -->
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Landlord Masters</title>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="">
+        <link rel="icon" href="../../favicon.ico">
+
+        <title>Online Property Management - Landlord Master</title>
         <?php
         $this->load->view("themes/" . THEME . "/headers/global.php");
         echo $CI->assets->renderHead();
         ?>
 
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Google font file-->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700' rel='stylesheet' type='text/css'>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'>
+
+        <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+        <!--[if lt IE 9]><script src="js/ie8-responsive-file-warning.js"></script><![endif]-->
+        <script src="js/ie-emulation-modes-warning.js"></script>
+
         <!-- skin -->
         <link rel="stylesheet" href="skin/default.css">
     </head>
     <body>
-        <?php $this->load->view("themes/" . THEME . "/layout/inc-header"); ?>
-        <section class="featured">
-            <div class="container"> 
-                <a href="franchisee" class="pull-right map1"><img src="images/map1.png" alt="" width="110px"/></a>
-                <div class="row mar-bot40 serch">
-                    <div class="" style="width: 350px; float: right;">
-                        <div class="search-postcode">
-                            <h3>FIND YOUR NEAREST CREATION STATION</h3>
-                            <p>Pop enter your postcode or town name in here to find your nearest inspiring Creation Station leader</p>
-                            <form method="post" action="<?= base_url(); ?>franchisee/index">
-                                <input type="text" name='p' placeholder="Town name / postcode here.." class="search"><input type='submit' value="Go!" class="btn go">
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- section works -->
-        <section id="section-works" class="section appear clearfix padding-0">
+        <div class="full_topbar_container">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-offset-3 col-lg-6 col-sm-12 col-xs-12 center ">
-<!--                        <img src="images/with-us.png" alt="Create With Us" class="img-responsive"/>-->
-                        <div class="cwu">
-                            <h1>INSPIRE IMAGINATIONS & NATURE POTENTIAL</h1>
+                    <div class="topbar_left_section">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled list-inline">
+                                <li> <a href="#"><i class="fa fa-phone"></i> 123 456 9878 </a> </li>
+                                <li> <a href="#"><i class="fa fa-envelope-o "></i> email@domainname.com</a> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="topbar_left_section text-right">
+                        <div class="col-md-6">
+                            <ul class="list-unstyled list-inline">
+                                <li>Open 24 hrs 7 days a week  | </li> 
+                                <li>Mon - Sat: 7.00 - 18.00 - Sunday: Closed</li>
+                            </ul>
+
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8">
-                        <div class= "want-to-inspire">Do you want to inspire your child’s imagination, nature their potential and have fun? You've come to the right place. Scrolls down to discover award winning creative fun. </div>
-                    </div>
-                    <div class="col-sm-12">
-                        <div class="cacc">
-                            <h1>CHILDREN'S ART & CRAFT CLASSES</h1>
-                            <p>from 6 months to 11 years</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="portfolio-items isotopeWrapper clearfix" id="3">
-
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">                                        
-                                        <?php echo ($baby_discover ); ?>
-                                    </div>
-                                </article>
-
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($little_explorer ); ?>
-                                    </div>
-                                </article>
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($family_adventure ); ?>
-                                    </div>
-                                </article>
-                                <article class="col-md-offset-2 col-md-8 col-sm-12 col-xs-12 isotopeItem webdesign center">
-                                    <div class="portfolio-item las">
-                                        <h1 style="color: #DA0001">JUST LOOKING FOR FUN</h1>
-                                        <p><a href="" class="create">Create</a></p>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="section-cparties" class="section appear clearfix padding-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8 col-sm-12 col-xs-12 center ">
-                        <div class="heading-bg">
-                            <h1>ENJOY CREATIVE PARTIES, OUT OF SCHOOL CLUBS AND EVENTS</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="portfolio-items isotopeWrapper clearfix" id="3">
-
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">                                        
-                                        <?php echo ($birthday_parties ); ?>
-                                    </div>
-                                </article>
-
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($baby_discover2 ); ?>
-                                    </div>
-                                </article>
-                                <article class="col-md-4 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($events ); ?>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="section-pro-gift" class="section appear clearfix padding-0">
-            <div class="parda"></div>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8 col-sm-12 col-xs-12 center ">
-                        <div class="heading-bg">
-                            <h1>Looking for a great art and craft  products or gifts?</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row mar-top40">
-                    <div class="col-md-12">
-                        <div class="row">
-                            <div class="portfolio-items isotopeWrapper clearfix" id="3">
-                                <article class="col-md-4 col-sm-12 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($visit_our_store ); ?>
-                                    </div>
-                                </article>
-                                <article class="col-md-4 col-sm-12 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($give_the_gift ); ?>
-                                    </div>
-                                </article>
-                                <article class="col-md-4 col-sm-12 isotopeItem webdesign center">
-                                    <div class="portfolio-item">
-                                        <?php echo ($check_voucher ); ?>
-                                    </div>
-                                </article>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="section-social" class="section appear clearfix padding-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-offset-2 col-lg-8 col-sm-12 col-xs-12 center ">
-                        <div class="heading-bg">
-                            <h1>Discover fun creative news from across the nation</h1>
-                        </div>
-                    </div>
-                </div>
-                <div class="row buttr-fly">
-                    <div class="col-lg-4" style="padding: 0 45px">
-                        <div class="soc-tp"></div>
-                        <div class="soc-bg">
-                            <h1>BLOG FEEDS</h1>
-                            <?php
-                            foreach (latestFeed(3) as $item) {
-                                foreach ($item as $feed) {
-//                                    echo '<pre>';
-//                                    print_r($feed);
-                                    ?>
-                            <p><a href="http://news.thecreationstation.co.uk/<?= $feed['post_name'] ?>" target="_blank"><i class="fa fa-arrow-circle-right"></i>&nbsp;<?= $feed['post_title'] ?></a></p>
-                                    <?php
-                                }
-                            }
-                            ?>
-                        </div>
-                        <div class="soc-bot"></div>
-                    </div>
-                    <div class="col-lg-4" style="padding:0 45px;">
-                        <div class="soc-tp"></div>
-                        <div class="soc-bg">
-                            <h1>NEWS UPDATES</h1>
-                            <?php foreach (latestNews(3) as $item) { ?>
-                                <p><a href="<?= base_url(); ?>news/details/<?php echo $item['url_alias'] ?>"><?php echo $item['news_title'] ?></a></p>
-                                <!--<p><?php //echo word_limiter(strip_tags($item['contents']), 20);     ?></p>-->
-                            <?php } ?>
-                        </div>
-                        <div class="soc-bot"></div>
-                    </div>
-                    <div class="col-lg-4" style="padding:0 45px;">
-                        <div class="soc-tp"></div>
-                        <div class="soc-bg">
-                            <!-- Facebook -->       
-                            <div id="fb-root"></div>
-                            <script>(function (d, s, id) {
-                                    var js, fjs = d.getElementsByTagName(s)[0];
-                                    if (d.getElementById(id))
-                                        return;
-                                    js = d.createElement(s);
-                                    js.id = id;
-                                    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.0";
-                                    fjs.parentNode.insertBefore(js, fjs);
-                                }(document, 'script', 'facebook-jssdk'));
-                            </script>
-
-                            <div class="fb-like-box" data-href="https://www.facebook.com/thecreationstationltd" data-width="230px" data-height="250px" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false"></div>
-                            <!--End Facebook -->               
-                        </div>
-                        <div class="soc-bot"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- about -->
-        <section id="section-services" class="section pad-bot30 bg-red">
-            <div class="container"> 
-                <div class="row mar-bot40">
-                    <div class="col-lg-6 pad-top60">
-                        <?php echo ($take_a_look_what_we_do ); ?>
-                    </div>
-
-                    <div class="col-lg-6" >
-                        <div class="align-center ">
-                            <div class="video-part">
-                                <div class="video-bg">
-                                    <?php echo ($video ); ?>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>	
-            </div>
-        </section>
-        <section id="section-owner" class="section appear clearfix padding-0">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-offset-2 col-sm-offset-1 center inspire ownerss">
-                        <h1>Get free weekly ideas, offers and cool creative stuff</h1>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-offset-1 col-lg-10 ">
-                        <div class="owners">
-                            <img src="images/owners.png" alt="owners" class="img-responsive" style="width: 100%"/>
-                            <div class="mess">
-                                <!--<h1>BE PART OF OUR GROWING NETWORK OF FRANCHISEES WHO INSPIRE CHILDRENS IMAGINATION ACROSS THE NATION!</h1>-->
-                                <h1>Get free ideas, offers and creative sparks every week.</h1>
-                                <p><a href="" class="create">Find Out More</a></p>
-                            </div>
-                        </div>
-                        <div class="owner-bt">
-                            <img src="images/owner-bt.png" alt="" class="img-responsive" style="width: 100%"/>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <section id="section-contact" class="section appear clearfix padding-0">
-            <div class="container">
-                <div class="row ">
-                    <div class="contact-form pad-top40">
-                        <div class="col-lg-offset-1 col-lg-10 ">
-                            <div class="col-lg-offset-1 col-lg-4 center">
-                                <?php echo ($mom_child ); ?>
-                            </div>
-                            <div class="col-lg-7">
-                                <div class="chester">
-                                    <?php echo ($idea_to_inspire ); ?>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-6 col-lg-offset-6 col-sm-12">
-                            <div class="info-pack col-sm-5">
-                                <h2>DOWNLOAD YOUR FREE INFORMATION PACK</h2>
-                                <p class="text-bold">Download free boredom buster booklet with 15 an half ideas to inspire your child.</p>
-                            </div>
-                            <div class="info-pack col-sm-5 center">
-                                <div id="">
-                                    <form id="recommendform" name="recommendform" enctype="multipart/form-data" method="post" >
-                                        <input type="text" name="yourname" placeholder="Name" id="nameInput" class="form-control br-round mar-bot10" />
-                                        <span id="nameLabel" class="error">Please enter your name</span>
-                                        <input type="text" name="yournumber" placeholder="Number" id="numberInput" class="form-control br-round mar-bot10" />
-                                        <span  for="yournumber" class="error" id="numberLabel">Please enter your number</span>
-                                        <input type="text" name="youremail" placeholder="Email" id="emailInput" class="form-control br-round mar-bot10" />
-                                        <span  for="youremail" class="error" id="emailLabel">Please enter your email</span>
-                                        <span  for="youremail" class="error" id="emailValid">Please enter valid email</span>
-                                        <button class="btn sen fri-inp create">Download</button>
-                                    </form>
-                                </div>
-                            </div>
-                            <!--<span class="btn create news-letter-p">Download</span>-->
-                        </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <!-- ./span12 -->
-                </div>
-            </div>
-        </section>
-
-        <footer id="footer" class="section footer">
-            <div class="container">
-                <?php $this->load->view("themes/" . THEME . "/layout/inc-footer"); ?>
-            </div>
-        </footer>
-        <a href="#header" class="scrollup"><i class="fa fa-chevron-up"></i></a>	
-        <?php echo $CI->assets->renderFooter(); ?>
-
-        <script type='text/javascript'>
-            $(document).ready(function () {
-                function recommendvalidation() {
-                    var validations = '';
-                    var emailReg = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-                    var name = $('#nameInput').val();
-                    var number = $('#numberInput').val();
-                    var email = $('#emailInput').val();
-                    var inputVal = new Array(name, number, email);
-                    var inputMessage = new Array("name", "number", "email address");
-                    $('.error').hide();
-
-                    if (name == "") {
-                        validations += '#nameLabel ,';
-
-//                        return false;
-                    }
-                    if (inputVal[1] == "") {
-
-                        validations += '#numberLabel ,';
-
-//                        return false;
-                    }
-                    if (inputVal[2] == "") {
-
-                        validations += '#emailLabel ,';
-//                        return false;
-                    }
-                    else if (!emailReg.test(email)) {
-                        validations += '#emailValid ,';
-
-//                        return false;
-                    }
-                    if (validations != '')
-                    {
-                        //alert('if');
-                        $(validations.slice(0, -1)).show();
-
-                        return false;
-                    } else {
-                        //alert('else');
-                        return true;
-                    }
-                    validations = '';
-                }
-                $('.sen').click(function () {
-
-//                    recommendvalidation();
-                    // console.log(recommendvalidation())
-                    //   if (recommendvalidation() != false) {
-                    $.ajax({
-                        url: "contact/download",
-                        context: document.body,
-                        type: 'post',
-                        data: $('#recommendform').serialize(),
-                        dataType: 'JSON'
-                    }).done(function (data) {
-                        console.log(data);
-                        if (data.error != 0)
-                        {
-                            //alert('if');
-                            $('.error').hide();
-                            $(data.error).show();
-                            return false;
-                        }
-                        if (data.response == 'true')
-                            $('#recommend_pop_up').html(data.response);
-                        $('#recommend_pop_up').bPopup({closeClass: 'recomclose', });
-                        $('.downloadlink').html(data.message);
-                    });
-                    //  }
-                    return false;
-                });
-                $('.recomclose').click(function () {
-                    location.reload();
-                });
-            });
-        </script>
-        <style>
-            .error {
-                display: none;
-            }
-            .recomclose {
-                background: #DA0001 none repeat scroll 0 0;
-                border-radius: 75px;
-                color: #fff;
-                text-align: center;
-                width: 20px;
-                float: right;
-                cursor: pointer;
-            }
-        </style>
-        <div id="recommend_pop_up" style="background: #fff; padding: 10px;display: none; border-radius: 10px;">
-            <div class="recomclose">X</div>
-            <div style="clear: both; float: left; padding: 2px 0; width: 305px;"> 
-                <span class="downloadlink"></span>
             </div>
         </div>
+        <div class="clearfix"></div>
+
+
+        <!-- Static navbar -->
+        <nav class="navbar navbar-default navbar-static-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <div class="logo_container">
+                        <div class="logo">
+                            <a href="#">
+                                <img src="imgs/logo.png" class="img-responsive"/>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse top_mymenu">
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="#">Landlord Services </a></li>
+                        <li><a href="#">About us</a></li>
+                        <li><a href="#">Why Rentify? </a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"> Our Properties <span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="#">Properties One</a></li>
+                                <li><a href="#">Properties Two</a></li>
+                                <li><a href="#">Properties Three</a></li>
+                                <li><a href="#">Properties Four</a></li>
+                                <li><a href="#">Properties Five</a></li>
+                                <li><a href="#">Properties Six</a></li>
+
+                            </ul>
+                        </li>
+                        <li><a href="#">Resources</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+
+        <!-- Bootstrap Slider -->
+
+        <div id="carousel-example" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-example" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example" data-slide-to="1"></li>
+                <li data-target="#carousel-example" data-slide-to="2"></li>
+            </ol>
+
+            <div class="carousel-inner">
+                <div class="item active">
+                    <a href="#"><img src="imgs/slider2.jpg" /></a>
+                    <div class="carousel-caption">
+                        <h3>Meow</h3>
+                        <p>Just Kitten Around</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="#"><img src="imgs/slider1.jpg" /></a>
+                    <div class="carousel-caption">
+                        <h3>Meow</h3>
+                        <p>Just Kitten Around</p>
+                    </div>
+                </div>
+                <div class="item">
+                    <a href="#"><img src="imgs/slider3.jpg"  /></a>
+                    <div class="carousel-caption">
+                        <h3>Meow</h3>
+                        <p>Just Kitten Around</p>
+                    </div>
+                </div>
+            </div>
+
+            <a class="left carousel-control" href="#carousel-example" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </a>
+        </div>
+
+        <div class="clearfix"></div>
+        <!-- End Bootstrap Slider -->
+        <div class="full_top_searchbar_container">
+            <div class="property_searchbar_section">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="property_searchbar_option">
+                                <form role="form" class="navbar-form" id="signin">
+                                    <div class="input-group">
+
+                                        <div class="srch_heading_text"><h4 style="">Find Now</h4></div>
+
+                                    </div>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-gbp"></i></span>
+                                        <input type="text" placeholder="Min Price" value="" name="email" class="form-control" id="email">                                        
+                                    </div>
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-gbp"></i></span>
+                                        <input type="text" placeholder="Max Price" value="" name="email" class="form-control" id="email">                                        
+                                    </div>
+
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-home"></i></span>
+                                        <input type="text" placeholder="Property Type " value="" name="email" class="form-control" id="email">                                        
+                                    </div>
+
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+                                        <input type="text" placeholder="Zipcode, Country" value="" name="password" class="form-control" id="password">                                        
+                                    </div>
+
+                                    <button class="btn btn-primary" type="submit"> Search <i class="fa fa-search"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="full_middle_container">
+            <div class="container">
+                <div class="row">
+                    <div class="middle_center_container">
+                        <div class="property_heading_text">
+                            <h2> Property List </h2>
+                        </div>
+
+
+                        <!-- Start First Column Line -->
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <!-- End First Column Line -->
+
+                        <!-- Start First Column Line -->
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="col-md-3">
+                            <div class="property_list_box">
+                                <div class="view view-first property_img">
+                                    <img src="imgs/property/prop01.png">
+                                    <div class="mask">
+                                        <h2>Property Name Here</h2>
+                                        <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
+                                        <p class="prop_price">     $1,599.000 </p>
+
+                                        <a class="info" href="#">Read More</a>
+                                    </div>
+                                </div> 
+                                <div class="property_text">
+                                    <div class="col-md-9"> 
+                                        <div class="property-city-name"><p>  United States</p></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="price-text-note"> <p>  $1,599.000 </p></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+
+                                    <div class="col-md-9"> 
+                                        <div class="property-text-name"><h4> Property Tittle Name</h4></div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- End First Column Line -->
+
+
+
+                    </div>
+                </div>
+            </div>
+
+
+        </div> <!-- /container -->
+
+        <div class="clearfix"></div>
+        <!-- Start footer Section --> 
+        <footer>
+            <div class="full_footer_container">
+                <div class="footer_container">
+                    <div class="container">
+                        <div class="row">
+                            <div class="footer_middle_container">
+                                <div class="col-md-6">
+                                    <div class="footer_abut_left_section">
+                                        <div class="footer_abt_heading">
+                                            <h3><span class="text-white">About </span>Company</h3>
+                                        </div>
+                                        <div class="footer_abt_desc">
+                                            <div class="footer_abt_imgleft">
+                                                <div class="footer_about_img">
+                                                    <a href="#"><img src="imgs/footer_abut_img.png"/></a>
+                                                </div>
+                                            </div>
+                                            <div class="footer_abt_descright">
+                                                <div class="fabt_desc_read">
+                                                    <p>
+                                                        Contrary to popular belief, Lorem Ipsum is not simply random
+                                                        text. It has roots in a piece of classical Latin literature from 45 BC
+                                                        making it over 2000 years old. Richard McClintock, a Latin professor
+                                                        at Hampden-Sydney College in Virginia, looked up one of the more
+                                                        obscure Latin words, consectetur, from a Lorem Ipsum passage, and
+                                                        going through the cites of the word in classical literature
+                                                    </p>
+                                                </div>
+                                                <div class="abt_footer_read_link text-right">
+                                                    <a href="#" >Read More</a>  
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="popular_link_container">
+                                        <div class="popular_link_list_section">
+                                            <div class="popular_heading_text">
+                                                <h3> Popular Links </h3>
+                                            </div>
+                                            <div class="popular_links_active_list">
+                                                <ul class="footer_menu_links list-unstyled">
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Home</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> About Us</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Our Services</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Property List</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> How to use</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Contact us</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- End Popular links-->
+
+                                <div class="col-md-3">
+                                    <div class="popular_link_container">
+                                        <div class="popular_link_list_section">
+                                            <div class="popular_heading_text">
+                                                <h3> Features & Benefits </h3>
+                                            </div>
+                                            <div class="popular_links_active_list">
+                                                <ul class="footer_menu_links list-unstyled">
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Product Overview</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Pricing</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Calculate Your Cost Savings</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Case Studies & Testimonials</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Top 10 Reasons to Choose</a></li>
+                                                    <li> <a href="#"> <i class="fa fa-arrow-circle-o-right"></i> Property Manager</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <!-- End Feature Products -->
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="clearfix"></div>
+
+
+            <div class="full_footer_policy_links_container">
+                <div class="footer_policy_links_section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="footer_policy_links_left">
+                                    <ul class="list-unstyled list-inline">
+                                        <li> <a href="#"> Terms </a></li>
+                                        <li> <a href="#"> Privacy policy  </a></li>
+                                        <li> <a href="#"> Credit reference terms  </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="footer_social_links_right">
+                                    <ul class="list-unstyled list-inline text-right">
+                                        <li> <a href="#"> <i class="fa fa-twitter-square"></i> </a></li>
+                                        <li> <a href="#"> <i class="fa fa-linkedin-square"></i> </a></li>
+                                        <li> <a href="#"> <i class="fa fa-google-plus-square"></i> </a></li>
+                                        <li> <a href="#"> <i class="fa fa-facebook-square"></i> </a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="full_footer_copyright_container">
+                <div class="footer_copyright_section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="copyrigt_text_leftside">
+                                    <p>Copyright © 2011-2015 Landlord Master. all rights reserved</p>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="designed_by_text_rightside">
+                                    <p class="text-right"><span class="text-gray">Designed By: </span>Multichannelcreative</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </footer>   
+
+        <!-- End footer Section -->
+
+
+        <!-- Custom styles for this template -->
+        <link href="css/navbar.css" rel="stylesheet">
+        <link href="css/style.css" rel="stylesheet">
+
+        <!-- Font Awesome Style Sheet  -->
+        <link href="css/font-awesome.css" rel="stylesheet">
+        <link href="css/font-css/font-awesome.min.css" rel="stylesheet">
+
+        <!-- Bootstrap core JavaScript
+        ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>-->
+        <!--<script src="js/bootstrap.min.js"></script>-->
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
+
+        <script>
+            $('.carousel').carousel({
+                interval: 3000
+            })
+        </script>
     </body>
 </html>
 

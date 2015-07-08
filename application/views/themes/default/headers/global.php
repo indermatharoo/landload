@@ -5,16 +5,6 @@
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script> 
 <script type="text/javascript">
     $(document).ready(function () {
-        $(".root_menu a").each(function () {
-            if (this.href == window.location.href) {
-                $(this).parent('li').addClass("mactive");
-            }
-        });
-        $(".custom_login").on('click', function () {
-            $('.login_form').bPopup({
-                closeClass: 'cls'
-            });
-        });
         $('.carousel').carousel();
     });
     $(function () {
