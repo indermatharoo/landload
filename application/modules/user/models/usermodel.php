@@ -94,7 +94,7 @@ class Usermodel extends Basemodel {
         $this->db->select('t3.*');
         $this->db->from('applications t1');
         $this->db->join('properties t2', 't2.id=t1.property_id');
-        $this->db->join('company t3', 't3.company_id=t2.company_id');
+        $this->db->join('user_extra_detail t3', 't3.id=t2.company_id');
         $this->db->where('t1.applicant_id', $applicant_id);
         $results = $this->db->get()->result_array();
         return $results;

@@ -68,12 +68,11 @@ class virtcab extends Cms_Controller {
         );
 
         $othrShareFile = array('shared' => true,
-            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, fname',
+            'columns' => 'virtualCab.id, assignes,visible_name, filetype, actual_name, creator_id, fname',
             $this->VirtualCabinetmodel->assignes => $this->session->userdata['applicant_id'],
             'order-field' => 'fname',
             'order-by' => 'desc',
         );
-
         $tab1 = ' active ';
         $tab2 = '';
         if (isset($_POST['searchfile'])) {
@@ -92,7 +91,8 @@ class virtcab extends Cms_Controller {
         $inner['tab2'] = $tab2;
         $inner['myShareFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $myShareFileOpt);
         $inner['userSharedFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $othrShareFile);
-
+//        e($othrShareFile,0);
+//        e($inner['userSharedFiles']);
         $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles']);
         $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true);
         $inner['addEditJs'] = false;
@@ -181,7 +181,7 @@ class virtcab extends Cms_Controller {
                 $virCabPath = $this->config->item('UPLOAD_PATH_VIRCAB_VIDEO');
             }
             $uniqueTime = time();
-            $userId = $this->session->userdata['id'];
+            $userId = $this->session->userdata['applicant_id'];
             $config['file_name'] = $uniqueTime . $userId . '.' . $ext;
             $newFileName = $config['file_name'];
             $config['upload_path'] = $virCabPath;
@@ -210,23 +210,24 @@ class virtcab extends Cms_Controller {
                         $data[$this->VirtualCabinetmodel->create_dtime] = date('Y-m-d H:i:s');
                         $data[$this->VirtualCabinetmodel->assignes] = is_null($usersAssignes) || empty($usersAssignes) ? 0 : $usersAssignes;
                         $data[$this->VirtualCabinetmodel->creator_id] = $userId;
-                        $data['is_applicant'] = 1;
+//                        e()
+                        $data['is_applicant'] = 0;
                         $virtual_event_id = $this->VirtualCabinetmodel->insertRecord($data, true);
-                        $notify_data = array(
-                            'class' => $this->router->fetch_class(),
-                            'method' => $this->router->fetch_method(),
-                            'creator_id' => $data[$this->VirtualCabinetmodel->creator_id],
-                            'creator_name' => $this->session->userdata['name'],
-                            'sender_id' => $data[$this->VirtualCabinetmodel->creator_id],
-                            'sender_name' => $this->session->userdata['name'],
-                            'assigne_grp' => $data[$this->VirtualCabinetmodel->assigne_grp],
-                            'assigne_id' => $data[$this->VirtualCabinetmodel->assignes],
-                            'event_title' => $data[$this->VirtualCabinetmodel->actual_name],
-                            'event_id' => $virtual_event_id,
-                            'filter' => '',
-                        );
+//                        $notify_data = array(
+//                            'class' => $this->router->fetch_class(),
+//                            'method' => $this->router->fetch_method(),
+//                            'creator_id' => $data[$this->VirtualCabinetmodel->creator_id],
+//                            'creator_name' => $this->session->userdata['name'],
+//                            'sender_id' => $data[$this->VirtualCabinetmodel->creator_id],
+//                            'sender_name' => $this->session->userdata['name'],
+//                            'assigne_grp' => $data[$this->VirtualCabinetmodel->assigne_grp],
+//                            'assigne_id' => $data[$this->VirtualCabinetmodel->assignes],
+//                            'event_title' => $data[$this->VirtualCabinetmodel->actual_name],
+//                            'event_id' => $virtual_event_id,
+//                            'filter' => '',
+//                        );
 
-                        $this->notification->notify($notify_data);
+//                        $this->notification->notify($notify_data);
                         //$data = array('success' => 1, 'msg' => 'done');
                     }
                 }
@@ -275,7 +276,7 @@ class virtcab extends Cms_Controller {
         $selectRes = array();
         if ($result) {
             foreach ($result as $key => $kval) {
-                $selectRes[$kval['company_id']] = $kval['company_name'];
+                $selectRes[$kval['id']] = $kval['company_name'];
             }
         }
         $selectedArr = array();
