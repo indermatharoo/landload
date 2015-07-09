@@ -4,14 +4,15 @@ if (!defined('BASEPATH'))
     exit('No direct script access allowed');
 
 class Cms extends Cms_Controller {
-
-    function index() {
+    public $COMPANY = false;
+            function index() {
+        
         $this->load->helper('url');
         $this->load->helper('text');
         $this->load->library('Cart');
         $this->load->model('Pagemodel');
         $this->load->helper('cms_helper');
-        $this->load->model('news/Newsmodel');
+        //$this->load->model('news/Newsmodel');
         $this->load->model('slideshow/Slidemodel');
         $this->load->model('property/Propertymodel');
 
@@ -68,8 +69,8 @@ class Cms extends Cms_Controller {
         $languages = array();
         $languages = $this->Pagemodel->getAllLanguages($page, $lang);
 
-        $company = array();
-        $company = $this->COMPANY;
+//        $company = array();
+//        $company = $this->COMPANY;
 
 
         $breadcrumbs = array();
@@ -109,7 +110,7 @@ class Cms extends Cms_Controller {
 
 
         $inner['compiledblocks'] = $compiledblocks;
-        $inner['comapny'] = $company;
+   //     $inner['comapny'] = $company;
 
         foreach ($inner as $key => $val) {
             $shell[$key] = $val;
@@ -128,32 +129,32 @@ class Cms extends Cms_Controller {
             $this->html->addMeta($this->load->view("themes/" . THEME . "/meta/default", array('page' => $page), TRUE));
         }
         //Assets
-        if (file_exists("application/views/themes/" . THEME . "/headers/cms/" . $file_name . ".php")) {
-            $this->assets->loadFromFile("themes/" . THEME . "/headers/cms/" . $file_name);
-        }
-
-        if (file_exists($file_path)) {
-            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . $file_name, $inner, true);
-        } else if ($this->COMPANY == TRUE && $inner['page']['template_alias'] == 'homepage') {
-            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . 'default', $inner, true);
-        } else if ($this->COMPANY == FALSE && $inner['page']['template_alias'] == 'homepage') {
-            $inner['page']['page_contents'] = '';
-            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . 'homepage-global.php', $inner, true);
-        } else if ($this->COMPANY == FALSE && isset($inner['page']['template_alias'])) {
-            $shell['contents'] = $page['page_contents'];
-        } else {
-            $this->load->view("themes/" . THEME . "/cms/" . 'pages', $inner, true);
-        }
+//        if (file_exists("application/views/themes/" . THEME . "/headers/cms/" . $file_name . ".php")) {
+//            $this->assets->loadFromFile("themes/" . THEME . "/headers/cms/" . $file_name);
+//        }
+//
+//        if (file_exists($file_path)) {
+//            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . $file_name, $inner, true);
+//        } else if ($this->COMPANY == TRUE && $inner['page']['template_alias'] == 'homepage') {
+//            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . 'default', $inner, true);
+//        } else if ($this->COMPANY == FALSE && $inner['page']['template_alias'] == 'homepage') {
+//            $inner['page']['page_contents'] = '';
+//            $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . 'homepage-global.php', $inner, true);
+//        } else if ($this->COMPANY == FALSE && isset($inner['page']['template_alias'])) {
+//            $shell['contents'] = $page['page_contents'];
+//        } else {
+//            $this->load->view("themes/" . THEME . "/cms/" . 'pages', $inner, true);
+//        }
 
         if ($this->COMPANY == TRUE && $page['page_uri'] == 'homepage') {
             $this->load->view("themes/" . THEME . "/templates/default-subpage", $shell);
-        } else {
+       } else {
             if ($page['page_uri'] == 'homepage-global' || $page['page_uri'] == 'homepage') {
                 $this->load->view("themes/" . THEME . "/templates/default-homepage", $shell);
-            } else {
+           } else {
                 $this->load->view("themes/" . THEME . "/templates/" . $page['template_alias'], $shell);
             }
-        }
+       }
     }
 
 }

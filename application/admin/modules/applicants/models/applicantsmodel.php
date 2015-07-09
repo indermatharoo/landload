@@ -92,4 +92,11 @@ class Applicantsmodel extends Basemodel {
        $this->db->where('id',$id);
        $this->db->delete('applicants');
     }
+    function getRecentApplicants()
+    {
+        $this->db->order_by("applicant_id", "desc");
+        $this->db->limit(10);
+        $res = $this->db->get('applicants');
+        return array('num_rows'=>$res->num_rows(),'results'=>$res->result_array());
+    }
 }

@@ -1003,6 +1003,7 @@ class Usermodel extends Basemodel {
         return count($rs);
     }
 
+
 }
 
 ?>
