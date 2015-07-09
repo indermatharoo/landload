@@ -19,18 +19,20 @@
         <div class="form-group">
             <div class="col-sm-6">
                 <label>Property </label>
-
+                
                 <select name="property_id" class="form-control">
                     <option></option>
                     <?php
-                    foreach ($propertyList as $list) {
+                    foreach($propertyList as $list)
+                    {
                         ?>
-                        <option value="<?php echo $list['id'] ?>" <?php echo ($list['id'] == $details['property_id']) ? 'selected' : ''; ?>><?php echo $list['pname'] ?></option>
-                        <?php
+                    <option value="<?php echo $list['id'] ?>" <?php echo ($list['id']==$details['property_id'])?'selected':''; ?>><?php echo $list['pname'] ?></option>
+                        <?php 
                     }
                     ?>
                 </select>
             </div>
+
 
             <div class="col-sm-6">
                 <label>Unit Name</label>
@@ -46,9 +48,29 @@
             </div>               
             <div class="col-sm-6">
                 <label>Status</label><br>
-                <?php foreach ($status as $st => $stval) { ?>
-                    <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st == $details['status']) ? 'checked' : ''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php foreach($status as $st=>$stval){ ?>
+                <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st==$details['status'])?'checked':''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
+            </div>
+            <div class="col-sm-6">
+                <label>Unit Type</label>
+                <select name="unit_type" class="form-control">
+                    <option <?php echo ($details['unit_type']=='s')?'selected="selected"':''; ?> value="s">Shop</option>
+                    <option <?php echo ($details['unit_type']=='f')?'selected="selected"':''; ?> value="f">Flat</option>
+                </select>
+               
+            </div>   
+            <div class="col-sm-6">
+                <label>Area(sq.feet)</label>
+                 <input type="text" class="form-control" name="area"  placeholder="Area" value="<?php echo $details['area']; ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>Room</label>
+                <input type="text" class="form-control"  name="room"  placeholder="Rooms *" value="<?php echo $details['room']; ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>BathRoom</label>
+                <input type="text" class="form-control"  name="bathroom"  placeholder="Bathroom *" value="<?php echo $details['bathroom']; ?>">
             </div>
             <div class="col-sm-6">
                 <label>Rental Amount</label>
@@ -57,12 +79,11 @@
             <div class="col-sm-6">
                 <label>Features</label>
                 <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:324px;" name="features[]" tabindex="4">
-                    <?php
-                    $exp = explode('|', $details['features']);
-                    foreach ($features as $feature) {
-                        ?>
-                        <option value="<?php echo $feature['id'] ?>" <?php echo (in_array($feature['id'], $exp)) ? 'selected' : '' ?>><?php echo $feature['tag'] ?></option>
-                    <?php } ?>
+                      <?php
+                      $exp = explode('|',$details['features']);
+                      foreach($features as $feature){ ?>
+                    <option value="<?php echo $feature['id'] ?>" <?php echo (in_array( $feature['id'] ,$exp))?'selected':'' ?>><?php echo $feature['tag'] ?></option>
+                      <?php } ?>
                 </select>
             </div> 
             <div class="col-sm-6">
@@ -70,14 +91,14 @@
                 <select name="amount_type" class="form-control">
                     <option>Select</option>
                     <?php foreach (Unitsmodel::$types as $val => $type): ?>
-                        <option <?php echo ($val == $details['amount_type']) ? 'selected="selected"' : ''; ?> value="<?php echo $val ?>"><?php echo $type ?></option>
+                        <option <?php echo ($val==$details['amount_type'])?'selected="selected"':''; ?> value="<?php echo $val ?>"><?php echo $type ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>
             
             <div class="col-sm-6">
                 <label>Map Image</label>
-                <input type="file"  name="map_image" style="height: 34px;"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
+                <input type="file"  name="map_image"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
             </div>
             
             <div class="col-sm-6">
@@ -87,35 +108,23 @@
             
            <div class="col-sm-6">
                 <label>Active</label><br />
-                <input type="radio" value="1" <?php echo ($details['is_active'] == 1) ? 'checked="checked"' : ''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active'] == 0) ? 'checked="checked"' : ''; ?>>&nbsp;&nbsp;No
+                <input type="radio" value="1" <?php echo ($details['is_active']==1)?'checked="checked"':''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active']==0)?'checked="checked"':''; ?>>&nbsp;&nbsp;No
             </div>
-
+            
             <div class="col-sm-12">
                 <label>Description</label>
                 <textarea name="description" class="form-control"><?php echo $details['description']; ?></textarea>
             </div>
-
+            
             <div class="col-sm-6">
-                <label>Unit Type</label>
-                <select name="unit_type" class="form-control">
-                    <option value="">Select</option>
-                    <option <?php echo ($details['unit_type'] == 's') ? 'selected="selected"' : ''; ?> value="s">Shop</option>
-                    <option <?php echo ($details['unit_type'] == 'f') ? 'selected="selected"' : ''; ?> value="f">Flat</option>
-                </select>
-            </div>   
-
-            <div class="form-group extraAttributes">
-            </div>
-
-            <div class="col-sm-6">
-                <?php foreach ($images['result'] as $image) { ?>
-                    <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $image['image'] ?>" height="100px"  width="100px">
-                    <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" >
+                <?php foreach($images['result'] as $image){ ?>
+                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$image['image'] ?>" height="100px"  width="100px">
+                <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" >
                 <?php } ?>
             </div>             
 
         </div>
-
+        
         <div class="form-group">
             <div class="col-sm-12 text-center">
                 Fields mark with <span class="error">*</span> required
@@ -130,48 +139,10 @@
 </div>
 <script type="text/javascript">
     var config = {
-        '.chosen-select': {}
+      '.chosen-select'           : {}
     }
     for (var selector in config) {
-        $(selector).chosen(config[selector]);
+      $(selector).chosen(config[selector]);
     }
-    $(document).ready(function () {
-        post();
-        $('select[name="unit_type"]').on('change', function () {
-            post();
-        });
-    });
-
-    function post(elm) {
-        var val = $('select[name="unit_type"]').val(),
-                unit_id = '<?php echo $unit_id; ?>';
-        ;
-        $.post('units/attributes/getAttributeValue', {val: unit_id}, function (response) {
-            response = JSON.parse(response);
-            if (!response.success) {
-                $('.extraAttributes').html('');
-                return false;
-            }
-            var html = '';
-            response.data.forEach(function (elm) {
-                var row = '';
-                row += '<div class="col-sm-6">';
-                row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                row += '<input value="' + elm.value + '" type="text" class="' + elm.class + ' form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.name) + '">';
-                row += '</div>';
-                html += row;
-            });
-            $('.extraAttributes').html(html);
-        });
-    }
-
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1);
-    }
-
-    function l(v) {
-        console.log(v);
-    }
-
-</script>
+  </script>
 
