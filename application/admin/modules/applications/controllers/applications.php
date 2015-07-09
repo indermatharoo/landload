@@ -232,7 +232,7 @@ class Applications extends Admin_Controller {
                  $this->Applicationsmodel->saveUserDetails($offset);
              }
     }
-    function job_details($offset)
+    function job_details($offset="")
     {
         $this->Applicationsmodel->saveJobDetails($offset);
     }
@@ -273,8 +273,6 @@ class Applications extends Admin_Controller {
     function upload_document($id)
     {
         $this->load->library('form_validation');
-        echo "<pre>";
-        print_r($_FILES);
         foreach($_FILES['document']['name'] as $file)
         {
             if(trim($file)=="")

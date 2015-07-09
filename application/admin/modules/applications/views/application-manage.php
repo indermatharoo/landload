@@ -1,9 +1,9 @@
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
                         <?php 
-//                        echo "<pre>";
-//                        print_r($details['type']);
-//                        echo "</pre>";
+                        echo "<pre>";
+                        print_r($details);
+                        echo "</pre>";
                         ?>
 <script type="text/javascript">
     $(document).ready(function () {
