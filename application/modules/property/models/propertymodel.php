@@ -7,7 +7,7 @@ class Propertymodel extends CI_Model {
     }
 
     function listAll() {
-        $this->db->select('*')
+        $this->db->select('unit.id as unit_id,unit.*')
                 ->from('units')
                 ->join('properties','units.property_id=properties.id');
         $rs = $this->db->get();
