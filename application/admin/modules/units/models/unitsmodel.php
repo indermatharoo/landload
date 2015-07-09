@@ -54,7 +54,20 @@ class Unitsmodel extends Basemodel {
         $data['amount_type'] = $this->input->post('amount_type');
         $data['is_featured'] = $this->input->post('is_featured');
 //        e($data);
- 
+        
+        $config_slug = array(
+        'field' => 'uri',
+        'title' => 'title',
+        'table' => 'units',
+        'id' => 'id',
+        );
+        $this->load->library('slug', $config_slug);
+        
+        $data_uri = array(
+            'title' => $this->input->post('unit_number')
+        );
+        $data['uri'] = $this->slug->create_uri($data_uri);
+        
         if(!empty($_POST['features']))
         {
             $data['features'] =  implode($_POST['features'],'|');
@@ -144,7 +157,20 @@ class Unitsmodel extends Basemodel {
         $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
-        $this->load->library('upload', $config);      
+        $this->load->library('upload', $config);  
+        
+        $config_slug = array(
+            'field' => 'uri',
+            'title' => 'title',
+            'table' => 'units',
+            'id' => 'id',
+        );
+        $this->load->library('slug', $config_slug);
+        
+        $data = array(
+            'title' => $this->input->post('unit_number'),
+        );
+        $data['uri'] = $this->slug->create_uri($data, $id);
               
         $map_img = $_FILES['map_image']['name'];
         
