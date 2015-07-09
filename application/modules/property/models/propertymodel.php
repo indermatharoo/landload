@@ -9,7 +9,7 @@ class Propertymodel extends CI_Model {
     function listAll() {
         $this->db->select('units.id as unit_id,units.*,properties.*')
                 ->from('units')
-                ->join('properties','units.property_id=properties.id');
+                ->join('properties', 'units.property_id=properties.id');
         $rs = $this->db->get();
 //        e($rs->result_array());
         return $rs->result_array();
@@ -31,31 +31,29 @@ class Propertymodel extends CI_Model {
         //$this->db->join('unit_image','units.id=unit_image.unit_id');
         $rs = $this->db->get();
         //e($this->db->last_query());
-        return $rs->row_array();
+        return $rs->result_array();
     }
-    
-    function getGalleryImages($uid){
+
+    function getGalleryImages($uid) {
         $this->db->where('unit_id', $uid);
         $this->db->from('unit_image');
         $rs = $this->db->get();
-        if($rs->num_rows()>0){
-            return $rs->row_array();
+        if ($rs->num_rows() > 0) {
+            return $rs->result_array();
         }
         return FALSE;
         //e($this->db->last_query());
-        
     }
-    
-     function getAttributes($uid){
+
+    function getAttributes($uid) {
         $this->db->where('unit_id', $uid);
         $this->db->from('units_attributes_value');
         $rs = $this->db->get();
-        if($rs->num_rows()>0){
+        if ($rs->num_rows() > 0) {
             return $rs->row_array();
         }
         return FALSE;
         //e($this->db->last_query());
-        
     }
 
     function getEvent() {
@@ -87,6 +85,14 @@ class Propertymodel extends CI_Model {
         $this->db->from('franchise_testimonials');
         $rs = $this->db->get();
         return $rs->result_array();
+    }
+
+    function getAttributeValue($unit_id) {
+        $this->db->from('units_attributes_value t1');
+        $this->db->join('units_attributes t2', 't1.attribute_id=t2.id');
+        $this->db->where('unit_id', $unit_id);
+        $results = $this->db->get()->result_array();
+        return $results;
     }
 
 }

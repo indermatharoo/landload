@@ -53,7 +53,7 @@ class Unitsmodel extends Basemodel {
         
         $config_slug = array(
         'field' => 'uri',
-        'title' => 'title',
+//        'title' => 'title',
         'table' => 'units',
         'id' => 'id',
         );
@@ -161,7 +161,7 @@ class Unitsmodel extends Basemodel {
         
         $config_slug = array(
             'field' => 'uri',
-            'title' => 'title',
+//            'title' => 'title',
             'table' => 'units',
             'id' => 'id',
         );
