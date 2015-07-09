@@ -1001,11 +1001,22 @@ class Companymodel extends Basemodel {
         $rs = $this->db->get('page')->result_array();
         return count($rs);
     }
+    function getCompanyId($id)
+    {
+        
+        $this->db->get('aauth_groups');
+        
+    }
     function getRecentCompany()
     {
-        $this->db->order_by("reg_datetime", "desc");
+        $this->db->order_by("register_date", "desc");
+        $this->db->select();
         $this->db->limit(10);
-        $res = $this->db->get('company');
+        $this->db->where('aauth_groups.id',3);
+        $this->db->join('aauth_user_to_group','aauth_groups.id=aauth_user_to_group.group_id','left');
+        $this->db->join('aauth_users','aauth_users.id=aauth_user_to_group.user_id','left');
+        $this->db->join('user_extra_detail','user_extra_detail.id=aauth_users.id','left');
+        $res = $this->db->get('aauth_groups');
         return array('num_rows'=>$res->num_rows(),'results'=>$res->result_array());
     }
 }
