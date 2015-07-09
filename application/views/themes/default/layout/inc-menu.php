@@ -8,7 +8,7 @@
     <div class="logo_container">
         <div class="logo">
             <a href="<?php echo base_url(); ?>">
-                <img src="<?php base_url(); ?>imgs/logo.png" class="img-responsive"/>
+                <img src="<?php echo base_url(); ?>imgs/logo.png" class="img-responsive"/>
             </a>
         </div>
     </div>
