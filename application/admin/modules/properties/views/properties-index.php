@@ -1,4 +1,4 @@
- <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
+<?php $this->load->view(THEME . 'messages/inc-messages'); ?>
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <header class="panel-heading">
     <div class="row">
@@ -9,7 +9,7 @@
             <h3 style="margin: 0; text-align: center">Properties Management</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
-            <a href="properties/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New user"></i></h3></a>
+            <?php if (!$this->aauth->isAdmin()) { ?><a href="properties/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New user"></i></h3></a> <?php }?>
         </div>
     </div>
 </header>
@@ -43,5 +43,5 @@
         </tfoot>
     </table>
 </div>
-<p align="center"><?php echo $pagination;?></p>
+<p align="center"><?php echo $pagination; ?></p>
 

@@ -22,10 +22,9 @@
                 <select name="property_id" class="form-control">
                     <option></option>
                     <?php
-                    
                     foreach ($propertyList as $list) {
                         ?>
-                        <option <?php if($list['is_active']!=1){ ?>disabled<?php } ?> value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
+                        <option <?php if ($list['is_active'] != 1) { ?>disabled<?php } ?> value="<?php echo $list['id'] ?>"><?php echo $list['pname'] ?></option>
                         <?php
                     }
                     ?>
@@ -47,31 +46,18 @@
             </div>            
             <div class="col-sm-6">
                 <label>Status</label><br>
-                <?php
-                
-                foreach ($status as $st => $stval) { ?>
-                <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                <?php foreach ($status as $st => $stval) { ?>
+                    <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
             <div class="col-sm-6">
                 <label>Unit Type</label><br>
-               <select name="unit_type" class="form-control">
+                <select name="unit_type" class="form-control">
+                    <option value="">Select</option>
                     <option value="s">Shop</option>
                     <option value="f">Flat</option>
                 </select>
             </div>            
-            <div class="col-sm-6">
-                <label>Area(sq.feet)</label>
-                <input type="text" class="form-control" name="area"  placeholder="Area">
-            </div>
-            <div class="col-sm-6">
-                <label>Room</label>
-                <input type="text" class="form-control"  name="room"  placeholder="Rooms *">
-            </div>
-            <div class="col-sm-6">
-                <label>BathRoom</label>
-                <input type="text" class="form-control"  name="bathroom"  placeholder="Bathroom *">
-            </div>
             <div class="col-sm-6">
                 <label>Rental Amount</label>
                 <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *">
@@ -109,14 +95,16 @@
                 <label>Active</label><br />
                 <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
             </div>
-            
+
             <div class="col-sm-12">
                 <label>Description</label>
                 <textarea name="description" class="form-control"></textarea>
             </div>
-            
-        </div>
 
+        </div>
+        <div class="form-group extraAttributes">
+
+        </div>
         <div class="form-group">
             <div class="col-sm-12 text-center">
                 Fields mark with <span class="error1">*</span> required
@@ -129,12 +117,39 @@
         </div>
     </form>
 </div>
-<?php //$this->load->view('headers/user_add');  ?>
+<?php //$this->load->view('headers/user_add');   ?>
 <script type="text/javascript">
     var config = {
         '.chosen-select': {}
     }
     for (var selector in config) {
         $(selector).chosen(config[selector]);
+    }
+    $(document).ready(function () {
+        $('select[name="unit_type"]').on('change', function () {
+            var val = $(this).val();
+            $.post('units/attributes/getAttribute', {val: val}, function (response) {
+//                console.log(response);
+                response = JSON.parse(response);
+                if (!response.success) {
+                    $('.extraAttributes').html('');
+                    return false;
+                }
+                var html = '';
+                response.data.forEach(function (elm) {
+                    var row = '';
+                    row += '<div class="col-sm-6">';
+                    row += '<label>' + elm.label + '</label><br />';
+                    row += '<input type="text" class="' + elm.class + '"  name="attributes[' + elm.id + ']"  placeholder="' + elm.name + '">';
+                    row += '</div>';
+                    html += row;
+                });
+                $('.extraAttributes').html(html);
+            });
+        });
+    });
+
+    function l(v) {
+        console.log(v);
     }
 </script>
