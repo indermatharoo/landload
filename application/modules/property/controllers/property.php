@@ -12,7 +12,7 @@ class Property extends Cms_Controller {
     function index() {
         $this->load->model('propertymodel');
         $property = $this->propertymodel->listAll();
- //       e($property);
+        e($property);
 
         $inner = array();
         $inner['property'] = $property;
