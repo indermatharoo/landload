@@ -25,19 +25,4 @@ class Attributesmodel extends Basemodel {
         }
     }
 
-    function getAttributes($key) {
-        $this->db->where('unit_type', $key);
-//        $this->db->order('sort','asc');
-        $result = $this->db->from('units_attributes')->get()->result_array();
-        return $result;
-    }
-
-    function getAttributeValue($unit_id) {
-        $this->db->from('units_attributes_value t1');
-        $this->db->join('units_attributes t2','t1.attribute_id=t2.id'); 
-        $this->db->where('unit_id',$unit_id);
-        $results = $this->db->get()->result_array();
-        return $results;
-    }
-
 }

@@ -27,7 +27,7 @@
                 <?php foreach ($labels as $key => $value): ?>
                     <?php
                     $data = arrIndex($item, $key, FALSE);
-                    if ($key == -1) {
+                    if (!$data) {
                         $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . arrIndex($item, 'unit_id') . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
                     }
                     ?>

@@ -21,6 +21,9 @@ class Property extends Cms_Controller {
     }
 
     function detail($uid) {
+       // e($uid);
+        
+        
         $this->load->model('propertymodel');
         $property = $this->propertymodel->getProperty($uid);
         

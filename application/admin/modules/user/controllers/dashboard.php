@@ -6,31 +6,28 @@ if (!defined('BASEPATH'))
 class Dashboard extends Admin_Controller {
 
     function index($syear = 2014, $eyear = 2015) { 
-       // echo "This called"; exit;
         ini_set('display_errors','On');
         if ($this->aauth->isCustomer()):
             redirect('customer/dashboard');
         endif;
-       // $this->session->set_userdata('syear', $syear);
-      //  $this->session->set_userdata('eyear', $eyear);
         $this->load->library('pagination');
         $this->load->helper('text');
         $this->load->library('form_validation');
         $this->load->helper('form');
+        $this->load->model('properties/Propertiesmodel');
+        $this->load->model('company/Companymodel');
+        $this->load->model('applicants/Applicantsmodel');
         $notification = $this->load->model('usermodel');
-        //$notification = $this->load->model('calender/event');
+        $recentProperties = $this->Propertiesmodel->getRecentProperties();
+        $recentCompanies = $this->Companymodel->getRecentCompany();
+        //e($recentCompanies);
+        $recentUser = $this->Applicantsmodel->getRecentApplicants();
         $inner = array();
+        $inner['recentProperties'] = $recentProperties;
+        $inner['recentCompanies'] = $recentCompanies;
+        $inner['recentApplicants'] = $recentUser;
         $page = array();
-        //$page['content'] = "Welcome to landlord Masters";
-        //$inner['row'] = "Test";
-        //$inner['dasbBoardData'] = $this->usermodel->dasbBoardData($syear, $eyear, $this->ids);
-//        e($inner['dasbBoardData']);
-       // $inner['franchises'] = $this->usermodel->getAllFranchise();
-       // $inner['regions'] = $this->db->get('franchise_region')->result_array();
-       // $inner['magentoDashboardData'] = self::loadmagentodata();
-       // self::setUserSession($inner['regions'], $inner['franchises']);
         $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
-       // e($this->dashboard);
         $this->load->view($this->dashboard, $page);
     }
     

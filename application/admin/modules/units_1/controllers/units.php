@@ -30,13 +30,13 @@ class Units extends Admin_Controller {
         $inner = array();
         $inner['labels'] = array(
             'pname' => 'Name',
-//            'area' => 'Area',
-//            'room' => 'Room',
-//            'bathroom' => 'Bathroom',
+            'area' => 'Area',
+            'room' => 'Room',
+            'bathroom' => 'Bathroom',
             'amount' => 'Amount',
             'owner' => 'Owner',
             'state' => 'State',
-            -1 => 'Action'
+            0 => 'Action'
         );
         $inner['Listing'] = $Listing;
 
@@ -64,8 +64,8 @@ class Units extends Admin_Controller {
         }
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
-//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
-//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
+        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
         //$this->form_validation->set_rules('description', 'Rent Type', 'trim|required|integer');
@@ -80,7 +80,7 @@ class Units extends Admin_Controller {
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-            
+
             $userid = $this->Unitsmodel->insertRecord();
             $this->session->set_flashdata('SUCCESS', 'unit_added');
             redirect(createUrl('units/index/'));
@@ -95,8 +95,7 @@ class Units extends Admin_Controller {
         $this->load->library('parser');
         $this->load->library('email');
         $features = $this->Featuresmodel->getAllfeatures();
-//        $unitsType = $this->Unitsmodel->getUnitType();
-        $unitsType = null;
+        $unitsType = $this->Unitsmodel->getUnitType();
         $propertyList = $this->Propertiesmodel->getPropertiesList();
         $details = $this->Unitsmodel->getUnitDetails($offset);
         $images = $this->Unitsmodel->getUnitImages($offset);
@@ -108,9 +107,9 @@ class Units extends Admin_Controller {
 //        }
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
-//        $this->form_validation->set_rules('area', 'Area', 'trim|required|integer');
-//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
-//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+        $this->form_validation->set_rules('area', 'Area', 'trim|required');
+        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
+        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
 
         $Countries = $this->Usermodel->getCountries();
@@ -122,12 +121,11 @@ class Units extends Admin_Controller {
             $inner['propertyList'] = $propertyList;
             $inner['details'] = $details;
             $inner['unitsType'] = $unitsType;
-            $inner['unit_id'] = $offset;
             $page = array();
             $page['content'] = $this->load->view('unit-edit', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-            
+
             $userid = $this->Unitsmodel->updateRecord($offset);
 
             $this->session->set_flashdata('SUCCESS', 'unit_updated');
@@ -149,6 +147,7 @@ class Units extends Admin_Controller {
 
             $html .= "</option>";
             foreach ($res as $unit) {
+
                 $html .= "<option value='" . $unit['id'] . "'>";
                 $html .= $unit['unit_number'];
                 $html .= "</option>";

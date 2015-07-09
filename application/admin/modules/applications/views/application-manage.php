@@ -104,6 +104,14 @@ $(document).ready(function(){
                 <form name="userDetails" id="userDetails" action="applications" method="post" >
                 <div class="form-group">
                     <div class="col-sm-6">
+                        <label> Status </label><br>
+                        <select name="status" class="form-control">
+                        <?php foreach($applicantsType as $type){ ?>
+                        <option   value="<?php echo $type['code'] ?>" <?php echo ($details['type']==$type['code'])?'selected':'' ?> ><?php echo $type['type'] ?></option>
+                        <?php } ?>
+                        </select>
+                    </div>    
+                    <div class="col-sm-6">
                         <label>First Name</label>
                         <input type="text" class="form-control" id="fname" name="fname" value="<?= arrIndex($details, 'fname'); ?>" placeholder="">
                     </div>
@@ -123,16 +131,7 @@ $(document).ready(function(){
                         <input type="text" class="form-control" id="phone" name="phone" value="<?= arrIndex($details,'phone'); ?>" placeholder="">
                     </div>
                 </div>
-                    <div class="form-group">
-                            <div class="col-sm-6">
-                            <label> Status </label><br>
-                            <select name="status" class="form-control">
-                            <?php foreach($applicantsType as $type){ ?>
-                            <option   value="<?php echo $type['code'] ?>" <?php echo ($details['type']==$type['code'])?'selected':'' ?> ><?php echo $type['type'] ?></option>
-                            <?php } ?>
-                            </select>
-                        </div>    
-                    </div>
+   
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Address</label>
@@ -242,7 +241,7 @@ $(document).ready(function(){
 
                         <select name="day_of_week" class="form-control" >
                            <?php foreach($days as $key=>$val){ ?>
-                            <option name="<?php echo $key ?>" <?php echo (strtolower(arrIndex($details, 'day_of_week'))==$key)?'selected':'' ?>><?php echo $val; ?></option>
+                            <option value="<?php echo $key ?>" <?php echo (strtolower(arrIndex($details, 'day_of_week'))==$key)?'selected':'' ?>><?php echo $val; ?></option>
                            <?php } ?>
                         </select>
                     </div>
@@ -281,10 +280,9 @@ $(document).ready(function(){
                         foreach($uploadedDocuments['result'] as $document)
                         {
                             ?>
-                             <img src="<?php echo $this->config->item('UPLOAD_URL_VIRCAB_IMG').$document['actual_name']; ?>" >
+                                <a href="<?php echo $this->config->item('UPLOAD_URL_VIRCAB_IMG').$document['visible_name']; ?>" target="_blank"> <img  height="150px" width="150px" src="<?php echo $this->config->item('UPLOAD_URL_VIRCAB_IMG').$document['visible_name']; ?>" ></a>
                              <?php
                         }
-                        
                          ?>
                     <?php }else{ ?>
                         <h1>No Records Found</h1>
@@ -297,3 +295,8 @@ $(document).ready(function(){
     
 </div>
 
+<script type="text/javascript" >
+    $(document).ready(function(){
+        $('.popup').bPopup();
+    })
+</script>

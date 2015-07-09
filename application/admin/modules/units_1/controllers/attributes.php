@@ -15,7 +15,6 @@ class Attributes extends Admin_Controller {
             'name' => 'Name',
             'label' => 'Label',
             'sort' => 'Sort',
-//            'searchable' => 'Searchable',
             -1 => 'Action'
         );
         $page['content'] = $this->load->view('attributes/index', $inner, true);
@@ -43,7 +42,6 @@ class Attributes extends Admin_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('label', 'Label', 'required');
-        $this->form_validation->set_rules('searchable', 'Searchable', 'required');
         $this->form_validation->set_rules('unit_type', 'Attribute Type', 'required');
         $this->form_validation->set_rules('sort', 'Sort Order', 'numeric');
         $this->form_validation->set_error_delimiters('<li>', '</li>');
@@ -56,30 +54,6 @@ class Attributes extends Admin_Controller {
             $this->attributesmodel->save();
             redirect('units/attributes');
         }
-    }
-
-    function getAttribute() {
-        $attribute = gParam('val');
-        $return['success'] = false;
-        if ($attribute) {
-            $return['data'] = $this->attributesmodel->getAttributes($attribute);
-            if (count($return['data'])) {
-                $return['success'] = true;
-            }
-        }
-        echo json_encode($return);
-    }
-
-    function getAttributeValue() {
-        $unit_id = gParam('val');
-        $return['success'] = false;
-        if ($unit_id) {
-            $return['data'] = $this->attributesmodel->getAttributeValue($unit_id);
-            if (count($return['data'])) {
-                $return['success'] = true;
-            }
-        }
-        echo json_encode($return);
     }
 
 }
