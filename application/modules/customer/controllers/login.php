@@ -69,9 +69,19 @@ class Login extends Cms_Controller {
                 $result['isUser'] = 0;
                 $result['isCustomer'] = 1;
                 $this->session->set_userdata($result);
-                redirect('');
+               // e($this->session->all_userdata());
+               $referred_from = $this->session->userdata('referred_from');
+               if($referred_from!=''){
+                redirect($referred_from, 'refresh');
+               
+               }
+               else{
+                   redirect('');
+               }
+                //redirect('');
             }
         }
+        
     }
 
 }
