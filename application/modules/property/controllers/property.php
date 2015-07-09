@@ -22,6 +22,8 @@ class Property extends Cms_Controller {
 
     function detail($uid) {
        // e($uid);
+        $this->session->set_userdata('referred_from', current_url());
+        
         $this->load->model('propertymodel');
         $property = $this->propertymodel->getProperty($uid);
         
