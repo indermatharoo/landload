@@ -36,9 +36,9 @@
                  <td><?= arrIndex($item, 'birthdate'); ?></td>
                  <td><?= arrIndex($item, 'license'); ?></td>
                  <td><?= arrIndex($item, 'monthly_gross'); ?></td>
-                 <td><?= arrIndex($item, 'additional'); ?></td>
+<!--                 <td><?= arrIndex($item, 'additional'); ?></td>
                  <td><?= arrIndex($item, 'asset'); ?></td>
-                 <td><?= arrIndex($item, 'type'); ?></td>
+                 <td><?= arrIndex($item, 'type'); ?></td>-->
                     <td><a href="<?= createUrl('applicants/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applicants/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; ?>

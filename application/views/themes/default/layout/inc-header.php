@@ -23,8 +23,18 @@
     </div>
 </div>
 <div class="clearfix"></div>
-
-
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="top-login-links text-right">
+                <ul class="list-unstyled list-inline"> 
+                    <li> <a href="customer/login"> <i class="fa fa-key"></i> Login</a></li>
+                    <li> <a href="customer/register"> <i class="fa fa-user"></i> Sign up</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">

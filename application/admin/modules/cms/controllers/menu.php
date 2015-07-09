@@ -44,10 +44,10 @@ class Menu extends Admin_Controller {
         $this->load->helper('form');
         $this->load->library('pagination');
 
-        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
-            $this->utility->accessDenied();
-            return;
-        }
+//        if (!($this->aauth->isAdmin() || $this->aauth->isFrsUser())) {
+//            $this->utility->accessDenied();
+//            return;
+//        }
 
         //Setup pagination
         $perpage = 20;

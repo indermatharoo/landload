@@ -1,14 +1,34 @@
+<?php foreach ($property as $row) { ?>
+    <div class="col-md-3">
+        <div class="property_list_box">
+            <div class="view view-first property_img">
 
-<div class="col-lg-6">
-    <div class="col-lg-12 f-location">
-        <?php foreach ($property as $row) { ?>
-            <div class="location">
-                <h4 class="mar-bot10 mar-top10"><?= $row['pname']; ?></h4>
-                <p><?= $row['unit_number']; ?></p>
-                <div><img src="<?= $this->config->item('UNIT_IMAGE_URL').$row['unit_image']; ?>" class="img-responsive"/></div>
-                <p><?= $row['description']; ?></p>
-                <p style="text-align: right"><a href="<?= base_url(); ?>property/detail/<?= $row['unit_id']; ?>"><span class="btn btn-primary">view detail</span></a></p>
+                <img src="<?= $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>">
+                <div class="mask">
+                    <h2><?= $row['pname'] ?></h2>
+                    <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
+                    <p class="prop_price"><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p>
+
+                    <a class="info" href="property/detail/<?= $row['unit_id'] ?>">Read More</a>
+                </div>
+            </div> 
+            <div class="property_text">
+                <div class="col-md-9"> 
+                    <div class="property-city-name"><p>United States</p></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="price-text-note"> <p><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p></div> 
+                </div>
+                <div class="clearfix"></div>
+
+                <div class="col-md-9"> 
+                    <div class="property-text-name"><h4><?= $row['unit_number'] ?></h4></div>
+                </div>
+                <div class="col-md-3">
+                    <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                </div>
+                <div class="clearfix"></div>
             </div>
-        <?php } ?>
+        </div>
     </div>
-</div> 
+<?php } ?>

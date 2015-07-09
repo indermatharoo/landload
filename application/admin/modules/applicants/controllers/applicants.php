@@ -32,9 +32,9 @@ class Applicants extends Admin_Controller {
             'birthdate' => 'birthdate',
             'license' => 'license',
             'monthly_gross' => 'monthly_gross',
-            'additional' => 'additional',
-            'asset' => 'asset',
-            'type' => 'type',
+//            'additional' => 'additional',
+//            'asset' => 'asset',
+//            'type' => 'type',
             
             'Action' => 'Action',
                     
