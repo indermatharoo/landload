@@ -1001,6 +1001,13 @@ class Companymodel extends Basemodel {
         $rs = $this->db->get('page')->result_array();
         return count($rs);
     }
+    function getRecentCompany()
+    {
+        $this->db->order_by("reg_datetime", "desc");
+        $this->db->limit(10);
+        $res = $this->db->get('company');
+        return array('num_rows'=>$res->num_rows(),'results'=>$res->result_array());
+    }
 }
 
 ?>
