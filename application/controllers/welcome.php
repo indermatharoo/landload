@@ -6,6 +6,7 @@ if (!defined('BASEPATH'))
 class Welcome extends CI_Controller {
 
     function index() {
+       
         $this->load->model('Settingsmodel');
         $this->load->model('Pagemodel');
         $this->load->helper('text');

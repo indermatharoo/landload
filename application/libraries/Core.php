@@ -56,15 +56,15 @@ class Core {
         $CI->load->vars(array('CI' => $CI));
 		
         global $DWS_USERNAME;
-        $CI->db->where('company_url_alias', $DWS_USERNAME);
-        $rs = $CI->db->get('company');
-		if($rs && $rs->num_rows() == 1) {
-			$CI->COMPANY = $rs->row_array();		
-			$CI->load->vars(array('COMPANY' => $CI->COMPANY));
-		}else {
-			$CI->COMPANY =false;		
-			$CI->load->vars(array('COMPANY' => false));
-		}
+//        $CI->db->where('company_url_alias', $DWS_USERNAME);
+//        $rs = $CI->db->get('company');
+//		if($rs && $rs->num_rows() == 1) {
+//			$CI->COMPANY = $rs->row_array();		
+//			$CI->load->vars(array('COMPANY' => $CI->COMPANY));
+//		}else {
+//			$CI->COMPANY =false;		
+//			$CI->load->vars(array('COMPANY' => false));
+//		}
 		$CI->load->library('globaldata');
 
         /*$file_name = $CI->router->class . '_' . $CI->router->method;
