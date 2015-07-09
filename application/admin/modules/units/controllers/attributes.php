@@ -11,8 +11,8 @@ class Attributes extends Admin_Controller {
         $inner = $page = array();
         $inner['attributes'] = $this->attributesmodel->findAll();
         $inner['labels'] = array(
-            'class' => 'Class',
-            'name' => 'Name',
+//            'class' => 'Class',
+//            'name' => 'Name',
             'label' => 'Label',
             'sort' => 'Sort',
 //            'searchable' => 'Searchable',
@@ -24,12 +24,13 @@ class Attributes extends Admin_Controller {
 
     function add() {
         $model = tableFields('units_attributes', true);
+        $model['sort'] = 0;
         unset($model['id']);
         self::save($model);
     }
 
     function edit($id) {
-        $model = $this->commonmodel->getByPk($id, 'units_attributes');
+        $model = $this->commonmodel->getByPk($id, 'units_attributes');        
         self::save($model);
     }
 
@@ -41,7 +42,7 @@ class Attributes extends Admin_Controller {
 
     function save($model) {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('name', 'Name', 'required');
+//        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('label', 'Label', 'required');
         $this->form_validation->set_rules('searchable', 'Searchable', 'required');
         $this->form_validation->set_rules('unit_type', 'Attribute Type', 'required');
