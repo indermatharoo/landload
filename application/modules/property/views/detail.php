@@ -1,5 +1,5 @@
 <?php
-e($attributes);
+//e($property);
 ?>
 <div class="row">
     <div class="col-lg-8">
@@ -33,16 +33,16 @@ e($attributes);
                 <p><?php echo $property['description']; ?></p>
             </div>
         </div>
-        <?php if ($attributes) { ?>
+        <?php // if ($attributes) { ?>
             <div class="col-lg-12 padding-0 mar-top20 mar-bot20">
                 <div class="bas_detail">
                     <p style="font-size: 20px; color: #fff;"><b>Features</b></p>
-                    <?php foreach ($attributes as $feature) { ?>
+                    <?php // foreach ($attributes as $feature) { ?>
                         <div class="col-sm-3">
                             <div class="attr-lab">Property Type</div>
                             <div class="attrb">Villa House</div>
                         </div>
-                    <?php } ?>
+                    <?php // } ?>
                     <div class="col-sm-3">
                         <div class="attr-lab">Property Type</div>
                         <div class="attrb">Villa House</div>
@@ -74,8 +74,8 @@ e($attributes);
                     <div class="clearfix"></div>
                 </div>
             </div>
-        <?php } ?>
-        <p class="push-right mar-top20"> <button name="" type="submit" class="btn btn-primary subbmint">Apply</button></p>
+        <?php // } ?>
+       
     </div>
     <div class="col-lg-4" style="padding: 0 30px;">
         <div class="det-right">
