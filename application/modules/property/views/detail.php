@@ -88,6 +88,30 @@
                     <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>
                     <br />
                     <div style="font-size: 20px"><b><i class="fa fa-usd"></i>  300</b></div>
+                    <?php
+                   $this->session->set_userdata('referred_from', current_url());
+                   //e($this->session->all_userdata());
+                   if ($this->session->userdata('applicant_id') != '') {
+                       
+                       $attributes = array('class' => 'apply', 'id' => 'myform', 'name' => 'myform');
+                       echo form_open('property/apply', $attributes);
+                       echo form_hidden('unit_id', $property['unit_id']);
+                       echo form_hidden('property_id', $property['property_id']);
+                       echo form_hidden('applicant_id', $this->session->userdata('applicant_id'));
+                       
+                       ?>
+                        
+                       <button name="" type="submit" class="btn btn-primary subbmint">Apply</button>
+                       <?php
+                       echo form_close();
+                       
+                       
+                   } else {
+                       ?>
+                       <button name="" onclick="window.location = '<?php echo base_url(); ?>customer/login'" type="button" class="btn btn-primary subbmint">Apply</button>
+                       <?php
+                   }
+                   ?>
                 </div>
                 <div class="col-sm-2 rgt">
                     <div><a href=""><i class="fa fa-facebook-square fa-2x"></i></a></div>

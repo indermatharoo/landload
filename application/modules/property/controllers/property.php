@@ -37,6 +37,13 @@ class Property extends Cms_Controller {
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
+    
+    function apply(){
+        $this->load->model('propertymodel');
+        
+        $this->propertymodel->insertApplication();
+        
+    }
 
     function event() {
         $this->load->model('Franchiseemodel');
