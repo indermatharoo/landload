@@ -150,7 +150,7 @@ class Unitsmodel extends Basemodel {
         $data['unit_type'] = $this->input->post('unit_type');
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
-       
+
         if(!empty($_POST['features']))
         {
             $data['features'] =  implode($_POST['features'] ,'|');
@@ -170,7 +170,7 @@ class Unitsmodel extends Basemodel {
         ));
         if($this->upload->do_multi_upload("galleryImages")) {
             //Print data for all uploaded files.
-            print_r($this->upload->get_multi_upload_data());
+           
             foreach($this->upload->get_multi_upload_data() as $images)
             {
                 $this->db->insert('unit_image',array('image'=>$images['file_name'],'unit_id'=>$id));

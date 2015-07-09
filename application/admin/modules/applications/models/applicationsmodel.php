@@ -129,11 +129,11 @@ class Applicationsmodel extends Basemodel {
     }
 
     function getUserDetails($id) {
-        $this->db->select('applications.*,applicants.*,properties.pname,job_details.*');
+        $this->db->select('applications.*,applicants.*,properties.pname,job_details.current_job,job_details.previous_job,job_details.experience');
         $this->db->from('applications');
         $this->db->join('applicants', 'applications.applicant_id=applicants.applicant_id');
         $this->db->join('properties', 'applications.property_id=properties.id');
-        $this->db->join('job_details', 'applications.applicant_id=job_details.applicant_id');
+        $this->db->join('job_details', 'applications.applicant_id=job_details.applicant_id','left');
         $this->db->where('applications.id',$id);
         $results = $this->db->get();
         if($results->num_rows()>0){
@@ -168,13 +168,13 @@ class Applicationsmodel extends Basemodel {
             return false;
         }
     }
-    function saveJobDetails($id)
+    function saveJobDetails($id="")
     {
         $data = array();
         $data['current_job'] =$this->input->post('current_job');
         $data['previous_job'] =$this->input->post('previous_job');
         $data['experience'] =$this->input->post('experience');
-        if($this->getJobExistence($id))
+        if($this->getJobExistence($id) )
         {
             $this->db->where('applicant_id',$id);
             $this->db->update('job_details',$data);
@@ -236,6 +236,12 @@ class Applicationsmodel extends Basemodel {
             {
                 $this->db->insert('unit_image',array('image'=>$images['file_name'],'unit_id'=>$unit_id));
             }
-        }s
+        }
+    }
+    public function getUploadedDocuments($id)
+    {
+        $this->db->where('assignes',$id); 
+        $res = $this->db->get('virtualcab') ; 
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
     }
 }
