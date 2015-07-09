@@ -1,18 +1,18 @@
 <?php
-e($attributes);
+//e($property);
 ?>
 <div class="row">
     <div class="col-lg-8">
-        <div class="col-lg-12 padding-0 unit-imgs">
+        <div class="col-lg-12 padding-0 unit-imgs" style="height: 300px;">
             <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner">
+                <div class="carousel-inner" style="height: 292px;">
                     <?php
                     $c = '';
                     foreach ($gallery as $slide) {
                         ++$c;
                         ?>
                         <div class="item <?php echo $c == 1 ? 'active' : ''; ?> ">
-                            <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>"/>
+                            <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>" height="300px"/>
                         </div>
                     <?php } ?>
                 </div>
@@ -27,22 +27,23 @@ e($attributes);
         </div>
         <div class="col-lg-12 padding-0 mar-top30">
             <div class="head_desc">
-                <h2><?php echo $property['unit_number']; ?></h2>
+                <?php foreach ($property as $item)?>
+                <h2><?php echo $item['unit_number']; ?></h2>
                 <hr>
                 <p style="font-size: 20px;"><b>Property Description</b></p>
-                <p><?php echo $property['description']; ?></p>
+                <p><?php echo $item['description']; ?></p>
             </div>
         </div>
-        <?php if ($attributes) { ?>
+        <?php // if ($attributes) { ?>
             <div class="col-lg-12 padding-0 mar-top20 mar-bot20">
                 <div class="bas_detail">
                     <p style="font-size: 20px; color: #fff;"><b>Features</b></p>
-                    <?php foreach ($attributes as $feature) { ?>
+                    <?php // foreach ($attributes as $feature) { ?>
                         <div class="col-sm-3">
                             <div class="attr-lab">Property Type</div>
                             <div class="attrb">Villa House</div>
                         </div>
-                    <?php } ?>
+                    <?php // } ?>
                     <div class="col-sm-3">
                         <div class="attr-lab">Property Type</div>
                         <div class="attrb">Villa House</div>
@@ -74,8 +75,8 @@ e($attributes);
                     <div class="clearfix"></div>
                 </div>
             </div>
-        <?php } ?>
-        <p class="push-right mar-top20"> <button name="" type="submit" class="btn btn-primary subbmint">Apply</button></p>
+        <?php // } ?>
+       
     </div>
     <div class="col-lg-4" style="padding: 0 30px;">
         <div class="det-right">
@@ -86,15 +87,17 @@ e($attributes);
             </div>
             <div class="unit-inf con-deta mar-top20">
                 <div class="col-sm-10 lft">
-                    <div><b>Listing ID : </b><i><?= $property['id']; ?></i></div>
+                    <?php foreach ($property as $items) { ?>
+                    <div><b>Listing ID : </b><i><?= $items['id']; ?></i></div>
                     <div><b>Bedroom : </b><i>5</i></div>
                     <div><b>Bathroom : </b><i>3</i></div>
                     <div><b>Build Up Area : </b><i>4500ft</i></div>
                     <br />
-                    <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
-                    <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>
+                    <div><b>City Name : </b><i><?= $items['city']; ?></i></div>
+                    <div><b>Area Code : </b><i><?= $items['post_code']; ?></i></div>
                     <br />
-                    <div style="font-size: 20px"><b><i class="fa fa-usd"></i>  300</b></div>
+                    <div style="font-size: 20px"><b><i class="fa fa-usd"></i>  <?= $items['amount']; ?></b></div>
+                    <?php } ?>
                     <?php
                    $this->session->set_userdata('referred_from', current_url());
                    //e($this->session->all_userdata());
@@ -108,7 +111,7 @@ e($attributes);
                        
                        ?>
                         
-                       <button name="" type="submit" class="btn btn-primary subbmint">Apply</button>
+                       <button name="" type="submit" class="btn btn-primary subbmint push-right">Apply</button>
                        <?php
                        echo form_close();
                        
