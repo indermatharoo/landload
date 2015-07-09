@@ -82,7 +82,7 @@
             
             <div class="col-sm-6">
                 <label>Map Image</label>
-                <input type="file"  name="map_image">
+                <input type="file"  name="map_image" style="height: 34px;">
             </div>
             
             <div class="col-sm-6">

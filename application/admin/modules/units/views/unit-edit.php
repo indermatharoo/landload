@@ -98,7 +98,7 @@
             
             <div class="col-sm-6">
                 <label>Map Image</label>
-                <input type="file"  name="map_image"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
+                <input type="file"  name="map_image" style="height: 34px;"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
             </div>
             
             <div class="col-sm-6">
