@@ -1,9 +1,9 @@
 <?php
 if($recentCompanies['num_rows'] > 0)
 {
-//    echo "<pre>";
-//    print_r($recentCompany['results']);
-//    die();
+    //    echo "<pre>";
+    //    print_r($recentCompany['results']);
+    //    die();
     ?>
 <h3 style="margin: 0; text-align: center">Recent Company</h3>
 <div class="col-lg-12 padding-0" style="padding-top: 15px;">
@@ -31,9 +31,9 @@ if($recentCompanies['num_rows'] > 0)
             foreach ($recentCompanies['results'] as $item): ?>
                 <tr>
                     <td><?= arrIndex($item, 'company_name'); ?></td>
-                    <td><?= arrIndex($item, 'company_address'); ?></td>
-                    <td><?= arrIndex($item, 'company_phone'); ?></td>
-                    <td><?= arrIndex($item, 'company_email'); ?></td>
+                    <td><?= arrIndex($item, 'address'); ?></td>
+                    <td><?= arrIndex($item, 'phone'); ?></td>
+                    <td><?= arrIndex($item, 'email'); ?></td>
                     
                     
                     
