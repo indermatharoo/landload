@@ -18,8 +18,6 @@
             <?php
             continue;
         endif;
-        ?>
-        <?php
         $unit_type = arrIndex($model, 'unit_type');
         if ($key == 'unit_type'):
             ?>
@@ -27,10 +25,25 @@
                 <div class="col-sm-12">
                     <label>Attribute Type</label>
                     <select name="<?php echo $key ?>" class="form-control">
-                        <option>Select</option>
+                        <option value="">Select</option>
                         <?php foreach (getUnitsTypes() as $key => $value): ?>
-                            <option <?php echo ($unit_type == $key) ? 'selected="true"' : ''  ?> value="<?php echo $key ?>"><?php echo $value ?></option>
+                            <option <?php echo ($unit_type == $key) ? 'selected="true"' : '' ?> value="<?php echo $key ?>"><?php echo $value ?></option>
                         <?php endforeach; ?>
+                    </select>
+                </div>
+            </div>
+            <?php
+            continue;
+        endif;
+        if ($key == 'searchable'):
+            ?>
+            <div class="form-group">
+                <div class="col-sm-12">
+                    <label>Searchable</label>
+                    <select name="<?php echo $key ?>" class="form-control">
+                        <option value="">Select</option>
+                        <option <?php echo ($value == 0) ? 'selected="true"' : ''; ?> value="0">No</option>
+                        <option <?php echo ($value == 1) ? 'selected="true"' : ''; ?> value="1">Yes</option>
                     </select>
                 </div>
             </div>

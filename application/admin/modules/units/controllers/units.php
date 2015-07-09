@@ -64,8 +64,8 @@ class Units extends Admin_Controller {
         }
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
-        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
-        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
+//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
         //$this->form_validation->set_rules('description', 'Rent Type', 'trim|required|integer');
@@ -80,7 +80,7 @@ class Units extends Admin_Controller {
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-
+            
             $userid = $this->Unitsmodel->insertRecord();
             $this->session->set_flashdata('SUCCESS', 'unit_added');
             redirect(createUrl('units/index/'));
@@ -147,7 +147,6 @@ class Units extends Admin_Controller {
 
             $html .= "</option>";
             foreach ($res as $unit) {
-
                 $html .= "<option value='" . $unit['id'] . "'>";
                 $html .= $unit['unit_number'];
                 $html .= "</option>";
