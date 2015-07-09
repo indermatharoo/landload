@@ -7,7 +7,7 @@
                 <p><?= $row['unit_number']; ?></p>
                 <div><img src="<?= $this->config->item('UNIT_IMAGE_URL').$row['unit_image']; ?>" class="img-responsive"/></div>
                 <p><?= $row['description']; ?></p>
-                <p style="text-align: right"><a href="<?= base_url(); ?>property/detail/<?= $row['id']; ?>"><span class="btn btn-primary">view detail</span></a></p>
+                <p style="text-align: right"><a href="<?= base_url(); ?>property/detail/<?= $row['unit_id']; ?>"><span class="btn btn-primary">view detail</span></a></p>
             </div>
         <?php } ?>
     </div>
