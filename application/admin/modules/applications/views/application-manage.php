@@ -241,7 +241,7 @@ $(document).ready(function(){
 
                         <select name="day_of_week" class="form-control" >
                            <?php foreach($days as $key=>$val){ ?>
-                            <option name="<?php echo $key ?>" <?php echo (strtolower(arrIndex($details, 'day_of_week'))==$key)?'selected':'' ?>><?php echo $val; ?></option>
+                            <option value="<?php echo $key ?>" <?php echo (strtolower(arrIndex($details, 'day_of_week'))==$key)?'selected':'' ?>><?php echo $val; ?></option>
                            <?php } ?>
                         </select>
                     </div>
