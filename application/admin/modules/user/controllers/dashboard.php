@@ -15,11 +15,12 @@ class Dashboard extends Admin_Controller {
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->model('properties/Propertiesmodel');
-       // $this->load->model('company/Companymodel');
+        $this->load->model('company/Companymodel');
         $this->load->model('applicants/Applicantsmodel');
         $notification = $this->load->model('usermodel');
         $recentProperties = $this->Propertiesmodel->getRecentProperties();
-      //  $recentCompanies = $this->Companymodel->getRecentCompany();
+        $recentCompanies = $this->Companymodel->getRecentCompany();
+        //e($recentCompanies);
         $recentUser = $this->Applicantsmodel->getRecentApplicants();
         $inner = array();
         $inner['recentProperties'] = $recentProperties;

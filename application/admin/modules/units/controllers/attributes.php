@@ -70,4 +70,16 @@ class Attributes extends Admin_Controller {
         echo json_encode($return);
     }
 
+    function getAttributeValue() {
+        $unit_id = gParam('val');
+        $return['success'] = false;
+        if ($unit_id) {
+            $return['data'] = $this->attributesmodel->getAttributeValue($unit_id);
+            if (count($return['data'])) {
+                $return['success'] = true;
+            }
+        }
+        echo json_encode($return);
+    }
+
 }

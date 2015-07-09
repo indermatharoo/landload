@@ -268,7 +268,7 @@ function IsFirstTimeLogin() {
 
 function getUnitsTypes() {
     return array(
-        's' => 's',
-        'f' => 'f'
+        's' => 'Shop',
+        'f' => 'Flat'
     );
 }
