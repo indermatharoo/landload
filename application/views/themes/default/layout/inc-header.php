@@ -28,6 +28,8 @@
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); ?>
+        <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); 
+       
+        ?>
     </div>
 </nav>
