@@ -167,10 +167,10 @@ class Unitsmodel extends Basemodel {
         );
         $this->load->library('slug', $config_slug);
         
-        $data = array(
+        $data_slug = array(
             'title' => $this->input->post('unit_number'),
         );
-        $data['uri'] = $this->slug->create_uri($data, $id);
+        $data['uri'] = $this->slug->create_uri($data_slug, $id);
               
         $map_img = $_FILES['map_image']['name'];
         
@@ -211,9 +211,9 @@ class Unitsmodel extends Basemodel {
         $data['property_id'] = $this->input->post('property_id');
         $data['unit_number'] = $this->input->post('unit_number');
         $data['status'] = $this->input->post('status');
-        $data['area'] = $this->input->post('area');
-        $data['room'] = $this->input->post('room');
-        $data['bathroom'] = $this->input->post('bathroom');
+        //$data['area'] = $this->input->post('area');
+       // $data['room'] = $this->input->post('room');
+        //$data['bathroom'] = $this->input->post('bathroom');
         $data['amount'] = $this->input->post('amount');
         $data['amount_type'] = $this->input->post('amount_type');
         $data['unit_type'] = $this->input->post('unit_type');

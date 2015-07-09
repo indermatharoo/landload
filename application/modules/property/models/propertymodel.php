@@ -25,8 +25,8 @@ class Propertymodel extends CI_Model {
 
     function getProperty($uid) {
 //      $this->db->select('page.*,aauth_users.pic,user_extra_detail.*');
+        $this->db->select('units.id as unit_id,units.*,properties.*')->from('units');
         $this->db->where('units.id', $uid);
-        $this->db->from('units');
         $this->db->join('properties', 'properties.id=units.property_id');
         //$this->db->join('unit_image','units.id=unit_image.unit_id');
         $rs = $this->db->get();
@@ -85,6 +85,27 @@ class Propertymodel extends CI_Model {
         $this->db->from('franchise_testimonials');
         $rs = $this->db->get();
         return $rs->result_array();
+    }
+    
+    function getCompanyId($id){
+        $this->db->select('company_id');
+        $this->db->from('properties');
+        $this->db->where('id', $id);
+        $rs = $this->db->get();
+        return $rs->row_array();
+    }
+    
+    function insertApplication()
+    {
+        $data['unit_id'] = $this->input->post('unit_id');
+        $data['property_id'] = $this->input->post('property_id');
+        $data['applicant_id'] = $this->input->post('applicant_id');
+        $company = $this->getCompanyId($property_id);
+        $data['company_id'] = $company['company_id'];
+        
+        
+        $applied_date = date('Y-m-d');
+        
     }
 
     function getAttributeValue($unit_id) {
