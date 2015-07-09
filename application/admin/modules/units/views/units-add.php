@@ -51,13 +51,9 @@
                 <?php } ?>
             </div>
             <div class="col-sm-6">
-                <label>Unit Type</label><br>
-                <select name="unit_type" class="form-control">
-                    <option value="">Select</option>
-                    <option value="s">Shop</option>
-                    <option value="f">Flat</option>
-                </select>
-            </div>            
+                <label>Active</label><br />
+                <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
+            </div>
             <div class="col-sm-6">
                 <label>Rental Amount</label>
                 <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *">
@@ -79,17 +75,19 @@
                     <?php endforeach; ?>
                 </select>
             </div>
-            <div class="col-sm-6">
-                <label>Active</label><br />
-                <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
-            </div>
-
             <div class="col-sm-12">
                 <label>Description</label>
                 <textarea name="description" class="form-control"></textarea>
             </div>
-
         </div>
+        <div class="col-sm-6">
+            <label>Unit Type</label><br>
+            <select name="unit_type" class="form-control">
+                <option value="">Select</option>
+                <option value="s">Shop</option>
+                <option value="f">Flat</option>
+            </select>
+        </div>            
         <div class="form-group extraAttributes">
 
         </div>
@@ -127,8 +125,8 @@
                 response.data.forEach(function (elm) {
                     var row = '';
                     row += '<div class="col-sm-6">';
-                    row += '<label>' + elm.label + '</label><br />';
-                    row += '<input type="text" class="' + elm.class + '"  name="attributes[' + elm.id + ']"  placeholder="' + elm.name + '">';
+                    row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
+                    row += '<input type="text" class="' + elm.class + ' form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.name) + '">';
                     row += '</div>';
                     html += row;
                 });
@@ -136,6 +134,10 @@
             });
         });
     });
+
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     function l(v) {
         console.log(v);
