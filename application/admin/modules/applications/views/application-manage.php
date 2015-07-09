@@ -1,9 +1,9 @@
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
                         <?php 
-                        echo "<pre>";
-                        print_r($details);
-                        echo "</pre>";
+//                        echo "<pre>";
+//                        print_r($details);
+//                        echo "</pre>";
                         ?>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -72,7 +72,6 @@ $(document).ready(function(){
          saveDetails('applications/properties_details/<?php echo  arrIndex($details, 'id') ?>',$('#propDetails').serialize());
     })
     $('.agreement').on('click',function(){
-        
          saveDetails('applications/agree_details/<?php echo  arrIndex($details, 'id') ?>',$('#agreeDetails').serialize());
     })    
 })
@@ -264,7 +263,7 @@ $(document).ready(function(){
                  </form>
             </div>     
             <div class="tab-pane" id="tabs-5">
-                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document/<?php echo  arrIndex($details, 'id') ?>" method="post" >
+                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document/<?php echo  arrIndex($details, 'applicant_id') ?>" method="post" >
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Upload Documents</label>
@@ -276,6 +275,22 @@ $(document).ready(function(){
                         <input type="submit" class="btn btn-primary pull-right " style="margin-top: 23px"  value="Submit">
                     </div>  
                 </form>
+                <div>
+                    <?php if($uploadedDocuments['num_rows'] > 0){ ?>
+                        <?php 
+                        foreach($uploadedDocuments['result'] as $document)
+                        {
+                            ?>
+                             <img src="<?php echo $this->config->item('UPLOAD_URL_VIRCAB_IMG').$document['actual_name']; ?>" >
+                             <?php
+                        }
+                        
+                         ?>
+                    <?php }else{ ?>
+                        <h1>No Records Found</h1>
+                    <?php } ?>
+                </div>
+                
             </div>     
         </div>
         <p style="text-align: center; padding-bottom: 10px;"></p>

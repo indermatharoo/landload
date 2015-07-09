@@ -169,7 +169,9 @@ class Applications extends Admin_Controller {
         $userDetail = $this->Applicationsmodel->getUserDetails($id);
         $ApplicationType = $this->Applicationsmodel->getApplicationType();
         $propertiesList = $this->Propertiesmodel->getPropertiesList();
-          $applicantsType = $this->Applicantsmodel->getApplicantType();
+        $applicantsType = $this->Applicantsmodel->getApplicantType();
+        $uploadedDocuments = $this->Applicationsmodel->getUploadedDocuments($id);
+        
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
@@ -202,6 +204,7 @@ class Applications extends Admin_Controller {
             $inner['propertiesList'] = $propertiesList;
             $inner['applicationType'] = $ApplicationType;
             $inner['applicantsType'] = $applicantsType;
+            $inner['uploadedDocuments'] = $uploadedDocuments;
             $inner['days'] = $days;
             $inner['offset'] = $id;
             $page = array();
@@ -273,6 +276,7 @@ class Applications extends Admin_Controller {
     function upload_document($id)
     {
         $this->load->library('form_validation');
+        $this->load->model('virtcab/VirtualCabinetmodel');
         foreach($_FILES['document']['name'] as $file)
         {
             if(trim($file)=="")
@@ -281,6 +285,54 @@ class Applications extends Admin_Controller {
                redirect(createUrl('applications/manage/'.$id));
             }
         }
+        $allowedTypes = array(
+            'jpg' => 'image/jpeg',
+            'png' => 'image/png',
+            'gif' => 'image/gif',
+            'txt' => 'text/plain',
+            'rtf' => 'application/rtf',
+            'rtf' => 'application/x-rtf',
+            'rtf' => 'text/richtext',
+            'doc' => 'application/msword',
+            'pdf' => 'application/pdf',
+            'xlsx' => 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+            'ppsx' => 'application/vnd.openxmlformats-officedocument.presentationml.slideshow',
+            'pptx' => 'application/vnd.openxmlformats-officedocument.presentationml.presentation',
+            'sldx' => 'application/vnd.openxmlformats-officedocument.presentationml.slide',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+            'mp4' => 'video/mp4',
+            'oog' => 'video/ogg',
+            'flv' => 'video/flv'
+        );
+         $currentUserId = curUsrId();
+                $this->load->library('upload');
+        $this->upload->initialize(array(
+            "upload_path"   => $this->config->item('UPLOAD_PATH_VIRCAB_IMG'),
+            'allowed_types'=>'gif|jpg|png'
+                
+        ));
+        
+        if($this->upload->do_multi_upload("document")) {
+            //Print data for all uploaded files.
+
+            $userId = $this->session->userdata['id'];
+            foreach($this->upload->get_multi_upload_data() as $images)
+            {
+                $ext = strtolower(end(explode('.', $images['file_name'])));
+                $data = array();
+                $data[$this->VirtualCabinetmodel->visible_name] = $images['file_name'];
+                $data[$this->VirtualCabinetmodel->filetype] = $ext;
+                $data[$this->VirtualCabinetmodel->assigne_grp] = 6;
+                $data[$this->VirtualCabinetmodel->actual_name] = $images['client_name'];
+                $data[$this->VirtualCabinetmodel->update_dtime] = date('Y-m-d H:i:s');
+                $data[$this->VirtualCabinetmodel->create_dtime] = date('Y-m-d H:i:s');
+                $data[$this->VirtualCabinetmodel->assignes] = $id;
+                $data[$this->VirtualCabinetmodel->creator_id] = $userId;  
+                $data['is_applicant'] = 1;
+                $virtual_event_id = $this->VirtualCabinetmodel->insertRecord($data, true);
+            }
+        }
+        redirect(createUrl('applications/index/'));
     }
     function delete($id) {
         $this->Applicationsmodel->DeleteRecord($id);
