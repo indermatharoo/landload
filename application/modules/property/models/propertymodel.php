@@ -29,6 +29,7 @@ class Propertymodel extends CI_Model {
         $this->db->from('units');
         $this->db->join('properties', 'properties.id=units.property_id');
         $rs = $this->db->get();
+        e($this->db->last_query());
         return $rs->row_array();
     }
 
