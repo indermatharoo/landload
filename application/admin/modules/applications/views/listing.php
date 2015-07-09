@@ -15,7 +15,7 @@
             <h3 style="margin: 0; text-align: center"> Applications / Lease Management</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
-            <a href="applications/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New Applications / Lease"></i></h3></a>
+<!--            <a href="applications/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New Applications / Lease"></i></h3></a>-->
         </div>
     </div>
 </header>

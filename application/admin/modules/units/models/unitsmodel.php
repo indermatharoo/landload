@@ -77,7 +77,10 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
-        $this->db->insert('units',$data);
+        $status = $this->db->insert('units',$data);
+        if($status) {
+            
+        }
         $unit_id = $this->db->insert_id(); 
         $this->upload->initialize(array(
             "upload_path"   => $this->config->item('UNIT_IMAGE_PATH'),

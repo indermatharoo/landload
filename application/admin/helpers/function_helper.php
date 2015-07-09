@@ -73,7 +73,7 @@ function rSF($tableName) {
     $fields = tableFields($tableName);
     $new_array = array();
     foreach ($fields as $field):
-        if (!gParam($field))
+        if (gParam($field) === null)
             continue;
         $new_array[$field] = gParam($field);
     endforeach;
@@ -262,11 +262,11 @@ function IsFirstTimeLogin() {
     getThis()->db->select('first_time_login');
     getThis()->db->where('id', curUsrId());
     getThis()->db->from('aauth_users');
-    $rs = getThis()->db->get()->row_array();    
-    return arrIndex($rs,'first_time_login');
+    $rs = getThis()->db->get()->row_array();
+    return arrIndex($rs, 'first_time_login');
 }
 
-function getUnitsTypes()    {
+function getUnitsTypes() {
     return array(
         's' => 's',
         'f' => 'f'
