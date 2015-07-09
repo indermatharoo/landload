@@ -28,10 +28,34 @@ class Propertymodel extends CI_Model {
         $this->db->where('units.id', $uid);
         $this->db->from('units');
         $this->db->join('properties', 'properties.id=units.property_id');
-        $this->db->join('unit_image','units.id=unit_image.unit_id');
+        //$this->db->join('unit_image','units.id=unit_image.unit_id');
         $rs = $this->db->get();
         //e($this->db->last_query());
         return $rs->row_array();
+    }
+    
+    function getGalleryImages($uid){
+        $this->db->where('unit_id', $uid);
+        $this->db->from('unit_image');
+        $rs = $this->db->get();
+        if($rs->num_rows()>0){
+            return $rs->row_array();
+        }
+        return FALSE;
+        //e($this->db->last_query());
+        
+    }
+    
+     function getAttributes($uid){
+        $this->db->where('unit_id', $uid);
+        $this->db->from('units_attributes_value');
+        $rs = $this->db->get();
+        if($rs->num_rows()>0){
+            return $rs->row_array();
+        }
+        return FALSE;
+        //e($this->db->last_query());
+        
     }
 
     function getEvent() {
