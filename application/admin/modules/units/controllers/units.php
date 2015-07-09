@@ -30,13 +30,13 @@ class Units extends Admin_Controller {
         $inner = array();
         $inner['labels'] = array(
             'pname' => 'Name',
-            'area' => 'Area',
-            'room' => 'Room',
-            'bathroom' => 'Bathroom',
+//            'area' => 'Area',
+//            'room' => 'Room',
+//            'bathroom' => 'Bathroom',
             'amount' => 'Amount',
             'owner' => 'Owner',
             'state' => 'State',
-            0 => 'Action'
+            -1 => 'Action'
         );
         $inner['Listing'] = $Listing;
 
@@ -95,7 +95,8 @@ class Units extends Admin_Controller {
         $this->load->library('parser');
         $this->load->library('email');
         $features = $this->Featuresmodel->getAllfeatures();
-        $unitsType = $this->Unitsmodel->getUnitType();
+//        $unitsType = $this->Unitsmodel->getUnitType();
+        $unitsType = null;
         $propertyList = $this->Propertiesmodel->getPropertiesList();
         $details = $this->Unitsmodel->getUnitDetails($offset);
         $images = $this->Unitsmodel->getUnitImages($offset);
@@ -107,9 +108,9 @@ class Units extends Admin_Controller {
 //        }
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
-        $this->form_validation->set_rules('area', 'Area', 'trim|required');
-        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
-        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+//        $this->form_validation->set_rules('area', 'Area', 'trim|required|integer');
+//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
+//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
 
         $Countries = $this->Usermodel->getCountries();
@@ -121,11 +122,12 @@ class Units extends Admin_Controller {
             $inner['propertyList'] = $propertyList;
             $inner['details'] = $details;
             $inner['unitsType'] = $unitsType;
+            $inner['unit_id'] = $offset;
             $page = array();
             $page['content'] = $this->load->view('unit-edit', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-
+            
             $userid = $this->Unitsmodel->updateRecord($offset);
 
             $this->session->set_flashdata('SUCCESS', 'unit_updated');

@@ -7,6 +7,8 @@
         <?php echo $property['unit_number']; ?>
 
         <?php
+         $this->session->set_userdata('referred_from', current_url());
+        //e($this->session->all_userdata());
         if ($this->session->userdata('applicant_id') != '') {
             $attributes = array('class' => 'appy', 'id' => 'myform', 'name' => '');
             echo form_open('email/send', $attributes);
