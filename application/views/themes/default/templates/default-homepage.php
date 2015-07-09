@@ -48,10 +48,10 @@
                                             <img src="<?= $this->config->item('UNIT_IMAGE_URL').$row['unit_image'] ?>">
                                             <div class="mask">
                                                 <h2><?= $row['pname'] ?></h2>
-                                                <p><?= $row['description'] ?></p>
+                                                <p><?php echo substr($row['description'],0,50).".."; ?></p>
                                                 <p class="prop_price"><?= DWS_CURRENCY_SYMBOL.$row['amount'] ?></p>
 
-                                                <a class="info" href="property/detail/<?= $row['id'] ?>">Read More</a>
+                                                <a class="info" href="property/detail/<?= $row['unit_id'] ?>">Read More</a>
                                             </div>
                                         </div> 
                                         <div class="property_text">

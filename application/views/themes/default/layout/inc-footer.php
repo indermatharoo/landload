@@ -11,7 +11,7 @@
                             <div class="footer_abt_desc">
                                 <div class="footer_abt_imgleft">
                                     <div class="footer_about_img">
-                                        <img src="imgs/footer_abut_img.png"/>
+                                        <img src="<?php echo base_url(); ?>imgs/footer_abut_img.png"/>
                                     </div>
                                 </div>
                                 <div class="footer_abt_descright">

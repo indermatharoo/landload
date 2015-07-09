@@ -12,13 +12,10 @@ class Property extends Cms_Controller {
     function index() {
         $this->load->model('propertymodel');
         $property = $this->propertymodel->listAll();
- //       e($property);
+        //e($property);
 
         $inner = array();
         $inner['property'] = $property;
-        e($inner);
-        //$inner['territory'] = $territory;
-        //$inner['mapFranchisee'] = $map;
         $shell['contents'] = $this->load->view("property-index", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
@@ -29,7 +26,7 @@ class Property extends Cms_Controller {
         
         $inner = array();
         $inner['property'] = $property;
-        
+       // e($inner);
         $inner['uid'] = $uid;
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
