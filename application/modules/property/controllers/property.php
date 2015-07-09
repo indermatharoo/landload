@@ -26,7 +26,7 @@ class Property extends Cms_Controller {
         
         $inner = array();
         $inner['property'] = $property;
-        e($inner);
+       // e($inner);
         $inner['uid'] = $uid;
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
