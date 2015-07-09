@@ -170,7 +170,7 @@ class Applications extends Admin_Controller {
         $ApplicationType = $this->Applicationsmodel->getApplicationType();
         $propertiesList = $this->Propertiesmodel->getPropertiesList();
         $applicantsType = $this->Applicantsmodel->getApplicantType();
-        $uploadedDocuments = $this->Applicationsmodel->getUploadedDocuments($id);
+        $uploadedDocuments = $this->Applicationsmodel->getUploadedDocuments($userDetail['applicant_id']);
         
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
@@ -275,6 +275,7 @@ class Applications extends Admin_Controller {
     }   
     function upload_document($id)
     {
+        die($id);
         $this->load->library('form_validation');
         $this->load->model('virtcab/VirtualCabinetmodel');
         foreach($_FILES['document']['name'] as $file)

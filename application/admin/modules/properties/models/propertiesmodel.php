@@ -93,6 +93,15 @@ class Propertiesmodel extends Basemodel {
         echo $this->db->last_query();
         return $this->db->insert_id();
     }
+    function getRecentProperties()
+    {
+        $this->db->select('properties.*,properties_type.type as property_type');
+        $this->db->order_by("datetime", "desc");
+        $this->db->join('properties_type','properties_type.short_code=properties.type');
+        $this->db->limit(10);
+        $res = $this->db->get('properties');
+        return array('num_rows'=>$res->num_rows(),'results'=>$res->result_array());
+    }
     function updateRecord($id)
     {
         $data = array();

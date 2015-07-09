@@ -33,7 +33,9 @@
         </div>
 
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
-            <?php //$this->load->view("dashboard/chart"); ?>
+            <?php $this->load->view("dashboard/dashboardListing"); ?>
+            <?php $this->load->view("dashboard/recentCompany"); ?>
+            <?php $this->load->view("dashboard/recentUsers"); ?>
         </div>
         <div id="franchisesregions"> </div>
     </div>
@@ -41,8 +43,6 @@
         <div class="col-lg-12 menu padding-0">
             <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
         </div>
-        <?php //$this->load->view(THEME . 'layout/inc-notifications'); ?>
-        <?php //$this->load->view(THEME . 'layout/in-social-links'); ?>        
     </div>
 </div>
 <?php $this->load->view('headers/dashboard'); ?>
