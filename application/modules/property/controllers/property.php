@@ -42,7 +42,7 @@ class Property extends Cms_Controller {
         $this->load->model('propertymodel');
         
         $this->propertymodel->insertApplication();
-        
+        echo  "Done";
     }
 
     function event() {

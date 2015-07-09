@@ -103,8 +103,9 @@ class Propertymodel extends CI_Model {
         $company = $this->getCompanyId($property_id);
         $data['company_id'] = $company['company_id'];
         
-        
         $applied_date = date('Y-m-d');
+        
+        $this->db->insert('applications',$data);    
         
     }
 
