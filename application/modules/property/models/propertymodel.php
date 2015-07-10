@@ -112,17 +112,7 @@ class Propertymodel extends CI_Model {
         $data['datetime'] = date('Y-m-d H:i:s');
         $applied_date = date('Y-m-d');
 
-        $status = $this->db->insert('applications', $data);
-        if ($status = 1) {
-            $this->db->select('*');
-            $this->db->from('applicants');
-            $this->db->where('applicant_id', $data['applicant_id']);
-            $rs = $this->db->get();
-
-            if ($rs->num_rows() > 0) {
-                return $rs->row_array();
-            }
-        }
+        $this->db->insert('applications', $data);
     }
 
     function getAttributeValue($unit_id) {
