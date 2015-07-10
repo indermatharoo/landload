@@ -82,7 +82,7 @@
                                 </div>-->
                 <div class="col-sm-12 push-right">
                     <?php
-                    $this->session->set_userdata('referred_from', current_url());
+                    
                     //e($this->session->all_userdata());
                     if ($this->session->userdata('applicant_id') != '') {
 
@@ -98,6 +98,7 @@
                         <?php
                         echo form_close();
                     } else {
+                       
                         ?>
                         <button name="" onclick="window.location = '<?php echo base_url(); ?>customer/login'" type="button" class="btn btn-primary subbmint">Apply</button>
                         <?php
