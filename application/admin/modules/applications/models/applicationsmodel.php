@@ -241,7 +241,7 @@ class Applicationsmodel extends Basemodel {
     public function getUploadedDocuments($id)
     {
         $this->db->where('assignes',$id); 
-        $res = $this->db->get('virtualcab') ; 
+        $res = $this->db->get('virtualCab') ; 
         return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
     }
 }
