@@ -146,7 +146,7 @@
         var val = $('select[name="unit_type"]').val(),
                 unit_id = '<?php echo $unit_id; ?>';
         ;
-        $.post('units/attributes/getAttributeValue', {val: unit_id}, function (response) {
+        $.post('units/attributes/getAttributeValue', {val: unit_id,type:val}, function (response) {
             response = JSON.parse(response);
             if (!response.success) {
                 $('.extraAttributes').html('');
@@ -154,6 +154,8 @@
             }
             var html = '';
             response.data.forEach(function (elm) {
+                if(elm.value == null)
+                    elm.value = '';
                 var row = '';
                 row += '<div class="col-sm-6">';
                 row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';

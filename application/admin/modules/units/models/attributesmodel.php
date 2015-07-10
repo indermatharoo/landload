@@ -32,10 +32,11 @@ class Attributesmodel extends Basemodel {
         return $result;
     }
 
-    function getAttributeValue($unit_id) {
-        $this->db->from('units_attributes_value t1');
-        $this->db->join('units_attributes t2','t1.attribute_id=t2.id'); 
-        $this->db->where('unit_id',$unit_id);
+    function getAttributeValue($unit_id, $type) {
+        $this->db->from('units_attributes t1');
+        $this->db->join('units_attributes_value t2', 't1.id=t2.attribute_id and t2.unit_id=' . $unit_id, 'left');
+        if ($type)
+            $this->db->where('unit_type', $type);
         $results = $this->db->get()->result_array();
         return $results;
     }

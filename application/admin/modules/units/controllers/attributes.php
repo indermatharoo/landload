@@ -30,7 +30,7 @@ class Attributes extends Admin_Controller {
     }
 
     function edit($id) {
-        $model = $this->commonmodel->getByPk($id, 'units_attributes');        
+        $model = $this->commonmodel->getByPk($id, 'units_attributes');
         self::save($model);
     }
 
@@ -73,9 +73,10 @@ class Attributes extends Admin_Controller {
 
     function getAttributeValue() {
         $unit_id = gParam('val');
+        $type = gParam('type');
         $return['success'] = false;
-        if ($unit_id) {
-            $return['data'] = $this->attributesmodel->getAttributeValue($unit_id);
+        if ($unit_id || $type) {
+            $return['data'] = $this->attributesmodel->getAttributeValue($unit_id, $type);
             if (count($return['data'])) {
                 $return['success'] = true;
             }
