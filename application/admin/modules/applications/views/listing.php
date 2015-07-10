@@ -34,7 +34,6 @@
             if(count($Listing) > 1)
             {
             foreach ($Listing as $item):
-                //echo '<pre>'; print_r($item);
                 ?>
                 <tr>
                     <td><?= arrIndex($item, 'fname') . ' ' . arrIndex($item, 'lname'); ?></td>
@@ -44,7 +43,6 @@
                     <td><a href="<?= createUrl('applications/manage/') . arrIndex($item, 'application_id'); ?>">Manage</a>  |<a href="<?= createUrl('applications/edit/') . arrIndex($item, 'application_id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['application_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; 
-            
             }
             else
             {
