@@ -27,8 +27,9 @@ class Login extends Cms_Controller {
 //*****************************Validation Functions End ********************************************************************
 
     function index() {
-
-
+        //print_r($this->session->all_userdata());
+        $this->load->library('user_agent');
+        $referred_from_url = $this->agent->referrer();
         $this->load->model('Customermodel');
         $this->load->library('form_validation');
         $this->load->library('email');
@@ -64,20 +65,26 @@ class Login extends Cms_Controller {
             if (!count($result)) {
                 redirect("/customer/login/");
             } else {
+                //e($this->session->all_userdata());
                 $result['isAdmin'] = 0;
                 $result['isCompany'] = 0;
                 $result['isUser'] = 0;
                 $result['isCustomer'] = 1;
                 $this->session->set_userdata($result);
-               // e($this->session->all_userdata());
-               $referred_from = $this->session->userdata('referred_from');
-               if($referred_from!=''){
-                redirect($referred_from, 'refresh');
                
-               }
-               else{
-                   redirect('');
-               }
+               //echo $referred_from;
+               redirect('/');
+//               if($redirect!=''){
+//                redirect($redirect, 'refresh');
+//                
+//                $shortlist = $this->session->userdata('referred_from');
+//                unset($shortlist[0]);
+//               
+//               }
+//               else{
+//                   redirect('/');
+//               }
+               
                 //redirect('');
             }
         }

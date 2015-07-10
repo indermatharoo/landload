@@ -219,7 +219,7 @@ $(document).ready(function(){
                 <div class="form-group">
                     <div class="col-sm-6">
                         <label>Amount</label>
-                        <input type="text" class="form-control" id="rent_amount" name="rent_amount" value="<?= arrIndex($details, 'rent_amount'); ?>" placeholder="">
+                        <input type="text" class="form-control" id="rent_amount" name="rent_amount" value="<?= arrIndex($details, 'invoice_amount'); ?>" placeholder="">
                     </div>
                     <div class="col-sm-6">
                         <label>Security Amount</label>

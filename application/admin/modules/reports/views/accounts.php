@@ -14,6 +14,7 @@
                 <?php
                 $labels = array(
                     'pname' => 'Property Name',
+                    'unitname' => 'Unit Number',
                     'type' => 'Type',
                     'unit' => 'Amount',
                     'Unit' => 'Unit type',
@@ -28,19 +29,21 @@
             <?php
             //e($paidUnits);
             //$Listing =array();
-            if ($paidUnits['num_rows'] > 0) {
-                foreach ($paidUnits['result'] as $item):
-                    ?>
-                    <tr>
-                        <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                        <td><?= arrIndex($item, 'type') ?></td>
-                        <td><?= arrIndex($item, 'amount') ?></td>
-                        <td><?= arrIndex($item, 'unit_type') ?></td>
-                    </tr>
-                    <?php
-                endforeach;
-            }
-            else {
+              if($paidUnits['num_rows'] > 0)
+              {
+            foreach ($paidUnits['result'] as $item):
+                ?>
+                <tr>
+                    <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                    <td><?= arrIndex($item, 'unit_number')  ?></td>
+                    <td><?= arrIndex($item, 'type') ?></td>
+                    <td><?= arrIndex($item, 'amount') ?></td>
+                    <td><?= arrIndex($item, 'unit_type') ?></td>
+                </tr>
+            <?php endforeach; 
+              }
+                       else
+            {
                 ?>
                 <tr><td colspan="5">No Record Found</td></tr>
                 <?php
@@ -71,19 +74,21 @@
             <?php
             //e($paidUnits);
             //$Listing =array();
-            if ($UnPaidUnits['num_rows'] > 0) {
-                foreach ($UnPaidUnits['result'] as $item):
-                    ?>
-                    <tr>
-                        <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                        <td><?= arrIndex($item, 'type') ?></td>
-                        <td><?= arrIndex($item, 'amount') ?></td>
-                        <td><?= arrIndex($item, 'unit_type') ?></td>
-                    </tr>
-                    <?php
-                endforeach;
-            }
-            else {
+              if($UnPaidUnits['num_rows'] > 0)
+              {
+            foreach ($UnPaidUnits['result'] as $item):
+                ?>
+                <tr>
+                    <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                    <td><?= arrIndex($item, 'unit_number')  ?></td>
+                    <td><?= arrIndex($item, 'type') ?></td>
+                    <td><?= arrIndex($item, 'amount') ?></td>
+                    <td><?= arrIndex($item, 'unit_type') ?></td>
+                </tr>
+            <?php endforeach; 
+              }
+                       else
+            {
                 ?>
                 <tr><td colspan="5">No Record Found</td></tr>
                 <?php
