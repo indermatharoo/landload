@@ -8,10 +8,11 @@ function isLogged() {
     }
 }
 
-function e($str) {
+function e($str, $exit = true) {
     echo "<pre>";
     print_r($str);
-    exit;
+    if ($exit)
+        exit;
 }
 
 function p() {
@@ -132,7 +133,7 @@ function noticationMsg($className = null, $classFunc = null) {
 
 function setDefault(&$key = null, $defVal = null, $temp = null) {
     if (isset($key) && !empty($key)) {
-        if($temp){
+        if ($temp) {
             return $temp;
         }
         return $key;
@@ -171,6 +172,7 @@ function getJSarrayFromPHPArray($phpArray = array(), $form = false) {
     $retHtml = '[' . implode(',', $retHtmlArr) . ']';
     return $retHtml;
 }
+
 function latestNews($limit) {
     $CI = & get_instance();
     $CI->db->order_by('news_date', 'DESC');
@@ -179,39 +181,38 @@ function latestNews($limit) {
     return $query->result_array();
 }
 
-function latestFeed($numrows=5){
+function latestFeed($numrows = 5) {
     $output = feed($numrows);
     return $output;
 }
 
-  function feed($fid=NULL) {
-        $inner = $page = array();
-        $param['noofrows'] = $fid;
-        $inner['output'] = call($param);
-        return $inner;
+function feed($fid = NULL) {
+    $inner = $page = array();
+    $param['noofrows'] = $fid;
+    $inner['output'] = call($param);
+    return $inner;
 //        $page['content'] = $this->load->view('franchiseorders', $inner, TRUE);
 //        $this->load->view($this->default, $page);
-    }
+}
 
-
-    function call($params = array()) {
-       $params = http_build_query($params);
-        $ch = curl_init();
+function call($params = array()) {
+    $params = http_build_query($params);
+    $ch = curl_init();
 //        echo $this->url . $url;
 //        die;        
-        curl_setopt($ch, CURLOPT_URL, 'http://news.thecreationstation.co.uk/test/');
-        curl_setopt($ch, CURLOPT_POST, 1);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $server_output = curl_exec($ch);
+    curl_setopt($ch, CURLOPT_URL, 'http://news.thecreationstation.co.uk/test/');
+    curl_setopt($ch, CURLOPT_POST, 1);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $params);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    $server_output = curl_exec($ch);
 //        return $server_output;
-        return json_decode($server_output, 1);
-    }
-    
+    return json_decode($server_output, 1);
+}
+
 function getCompany($id) {
     getThis()->db->select('*')
             ->from('properties')
-            ->join('aauth_users','properties.company_id=aauth_users.id');
+            ->join('aauth_users', 'properties.company_id=aauth_users.id');
     $result = getThis()->db->get();
     $result = $result->row();
     return $result;

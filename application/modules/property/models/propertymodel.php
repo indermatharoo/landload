@@ -25,11 +25,12 @@ class Propertymodel extends CI_Model {
 
     function getProperty($uid) {
 //      $this->db->select('page.*,aauth_users.pic,user_extra_detail.*');
-        $this->db->select('units.id as unit_id,units.*,properties.*')->from('units');
+        $this->db->select('units.id as unit_id,units.*,properties.*,properties_type.*')->from('units');
         $this->db->where('units.id', $uid);
         $this->db->join('properties', 'properties.id=units.property_id');
-        //$this->db->join('unit_image','units.id=unit_image.unit_id');
+        $this->db->join('properties_type','properties.type=properties_type.short_code');
         $rs = $this->db->get();
+//        e($rs->result_array());
         //e($this->db->last_query());
         return $rs->result_array();
     }
