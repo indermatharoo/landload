@@ -4,13 +4,7 @@
 //die();
 ?> 
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
-<div class="col-lg-12">
-    <form name="" action="">
-        <div class="col-sm-5"><input type="date" class="form-control" /></div>
-        <div class="col-sm-5"><input type="date" class="form-control" /></div>
-        <div class="col-sm-2"><button name="" value="search" class="btn btn-primary">Search</button></div>
-    </form>
-</div>
+
 <div class="col-lg-12 padding-0" style="padding-top: 15px;">
     <h3>Occupied</h3>
     <table id="table" class="table table-bordered table-striped">

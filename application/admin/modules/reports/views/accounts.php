@@ -1,8 +1,10 @@
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/jquery-ui.js"></script>
+<link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
 <div class="col-lg-12">
     <form name="" action="">
-        <div class="col-sm-5"><input type="date" class="form-control" /></div>
-        <div class="col-sm-5"><input type="date" class="form-control" /></div>
+        <div class="col-sm-5">FROM <input type="text" class=" datepicker" /></div>
+        <div class="col-sm-5">TO <input type="text" class=" datepicker" /></div>
         <div class="col-sm-2"><button name="" value="search" class="btn btn-primary">Search</button></div>
     </form>
 </div>
@@ -104,3 +106,8 @@
         </tfoot>
     </table>
 </div>
+<script>
+    $(document).ready(function(){
+        $('.datepicker').datepicker({});
+        })
+  </script>
