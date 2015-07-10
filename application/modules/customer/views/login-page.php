@@ -1,5 +1,5 @@
 <div class="col-lg-6">
-    <h1 style="display: none">Login Form</h1>
+    <h1 style="">Login Form</h1>
     <?php $this->load->view('inc-messages'); ?>
 
     <form action="<?php echo createUrl('customer/login'); ?>" method="post" role="form" class="">

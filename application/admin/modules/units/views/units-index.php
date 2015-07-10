@@ -9,7 +9,7 @@
             <h3 style="margin: 0; text-align: center">Units Management</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
-            <a href="units/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New unit"></i></h3></a>
+            <?php if (!$this->aauth->isAdmin()) { ?><a href="units/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New unit"></i></h3></a><?php } ?>
         </div>
     </div>
 </header>

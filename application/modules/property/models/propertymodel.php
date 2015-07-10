@@ -113,6 +113,10 @@ class Propertymodel extends CI_Model {
         $applied_date = date('Y-m-d');
 
         $this->db->insert('applications', $data);
+        
+        //echo $this->db->last_query();
+        //exit;
+        
     }
 
     function getAttributeValue($unit_id) {
