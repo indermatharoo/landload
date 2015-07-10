@@ -42,23 +42,23 @@
             //e($occupiedList);
             //$Listing =array();
               if($occupiedList['num_rows'] > 0)
-              {
-            foreach ($occupiedList['result'] as $item):
-                ?>
-                <tr>
-                    <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                    <td><?= arrIndex($item, 'type') ?></td>
-                    <td><?= arrIndex($item, 'amount') ?></td>
-                    <td><?= arrIndex($item, 'unit_type') ?></td>
-                </tr>
-            <?php endforeach; 
-              }
+                {
+                foreach ($occupiedList['result'] as $item):
+                  ?>
+                  <tr>
+                      <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                      <td><?= arrIndex($item, 'type') ?></td>
+                      <td><?= arrIndex($item, 'amount') ?></td>
+                      <td><?= arrIndex($item, 'unit_type') ?></td>
+                  </tr>
+                <?php endforeach; 
+                }
                        else
-            {
-                ?>
-                <tr><td colspan="5">No Record Found</td></tr>
-                <?php
-            }
+                {
+                    ?>
+                    <tr><td colspan="5">No Record Found</td></tr>
+                    <?php
+                }
             ?>
         </tbody>
         <tfoot>
