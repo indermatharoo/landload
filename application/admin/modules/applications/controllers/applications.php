@@ -157,6 +157,10 @@ class Applications extends Admin_Controller {
 //        echo '<pre>';
 //        print_r($_POST);
 //        exit;
+        if(trim($id)=="")
+        {
+            redirect('applications/index');
+        }
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->helper('string');

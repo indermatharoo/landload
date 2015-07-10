@@ -27,13 +27,15 @@ class Reports extends Admin_Controller {
     }
     function account()
     {
-        $occupiedList = $this->reportsmodel->getOccupiedUnitsList();
+        $PaidUnits = $this->reportsmodel->getPaidUnits();
+        $UnPaidUnits = $this->reportsmodel->getUnPaidUnits();
+        //e($PaidUnits);
         $notOccupied = $this->reportsmodel->getUnOccupiedUnitsList(); 
         $page = array();
         $inner = array();
-        $inner['occupiedList'] = $occupiedList;
-        $inner['UnOccupiedUnitsList'] = $notOccupied;
-        $page['content'] = $this->load->view('property', $inner, TRUE);;
+        $inner['paidUnits'] = $PaidUnits;
+        $inner['UnPaidUnits'] = $UnPaidUnits;
+        $page['content'] = $this->load->view('accounts', $inner, TRUE);
         $this->load->view('themes/default/templates/customer', $page);
     }
 
