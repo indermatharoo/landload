@@ -24,7 +24,7 @@ class Reportsmodel extends CI_Model {
     function getPaidUnits()
     {
         $this->db->where("invoice_new.is_paid ",'1');
-        $this->db->join('invoice_new','invoice_new.id=applications.id','left');
+        $this->db->join('invoice_new','invoice_new.applicant_id=applications.id','left');
         $this->db->join('units','units.id =applications.unit_id','left');
         $this->db->join('properties','properties.id=units.property_id','left');
         $this->db->join('properties_type','properties_type.short_code=properties.type','left');
@@ -34,7 +34,7 @@ class Reportsmodel extends CI_Model {
     function getUnPaidUnits()
     {
         $this->db->where("invoice_new.is_paid = '0'");
-        $this->db->join('invoice_new','invoice_new.id=applications.id','left');
+        $this->db->join('invoice_new','invoice_new.applicant_id=applications.id','left');
         $this->db->join('units','units.id =applications.unit_id','left');
         $this->db->join('properties','properties.id=units.property_id','left');
         $this->db->join('properties_type','properties_type.short_code=properties.type','left');
