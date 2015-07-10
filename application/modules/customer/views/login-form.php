@@ -1,4 +1,4 @@
-<div>
+<div class="col-lg-6">
     <h1>Login here</h1>
     <form action="<?php echo createUrl('customer/login'); ?>" method="post" role="form" class="">
         <div class="form-group">

@@ -90,6 +90,7 @@
                         echo form_open('property/apply', $attributes);
                         echo form_hidden('unit_id', $property['unit_id']);
                         echo form_hidden('property_id', $property['property_id']);
+                        echo form_hidden('rent_amount', $property['amount']);
                         echo form_hidden('applicant_id', $this->session->userdata('applicant_id'));
                         ?>
 

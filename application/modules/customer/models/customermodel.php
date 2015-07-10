@@ -8,9 +8,8 @@ class Customermodel extends CI_Model {
 
 //fetch by ID
     function fetchByID($cid) {
-        $this->db->from('customer');
-        $this->db->join('aauth_users', 'aauth_users.id=customer.auth_user_id');
-        $this->db->where('aauth_users.id', $cid);
+        $this->db->from('applicants');
+        $this->db->where('applicant_id', $cid);
         $rs = $this->db->get();
         if ($rs->num_rows() == 1) {
             return $rs->row_array();
