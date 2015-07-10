@@ -33,6 +33,7 @@ class Attributesmodel extends Basemodel {
     }
 
     function getAttributeValue($unit_id, $type) {
+        $this->db->select('t1.*,t2.value');
         $this->db->from('units_attributes t1');
         $this->db->join('units_attributes_value t2', 't1.id=t2.attribute_id and t2.unit_id=' . $unit_id, 'left');
         if ($type)
