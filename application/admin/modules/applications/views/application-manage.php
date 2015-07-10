@@ -271,8 +271,8 @@ $(document).ready(function(){
                     </div>
                     <div class="col-sm-12">
                         <label>Deal Start</label><br>
-                        Yes <input type="radio" name="deal" class="deal" value="1">
-                        No <input type="radio" name="deal" class="deal" value="0" checked="">
+                        Yes <input type="radio" name="deal" <?php echo  ( arrIndex($details, 'is_deal_start')==1 )?"checked":'' ?> class="deal" value="1">
+                        No <input type="radio" name="deal" <?php echo ( arrIndex($details, 'is_deal_start')==0)?"checked":'' ?> class="deal" value="0" >
                     </div>
                 </div>
                     <div class="col-sm-6">
