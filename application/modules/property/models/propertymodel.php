@@ -28,7 +28,7 @@ class Propertymodel extends CI_Model {
         $this->db->select('units.id as unit_id,units.*,properties.*,properties_type.*')->from('units');
         $this->db->where('units.id', $uid);
         $this->db->join('properties', 'properties.id=units.property_id');
-        $this->db->join('properties_type','properties.type=properties_type.short_code');
+        $this->db->join('properties_type', 'properties.type=properties_type.short_code');
         $rs = $this->db->get();
 //        e($rs->result_array());
         //e($this->db->last_query());
@@ -87,27 +87,39 @@ class Propertymodel extends CI_Model {
         $rs = $this->db->get();
         return $rs->result_array();
     }
-    
-    function getCompanyId($id){
+
+    function getCompanyId($id) {
+
         $this->db->select('company_id');
         $this->db->from('properties');
         $this->db->where('id', $id);
         $rs = $this->db->get();
-        return $rs->row_array();
+
+        if ($rs->num_rows() > 0) {
+            return $rs->row_array();
+        }
+        return FALSE;
     }
-    
-    function insertApplication()
-    {
+
+    function insertApplication() {
         $data['unit_id'] = $this->input->post('unit_id');
         $data['property_id'] = $this->input->post('property_id');
         $data['applicant_id'] = $this->input->post('applicant_id');
-        $company = $this->getCompanyId($property_id);
+        $company = $this->getCompanyId($data['property_id']);
         $data['company_id'] = $company['company_id'];
-        
         $applied_date = date('Y-m-d');
-        
-        $this->db->insert('applications',$data);    
-        
+
+        $status = $this->db->insert('applications', $data);
+        if ($status = 1) {
+            $this->db->select('*');
+            $this->db->from('applicants');
+            $this->db->where('applicant_id', $data['applicant_id']);
+            $rs = $this->db->get();
+
+            if ($rs->num_rows() > 0) {
+                return $rs->row_array();
+            }
+        }
     }
 
     function getAttributeValue($unit_id) {

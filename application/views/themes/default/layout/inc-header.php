@@ -28,8 +28,8 @@
         <div class="col-md-12">
             <div class="top-login-links text-right">
                 <ul class="list-unstyled list-inline"> 
-                    <li> <a href="customer/login"> <i class="fa fa-key"></i> Login</a></li>
-                    <li> <a href="customer/register"> <i class="fa fa-user"></i> Sign up</a></li>
+                    <li> <a href="<?php echo createUrl('customer/login'); ?>"> <i class="fa fa-key"></i> Login</a></li>
+                    <li> <a href="<?php echo createUrl('customer/register'); ?>"> <i class="fa fa-user"></i> Sign up</a></li>
                 </ul>
             </div>
         </div>

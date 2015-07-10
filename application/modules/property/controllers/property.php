@@ -21,9 +21,9 @@ class Property extends Cms_Controller {
     }
 
     function detail($uid) {
-       // e($uid);
-        
-        
+        // e($uid);
+
+
         $this->load->model('propertymodel');
         $property = $this->propertymodel->getProperty($uid);
         $gallery_images = $this->propertymodel->getGalleryImages($uid);
@@ -33,17 +33,18 @@ class Property extends Cms_Controller {
         $inner['property'] = $property;
         $inner['gallery'] = $gallery_images;
         $inner['attributes'] = $attributes;
-       // e($inner);
+        // e($inner);
         $inner['uid'] = $uid;
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
-    
-    function apply(){
+
+    function apply($unit_id = null, $property_id = null, $applicant_id = null) {
         $this->load->model('propertymodel');
-        
-        $this->propertymodel->insertApplication();
-        echo  "Done";
+
+        $inner['userDetail'] = $this->propertymodel->insertApplication($unit_id, $property_id, $applicant_id);
+        $shell['contents'] = $this->load->view("Thank-You", $inner, true);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
 
     function event() {

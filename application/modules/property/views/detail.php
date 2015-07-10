@@ -27,13 +27,10 @@
         </div>
         <div class="col-lg-12 padding-0 mar-top30">
             <div class="head_desc">
-                <?php foreach ($property as $item)
-                    
-                    ?>
-                <h2><?php echo $item['unit_number']; ?></h2>
+                <h2><?php echo $property['unit_number']; ?></h2>
                 <hr>
                 <p style="font-size: 20px;"><b>Property Description</b></p>
-                <p><?php echo $item['description']; ?></p>
+                <p><?php echo $property['description']; ?></p>
             </div>
         </div>
         <?php if ($attributes) { ?>
@@ -61,24 +58,20 @@
     <div class="col-lg-4" style="padding: 0 30px;">
         <div class="det-right">
             <div class="unit-inf">
-                <?php foreach ($property as $prop) { ?>
-                    <div class="col-sm-10 lft"><i class="fa fa-home fa-2x hm"></i> <span><?php echo $prop['type']; ?></span></div>
-                    <!--<div class="col-sm-2 padding-0 rgt"><img src="<?php echo base_url(); ?>imgs/sale.JPG" alt="sale" /></div>-->
-                <?php } ?>
+                <div class="col-sm-10 lft"><i class="fa fa-home fa-2x hm"></i> <span><?php echo $property['type']; ?></span></div>
+                <!--<div class="col-sm-2 padding-0 rgt"><img src="<?php echo base_url(); ?>imgs/sale.JPG" alt="sale" /></div>-->
                 <div class="clearfix"></div>
             </div>
             <div class="unit-inf con-deta mar-top20">
                 <div class="col-sm-10 lft">
-                    <?php foreach ($property as $items) { ?>
-                        <div><b>Listing ID : </b><i><?= $items['id']; ?></i></div>
-                        <div><b>Type : </b><i><?= $items['type']; ?></i></div>
-                        <div><b>Owner : </b><i><?= $items['owner']; ?></i></div>
-                        <br />
-                        <div><b>City Name : </b><i><?= $items['city']; ?></i></div>
-                        <div><b>Area Code : </b><i><?= $items['post_code']; ?></i></div>
-                        <br />
-                        <div style="font-size: 20px"><b><i class="fa fa-usd"></i>  <?= $items['amount']; ?></b></div>
-                    <?php } ?>
+                    <div><b>Listing ID : </b><i><?= $property['id']; ?></i></div>
+                    <div><b>Type : </b><i><?= $property['type']; ?></i></div>
+                    <div><b>Owner : </b><i><?= $property['owner']; ?></i></div>
+                    <br />
+                    <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
+                    <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>
+                    <br />
+                    <div style="font-size: 20px"><b><i class="fa fa-usd"></i>  <?= $property['amount']; ?></b></div>
 
                 </div>
                 <!--                <div class="col-sm-2 rgt">
