@@ -204,16 +204,19 @@ class Applicationsmodel extends Basemodel {
         $data['date_of_month'] =$this->input->post('date_of_month');
         $data['day_of_week'] =$this->input->post('day_of_week');
         $data['invoice_type'] =$this->input->post('ptype');
+        
         if($data['invoice_type']=="M")
         {
-            $data['day_of_week'] ="";
+            $data['day_of_week'] = "";
         }
         else
         {
-            $data['date_of_month'] ="0000-00-00";
+            $data['date_of_month'] = "0000-00-00";
         }
+        
         $data['refundable'] =$this->input->post('refund');
-        $data['rent_amount'] =$this->input->post('rent_amount');
+        $data['invoice_amount'] =$this->input->post('rent_amount');
+        $data['start_date'] =date('Y-m-d H:i:s');
         $data['security_amount'] =$this->input->post('security_amount');
         
             $this->db->where('id',$id);
@@ -241,7 +244,7 @@ class Applicationsmodel extends Basemodel {
     public function getUploadedDocuments($id)
     {
         $this->db->where('assignes',$id); 
-        $res = $this->db->get('virtualcab') ; 
+        $res = $this->db->get('virtualCab') ; 
         return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
     }
 }
