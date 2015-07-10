@@ -13,11 +13,14 @@ class Dashboard extends Cms_Controller {
         $this->load->helper('text');
         $this->load->library('form_validation');
         $this->load->helper('form');
+         $this->load->model('Customermodel');
               // $this->load->library('Memberauth');
 
         $customer = array();
         //$customer = $this->Memberauth->checkAuth();
-         $customer =  get_cust_data();
+         $id =  $this->aauth->isCustomer();
+         $customer = $this->Customermodel->fetchByID($id);
+//         e($customer);
         if (!$customer) {
             //$this->Hooksmodel->setReturnURL();
             redirect("/customer/login/");
@@ -29,7 +32,6 @@ class Dashboard extends Cms_Controller {
         $inner = array();
         $inner['customer'] = $customer;
 
-        $inner['title'] = 'Welcome ' . $customer['username'];
 
         $shell['contents'] = $this->load->view('dashboard', $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);

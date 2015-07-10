@@ -28,8 +28,16 @@
         <div class="col-md-12">
             <div class="top-login-links text-right">
                 <ul class="list-unstyled list-inline"> 
-                    <li> <a href="<?php echo createUrl('customer/login'); ?>"> <i class="fa fa-key"></i> Login</a></li>
-                    <li> <a href="<?php echo createUrl('customer/register'); ?>"> <i class="fa fa-user"></i> Sign up</a></li>
+                    <?php if (!$this->aauth->isCustomer()) { ?>
+                        <li> <a href="<?php echo createUrl('customer/login'); ?>"> <i class="fa fa-key"></i> Login</a></li>
+                        <li> <a href="<?php echo createUrl('customer/register'); ?>"> <i class="fa fa-user"></i> Sign up</a></li>
+                    <?php } else { ?>
+                        <li> <a href="<?php echo createUrl('customer/dashboard'); ?>"> <i class="fa fa-dashcube"></i> Dashboard</a></li>
+                        <li> <a href="<?php echo createUrl('customer/dashboard'); ?>"> <i class="fa fa-dashcube"></i> <?php echo $this->session->userdata('fname') ?></a></li>
+                        <li> <a href="<?php echo createUrl('customer/logout'); ?>"> <i class="fa fa-dashcube"></i> Sign out</a></li>
+                    <?php } ?>
+
+
                 </ul>
             </div>
         </div>
@@ -38,8 +46,6 @@
 <!-- Static navbar -->
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
-        <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); 
-       
-        ?>
+        <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); ?>
     </div>
 </nav>

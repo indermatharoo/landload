@@ -40,10 +40,12 @@ class Property extends Cms_Controller {
     }
 
     function apply($unit_id = null, $property_id = null, $applicant_id = null) {
+//        e($_POST);
         $this->load->model('propertymodel');
+        $this->load->model('customer/Customermodel');
 
-        $inner['userDetail'] = $this->propertymodel->insertApplication($unit_id, $property_id, $applicant_id);
-        $shell['contents'] = $this->load->view("Thank-You", $inner, true);
+        $inner['customer'] = $this->propertymodel->insertApplication($unit_id, $property_id, $applicant_id);
+        $shell['contents'] = $this->load->view("customer/dashboard", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
 
