@@ -156,6 +156,7 @@
             response.data.forEach(function (elm) {
                 if(elm.value == null)
                     elm.value = '';
+                l(elm);
                 var row = '';
                 row += '<div class="col-sm-6">';
                 row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';

@@ -127,7 +127,7 @@ class Units extends Admin_Controller {
             $page['content'] = $this->load->view('unit-edit', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-            
+
             $userid = $this->Unitsmodel->updateRecord($offset);
 
             $this->session->set_flashdata('SUCCESS', 'unit_updated');
