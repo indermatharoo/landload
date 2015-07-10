@@ -29,8 +29,8 @@ class Reports extends Admin_Controller {
     {
         $PaidUnits = $this->reportsmodel->getPaidUnits();
         $UnPaidUnits = $this->reportsmodel->getUnPaidUnits();
-        //e($PaidUnits);
-        $notOccupied = $this->reportsmodel->getUnOccupiedUnitsList(); 
+        
+      //  $notOccupied = $this->reportsmodel->getUnOccupiedUnitsList(); 
         $page = array();
         $inner = array();
         $inner['paidUnits'] = $PaidUnits;

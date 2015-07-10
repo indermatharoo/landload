@@ -204,14 +204,16 @@ class Applicationsmodel extends Basemodel {
         $data['date_of_month'] =$this->input->post('date_of_month');
         $data['day_of_week'] =$this->input->post('day_of_week');
         $data['invoice_type'] =$this->input->post('ptype');
+        
         if($data['invoice_type']=="M")
         {
-            $data['day_of_week'] ="";
+            $data['day_of_week'] = "";
         }
         else
         {
-            $data['date_of_month'] ="0000-00-00";
+            $data['date_of_month'] = "0000-00-00";
         }
+        
         $data['refundable'] =$this->input->post('refund');
         $data['invoice_amount'] =$this->input->post('rent_amount');
         $data['start_date'] =date('Y-m-d H:i:s');
