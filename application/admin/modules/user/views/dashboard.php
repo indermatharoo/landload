@@ -34,8 +34,11 @@
 
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
             <?php $this->load->view("dashboard/dashboardListing"); ?>
+            <div class="clearfix"></div>
             <?php $this->load->view("dashboard/recentCompany"); ?>
+            <div class="clearfix"></div>
             <?php $this->load->view("dashboard/recentUsers"); ?>
+            <div class="clearfix"></div>
         </div>
         <div id="franchisesregions"> </div>
     </div>
