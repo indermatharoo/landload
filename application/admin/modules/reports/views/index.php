@@ -13,9 +13,17 @@
         </div>
     </div>
 </header>
-<div class="col-lg-12 padding-0" style="padding-top: 15px;">
-    <a href="reports/property">Property</a>
-    <a href="reports/account">Account</a>
+<div class="nav-tabs-custom">
+    <ul class="nav nav-tabs">
+        <li data-id="1" class="active"><a href="#tabs-1" data-toggle="tab">Property</a></li>
+        <li data-id="2"><a href="#tabs-2" data-toggle="tab">Accounts</a></li>
+    </ul>
+    <div class="tab-content clearfix">
+        <div class="tab-pane active" id="tabs-1">
+            <?php $page['content'] = $this->load->view('property'); ?>
+        </div>
+        <div class="tab-pane" id="tabs-2">
+            <?php $page['content'] = $this->load->view('accounts'); ?>
+        </div>
+    </div>
 </div>
-<p align="center"><?php //echo $pagination; ?></p>
-
