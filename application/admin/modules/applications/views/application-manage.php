@@ -262,12 +262,17 @@ $(document).ready(function(){
                  </form>
             </div>     
             <div class="tab-pane" id="tabs-5">
-                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document/<?php echo  arrIndex($details, 'applicant_id') ?>" method="post" >
+                <form name="requiredDocument" id="requiredDocument" enctype="multipart/form-data" action="applications/upload_document/<?php echo  arrIndex($details, 'applicant_id') ?>/<?php echo  arrIndex($details, 'id') ?>" method="post" >
                 <div class="form-group">
                     <div class="col-sm-12">
                         <label>Upload Documents</label>
                         <input type="file" name="document[]" multiple="" id="document">
                         <input type="hidden" name="documents" >
+                    </div>
+                    <div class="col-sm-12">
+                        <label>Deal Start</label><br>
+                        Yes <input type="radio" name="deal" <?php echo  ( arrIndex($details, 'is_deal_start')==1 )?"checked":'' ?> class="deal" value="1">
+                        No <input type="radio" name="deal" <?php echo ( arrIndex($details, 'is_deal_start')==0)?"checked":'' ?> class="deal" value="0" >
                     </div>
                 </div>
                     <div class="col-sm-6">

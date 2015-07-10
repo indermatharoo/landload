@@ -12,7 +12,6 @@ class Reportsmodel extends CI_Model {
         $this->db->join('properties_type','properties_type.short_code=properties.type','left');
         $res = $this->db->get('units');
         return array('num_rows'=>$res->num_rows(), 'result'=>$res->result_array());
-        
     }
     function getUnOccupiedUnitsList()
     {

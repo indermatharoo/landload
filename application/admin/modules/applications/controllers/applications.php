@@ -273,19 +273,12 @@ class Applications extends Admin_Controller {
                  $this->Applicationsmodel->saveAgreeDetails($offset);
              }        
     }   
-    function upload_document($id)
+    function upload_document($id,$appID)
     {
-        die($id);
+        
         $this->load->library('form_validation');
         $this->load->model('virtcab/VirtualCabinetmodel');
-        foreach($_FILES['document']['name'] as $file)
-        {
-            if(trim($file)=="")
-            {
-              $this->session->set_flashdata('ERROR', 'required_document');
-               redirect(createUrl('applications/manage/'.$id));
-            }
-        }
+
         $allowedTypes = array(
             'jpg' => 'image/jpeg',
             'png' => 'image/png',
@@ -312,7 +305,11 @@ class Applications extends Admin_Controller {
             'allowed_types'=>'gif|jpg|png'
                 
         ));
-        
+        if($this->input->post('deal')!=NULL)
+        {
+            $this->db->where('id',$appID);
+            $this->db->update('applications',array('is_deal_start'=>$this->input->post('deal')));
+        }
         if($this->upload->do_multi_upload("document")) {
             //Print data for all uploaded files.
 
