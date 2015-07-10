@@ -143,7 +143,7 @@
                     var row = '';
                     row += '<div class="col-sm-6">';
                     row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                    row += '<input type="text" class="' + elm.class + ' form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.name) + '">';
+                    row += '<input type="text" class="form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.label) + '">';
                     row += '</div>';
                     html += row;
                 });
