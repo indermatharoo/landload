@@ -276,7 +276,7 @@ $(document).ready(function(){
                     </div>
                 </div>
                     <div class="col-sm-6">
-                        <input type="submit" class="btn btn-primary pull-right " style="margin-top: 23px"  value="Submit">
+                        <input type="submit" class="btn btn-primary pull-right" style="margin-top: 23px"  value="Submit">
                     </div>  
                 </form>
                 <div>
