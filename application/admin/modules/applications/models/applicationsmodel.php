@@ -219,7 +219,7 @@ class Applicationsmodel extends Basemodel {
             $this->db->where('id',$id);
             $this->db->update('applications',$data);
 
-        echo json_encode(array('response'=>'true','msg'=>'Agreement information is successfully saved','tab'=>"4"));
+        echo json_encode(array('response'=>'true','msg'=>'Agreement information is successfully saved','tab'=>"5"));
     }        
     public function UploadDocuments()
     {
