@@ -22,7 +22,6 @@ class Reportsmodel extends CI_Model {
         $this->db->join('unit_type','unit_type.unit_code=units.unit_type','left');
         $this->db->join('properties_type','properties_type.short_code=properties.type','left');
         $res = $this->db->get('units');
-        echo $this->db->last_query();
         return array('num_rows'=>$res->num_rows(), 'result'=>$res->result_array());
     }
 }

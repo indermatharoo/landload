@@ -77,12 +77,6 @@
         <thead>
             <tr>                        
                 <?php
-            $labels = array(
-                    'pname' => 'Property Name',
-                    'type' => 'Type',
-                    'unit' => 'Amount',
-                    'Unit' => 'Unit type',
-                );
                 foreach ($labels as $label): ?>
                     <th><?php echo $label ?></th>
                 <?php endforeach; ?>
