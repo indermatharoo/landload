@@ -32,7 +32,7 @@ class Propertymodel extends CI_Model {
         $rs = $this->db->get();
 //        e($rs->result_array());
         //e($this->db->last_query());
-        return $rs->result_array();
+        return $rs->row_array();
     }
 
     function getGalleryImages($uid) {

@@ -5,7 +5,7 @@
 <link href="<?= base_url(); ?>/admin/css/bootstrap-multiselect.css" rel="stylesheet" />
 <div class="form-group col-sm-12">
     <?php // $this->load->view(THEME . 'messages/inc-messages'); ?>
-    <div id="#popup"></div>
+    <div id="popup"></div>
 </div>
 <header class="panel-heading">
     <div class="row">
