@@ -21,11 +21,11 @@
                               <tr>
                             <td width="67%" align="right">
                                 <font style="font-family: 'Arial' , sans-serif; color:#68696a; font-size:11.5px;font-weight: 100;">
-                                    <span>Address 1 </span><br/>
-                                    <span>Address 2</span><br/>
-                                    <span>Address 3</span><br/>
-                                    <span>Address 4</span><br/><br/>
-                                    <span style="font-weight:600; color:#000;">Telephone: 0000</span><br/>
+                                   <span>Dudley House</span><br/>
+                                    <span>3rd Floor</span><br/>
+                                    <span>Stone Street</span><br/>
+                                    <span>Dudley (DY1 1NP )</span><br/><br/>
+                                    <span style="font-weight:600; color:#000;">Telephone: 01384 239100</span><br/>
                                     <span style="font-weight:600;color:#000;">enquiries@example.com</span><br/>
                                 </font>
                             </td>

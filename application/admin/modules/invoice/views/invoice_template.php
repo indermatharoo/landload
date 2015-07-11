@@ -18,7 +18,7 @@ function vat($price_without_vat=NULL) {
         <tr>
             <td><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border-bottom: 1px solid rgb(206, 206, 206); padding-bottom: 10px;">
               <tr>
-                <td width="200"><a href= "#" target="_blank"><img src="http://crm.checksample.co.uk/images/logo.png" border="0" alt=""/></a></td>
+                <td width="200"><a href= "#" target="_blank"><img src="http://landlord.webnseo.co.uk/admin/images/logo.png" border="0" alt=""/></a></td>
                 <td width="250">
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                     <tr>
@@ -34,11 +34,11 @@ function vat($price_without_vat=NULL) {
                               <tr>
                             <td width="67%" align="right">
                                 <font style="font-family: 'Arial' , sans-serif; color:#68696a; font-size:11.5px;font-weight: 100;">
-                                    <span>Address 1</span><br/>
-                                    <span>Address 2</span><br/>
-                                    <span>Address 3</span><br/>
-                                    <span>Address 4</span><br/><br/>
-                                    <span style="font-weight:600; color:#000;">Telephone: 01395 00000</span><br/>
+                                    <span>Dudley House</span><br/>
+                                    <span>3rd Floor</span><br/>
+                                    <span>Stone Street</span><br/>
+                                    <span>Dudley (DY1 1NP )</span><br/><br/>
+                                    <span style="font-weight:600; color:#000;">Telephone: 01384 239100</span><br/>
                                     <span style="font-weight:600;color:#000;">enquiries@example.co.uk</span><br/>
                                 </font>
                             </td>
