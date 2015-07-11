@@ -27,9 +27,23 @@
             
                 <?php foreach ($labels as $key => $value): ?>
                     <?php
-                    $data = arrIndex($item, $key, FALSE);
-                    if ($key == -1) {
-                        $data = '<a href=' . createUrl('units/attributes/edit/') . arrIndex($item, 'id') . '>Edit</a> |  <a href=' . createUrl('units/attributes/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                    if($key=='unit_type'){
+                        $data = arrIndex($item, $key, FALSE);
+                        if($data=='s'){
+                            $data = "Shop";
+                        }else{
+                            $data = "Flat";
+                        }
+                        if ($key == -1) {
+                            $data = '<a href=' . createUrl('units/attributes/edit/') . arrIndex($item, 'id') . '>Edit</a> |  <a href=' . createUrl('units/attributes/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                        }
+                    }
+                    else{
+                        $data = arrIndex($item, $key, FALSE);
+
+                        if ($key == -1) {
+                            $data = '<a href=' . createUrl('units/attributes/edit/') . arrIndex($item, 'id') . '>Edit</a> |  <a href=' . createUrl('units/attributes/delete/') . $item['id'] . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                        }
                     }
                     ?>
                 <td><?php echo $data ?></td>
