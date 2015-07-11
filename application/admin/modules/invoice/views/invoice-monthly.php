@@ -21,11 +21,23 @@
         text-align: center;
     }
 </style>
-
+<header class="panel-heading">
+    <div class="row">
+        <div class="col-sm-1">
+            <i class="fa fa-file-text fa-2x"></i>
+        </div>
+        <div class="col-sm-10">
+            <a href="invoice/monthly"><h3 style="margin: 0; text-align: center; color: #fff;">Reports (Monthly)</h3></a>
+        </div>
+        <div class="col-sm-1" style="text-align: right">
+         <!--   <a href="invoice/manual"><h3 style="cursor: pointer; margin: 0; color: #fff;"><i class="fa fa-plus-square" title="Generate Manual Invoice"></i></h3></a>-->
+        </div>
+    </div>
+</header>
 <div class="">
     <div class="box-header ui-sortable-handle">
-        <i class="fa fa-calendar-o"></i>
-        <h3 class="box-title"><a href="invoice/monthly">Reports (Monthly)</a></h3>
+        <!--<i class="fa fa-calendar-o"></i>
+        <h3 class="box-title"><a href="invoice/monthly">Reports (Monthly)</a></h3>-->
         <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     </div>
     <div class="table-responsive">
