@@ -44,11 +44,13 @@
             <?php endforeach; ?>
         </tbody>
         <tfoot>
+            <?php /* ?>
             <tr>                        
                 <?php foreach ($labels as $label): ?>
                     <th><?php echo $label ?></th>
                 <?php endforeach; ?>
             </tr>
+            <?php */ ?>
         </tfoot>
     </table>
 </div>

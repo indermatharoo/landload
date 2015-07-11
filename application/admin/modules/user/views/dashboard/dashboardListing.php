@@ -39,11 +39,13 @@ if($recentProperties['num_rows'] > 0)
             <?php endforeach; ?>
         </tbody>
         <tfoot>
+            <?php /* ?>
             <tr>                        
                 <?php foreach ($companylabels as $label): ?>
                     <th><?php echo $label ?></th>
                 <?php endforeach; ?>
             </tr>
+             <?php */ ?>
         </tfoot>
     </table>
 </div>
