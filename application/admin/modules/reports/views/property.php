@@ -4,6 +4,7 @@
 //die();
 ?> 
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
+
 <div class="col-lg-12 padding-0" style="padding-top: 15px;">
     <h3>Occupied</h3>
     <table id="table" class="table table-bordered table-striped">
@@ -12,6 +13,7 @@
                 <?php
                 $labels = array(
                     'pname' => 'Property Name',
+                    'unitname' => 'Unit Number',
                     'type' => 'Type',
                     'unit' => 'Amount',
                     'Unit' => 'Unit type',
@@ -31,6 +33,7 @@
                     ?>
                     <tr>
                         <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                          <td><?= arrIndex($item, 'unit_number')  ?></td>
                         <td><?= arrIndex($item, 'type') ?></td>
                         <td><?= arrIndex($item, 'amount') ?></td>
                         <td><?= arrIndex($item, 'unit_type') ?></td>
@@ -74,6 +77,7 @@
                     ?>
                     <tr>
                         <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                          <td><?= arrIndex($item, 'unit_number')  ?></td>
                         <td><?= arrIndex($item, 'type') ?></td>
                         <td><?= arrIndex($item, 'amount') ?></td>
                         <td><?= arrIndex($item, 'unit_type') ?></td>
@@ -97,6 +101,6 @@
         </tfoot>
     </table>
 </div>
-<p align="center"><?php //echo $pagination;      ?></p>
+<p align="center"><?php //echo $pagination;       ?></p>
 
 
