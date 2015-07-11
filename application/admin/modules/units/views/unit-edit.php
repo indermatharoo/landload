@@ -108,9 +108,12 @@
             </div>
 
             <div class="col-sm-6">
+                
                 <?php foreach ($images['result'] as $image) { ?>
+                    <div class="koiclass col-sm-4 center" >
                     <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $image['image'] ?>" height="100px"  width="100px">
-                    <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" >
+                    <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" title="">delete
+                    </div>
                 <?php } ?>
             </div>             
 

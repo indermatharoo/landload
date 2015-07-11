@@ -129,7 +129,7 @@ class Unitsmodel extends Basemodel {
         ));
         if ($this->upload->do_multi_upload("galleryImages")) {
             //Print data for all uploaded files.
-            print_r($this->upload->get_multi_upload_data());
+            
             foreach ($this->upload->get_multi_upload_data() as $images) {
                 $this->db->insert('unit_image', array('image' => $images['file_name'], 'unit_id' => $unit_id));
             }
