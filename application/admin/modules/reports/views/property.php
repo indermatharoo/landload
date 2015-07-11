@@ -101,7 +101,7 @@
                     <th><?php echo $label ?></th>
                 <?php endforeach; ?>
             </tr>
-            <?php /* ?>
+            <?php */ ?>
         </tfoot>
     </table>
 </div>
