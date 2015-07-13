@@ -6,13 +6,31 @@ class Propertymodel extends CI_Model {
         parent::__construct();
     }
 
-    function listAll() {
-        $this->db->select('units.id as unit_id,units.*,properties.*')
-                ->from('units')
-                ->join('properties', 'units.property_id=properties.id');
-        $rs = $this->db->get();
-//        e($rs->result_array());
-        return $rs->result_array();
+
+    function listAll($attributes = array()) {
+        $attributeWhere = $valueWhere = array();
+        foreach ($attributes as $id => $value):
+            if (empty($value))
+                continue;
+            $attributeWhere[] = $id;
+            $valueWhere[] = 't3.value like "%' . $value . '%"';
+        endforeach;
+        if (count($valueWhere)) {
+            $valueWhere = implode(' OR ', $valueWhere);
+            $valueWhere = 'AND ' . $valueWhere;
+        } else {
+            $valueWhere = '';
+        }
+        $this->db->select('t1.id as unit_id,t1.*,t2.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
+        $this->db->from('units t1');
+        $this->db->join('properties t2', 't1.property_id=t2.id');
+        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere);
+        $this->db->group_by('unit_id');
+        if (count($attributeWhere))
+            $this->db->where_in('attribute_id', $attributeWhere);
+        $results = $this->db->get()->result_array();
+//        e($results);
+        return $results;
     }
 
     function territoryList() {
@@ -113,10 +131,9 @@ class Propertymodel extends CI_Model {
         $applied_date = date('Y-m-d');
 
         $this->db->insert('applications', $data);
-        
+
         //echo $this->db->last_query();
         //exit;
-        
     }
 
     function getAttributeValue($unit_id) {

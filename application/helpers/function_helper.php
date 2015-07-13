@@ -19,13 +19,9 @@ function p() {
     echo "<pre>";
 }
 
-function gParam($index = null, $exit = true, $fromGET = false) {
-    $params = $_POST;
-    if ($fromGET) {
-        $params = $_GET;
-    }
-
-    $return = isset($params[$index]) ? $params[$index] : null;
+function gParam($index = null,$return = null) {
+    $params = $_REQUEST;
+    $return = isset($params[$index]) ? $params[$index] : $return;
     return $return;
 }
 
@@ -216,4 +212,19 @@ function getCompany($id) {
     $result = getThis()->db->get();
     $result = $result->row();
     return $result;
+}
+
+function getAttributes() {
+    $results = getThis()
+            ->db
+            ->from('units_attributes')
+            ->where('searchable', 1)
+            ->get()
+            ->result_array()
+    ;
+    return $results;
+}
+
+function lQ() {
+    e(getThis()->db->last_query());
 }

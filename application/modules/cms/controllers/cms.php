@@ -6,7 +6,7 @@ if (!defined('BASEPATH'))
 class Cms extends Cms_Controller {
     public $COMPANY = false;
             function index() {
-        
+                
         $this->load->helper('url');
         $this->load->helper('text');
         $this->load->library('Cart');
@@ -78,9 +78,9 @@ class Cms extends Cms_Controller {
 
         $slides = array();
         $slides = $this->Slidemodel->listAll();
-
+        $attributes = gParam('attributes',array());
         $property = array();
-        $property = $this->Propertymodel->listAll();
+        $property = $this->Propertymodel->listAll($attributes);
         //Get all news
 //        $news = array();
 //        $news = $this->Newsmodel->listAll(0 ,2);
