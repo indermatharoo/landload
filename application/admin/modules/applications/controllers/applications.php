@@ -25,7 +25,7 @@ class Applications extends Admin_Controller {
         $this->pagination->initialize($config);
 
         $Listing = $this->Applicationsmodel->listAll();
-        
+
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',
@@ -157,8 +157,7 @@ class Applications extends Admin_Controller {
 //        echo '<pre>';
 //        print_r($_POST);
 //        exit;
-        if(trim($id)=="")
-        {
+        if (trim($id) == "") {
             redirect('applications/index');
         }
         $this->load->library('form_validation');
@@ -169,13 +168,13 @@ class Applications extends Admin_Controller {
         $this->load->library('email');
 
         //$details = $this->Applicationsmodel->getApplicationDetails($id);
-        
+
         $userDetail = $this->Applicationsmodel->getUserDetails($id);
         $ApplicationType = $this->Applicationsmodel->getApplicationType();
         $propertiesList = $this->Propertiesmodel->getPropertiesList();
         $applicantsType = $this->Applicantsmodel->getApplicantType();
         $uploadedDocuments = $this->Applicationsmodel->getUploadedDocuments($userDetail['applicant_id']);
-        
+
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
@@ -194,14 +193,14 @@ class Applications extends Admin_Controller {
         $this->form_validation->set_rules('refund', 'Refundable', 'trim|required');
 
         $days = array(
-            'sunday'=>'Sunday',
-            'monday'=>'Monday',
-            'tuesday'=>'Tuesday',
-            'wednesday'=>'Wednesday',
-            'thursday'=>'Thursday',
-            'friday'=>'Friday',
-            'satureday'=>'Satureday'
-            );
+            'sunday' => 'Sunday',
+            'monday' => 'Monday',
+            'tuesday' => 'Tuesday',
+            'wednesday' => 'Wednesday',
+            'thursday' => 'Thursday',
+            'friday' => 'Friday',
+            'satureday' => 'Satureday'
+        );
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['details'] = $userDetail;
@@ -222,64 +221,66 @@ class Applications extends Admin_Controller {
             redirect(createUrl('applications/index/'));
         }
     }
-    function user_details($offset)
-    {
-          $this->load->library('form_validation');
+
+    function user_details($offset) {
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('fname', 'First Name', 'trim|required');
         $this->form_validation->set_rules('lname', 'Last Name', 'trim|required');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
         $this->form_validation->set_rules('phone', 'Phone', 'trim|required');
-             if ($this->form_validation->run() == FALSE) {
-                 echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
-             }
-             else
-             {
-                 
-                 $this->Applicationsmodel->saveUserDetails($offset);
-             }
+        if ($this->form_validation->run() == FALSE) {
+            echo json_encode(array('response' => 'false', 'msg' => validation_errors()));
+        } else {
+
+            $this->Applicationsmodel->saveUserDetails($offset);
+        }
     }
-    function job_details($offset="")
-    {
+
+    function job_details($offset = "") {
         $this->Applicationsmodel->saveJobDetails($offset);
     }
-    function properties_details($offset)
-    {
-          $this->load->library('form_validation');
+
+    function properties_details($offset) {
+        $this->load->library('form_validation');
         $this->form_validation->set_rules('property_id', 'First Name', 'trim|required');
         $this->form_validation->set_rules('unit_id', 'Last Name', 'trim|required');
-       
-      if ($this->form_validation->run() == FALSE) {
-                  echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
-             }
-             else
-             {
-                 $this->Applicationsmodel->savePropertyDetails($offset);
-             }        
+
+        if ($this->form_validation->run() == FALSE) {
+            echo json_encode(array('response' => 'false', 'msg' => validation_errors()));
+        } else {
+            $this->Applicationsmodel->savePropertyDetails($offset);
+        }
     }
-    function agree_details($offset)
-    {
-       $this->load->library('form_validation');
-       $this->form_validation->set_rules('agree', 'Agree to Agreement', 'trim|required');
-       $this->form_validation->set_rules('rent_amount', 'Rent Amount', 'trim|required|integer');
-       $this->form_validation->set_rules('security_amount', 'Security Amount', 'trim|required|integer');
-       $this->form_validation->set_rules('ptype', 'Payment Amount', 'trim|required');
-       $this->form_validation->set_rules('refund', 'Refund Amount', 'trim|required');
-       if($this->input->post('ptype')=="M")
-       {
-           $this->form_validation->set_rules('date_of_month', 'Day Of Month', 'trim|required|callback_valid_date');
-       }
-      if ($this->form_validation->run() == FALSE) {
-                   echo json_encode(array('response'=>'false','msg'=>  validation_errors()));
-             }
-             else
-             {
-                 $this->Applicationsmodel->saveAgreeDetails($offset);
-             }        
-    }   
-    function upload_document($id,$appID)
-    {
-        
+
+    function checkPrice($value) {
+        if (is_numeric($value)) {
+            return true;
+        } else {
+            $this->form_validation->set_message('checkPrice','Rent Amount Must Be A Numeric');
+            return false;
+        }
+    }
+
+    function agree_details($offset) {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('agree', 'Agree to Agreement', 'trim|required');
+        $this->form_validation->set_rules('rent_amount', 'Rent Amount', 'trim|required|callback_checkPrice');
+        $this->form_validation->set_rules('security_amount', 'Security Amount', 'trim|required|integer');
+        $this->form_validation->set_rules('ptype', 'Payment Amount', 'trim|required');
+        $this->form_validation->set_rules('refund', 'Refund Amount', 'trim|required');
+        if ($this->input->post('ptype') == "M") {
+            $this->form_validation->set_rules('date_of_month', 'Day Of Month', 'trim|required|callback_valid_date');
+        }
+        if ($this->form_validation->run() == FALSE) {
+            echo json_encode(array('response' => 'false', 'msg' => validation_errors()));
+        } else {
+            $this->Applicationsmodel->saveAgreeDetails($offset);
+        }
+    }
+
+    function upload_document($id, $appID) {
+
         $this->load->library('form_validation');
         $this->load->model('virtcab/VirtualCabinetmodel');
 
@@ -302,24 +303,21 @@ class Applications extends Admin_Controller {
             'oog' => 'video/ogg',
             'flv' => 'video/flv'
         );
-         $currentUserId = curUsrId();
-                $this->load->library('upload');
+        $currentUserId = curUsrId();
+        $this->load->library('upload');
         $this->upload->initialize(array(
-            "upload_path"   => $this->config->item('UPLOAD_PATH_VIRCAB_IMG'),
-            'allowed_types'=>'gif|jpg|png'
-                
+            "upload_path" => $this->config->item('UPLOAD_PATH_VIRCAB_IMG'),
+            'allowed_types' => 'gif|jpg|png'
         ));
-        if($this->input->post('deal')!=NULL)
-        {
-            $this->db->where('id',$appID);
-            $this->db->update('applications',array('is_deal_start'=>$this->input->post('deal')));
+        if ($this->input->post('deal') != NULL) {
+            $this->db->where('id', $appID);
+            $this->db->update('applications', array('is_deal_start' => $this->input->post('deal')));
         }
-        if($this->upload->do_multi_upload("document")) {
+        if ($this->upload->do_multi_upload("document")) {
             //Print data for all uploaded files.
 
             $userId = $this->session->userdata['id'];
-            foreach($this->upload->get_multi_upload_data() as $images)
-            {
+            foreach ($this->upload->get_multi_upload_data() as $images) {
                 $ext = strtolower(end(explode('.', $images['file_name'])));
                 $data = array();
                 $data[$this->VirtualCabinetmodel->visible_name] = $images['file_name'];
@@ -329,17 +327,18 @@ class Applications extends Admin_Controller {
                 $data[$this->VirtualCabinetmodel->update_dtime] = date('Y-m-d H:i:s');
                 $data[$this->VirtualCabinetmodel->create_dtime] = date('Y-m-d H:i:s');
                 $data[$this->VirtualCabinetmodel->assignes] = $id;
-                $data[$this->VirtualCabinetmodel->creator_id] = $userId;  
+                $data[$this->VirtualCabinetmodel->creator_id] = $userId;
                 $data['is_applicant'] = 1;
                 $virtual_event_id = $this->VirtualCabinetmodel->insertRecord($data, true);
             }
         }
         redirect(createUrl('applications/index/'));
     }
+
     function delete($id) {
         $this->Applicationsmodel->DeleteRecord($id);
         $this->session->set_flashdata('SUCCESS', 'application_deleted');
         redirect(createUrl('applications/index/'));
     }
-    
+
 }

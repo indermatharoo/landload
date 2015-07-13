@@ -216,7 +216,7 @@ class Applicationsmodel extends Basemodel {
         
         $data['refundable'] =$this->input->post('refund');
         $data['invoice_amount'] =$this->input->post('rent_amount');
-        $data['start_date'] =date('Y-m-d H:i:s');
+        $data['startdate'] =date('Y-m-d H:i:s');
         $data['security_amount'] =$this->input->post('security_amount');
         
             $this->db->where('id',$id);

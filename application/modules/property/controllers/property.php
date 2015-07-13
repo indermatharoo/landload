@@ -22,7 +22,7 @@ class Property extends Cms_Controller {
 
     function detail($uid) {
         // e($uid);
-              
+
         $this->load->model('propertymodel');
         $property = $this->propertymodel->getProperty($uid);
         $gallery_images = $this->propertymodel->getGalleryImages($uid);
@@ -42,7 +42,10 @@ class Property extends Cms_Controller {
 //        e($_POST);
         $this->load->model('propertymodel');
 
-        $this->propertymodel->insertApplication($unit_id, $property_id, $applicant_id);
+        $result = $this->propertymodel->insertApplication($unit_id, $property_id, $applicant_id);
+        if ($result) {
+            $this->session->set_flashdata('success', '<h1 style="color:green">Applied for property successfully</h1>');
+        }
         redirect("customer/dashboard/$applicant_id");
     }
 

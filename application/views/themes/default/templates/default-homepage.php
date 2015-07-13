@@ -40,16 +40,21 @@
                             <div class="property_heading_text">
                                 <h2> Property List </h2>
                             </div>
+                            <?php if (!count($property)): ?>
+                                <div class="col-lg-12">
+                                    No Property Found..
+                                </div>
+                            <?php endif; ?>
                             <?php foreach ($property as $row) { ?>
                                 <div class="col-md-3">
                                     <div class="property_list_box">
                                         <div class="view view-first property_img">
-                                            
-                                            <img src="<?= $this->config->item('UNIT_IMAGE_URL').$row['unit_image'] ?>">
+
+                                            <img src="<?= $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>">
                                             <div class="mask">
                                                 <h2><?= $row['pname'] ?></h2>
-                                                <p><?php echo substr($row['description'],0,50).".."; ?></p>
-                                                <p class="prop_price"><?= DWS_CURRENCY_SYMBOL.$row['amount'] ?></p>
+                                                <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
+                                                <p class="prop_price"><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p>
 
                                                 <a class="info" href="property/detail/<?= $row['unit_id'] ?>">Read More</a>
                                             </div>
@@ -59,7 +64,7 @@
                                                 <div class="property-city-name"><p>United States</p></div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="price-text-note"> <p><?= DWS_CURRENCY_SYMBOL.$row['amount'] ?></p></div> 
+                                                <div class="price-text-note"> <p><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p></div> 
                                             </div>
                                             <div class="clearfix"></div>
 

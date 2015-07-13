@@ -39,7 +39,9 @@ class Login extends Cms_Controller {
 
 //Get Page Details
 //validation check
-
+        if (count($_POST)) {
+            $this->session->set_flashdata('error', '<h1 style="color:red">Wrong email id or password</h1>');
+        }
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
         $this->form_validation->set_rules('password', 'Password', 'trim|required|callback_login_check');
         $this->form_validation->set_error_delimiters('<li>', '</li>');
@@ -71,9 +73,9 @@ class Login extends Cms_Controller {
                 $result['isUser'] = 0;
                 $result['isCustomer'] = 1;
                 $this->session->set_userdata($result);
-               
-               //echo $referred_from;
-               redirect('/');
+
+                //echo $referred_from;
+                redirect('/');
 //               if($redirect!=''){
 //                redirect($redirect, 'refresh');
 //                
@@ -84,11 +86,9 @@ class Login extends Cms_Controller {
 //               else{
 //                   redirect('/');
 //               }
-               
                 //redirect('');
             }
         }
-        
     }
 
 }

@@ -1,5 +1,6 @@
 <div class="col-lg-6">
     <h1 style="">Login Form</h1>
+    <?php echo $this->session->flashdata('error'); ?>
     <?php $this->load->view('inc-messages'); ?>
 
     <form action="<?php echo createUrl('customer/login'); ?>" method="post" role="form" class="">

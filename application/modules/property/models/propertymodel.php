@@ -130,7 +130,7 @@ class Propertymodel extends CI_Model {
         $data['datetime'] = date('Y-m-d H:i:s');
         $applied_date = date('Y-m-d');
 
-        $this->db->insert('applications', $data);
+        return $this->db->insert('applications', $data);
 
         //echo $this->db->last_query();
         //exit;
