@@ -35,7 +35,9 @@
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
             <?php $this->load->view("dashboard/dashboardListing"); ?>
             <div class="clearfix"></div>
-            <?php $this->load->view("dashboard/recentCompany"); ?>
+            <?php if ($this->aauth->isAdmin()): ?>
+                <?php $this->load->view("dashboard/recentCompany"); ?>
+            <?php endif; ?>
             <div class="clearfix"></div>
             <?php $this->load->view("dashboard/recentUsers"); ?>
             <div class="clearfix"></div>

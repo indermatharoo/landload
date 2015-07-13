@@ -72,7 +72,7 @@
                                                 <div class="property-text-name"><h4><?= $row['unit_number'] ?></h4></div>
                                             </div>
                                             <div class="col-md-3">
-                                                <div class="buy-now-btn"> <a href="#" class="btn btn-primary">  Buy Now </a></div> 
+                                                <div class="buy-now-btn"> <a href="property/detail/<?= $row['unit_id'] ?>" class="btn btn-primary">  Buy Now </a></div> 
                                             </div>
                                             <div class="clearfix"></div>
                                         </div>

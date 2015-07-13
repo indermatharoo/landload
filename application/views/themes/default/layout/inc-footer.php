@@ -26,7 +26,7 @@
                                         </p>
                                     </div>
                                     <div class="abt_footer_read_link text-right">
-                                        <a href="about-us" >Read More</a>  
+                                        <a href="<?php echo base_url() ?>about-us" >Read More</a>  
                                     </div>
                                 </div>
                                 <div class="clearfix"></div>

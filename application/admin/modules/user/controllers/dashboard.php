@@ -5,8 +5,8 @@ if (!defined('BASEPATH'))
 
 class Dashboard extends Admin_Controller {
 
-    function index($syear = 2014, $eyear = 2015) { 
-        ini_set('display_errors','On');
+    function index($syear = 2014, $eyear = 2015) {
+
         if ($this->aauth->isCustomer()):
             redirect('customer/dashboard');
         endif;
@@ -21,7 +21,11 @@ class Dashboard extends Admin_Controller {
         $recentProperties = $this->Propertiesmodel->getRecentProperties();
         $recentCompanies = $this->Companymodel->getRecentCompany();
         //e($recentCompanies);
-        $recentUser = $this->Applicantsmodel->getRecentApplicants();
+        if ($this->aauth->isCompany()):
+            $recentUser = $this->Applicantsmodel->getRecentApplicantsCompany();
+        else:
+            $recentUser = $this->Applicantsmodel->getRecentApplicants();
+        endif;
         $inner = array();
         $inner['recentProperties'] = $recentProperties;
         $inner['recentCompanies'] = $recentCompanies;
@@ -30,8 +34,7 @@ class Dashboard extends Admin_Controller {
         $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
         $this->load->view($this->dashboard, $page);
     }
-    
-   
+
     function setUserSession($regions, $franchises) {
         $this->session->set_userdata('reporttype', 'default');
         $temp = array();
