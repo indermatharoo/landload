@@ -26,7 +26,7 @@
                                                         </div>-->
                             <?php foreach (getAttributes() as $attribute): ?>
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                    <span class="input-group-addon"></span>
                                     <input type="text" placeholder="<?php echo ucfirst(arrIndex($attribute, 'label')); ?>" value="" name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
                                 </div>
                             <?php endforeach; ?>
