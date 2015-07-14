@@ -19,6 +19,14 @@
                     });
                 });
             });
+            $(document).ready(function () {
+                $('.panel-title').click(function () {
+                    var img = $(this).find('img');
+                    var url = (img.attr('src') == '../imgs/down-triangle.png') ? '../imgs/right-triangle.png' : '../imgs/down-triangle.png';
+                    img.attr('src', url);
+                });
+            });
+
         </script>
         <div class="popups">
 
@@ -37,7 +45,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding: 0;">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Properties</h3></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Properties<img src="../imgs/right-triangle.png" style="float: right;"></h3></a>
                         </h4>
                     </div>
                     <div id="collapse1" class="panel-collapse collapse in">
@@ -48,7 +56,7 @@
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0;">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Company</h3></a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Company<img src="../imgs/down-triangle.png" style="float: right;"></h3></a>
                             </h4>
                         </div>
                         <div id="collapse2" class="panel-collapse collapse">
@@ -59,7 +67,7 @@
                 <div class="panel panel-default">
                     <div class="panel-heading" style="padding: 0;">
                         <h4 class="panel-title">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Applicants</h3></a>
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Applicants<img src="../imgs/down-triangle.png" style="float: right;"></h3></a>
                         </h4>
                     </div>
                     <div id="collapse3" class="panel-collapse collapse">
