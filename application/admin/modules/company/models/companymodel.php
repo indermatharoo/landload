@@ -12,10 +12,10 @@ class Companymodel extends Basemodel {
         $this->db->from(convertToAuthStr('users'));
         return $this->db->count_all_results();
     }
-    
+
     //Get List of countries
-    
-    function getCountry(){
+
+    function getCountry() {
         $query = $this->db->get('country');
         $row = $query->result_array();
         return $row;
@@ -60,10 +60,9 @@ class Companymodel extends Basemodel {
         $this->db->where('id !=', curUsrPid());
         $this->db->from(convertToAuthStr('users'));
         $this->db->join(
-                convertToAuthStr('user_to_group'), 
-                convertToAuthStr('user_to_group') . '.user_id = ' . convertToAuthStr('users') . '.id'
-                .' and dpd_'.convertToAuthStr('user_to_group').'.group_id!=6'
-                );
+                convertToAuthStr('user_to_group'), convertToAuthStr('user_to_group') . '.user_id = ' . convertToAuthStr('users') . '.id'
+                . ' and dpd_' . convertToAuthStr('user_to_group') . '.group_id!=6'
+        );
         $rs = $this->db->get();
         return $rs->result_array();
     }
@@ -95,16 +94,16 @@ class Companymodel extends Basemodel {
 
     //Get User Detial
     function fetchByID($uid) {
-       
+
         $this->db->select('*')
                 ->from('aauth_users')
-                ->join('user_extra_detail','user_extra_detail.id=aauth_users.id')
-                ->where('aauth_users.id',$uid);
-        
+                ->join('user_extra_detail', 'user_extra_detail.id=aauth_users.id')
+                ->where('aauth_users.id', $uid);
+
 //        $this->db->where('id', intval($uid));
 //        $this->db->where('is_active', 1);
         $rs = $this->db->get();
-        if ($rs && $rs->num_rows() >0)
+        if ($rs && $rs->num_rows() > 0)
             return $rs->row_array();
 
         return FALSE;
@@ -143,7 +142,7 @@ class Companymodel extends Basemodel {
 
     function uploadImage() {
         $config['upload_path'] = $this->config->item('UPLOAD_PATH_USERS');
-       
+
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
         $this->load->library('upload', $config);
@@ -196,7 +195,7 @@ class Companymodel extends Basemodel {
     function insertRecord() {
 
         $user_id = $this->aauth->create_user(gParam('email'), gParam('pass'), gParam('name'), '3', gParam('package'), $this->aauth->get_user()->id, self::uploadImage());
-        
+
         $data1['company_name'] = $this->input->post('company_name');
         $data1['contact_person'] = $this->input->post('contact_person');
         $data1['phone'] = $this->input->post('phone');
@@ -206,7 +205,7 @@ class Companymodel extends Basemodel {
         $data1['state'] = $this->input->post('state');
         $data1['country'] = $this->input->post('country');
         $data1['id'] = $user_id;
-                
+
         $this->db->insert('user_extra_detail', $data1);
         return $user_id;
     }
@@ -220,7 +219,7 @@ class Companymodel extends Basemodel {
         }
         $this->aauth->update_user($uid, gParam('email'), gParam('pass'), gParam('name'), gParam('package'), gParam('store_id'), self::uploadImage());
         $data = array();
-       // $data = rSF('user_extra_detail');
+        // $data = rSF('user_extra_detail');
 //        e($data);
         $data1['company_name'] = $this->input->post('company_name');
         $data1['contact_person'] = $this->input->post('contact_person');
@@ -244,7 +243,6 @@ class Companymodel extends Basemodel {
             //$data['start_date'] = time();
             $this->db->insert('user_extra_detail', $data1);
         }
-       
     }
 
     function updateTargets($uid, $event, $customer, $target, $event_type, $exludeWeekEnd) {
@@ -993,32 +991,41 @@ class Companymodel extends Basemodel {
         $this->db->update('aauth_users', $array);
         return true;
     }
-    
-    function hasCurPageAccess($pid){
+
+    function hasCurPageAccess($pid) {
         $this->db->select('*');
-        $this->db->where('page_id',$pid);
-        $this->db->where('user_id',  curUsrId());
+        $this->db->where('page_id', $pid);
+        $this->db->where('user_id', curUsrId());
         $rs = $this->db->get('page')->result_array();
         return count($rs);
     }
-    function getCompanyId($id)
-    {
-        
+
+    function getCompanyId($id) {
+
         $this->db->get('aauth_groups');
-        
     }
-    function getRecentCompany()
-    {
+
+    function getRecentCompany() {
         $this->db->order_by("register_date", "desc");
         $this->db->select();
         $this->db->limit(10);
-        $this->db->where('aauth_groups.id',3);
-        $this->db->join('aauth_user_to_group','aauth_groups.id=aauth_user_to_group.group_id','left');
-        $this->db->join('aauth_users','aauth_users.id=aauth_user_to_group.user_id','left');
-        $this->db->join('user_extra_detail','user_extra_detail.id=aauth_users.id','left');
+        $this->db->where('aauth_groups.id', 3);
+        $this->db->join('aauth_user_to_group', 'aauth_groups.id=aauth_user_to_group.group_id', 'left');
+        $this->db->join('aauth_users', 'aauth_users.id=aauth_user_to_group.user_id', 'left');
+        $this->db->join('user_extra_detail', 'user_extra_detail.id=aauth_users.id', 'left');
         $res = $this->db->get('aauth_groups');
-        return array('num_rows'=>$res->num_rows(),'results'=>$res->result_array());
+        return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }
+
+    function countCompany() {
+        $this->db->where('aauth_groups.id', 3);
+        $this->db->join('aauth_user_to_group', 'aauth_groups.id=aauth_user_to_group.group_id', 'left');
+        $this->db->join('aauth_users', 'aauth_users.id=aauth_user_to_group.user_id', 'left');
+        $this->db->join('user_extra_detail', 'user_extra_detail.id=aauth_users.id', 'left');
+        $res = $this->db->get('aauth_groups');
+        return $res->num_rows();
+    }
+
 }
 
 ?>
