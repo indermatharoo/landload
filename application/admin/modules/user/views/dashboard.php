@@ -33,14 +33,41 @@
         </div>
 
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
-            <?php $this->load->view("dashboard/dashboardListing"); ?>
-            <div class="clearfix"></div>
-            <?php if ($this->aauth->isAdmin()): ?>
-                <?php $this->load->view("dashboard/recentCompany"); ?>
-            <?php endif; ?>
-            <div class="clearfix"></div>
-            <?php $this->load->view("dashboard/recentUsers"); ?>
-            <div class="clearfix"></div>
+            <div class="panel-group" id="accordion" style="margin: 0;">
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="padding: 0;">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Properties</h3></a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse in">
+                        <div class="panel-body"> <?php $this->load->view("dashboard/dashboardListing"); ?></div>
+                    </div>
+                </div>
+                <?php if ($this->aauth->isAdmin()): ?>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" style="padding: 0;">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapse2"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Company</h3></a>
+                            </h4>
+                        </div>
+                        <div id="collapse2" class="panel-collapse collapse">
+                            <div class="panel-body"><?php $this->load->view("dashboard/recentCompany"); ?></div>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="padding: 0;">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse3"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Applicants</h3></a>
+                        </h4>
+                    </div>
+                    <div id="collapse3" class="panel-collapse collapse">
+                        <div class="panel-body"><?php $this->load->view("dashboard/recentUsers"); ?></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <div id="franchisesregions"> </div>
     </div>
