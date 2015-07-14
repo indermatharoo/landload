@@ -5,8 +5,8 @@ if($recentCompanies['num_rows'] > 0)
     //    print_r($recentCompany['results']);
     //    die();
     ?>
-<h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Company</h3>
-<div class="col-lg-12 padding-0" style="padding-top: 15px;">
+<!--<h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Company</h3>-->
+<div class="col-lg-12 padding-0">
     <table id="table" class="table table-bordered table-striped">
         <thead>
             <tr>                        
