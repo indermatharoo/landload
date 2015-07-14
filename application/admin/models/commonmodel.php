@@ -40,8 +40,15 @@ class Commonmodel extends Basemodel {
         $this->db->where($pkid, $id);
         $this->db->delete($table);
     }
-    
+
+    function count($table, $where = false) {
+        if ($where)
+            $this->db->where($where);
+        return $this->db->count_all_results($table);
+    }
+
     function test() {
         e(123);
     }
+
 }

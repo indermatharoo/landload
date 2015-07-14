@@ -33,12 +33,12 @@
                         <form action=<?= createUrl("welcome/index/"); ?> method="post" enctype="multipart/form-data">
                             <?php echo form_hidden($this->security->get_csrf_token_name(), $this->security->get_csrf_hash()); ?>
                             <div class="form-group">
-                                <label for="username" class="control-label">Username</label>
-                                <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="user name">
+                                <label for="username" class="control-label">Email</label>
+                                <input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="Email">
                             </div>
                             <div class="form-group">
                                 <label for="password" class="control-label">Password</label>
-                                <input type="password" class="form-control" id="password" name="passwd" value="" required="" title="Please enter your password" placeholder='password'>
+                                <input type="password" class="form-control" id="password" name="passwd" value="" required="" title="Please enter your password" placeholder='Password'>
                             </div>
                             <div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
 <!--                            <div class="form-group">

@@ -1,9 +1,0 @@
-#DirectoryIndex login.php
-php_flag zlib.output_compression On
-RewriteEngine On
-RewriteBase /desktopdeli/landlord
-
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*) index.php?/$1 [L]
-
