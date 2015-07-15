@@ -1,3 +1,4 @@
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <div class="row content-bg">
     <div class="dashboard_message content-bg" style="min-width:200px;left: 207.5px; position: absolute; top: 152px; z-index: 9999; opacity: 1; display: none; padding: 10px;">
         <div class="cls" style="text-align: right; cursor: pointer">X</div>
@@ -75,6 +76,73 @@
         <div class="col-lg-12 menu padding-0">
             <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
         </div>
+        <script type="text/javascript">
+            var total = <?php echo json_encode($total); ?>;
+            console.log(total);
+            google.load("visualization", "1", {packages: ["corechart", "line"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+                var data = google.visualization.arrayToDataTable([
+                    ['Stats', ''],
+                    ['Total Properties', total.applicants],
+                    ['Total Companies', total.companies],
+                    ['Total Applicants', total.properties]
+                ]);
+
+                var options = {
+                    title: 'Statistics',
+                    is3D: true,
+                };
+
+                var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+                chart.draw(data, options);
+            }
+        </script>        
+        <div class="col-lg-12 menu padding-0">
+            <div id="piechart_3d" style="width: 525px; height:300px;"></div>
+        </div>
     </div>
+    <div class="col-lg-12 menu padding-0">
+        <script type="text/javascript">
+            google.setOnLoadCallback(drawLineChart);
+            function drawLineChart() {
+                var data = new google.visualization.DataTable();
+                data.addColumn('number', 'Year');
+                data.addColumn('number', 'Properties');
+                data.addColumn('number', 'Companies');
+                data.addColumn('number', 'Applicants');
+                data.addRows([
+                    [1, 99.8, 99.8, 99.8],
+                    [2, 77.9, 77.5, 77.4],
+                    [3, 66.4, 66, 66.7],
+                    [4, 11.7, 18.8, 10.5],
+                    [5, 11.9, 17.6, 10.4],
+                    [6, 8.8, 13.6, 7.7],
+                    [7, 7.6, 12.3, 9.6],
+                    [8, 12.3, 29.2, 10.6],
+                    [9, 16.9, 42.9, 14.8],
+                    [10, 12.8, 30.9, 11.6],
+                    [11, 5.3, 7.9, 4.7],
+                    [12, 6.6, 8.4, 5.2],
+                    [13, 4.8, 6.3, 3.6],
+                    [14, 4.2, 6.2, 3.4]
+                ]);
+                var options = {
+                    chart: {
+                        title: 'Box Office Earnings in First Two Weeks of Opening',
+                        subtitle: 'in millions of dollars (USD)'
+                    },
+                    height: 400
+                };
+                var chart = new google.charts.Line(document.getElementById('linechart_material'));
+                chart.draw(data, options);
+            }
+
+        </script>
+        <div id="linechart_material" style="">                   
+        </div>        
+    </div>
+     <div class="clearfix"></div>
+
 </div>
 <?php $this->load->view('headers/dashboard'); ?>

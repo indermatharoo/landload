@@ -1025,7 +1025,12 @@ class Companymodel extends Basemodel {
         $res = $this->db->get('aauth_groups');
         return $res->num_rows();
     }
-
+    
+    function lineChartData(){
+//        $this->db->select('max(year(datetime)) as max_year');
+//        $result = $this->db->get('properties')->row_array();
+//        $max_year
+    }
 }
 
 ?>

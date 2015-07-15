@@ -17,9 +17,13 @@ class Propertiesmodel extends Basemodel {
         }
     }
 
-    function countAll() {
+    function countAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('company_id', $ids);
+        endif;
         $this->db->from('properties');
-        return $this->db->count_all_results();
+        $results = $this->db->count_all_results();
+        return $results;
     }
 
     function getPropertiesType() {
@@ -27,13 +31,12 @@ class Propertiesmodel extends Basemodel {
         return $res->result_array();
     }
 
-    function listAll($offset, $limit) {
-        if ($offset)
-            $this->db->offset($offset);
-        if ($limit)
-            $this->db->limit($limit);
-
-        return $this->db->get('properties')->result_array();
+    function listAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('company_id', $ids);
+        endif;
+        $results = $this->db->get('properties')->result_array();
+        return $results;
     }
 
     function getPropertDetails($id) {

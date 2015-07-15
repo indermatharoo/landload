@@ -12,19 +12,24 @@ class Unitsmodel extends Basemodel {
         2 => 'Monthly'
     );
 
-    function countAll() {
-        $this->db->from('units');
-        return $this->db->count_all_results();
-    }
-
-    function listAll($offset, $limit) {
-        if ($offset)
-            $this->db->offset($offset);
-        if ($limit)
-            $this->db->limit($limit);
+    function countAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('company_id', $ids);
+        endif;
         $this->db->select('units.id as unit_id,units.*,properties.*');
         $this->db->join('properties', 'properties.id=units.property_id', 'left');
-        return $this->db->get('units')->result_array();
+        $results = $this->db->get('units')->result_array();
+        return count($results);
+    }
+
+    function listAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('company_id', $ids);
+        endif;
+        $this->db->select('units.id as unit_id,units.*,properties.*');
+        $this->db->join('properties', 'properties.id=units.property_id', 'left');
+        $results = $this->db->get('units')->result_array();
+        return $results;
     }
 
     function getUnitType() {
@@ -50,52 +55,49 @@ class Unitsmodel extends Basemodel {
         $data['amount_type'] = $this->input->post('amount_type');
         $data['is_featured'] = $this->input->post('is_featured');
 //        e($data);
-        
+
         $config_slug = array(
-        'field' => 'uri',
+            'field' => 'uri',
 //        'title' => 'title',
-        'table' => 'units',
-        'id' => 'id',
+            'table' => 'units',
+            'id' => 'id',
         );
         $this->load->library('slug', $config_slug);
-        
+
         $data_uri = array(
             'title' => $this->input->post('unit_number')
         );
         $data['uri'] = $this->slug->create_uri($data_uri);
-        
-        if(!empty($_POST['features']))
-        {
-            $data['features'] =  implode($_POST['features'],'|');
-        }
-        else
-        {
-            $data['features']='';
+
+        if (!empty($_POST['features'])) {
+            $data['features'] = implode($_POST['features'], '|');
+        } else {
+            $data['features'] = '';
         }
         $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
         $this->load->library('upload', $config);
-        
+
         $map_img = $_FILES['map_image']['name'];
-        
-        if($map_img!=''){
-                        
+
+        if ($map_img != '') {
+
             if ($_FILES['map_image']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['map_image']['tmp_name'])) {
                 if (!$this->upload->do_upload('map_image')) {
                     show_error($this->upload->display_errors('<p class="err">', '</p>'));
                     return FALSE;
                 } else {
                     $upload_data = $this->upload->data();
-                     $data['map_image'] = $upload_data['file_name'];
+                    $data['map_image'] = $upload_data['file_name'];
                 }
             }
         }
-        
+
         if (count($_FILES) > 0) {
-            
+
             //e($_FILES);
-            
+
             if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
                 if (!$this->upload->do_upload('photo')) {
                     show_error($this->upload->display_errors('<p class="err">', '</p>'));
@@ -105,8 +107,6 @@ class Unitsmodel extends Basemodel {
                     $data['unit_image'] = $upload_data['file_name'];
                 }
             }
-            
-            
         }
         $status = $this->db->insert('units', $data);
         if ($status) {
@@ -129,7 +129,7 @@ class Unitsmodel extends Basemodel {
         ));
         if ($this->upload->do_multi_upload("galleryImages")) {
             //Print data for all uploaded files.
-            
+
             foreach ($this->upload->get_multi_upload_data() as $images) {
                 $this->db->insert('unit_image', array('image' => $images['file_name'], 'unit_id' => $unit_id));
             }
@@ -151,14 +151,14 @@ class Unitsmodel extends Basemodel {
                 $this->db->delete('unit_image');
             }
         }
-              $data = array();
-              
-        
+        $data = array();
+
+
         $config['upload_path'] = $this->config->item('UNIT_IMAGE_PATH');
         $config['allowed_types'] = 'gif|jpg|png';
         $config['overwrite'] = FALSE;
-        $this->load->library('upload', $config);  
-        
+        $this->load->library('upload', $config);
+
         $config_slug = array(
             'field' => 'uri',
 //            'title' => 'title',
@@ -166,53 +166,52 @@ class Unitsmodel extends Basemodel {
             'id' => 'id',
         );
         $this->load->library('slug', $config_slug);
-        
+
         $data_slug = array(
             'title' => $this->input->post('unit_number'),
         );
         $data['uri'] = $this->slug->create_uri($data_slug, $id);
-              
+
         $map_img = $_FILES['map_image']['name'];
-        
-        if($map_img!=''){
+
+        if ($map_img != '') {
             $mainimage = $this->getUnitDetails($id);
-            @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['map_image']);
-            
+            @unlink($this->config->item('UNIT_IMAGE_PATH') . $mainimage['map_image']);
+
             if ($_FILES['map_image']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['map_image']['tmp_name'])) {
                 if (!$this->upload->do_upload('map_image')) {
                     show_error($this->upload->display_errors('<p class="err">', '</p>'));
                     return FALSE;
                 } else {
                     $upload_data = $this->upload->data();
-                     $data['map_image'] = $upload_data['file_name'];
+                    $data['map_image'] = $upload_data['file_name'];
                 }
             }
         }
-        
-        if(!empty($_FILES['photo']['name']))
-        {
-            
+
+        if (!empty($_FILES['photo']['name'])) {
+
             $mainimage = $this->getUnitDetails($id);
-            @unlink($this->config->item('UNIT_IMAGE_PATH').$mainimage['unit_image']);
-            
-             if (count($_FILES) > 0) {
-                 if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
-                     if (!$this->upload->do_upload('photo')) {
-                         show_error($this->upload->display_errors('<p class="err">', '</p>'));
-                         return FALSE;
-                     } else {
-                         $upload_data = $this->upload->data();
-                          $data['unit_image'] = $upload_data['file_name'];
-                     }
-                 }
+            @unlink($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
+
+            if (count($_FILES) > 0) {
+                if ($_FILES['photo']['error'] == UPLOAD_ERR_OK && is_uploaded_file($_FILES['photo']['tmp_name'])) {
+                    if (!$this->upload->do_upload('photo')) {
+                        show_error($this->upload->display_errors('<p class="err">', '</p>'));
+                        return FALSE;
+                    } else {
+                        $upload_data = $this->upload->data();
+                        $data['unit_image'] = $upload_data['file_name'];
+                    }
+                }
+            }
         }
-        }
-  
+
         $data['property_id'] = $this->input->post('property_id');
         $data['unit_number'] = $this->input->post('unit_number');
         $data['status'] = $this->input->post('status');
         //$data['area'] = $this->input->post('area');
-       // $data['room'] = $this->input->post('room');
+        // $data['room'] = $this->input->post('room');
         //$data['bathroom'] = $this->input->post('bathroom');
         $data['amount'] = $this->input->post('amount');
         $data['amount_type'] = $this->input->post('amount_type');
@@ -220,10 +219,9 @@ class Unitsmodel extends Basemodel {
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
         $data['is_featured'] = $this->input->post('is_featured');
-        
-        if(!empty($_POST['features']))
-        {
-            $data['features'] =  implode($_POST['features'] ,'|');
+
+        if (!empty($_POST['features'])) {
+            $data['features'] = implode($_POST['features'], '|');
         }
         $this->db->where('id', $id);
         $status = $this->db->update('units', $data);

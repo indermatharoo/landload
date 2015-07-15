@@ -20,12 +20,12 @@ class Applications extends Admin_Controller {
         $perpage = 10;
         $config['base_url'] = base_url() . "applicants/index/";
         $config['uri_segment'] = 3;
-        $config['total_rows'] = $this->Applicationsmodel->countAll();
+        $config['total_rows'] = $this->Applicationsmodel->countAll($this->ids);
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
 
-        $Listing = $this->Applicationsmodel->listAll();
-
+        $Listing = $this->Applicationsmodel->listAll($this->ids);
+        
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',

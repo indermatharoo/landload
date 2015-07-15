@@ -21,12 +21,12 @@ class Units extends Admin_Controller {
         $perpage = 10;
         $config['base_url'] = base_url() . "units/index/";
         $config['uri_segment'] = 3;
-        $config['total_rows'] = $this->Unitsmodel->countAll();
+        $config['total_rows'] = $this->Unitsmodel->countAll($this->ids);
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
 
 
-        $Listing = $this->Unitsmodel->listAll($offset, $perpage);
+        $Listing = $this->Unitsmodel->listAll($this->ids);
         $inner = array();
         $inner['labels'] = array(
             'pname' => 'Name',

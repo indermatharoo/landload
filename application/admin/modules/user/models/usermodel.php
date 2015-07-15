@@ -1003,6 +1003,20 @@ class Usermodel extends Basemodel {
         return count($rs);
     }
 
+    function getCompanyUsersId($id = NULL) {
+        if (!$id)
+            $id = curUsrId();
+        $results = $this->db->select('id')
+                        ->from(convertToAuthStr('users'))
+                        ->where('id', $id)
+                        ->or_where('pid', $id)
+                        ->get()->result_array();
+        $tmp = array();
+        foreach ($results as $result):
+            $tmp[arrIndex($result, 'id')] = arrIndex($result, 'id');
+        endforeach;
+        return $tmp;
+    }
 
 }
 

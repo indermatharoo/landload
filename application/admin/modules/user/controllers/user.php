@@ -109,6 +109,7 @@ class User extends Admin_Controller {
         $inner['pagination'] = $this->pagination->create_links();
         $page = array();
         $page['content'] = $this->load->view('user-index', $inner, TRUE);
+//        e($this->customer);
         $this->load->view($this->customer, $page);
     }
 
@@ -182,13 +183,13 @@ class User extends Admin_Controller {
             $this->utility->accessDenied();
             return;
         }
-        if (($uid == 1) && ($this->aauth->isFrsUser())) {
-            $this->session->set_flashdata('ERROR', 'premission_denied_user');
-            redirect(createUrl('user/index'));
-        }
+//        if (($uid == 1) && ($this->aauth->isFrsUser())) {
+//            $this->session->set_flashdata('ERROR', 'premission_denied_user');
+//            redirect(createUrl('user/index'));
+//        }
         //Fetch user details
         $user = array();
-        $user = $this->Usermodel->fetchByID($uid);
+        $user = $this->Usermodel->fetchByID($uid);        
         if (!$user) {
             $this->utility->show404();
             return;
@@ -205,11 +206,11 @@ class User extends Admin_Controller {
             $valid = false;
         }  
         }
-        $this->form_validation->set_rules('city', 'City', 'trim|required');
-        $this->form_validation->set_rules('state', 'State', 'trim|required');
-        $this->form_validation->set_rules('country', 'Country', 'trim|required');
-        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required');       
+//        $this->form_validation->set_rules('city', 'City', 'trim|required');
+//        $this->form_validation->set_rules('state', 'State', 'trim|required');
+//        $this->form_validation->set_rules('country', 'Country', 'trim|required');
+//        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
+//        $this->form_validation->set_rules('address', 'Address', 'trim|required');       
         $this->form_validation->set_error_delimiters('<li>', '</li>');
 
         //Render View
@@ -227,9 +228,9 @@ class User extends Admin_Controller {
         } else {
             $this->Usermodel->updateRecord($uid);
             $this->session->set_flashdata('SUCCESS', 'user_updated');
-            redirect(createUrl('user/index/'));
+            redirect(createUrl('user/dashboard/'));
             exit();
-        }
+        }   
     }
 
     //Delete users

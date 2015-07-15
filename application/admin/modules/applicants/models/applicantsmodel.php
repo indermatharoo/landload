@@ -7,18 +7,22 @@ class Applicantsmodel extends Basemodel {
         parent::__construct();
     }
 
-    function countAll() {
+    function countAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('created_by', $ids);
+        endif;
         $this->db->from('applicants');
         return $this->db->count_all_results();
     }
 
-    function listAll($offset, $limit) {
-        if ($offset)
-            $this->db->offset($offset);
-        if ($limit)
-            $this->db->limit($limit);
+    function listAll($ids = array()) {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('created_by', $ids);
+        endif;
         $this->db->join('applicant_type', 'applicant_type.code=applicants.type');
-        return $this->db->get('applicants')->result_array();
+        $results = $this->db->get('applicants')->result_array();
+//        e($results);
+        return $results;
     }
 
     function getApplicantType() {

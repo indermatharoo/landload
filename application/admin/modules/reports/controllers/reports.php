@@ -8,11 +8,10 @@ class Reports extends Admin_Controller {
     }
 
     function index() {
-        $occupiedList = $this->reportsmodel->getOccupiedUnitsList();
-        
-        $notOccupied = $this->reportsmodel->getUnOccupiedUnitsList();
-        $PaidUnits = $this->reportsmodel->getPaidUnits();
-        $UnPaidUnits = $this->reportsmodel->getUnPaidUnits();
+        $occupiedList = $this->reportsmodel->getOccupiedUnitsList($this->ids);
+        $notOccupied = $this->reportsmodel->getUnOccupiedUnitsList($this->ids);
+        $PaidUnits = $this->reportsmodel->getPaidUnits($this->ids);
+        $UnPaidUnits = $this->reportsmodel->getUnPaidUnits($this->ids);
      //   e($occupiedList);
         $page = array();
         $inner = array();

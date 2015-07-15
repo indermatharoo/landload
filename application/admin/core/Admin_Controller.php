@@ -20,8 +20,10 @@ class Admin_Controller extends CMS_Controller {
     function init() {
         if ($this->aauth->isCompany()):
             $this->company_id = curUsrId();
+            $this->ids = $this->usermodel->getCompanyUsersId(curUsrId());
         elseif ($this->aauth->isUser()):
             $this->company_id = curUsrPid();
+            $this->ids = $this->usermodel->getCompanyUsersId(curUsrPid());
         endif;
     }
 

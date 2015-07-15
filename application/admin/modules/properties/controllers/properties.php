@@ -18,11 +18,11 @@ class Properties extends Admin_Controller {
         $perpage = 10;
         $config['base_url'] = base_url() . "properties/index/";
         $config['uri_segment'] = 3;
-        $config['total_rows'] = $this->Propertiesmodel->countAll();
+        $config['total_rows'] = $this->Propertiesmodel->countAll($this->ids);
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
 
-        $Listing = $this->Propertiesmodel->listAll($offset, $perpage);
+        $Listing = $this->Propertiesmodel->listAll($this->ids);
         $inner = array();
         $inner['labels'] = array(
             'property_name' => 'Property Name',

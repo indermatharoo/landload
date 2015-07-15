@@ -33,7 +33,7 @@ class Dashboard extends Admin_Controller {
         $inner['total']['applicants'] = $this->commonmodel->count('applicants');
         $inner['total']['properties'] = $this->commonmodel->count('properties');
         $inner['total']['companies'] = $this->Companymodel->countCompany();
-//        e($inner['total']);
+        $inner['lineChartdata'] = $this->Companymodel->lineChartData();
         $page = array();
         $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
         $this->load->view($this->dashboard, $page);

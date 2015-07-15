@@ -22,45 +22,6 @@ $muser = $user;
                 <label>First Name</label>
                 <input type="text" class="form-control" id="username" name="name" value="<?= arrIndex($user, 'name'); ?>" placeholder="First Name *">
             </div>
-
-            <div class="col-sm-6">
-                <label>City</label>
-                <input type="text" class="form-control" name="city" value="<?= arrIndex($user, 'city'); ?>" placeholder="Address *">
-                </textarea>
-            </div>
-            <div class="col-sm-6">
-                <label>State</label>
-                <input type="text" class="form-control" name="state" value="<?= arrIndex($user, 'state'); ?>" placeholder="State *">
-            </div>
-            <div class="col-sm-6">
-                <label>Country</label>
-                <select name="country"  class="form-control" >
-                    <option value=""></option>
-                    <?php foreach($country as $val){ ?>
-                    <option value="<?php echo $val['iso'] ?>" <?php echo ( arrIndex($user, 'country')== $val['iso']) ?"selected":""; ?>><?php echo $val['nicename'] ?></option>
-                    <?php } ?>
-                </select>
-            </div>
-            <div class="col-sm-6">
-                <label>Phone</label>
-                <input type="text" class="form-control" name="phone" value="<?= arrIndex($user, 'phone'); ?>" placeholder="Phone *">
-            </div>
-            <div class="col-sm-6">
-                <label>mobile</label>
-                <input type="text" class="form-control" name="mobile" value="<?= arrIndex($user, 'mobile'); ?>" placeholder="mobile *">
-            </div>
-            
-
-            <div class="col-sm-6">
-                <label>Address</label>
-                  <input type="text" class="form-control" name="address" value="<?= arrIndex($user, 'address'); ?>" placeholder="Address *">
-                
-            </div>
-
-<!--            <div class="col-sm-6">
-                <label>Username</label>
-                <input type="text" class="form-control" id="username" name="username" value="<?= arrIndex($user, 'name'); ?>" placeholder="Username *">
-            </div>-->
             <div class="col-sm-6">
                 <label>Email</label>
                 <input type="text" class="form-control" id="email" name="email" value="<?= arrIndex($user, 'email'); ?>" placeholder="Email *">
