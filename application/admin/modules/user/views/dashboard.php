@@ -112,7 +112,7 @@
     </div>
     <div class="col-lg-12 menu padding-0">
         <script type="text/javascript">
-            google.setOnLoadCallback(drawLineChart);
+//            google.setOnLoadCallback(drawLineChart);
             function drawLineChart() {
                 var data = new google.visualization.DataTable();
                 data.addColumn('number', 'Year');
