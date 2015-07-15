@@ -26,7 +26,7 @@
         </header>
         <section id='main-content'>
             <div class="container">
-                <?php $this->load->view('inc-messages'); ?>
+                <?php // $this->load->view('inc-messages'); ?>
                 <div class="row content-bg">
                     <div class="col-lg-7 pad-left30 pad-top20">
                         <?php echo $content; ?>

@@ -41,9 +41,15 @@ class Commonmodel extends Basemodel {
         $this->db->delete($table);
     }
 
-    function count($table, $where = false) {
-        if ($where)
-            $this->db->where($where);
+    function count($table, $where_in = array()) {
+        if ($where_in) {
+            foreach ($where_in as $key => $value):
+                if (!count($value)) {
+                    continue;
+                }
+                $this->db->where_in($key, $value);
+            endforeach;
+        }
         return $this->db->count_all_results($table);
     }
 

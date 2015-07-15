@@ -1017,7 +1017,10 @@ class Companymodel extends Basemodel {
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }
 
-    function countCompany() {
+    function countCompany($ids = array()) {
+        if (count($ids)) {
+            $this->db->where_in('aauth_users.id', $ids);
+        }
         $this->db->where('aauth_groups.id', 3);
         $this->db->join('aauth_user_to_group', 'aauth_groups.id=aauth_user_to_group.group_id', 'left');
         $this->db->join('aauth_users', 'aauth_users.id=aauth_user_to_group.user_id', 'left');
@@ -1025,12 +1028,33 @@ class Companymodel extends Basemodel {
         $res = $this->db->get('aauth_groups');
         return $res->num_rows();
     }
-    
-    function lineChartData(){
-//        $this->db->select('max(year(datetime)) as max_year');
-//        $result = $this->db->get('properties')->row_array();
-//        $max_year
+
+    function lineChartData($ids = array()) {
+        if (count($ids)) {
+            $sql = "select max(year(maxdate)) as maxdate , min(year(mindate)) as mindate from (select max(`datetime`) as maxdate , min(`datetime`) as mindate from dpd_applicants where created_by in (" . implode(',', $ids) . ") union all select max(register_date) as maxdate , min(register_date) as mindate from dpd_aauth_users where id in (" . implode(',', $ids) . ") union all select max(`datetime`) as maxdate , min(`datetime`) as mindate from dpd_properties where company_id in (" . implode(',', $ids) . ") ) as derived";
+        } else {
+            $sql = "select max(year(maxdate)) as maxdate , min(year(mindate)) as mindate from (select max(`datetime`) as maxdate , min(`datetime`) as mindate from dpd_applicants union all select max(register_date) as maxdate , min(register_date) as mindate from dpd_aauth_users union all select max(`datetime`) as maxdate , min(`datetime`) as mindate from dpd_properties) as derived";
+        }
+        $minmax = $this->db->query($sql)->row_array();
+        if (count($ids)) {
+            $sql = "select 'applicant' as `type` ,count(*) as count,year(`datetime`) as `year` from dpd_applicants where created_by in (" . implode(',', $ids) . ") group by year(`datetime`) union all select 'users' as `type` ,count(*) as count,year(`register_date`) as `year` from dpd_aauth_users where id in (" . implode(',', $ids) . ") group by year(`register_date`) union all select 'property' as `type` ,count(*) as count,year(`datetime`) as `year` from dpd_properties where company_id in (" . implode(',', $ids) . ")  group by year(`datetime`)";
+        } else {
+            $sql = "select 'applicant' as `type` ,count(*) as count,year(`datetime`) as `year` from dpd_applicants group by year(`datetime`) union all select 'users' as `type` ,count(*) as count,year(`register_date`) as `year` from dpd_aauth_users group by year(`register_date`) union all select 'property' as `type` ,count(*) as count,year(`datetime`) as `year` from dpd_properties group by year(`datetime`)";
+        }
+        $count_data = $this->db->query($sql)->result_array();
+        $temp = array();
+        foreach ($count_data as $data):
+            if (!arrIndex($data, 'year'))
+                continue;
+            $temp[arrIndex($data, 'type')][] = $data;
+        endforeach;
+//        e($temp);
+        $return['minmax'] = $minmax;
+        $return['count_data'] = $temp;
+//        e($return);
+        return $return;
     }
+
 }
 
 ?>

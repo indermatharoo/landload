@@ -215,8 +215,9 @@ class Applications extends Admin_Controller {
             $this->load->view($this->customer, $page);
         } else {
 
-            $userid = $this->Applicationsmodel->updateRecord($offset);
-
+            $unit_id = $this->Applicationsmodel->updateRecord($offset);
+            e($unit_id);
+            
             $this->session->set_flashdata('SUCCESS', 'application_updated');
             redirect(createUrl('applications/index/'));
         }
@@ -276,6 +277,7 @@ class Applications extends Admin_Controller {
             echo json_encode(array('response' => 'false', 'msg' => validation_errors()));
         } else {
             $this->Applicationsmodel->saveAgreeDetails($offset);
+            $this->Applicationsmodel->updateUnit($offset);
         }
     }
 

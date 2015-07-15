@@ -18,16 +18,16 @@
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
             <div class="col-sm-6">
-                <label>Last name</label>
-                <input type="text" class="form-control" name="lname"  placeholder="Last name *">
+                <label>First name</label>
+                <input type="text" class="form-control" name="fname"  placeholder="First name *" value="<?php echo arrIndex($postdata, 'fname') ?>">
             </div>
             <div class="col-sm-6">
-                <label>First name</label>
-                <input type="text" class="form-control" name="fname"  placeholder="First name *">
+                <label>Last name</label>
+                <input type="text" class="form-control" name="lname"  placeholder="Last name *" value="<?php echo arrIndex($postdata, 'lname') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Email </label>
-                <input type="text" class="form-control" name="email"  placeholder="Email *">
+                <input type="text" class="form-control" name="email"  placeholder="Email *" value="<?php echo arrIndex($postdata, 'email') ?>">
             </div>
             <div class="col-sm-6">
                 <label>password </label>
@@ -39,40 +39,40 @@
             </div>            
             <div class="col-sm-6">
                 <label>Address </label>
-                <input type="text" class="form-control" name="address"  placeholder="Address *">
+                <input type="text" class="form-control" name="address"  placeholder="Address *"  value="<?php echo arrIndex($postdata, 'address') ?>">
             </div>   
             <div class="col-sm-6">
                 <label>Phone </label>
-                <input type="text" class="form-control" name="phone"  placeholder="Phone *">
+                <input type="text" class="form-control" name="phone"  placeholder="Phone *" value="<?php echo arrIndex($postdata, 'phone') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Birth date </label>
-                 <input type="text" class="form-control" name="birth_date" id="datepicker" placeholder="Birth date *">
+                <input type="text" class="form-control" name="birth_date" id="datepicker" placeholder="Birth date *" value="<?php echo arrIndex($postdata, 'birth_date') ?>">
             </div>   
             <div class="col-sm-6">
                 <label>Driver License Number </label>
-                <input type="text" class="form-control" name="license"  placeholder="Driver License Number *">
+                <input type="text" class="form-control" name="license"  placeholder="Driver License Number *" value="<?php echo arrIndex($postdata, 'license') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Monthly Gross Pay </label>
-                <input type="text" class="form-control" name="monthly_gross"  placeholder="Monthly Gross Pay *">
+                <input type="text" class="form-control" name="monthly_gross"  placeholder="Monthly Gross Pay *" value="<?php echo arrIndex($postdata, 'monthly_gross') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Additional Income </label>
-                <input type="text" class="form-control" name="additional_income"  placeholder="Additional Income *">
+                <input type="text" class="form-control" name="additional_income"  placeholder="Additional Income *" value="<?php echo arrIndex($postdata, 'additional_income') ?>">
             </div>      
-            <div class="col-sm-6">
+<!--            <div class="col-sm-6">
                 <label>Assets </label>
-                <input type="text" class="form-control" name="assets"  placeholder="Assets *">
-            </div> 
+                <input type="text" class="form-control" name="assets"  placeholder="Assets *" value="<?php echo arrIndex($postdata, 'assets') ?>">
+            </div> -->
             <div class="col-sm-6">
                 <label> Status </label><br>
-                <?php foreach($applicantsType as $type){ ?>
-                <input type="radio" name="status" value="<?php echo $type['code'] ?>" ><?php echo $type['type'] ?><br>
+                <?php foreach ($applicantsType as $type) { ?>
+                    <input type="radio" name="status" value="<?php echo $type['code'] ?>" ><?php echo $type['type'] ?><br>
                 <?php } ?>
             </div>                  
         </div>
-        
+
         <div class="form-group">
             <div class="col-sm-12 text-center">
                 Fields mark with <span class="error">*</span> required
@@ -86,7 +86,7 @@
     </form>
 </div> 
 <script>
-    $(document).ready(function(){
+    $(document).ready(function () {
         $('#datepicker').datepicker({});
-        })
-  </script>
+    })
+</script>

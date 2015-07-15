@@ -30,10 +30,11 @@ class Dashboard extends Admin_Controller {
         $inner['recentProperties'] = $recentProperties;
         $inner['recentCompanies'] = $recentCompanies;
         $inner['recentApplicants'] = $recentUser;
-        $inner['total']['applicants'] = $this->commonmodel->count('applicants');
-        $inner['total']['properties'] = $this->commonmodel->count('properties');
-        $inner['total']['companies'] = $this->Companymodel->countCompany();
-        $inner['lineChartdata'] = $this->Companymodel->lineChartData();
+        $inner['total']['applicants'] = $this->commonmodel->count('applicants', array('created_by' => $this->ids));
+        $inner['total']['properties'] = $this->commonmodel->count('properties',array('company_id' => $this->ids));
+        $inner['total']['companies'] = $this->Companymodel->countCompany($this->ids);
+//        e($inner['total']);
+        $inner['lineChartdata'] = $this->Companymodel->lineChartData($this->ids);
         $page = array();
         $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
         $this->load->view($this->dashboard, $page);

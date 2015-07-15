@@ -114,6 +114,7 @@ class Applicationsmodel extends Basemodel {
 
         $this->db->where('id', $id);
         $this->db->update('applications', $data);
+        return $data['unit_id'];
     }
 
     function DeleteRecord($id) {
@@ -183,6 +184,18 @@ class Applicationsmodel extends Basemodel {
         $this->db->update('applications', $data);
 
         echo json_encode(array('response' => 'true', 'msg' => 'Property information is successfully saved', 'tab' => "4"));
+    }
+
+    function updateUnit($id) {
+        $this->db->from('applications');
+        $this->db->where('id', $id);
+        $data = $this->db->get()->row_array();
+        $unit_id = arrIndex($data, 'unit_id');
+        if ($unit_id) {
+            $sql = "UPDATE `dpd_units` SET `status` = '0' WHERE `id` = ".$unit_id;           
+            $this->db->query($sql);
+//            e($this->db->last_query());
+        }
     }
 
     function saveAgreeDetails($id) {

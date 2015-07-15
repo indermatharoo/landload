@@ -66,7 +66,7 @@ class Applicants extends Admin_Controller {
         }
         $this->form_validation->set_rules('license', 'Driving License Number', 'trim|required');
         $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
-        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
+//        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('passwd', 'password', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
@@ -79,6 +79,7 @@ class Applicants extends Admin_Controller {
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['applicantsType'] = $applicantsType;
+            $inner['postdata'] = $_POST;
             $page = array();
             $page['content'] = $this->load->view('applicant-add', $inner, TRUE);
             $this->load->view('themes/default/templates/customer', $page);
@@ -117,7 +118,7 @@ class Applicants extends Admin_Controller {
 
         $this->form_validation->set_rules('license', 'Driving License Number', 'trim|required');
         $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
-        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
+//        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
 
         $this->form_validation->set_rules('address', 'Address', 'trim|required');

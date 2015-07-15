@@ -112,33 +112,83 @@
     </div>
     <div class="col-lg-12 menu padding-0">
         <script type="text/javascript">
-//            google.setOnLoadCallback(drawLineChart);
+            var linechartdata = '<?php echo json_encode($lineChartdata); ?>';
+            console.log(linechartdata);
+            linechartdata = JSON.parse(linechartdata);
+            google.setOnLoadCallback(drawLineChart);
             function drawLineChart() {
                 var data = new google.visualization.DataTable();
-                data.addColumn('number', 'Year');
-                data.addColumn('number', 'Properties');
-                data.addColumn('number', 'Companies');
-                data.addColumn('number', 'Applicants');
-                data.addRows([
-                    [1, 99.8, 99.8, 99.8],
-                    [2, 77.9, 77.5, 77.4],
-                    [3, 66.4, 66, 66.7],
-                    [4, 11.7, 18.8, 10.5],
-                    [5, 11.9, 17.6, 10.4],
-                    [6, 8.8, 13.6, 7.7],
-                    [7, 7.6, 12.3, 9.6],
-                    [8, 12.3, 29.2, 10.6],
-                    [9, 16.9, 42.9, 14.8],
-                    [10, 12.8, 30.9, 11.6],
-                    [11, 5.3, 7.9, 4.7],
-                    [12, 6.6, 8.4, 5.2],
-                    [13, 4.8, 6.3, 3.6],
-                    [14, 4.2, 6.2, 3.4]
-                ]);
+                data.addColumn('string', 'Year');
+                console.log(linechartdata.count_data);
+                if (linechartdata.count_data.users) {
+                    data.addColumn('number', 'Companies');
+                }
+                if (linechartdata.count_data.property) {
+                    data.addColumn('number', 'Properties');
+                }
+                if (linechartdata.count_data.applicant) {
+                    data.addColumn('number', 'Applicants');
+                }
+                if (linechartdata.minmax.mindate == 0 && linechartdata.minmax.maxdate == 0) {
+                    return false
+                }
+                else if (linechartdata.minmax.mindate == 0) {
+                    linechartdata.minmax.mindate = linechartdata.minmax.maxdate;
+                } else {
+                    linechartdata.minmax.maxdate = linechartdata.minmax.mindate;
+                }
+                /*
+                 * creating data
+                 */
+                var addrow = [];
+                for (var i = linechartdata.minmax.mindate; i <= linechartdata.minmax.maxdate; i++) {
+                    var temp = [], selected = true;
+                    temp.push(linechartdata.minmax.mindate);
+                    if (linechartdata.count_data.users) {
+                        selected = true;
+                        linechartdata.count_data.users.forEach(function (elm) {
+                            if (elm.year == i) {
+                                selected = true;
+                                temp.push(parseInt(elm.count));
+                            }
+                        });
+                    }
+                    if (!selected) {
+                        temp.push(0);
+                    }
+                    if (linechartdata.count_data.property) {
+                        selected = false;
+                        linechartdata.count_data.property.forEach(function (elm) {
+                            if (elm.year == i) {
+                                selected = true;
+                                temp.push(parseInt(elm.count));
+                            }
+                        });
+
+                    }
+                    if (!selected) {
+                        temp.push(0);
+                    }
+                    if (linechartdata.count_data.applicant) {
+                        selected = false;
+                        linechartdata.count_data.applicant.forEach(function (elm) {
+                            if (elm.year == i) {
+                                selected = true;
+                                temp.push(parseInt(elm.count));
+                            }
+                        });
+                    }
+                    addrow.push(temp);
+                }
+                if (addrow.length == 1) {
+                    addrow.push(temp);
+                    console.log(temp);
+                }
+                data.addRows(addrow);
                 var options = {
                     chart: {
-                        title: 'Box Office Earnings in First Two Weeks of Opening',
-                        subtitle: 'in millions of dollars (USD)'
+                        title: 'Statistics',
+//                        subtitle: 'in millions of dollars (USD)'
                     },
                     height: 400
                 };
@@ -150,7 +200,7 @@
         <div id="linechart_material" style="">                   
         </div>        
     </div>
-     <div class="clearfix"></div>
+    <div class="clearfix"></div>
 
 </div>
 <?php $this->load->view('headers/dashboard'); ?>
