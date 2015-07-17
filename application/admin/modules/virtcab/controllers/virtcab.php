@@ -46,7 +46,14 @@ class virtcab extends Admin_Controller {
         $this->load->helper('form');
         $this->load->library('pagination');
         $this->load->library('form_validation');
-
+        $company_id = null;
+        if ($this->aauth->isCompany()):
+            $company_id = curUsrId();
+        elseif ($this->aauth->isCompany()):
+            $company_id = curUsrPid();
+        else:
+            $company_id = curUsrId();
+        endif;
         $inner['users'] = $this->Usermodel->listAll(0, 0, 'id, name');
         $inner['userOwnFiles'] = null;
         $inner['userSharedFiles'] = null;
@@ -61,12 +68,12 @@ class virtcab extends Admin_Controller {
         $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes',
             'order-field' => 'filetype',
             'order-by' => 'desc',
-            $this->VirtualCabinetmodel->creator_id => $this->session->userdata['id'],
+            $this->VirtualCabinetmodel->creator_id => $company_id,
         );
 
         $othrShareFile = array('shared' => true,
             'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name',
-            $this->VirtualCabinetmodel->assignes => $this->session->userdata['id'],
+            $this->VirtualCabinetmodel->assignes => $company_id,
             'order-field' => 'aauth_users.name',
             'order-by' => 'desc',
         );
@@ -98,6 +105,7 @@ class virtcab extends Admin_Controller {
         if (!is_null($inner['myFilesHtml']) || !empty($inner['myFilesHtml'])) {
             $inner['addEditJs'] = true;
         }
+//        e($inner);
         $inner['imgArray'] = $this->imgArray;
         $inner['docArray'] = $this->docArray;
         $inner['extImgArray'] = $this->extImgArray;
