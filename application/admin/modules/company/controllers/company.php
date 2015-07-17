@@ -24,6 +24,36 @@ class Company extends Admin_Controller {
         return true;
     }
 
+    function user($id = null) {
+        $this->load->library('form_validation');
+        $model = array();
+        if ($id) {
+            $model = $this->commonmodel->getByPk($id, 'aauth_users');
+        }
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
+        $this->form_validation->set_rules('pass', 'Password', 'trim|required');
+        $this->form_validation->set_rules('pass1', 'confirm Password', 'trim|required|matches[pass]');
+        $this->form_validation->set_error_delimiters('<li>', '</li>');
+
+        //Render View
+        if ($this->form_validation->run() == FALSE) {
+            $inner = $page = array();
+            if (!$id) {
+                $model = $_POST;
+            }
+            $inner['user'] = $model;
+            $page['content'] = $this->load->view('companyuser', $inner, true);
+            $this->load->view($this->customer, $page);
+        } else {
+            $data = rSF('aauth_users');
+            $status = $this->commonmodel->insertRecord($data,'aauth_users');
+            $this->session->set_flashdata('SUCCESS', 'user_added');
+            redirect(createUrl('company/user/'));
+            exit();
+        }
+    }
+
     //for edit
     function valid_email_e($str) {
         $this->db->where('email', $str);
@@ -113,8 +143,8 @@ class Company extends Admin_Controller {
 
     //function add
     function add() {
-        
-          
+
+
         $this->load->model('companymodel');
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -129,7 +159,7 @@ class Company extends Admin_Controller {
         }
         $country = array();
         $country_list = $this->companymodel->getCountry();
-        
+
         //validation check
         //$this->form_validation->set_rules('role_id', 'Role', 'trim|required');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
@@ -164,7 +194,7 @@ class Company extends Admin_Controller {
 
         //check user
         $login_user = $this->userauth->checkAuth();
-        
+
         if (!$this->checkAccess('EDIT_USER')) {
             $this->utility->accessDenied();
             return;
@@ -180,7 +210,7 @@ class Company extends Admin_Controller {
             $this->utility->show404();
             return;
         }
-        
+
         $country = array();
         $country_list = $this->Companymodel->getCountry();
 
@@ -206,7 +236,7 @@ class Company extends Admin_Controller {
         } else {
             $this->Companymodel->updateRecord($uid);
             $this->session->set_flashdata('SUCCESS', 'Company');
-            redirect(createUrl('company/index/'));
+            redirect(createUrl('user/index/'));
             exit();
         }
     }
@@ -302,7 +332,7 @@ class Company extends Admin_Controller {
             $inner['magentoDashboardData'] = self::loadmagentodata();
             $page['content'] = $this->load->view('dashboard/customdate', $inner, TRUE);
 //            $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
-       } else {
+        } else {
             $inner = $page = array();
             $inner['loadContent'] = false;
             $page['content'] = $this->load->view('dashboard/customdate', $inner, TRUE);

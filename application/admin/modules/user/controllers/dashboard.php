@@ -18,6 +18,7 @@ class Dashboard extends Admin_Controller {
         $this->load->model('company/Companymodel');
         $this->load->model('applicants/Applicantsmodel');
         $notification = $this->load->model('usermodel');
+//        e($this->ids);
         $recentProperties = $this->Propertiesmodel->getRecentProperties();
         $recentCompanies = $this->Companymodel->getRecentCompany();
         //e($recentCompanies);

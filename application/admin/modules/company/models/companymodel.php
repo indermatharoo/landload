@@ -1054,7 +1054,7 @@ class Companymodel extends Basemodel {
 //        e($return);
         return $return;
     }
-
+    
 }
 
 ?>

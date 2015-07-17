@@ -53,7 +53,7 @@ class Usermodel extends Basemodel {
         $this->db->from(convertToAuthStr('users'));
         $this->db->join(
                 convertToAuthStr('user_to_group'), convertToAuthStr('user_to_group') . '.user_id = ' . convertToAuthStr('users') . '.id'
-                . ' and dpd_' . convertToAuthStr('user_to_group') . '.group_id!=6'
+                . ' and dpd_' . convertToAuthStr('user_to_group') . '.group_id=5'
         );
         $rs = $this->db->get();
         return $rs->result_array();
@@ -194,8 +194,7 @@ class Usermodel extends Basemodel {
 
     //Add Insert User
     function insertRecord() {
-
-        $user_id = $this->aauth->create_user(gParam('email'), gParam('pass'), gParam('name'), 5, 0, $this->aauth->get_user()->id);
+        $user_id = $this->aauth->create_user(gParam('email'), gParam('pass'), gParam('name'), 5, 0, curUsrId());
         $data = array();
         $data['contact_person'] = trim($this->input->post('name'));
         $data['address'] = $this->input->post('address');

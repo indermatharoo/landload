@@ -160,7 +160,7 @@ class User extends Admin_Controller {
             $page['content'] = $this->load->view('add-user', $inner, TRUE);
             $this->load->view($this->customer, $page);
         } else {
-         
+
             $userid = $this->Usermodel->insertRecord();
             $this->Pagemodel->franchisee($page_details, $userid);
             $this->session->set_flashdata('SUCCESS', 'user_added');
