@@ -12,7 +12,7 @@
                     $curUser = $this->aauth->get_user();
                     $edit_url = '';
                     if ($this->aauth->isAdmin()):
-                        $edit_url = createUrl('user/edit/' . curUsrId());
+                        $edit_url = createUrl('user/editt/' . curUsrId());
                     elseif($this->aauth->isCompany()):
                         $edit_url = createUrl('company/edit/' . curUsrId());
                     elseif($this->aauth->isUser()):
