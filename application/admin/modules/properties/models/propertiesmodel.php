@@ -95,14 +95,14 @@ class Propertiesmodel extends Basemodel {
         return $this->db->insert_id();
     }
 
-    function getRecentProperties() {
+    function getRecentProperties($ids = array()) {
         $this->db->select('properties.*,properties_type.type as property_type');
         $this->db->order_by("datetime", "desc");
         $this->db->join('properties_type', 'properties_type.short_code=properties.type');
         $this->db->limit(10);
-        if ($this->aauth->isCompany()):
-            $this->db->where('company_id', curUsrId());
-        endif;
+        if (count($ids)) {
+            $this->db->where_in('company_id', $ids);
+        }
         $res = $this->db->get('properties');
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }

@@ -19,11 +19,11 @@ class Dashboard extends Admin_Controller {
         $this->load->model('applicants/Applicantsmodel');
         $notification = $this->load->model('usermodel');
 //        e($this->ids);
-        $recentProperties = $this->Propertiesmodel->getRecentProperties();
+        $recentProperties = $this->Propertiesmodel->getRecentProperties($this->ids);
         $recentCompanies = $this->Companymodel->getRecentCompany();
         //e($recentCompanies);
-        if ($this->aauth->isCompany()):
-            $recentUser = $this->Applicantsmodel->getRecentApplicantsCompany();
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $recentUser = $this->Applicantsmodel->getRecentApplicantsCompany($this->ids);
         else:
             $recentUser = $this->Applicantsmodel->getRecentApplicants();
         endif;

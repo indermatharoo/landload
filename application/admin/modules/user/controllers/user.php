@@ -7,7 +7,7 @@ class User extends Admin_Controller {
 
     function __construct() {
         parent::__construct();
-       // $this->load->model('calender/event');
+        // $this->load->model('calender/event');
         $this->load->model('Usermodel');
     }
 
@@ -127,12 +127,12 @@ class User extends Admin_Controller {
             $this->utility->accessDenied();
             return;
         }
-        
+
         $page_details = array();
         $page_details = $this->Pagemodel->detail(1);
-        
+
         $Countries = $this->Usermodel->getCountries();
-        
+
         //validation check
 //        $this->form_validation->set_rules('role_id', 'Role', 'trim|required');
         $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
@@ -143,8 +143,8 @@ class User extends Admin_Controller {
         $this->form_validation->set_rules('state', 'State', 'trim|required');
         $this->form_validation->set_rules('country', 'Country', 'trim|required');
 
-         $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
-        $this->form_validation->set_rules('address', 'Address', 'trim|required');       
+        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
         $this->form_validation->set_error_delimiters('<li>', '</li>');
 
         //Render View
@@ -155,7 +155,7 @@ class User extends Admin_Controller {
             $inner['user'] = array();
             $inner['targets'] = array();
             $inner['extrafields'] = tableFields('user_extra_detail');
-            $inner['country'] = $Countries ;
+            $inner['country'] = $Countries;
             $inner['edit'] = false;
             $page['content'] = $this->load->view('add-user', $inner, TRUE);
             $this->load->view($this->customer, $page);
@@ -165,6 +165,70 @@ class User extends Admin_Controller {
             $this->Pagemodel->franchisee($page_details, $userid);
             $this->session->set_flashdata('SUCCESS', 'user_added');
             redirect(createUrl('user/index/'));
+            exit();
+        }
+    }
+
+    //Edit Users
+    function editt($uid = 0) {
+        $this->load->library('form_validation');
+        $this->load->helper('form');
+        $this->load->helper('string');
+        $this->load->library('encrypt');
+        $Countries = $this->Usermodel->getCountries();
+        //check user
+        $login_user = $this->userauth->checkAuth();
+
+        if (!$this->checkAccess('EDIT_USER')) {
+            $this->utility->accessDenied();
+            return;
+        }
+//        if (($uid == 1) && ($this->aauth->isFrsUser())) {
+//            $this->session->set_flashdata('ERROR', 'premission_denied_user');
+//            redirect(createUrl('user/index'));
+//        }
+        //Fetch user details
+        $user = array();
+        $user = $this->Usermodel->fetchByID($uid);
+        if (!$user) {
+            $this->utility->show404();
+            return;
+        }
+
+        //validation check
+        $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
+        if ($this->input->post('pass') != NULL) {
+            if ($this->input->post('pass') != $this->input->post('pass1')) {
+
+                $this->session->set_flashdata('ERROR', 'pass_invalid');
+                redirect(createUrl('user/edit/' . $uid));
+                $valid = false;
+            }
+        }
+//        $this->form_validation->set_rules('city', 'City', 'trim|required');
+//        $this->form_validation->set_rules('state', 'State', 'trim|required');
+//        $this->form_validation->set_rules('country', 'Country', 'trim|required');
+//        $this->form_validation->set_rules('mobile', 'Mobile', 'trim|required');
+//        $this->form_validation->set_rules('address', 'Address', 'trim|required');       
+        $this->form_validation->set_error_delimiters('<li>', '</li>');
+
+        //Render View
+        if ($this->form_validation->run() == FALSE) {
+            $inner = array();
+            $inner['user'] = $user;
+            $inner['uid'] = $uid;
+            $page = array();
+            $inner['extrafields'] = tableFields('user_extra_detail');
+            $inner['user'] = array_merge($inner['user'], $this->Usermodel->getExtraFields($uid));
+            $inner['country'] = $Countries;
+            $inner['edit'] = $uid;
+            $page['content'] = $this->load->view('add-userr', $inner, TRUE);
+            $this->load->view($this->customer, $page);
+        } else {
+            $this->Usermodel->updateRecord($uid);
+            $this->session->set_flashdata('SUCCESS', 'user_updated');
+            redirect(createUrl('user/dashboard/'));
             exit();
         }
     }
@@ -189,7 +253,7 @@ class User extends Admin_Controller {
 //        }
         //Fetch user details
         $user = array();
-        $user = $this->Usermodel->fetchByID($uid);        
+        $user = $this->Usermodel->fetchByID($uid);
         if (!$user) {
             $this->utility->show404();
             return;
@@ -198,13 +262,13 @@ class User extends Admin_Controller {
         //validation check
         $this->form_validation->set_rules('name', 'Name', 'trim|required|callback_valid_login');
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|callback_email_check');
-        if($this->input->post('pass')!=NULL){
-            if ($this->input->post('pass')!=$this->input->post('pass1')) {
-                
-            $this->session->set_flashdata('ERROR', 'pass_invalid');
-             redirect(createUrl('user/edit/'.$uid));
-            $valid = false;
-        }  
+        if ($this->input->post('pass') != NULL) {
+            if ($this->input->post('pass') != $this->input->post('pass1')) {
+
+                $this->session->set_flashdata('ERROR', 'pass_invalid');
+                redirect(createUrl('user/edit/' . $uid));
+                $valid = false;
+            }
         }
 //        $this->form_validation->set_rules('city', 'City', 'trim|required');
 //        $this->form_validation->set_rules('state', 'State', 'trim|required');
@@ -221,7 +285,7 @@ class User extends Admin_Controller {
             $page = array();
             $inner['extrafields'] = tableFields('user_extra_detail');
             $inner['user'] = array_merge($inner['user'], $this->Usermodel->getExtraFields($uid));
-            $inner['country'] = $Countries ;
+            $inner['country'] = $Countries;
             $inner['edit'] = $uid;
             $page['content'] = $this->load->view('add-user', $inner, TRUE);
             $this->load->view($this->customer, $page);
@@ -230,7 +294,7 @@ class User extends Admin_Controller {
             $this->session->set_flashdata('SUCCESS', 'user_updated');
             redirect(createUrl('user/dashboard/'));
             exit();
-        }   
+        }
     }
 
     //Delete users
@@ -270,7 +334,7 @@ class User extends Admin_Controller {
         $this->session->sess_destroy();
         redirect("/welcome/");
         exit();
-       // echo "This is called";
+        // echo "This is called";
     }
 
     function profile($id) {
@@ -325,7 +389,7 @@ class User extends Admin_Controller {
             $inner['magentoDashboardData'] = self::loadmagentodata();
             $page['content'] = $this->load->view('dashboard/customdate', $inner, TRUE);
 //            $page['content'] = $this->load->view('user/dashboard', $inner, TRUE);
-       } else {
+        } else {
             $inner = $page = array();
             $inner['loadContent'] = false;
             $page['content'] = $this->load->view('dashboard/customdate', $inner, TRUE);

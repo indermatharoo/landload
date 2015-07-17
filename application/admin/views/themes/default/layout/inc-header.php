@@ -13,8 +13,10 @@
                     $edit_url = '';
                     if ($this->aauth->isAdmin()):
                         $edit_url = createUrl('user/edit/' . curUsrId());
-                    else:
+                    elseif($this->aauth->isCompany()):
                         $edit_url = createUrl('company/edit/' . curUsrId());
+                    elseif($this->aauth->isUser()):
+                        $edit_url = createUrl('user/edit/' . curUsrId());                        
                     endif;
                     ?>
                 </div>

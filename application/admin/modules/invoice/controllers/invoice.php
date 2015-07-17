@@ -30,7 +30,7 @@ class Invoice extends Admin_Controller {
 //*************************************validation End********************************
 
     function index($arg = "") {
-
+        
         if ($arg == '') {
             $this->load->library('form_validation');
             $this->load->helper('form');
