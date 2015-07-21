@@ -17,8 +17,7 @@ class Unitsmodel extends Basemodel {
             $this->db->where_in('company_id', $ids);
         endif;
         $this->db->select('units.id as unit_id,units.*');
-      //  $this->db->join('properties', 'properties.id=units.property_id', 'left');
-        $results = $this->db->get('units')->result_array();
+p        $results = $this->db->get('units')->result_array();
         return count($results);
     }
 
@@ -27,7 +26,6 @@ class Unitsmodel extends Basemodel {
          //   $this->db->where_in('company_id', $ids);
         endif;
         $this->db->select('units.id as unit_id,units.*');
-        //$this->db->join('properties', 'properties.id=units.property_id', 'left');
         $results = $this->db->get('units')->result_array();
         return $results;
     }
@@ -296,7 +294,7 @@ class Unitsmodel extends Basemodel {
     }
 
     function getUnitsByPropertyId($id) {
-        $this->db->where('property_id', $id);
+   
         $res = $this->db->get('units');
         return $res->result_array();
     }
