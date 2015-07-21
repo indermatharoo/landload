@@ -17,7 +17,7 @@ class Unitsmodel extends Basemodel {
             $this->db->where_in('company_id', $ids);
         endif;
         $this->db->select('units.id as unit_id,units.*');
-p        $results = $this->db->get('units')->result_array();
+        $results = $this->db->get('units')->result_array();
         return count($results);
     }
 
