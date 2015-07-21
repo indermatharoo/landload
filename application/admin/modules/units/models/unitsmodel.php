@@ -16,18 +16,18 @@ class Unitsmodel extends Basemodel {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
             $this->db->where_in('company_id', $ids);
         endif;
-        $this->db->select('units.id as unit_id,units.*,properties.*');
-        $this->db->join('properties', 'properties.id=units.property_id', 'left');
+        $this->db->select('units.id as unit_id,units.*');
+      //  $this->db->join('properties', 'properties.id=units.property_id', 'left');
         $results = $this->db->get('units')->result_array();
         return count($results);
     }
 
     function listAll($ids = array()) {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
-            $this->db->where_in('company_id', $ids);
+         //   $this->db->where_in('company_id', $ids);
         endif;
-        $this->db->select('units.id as unit_id,units.*,properties.*');
-        $this->db->join('properties', 'properties.id=units.property_id', 'left');
+        $this->db->select('units.id as unit_id,units.*');
+        //$this->db->join('properties', 'properties.id=units.property_id', 'left');
         $results = $this->db->get('units')->result_array();
         return $results;
     }
@@ -45,16 +45,25 @@ class Unitsmodel extends Basemodel {
             redirect('units/index');
         }
     }
-
+    function getPropertiesType() {
+        $res = $this->db->get('properties_type');
+        return $res->result_array();
+    }
     function insertRecord() {
         $data = array();
         $data = rSF('units');
+//        echo "<pre>";
+//        print_r($data);
+//        die();
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
         $data['datetime'] = date('Y-m-d H:i:s');
         $data['amount_type'] = $this->input->post('amount_type');
         $data['is_featured'] = $this->input->post('is_featured');
-//        e($data);
+        $data['property_type'] = $this->input->post('ptype');
+       // $data['country'] = $this->input->post('country');
+       $data['country'] = 'IN';
+       // $data['amount'] = $this->input->post('amount');
 
         $config_slug = array(
             'field' => 'uri',
@@ -108,7 +117,14 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
+        if ($this->aauth->isCompany()):
+            $data['company_id'] = curUsrId();
+        elseif ($this->aauth->isUser()):
+            $data['company_id'] = curUsrPid();
+        endif;
         $status = $this->db->insert('units', $data);
+      // echo $this->db->last_query();
+
         if ($status) {
             $unit_id = $this->db->insert_id();
             if ($unit_id) {
@@ -206,13 +222,14 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
-
-        $data['property_id'] = $this->input->post('property_id');
         $data['unit_number'] = $this->input->post('unit_number');
+        $data['property_type'] = $this->input->post('ptype');
+        $data['owner'] = $this->input->post('owner');
+        $data['owner'] = $this->input->post('owner');
+        $data['street'] = $this->input->post('street');
+        $data['city'] = $this->input->post('city');
+        $data['country'] = $this->input->post('country');
         $data['status'] = $this->input->post('status');
-        //$data['area'] = $this->input->post('area');
-        // $data['room'] = $this->input->post('room');
-        //$data['bathroom'] = $this->input->post('bathroom');
         $data['amount'] = $this->input->post('amount');
         $data['amount_type'] = $this->input->post('amount_type');
         $data['unit_type'] = $this->input->post('unit_type');
