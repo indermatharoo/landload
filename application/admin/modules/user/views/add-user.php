@@ -19,21 +19,21 @@ $muser = $user;
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
             <div class="col-sm-6">
-                <label>First Name</label>
+                <label>First Name<span class="red">*</span></label>
                 <input type="text" class="form-control" id="username" name="name" value="<?= arrIndex($user, 'name'); ?>" placeholder="First Name *">
             </div>
 
             <div class="col-sm-6">
-                <label>City</label>
+                <label>City<span class="red">*</span></label>
                 <input type="text" class="form-control" name="city" value="<?= arrIndex($user, 'city'); ?>" placeholder="City *">
                 </textarea>
             </div>
             <div class="col-sm-6">
-                <label>State</label>
+                <label>State<span class="red">*</span></label>
                 <input type="text" class="form-control" name="state" value="<?= arrIndex($user, 'state'); ?>" placeholder="State *">
             </div>
             <div class="col-sm-6">
-                <label>Country</label>
+                <label>Country<span class="red">*</span></label>
                 <select name="country"  class="form-control" >
                     <!--<option value=""></option>-->
                     <?php foreach ($country as $val) { ?>
@@ -45,11 +45,11 @@ $muser = $user;
                 </select>
             </div>
             <div class="col-sm-6">
-                <label>Phone</label>
+                <label>Phone<span class="red">*</span></label>
                 <input type="text" class="form-control" name="phone" value="<?= arrIndex($user, 'phone'); ?>" placeholder="Phone *">
             </div>
             <div class="col-sm-6">
-                <label>mobile</label>
+                <label>mobile<span class="red">*</span></label>
                 <input type="text" class="form-control" name="mobile" value="<?= arrIndex($user, 'mobile'); ?>" placeholder="mobile *">
             </div>
 
@@ -58,22 +58,22 @@ $muser = $user;
                             <input type="text" class="form-control" id="username" name="username" value="<?= arrIndex($user, 'name'); ?>" placeholder="Username *">
                         </div>-->
             <div class="col-sm-6">
-                <label>Email</label>
+                <label>Email<span class="red">*</span></label>
                 <input type="text" class="form-control" id="email" name="email" value="<?= arrIndex($user, 'email'); ?>" placeholder="Email *">
             </div>
             <div class="col-sm-12">
-                <label>Address</label>
+                <label>Address<span class="red">*</span></label>
                 <!--<input type="text" class="form-control" name="address" value="<?= arrIndex($user, 'address'); ?>" placeholder="Address *">-->                
                 <textarea name="address" class="form-control"><?= arrIndex($user, 'address'); ?></textarea>
             </div>
         </div>
         <div class="form-group">
             <div class="col-sm-6">
-                <label>Password</label>
+                <label>Password<span class="red">*</span></label>
                 <input type="password" class="form-control" id="passwd" name="pass" value="" placeholder="Password *">
             </div>
             <div class="col-sm-6">
-                <label>Confirm Password</label>
+                <label>Confirm Password<span class="red">*</span></label>
                 <input type="password" class="form-control" id="passwd1" name="pass1" value="" placeholder="Confirm Password *">
             </div>
         </div>

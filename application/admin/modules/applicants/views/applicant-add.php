@@ -68,7 +68,7 @@
             <div class="col-sm-6">
                 <label> Status <span class="red">*</span></label><br>
                 <?php foreach ($applicantsType as $type) { ?>
-                    <input type="radio" name="status" value="<?php echo $type['code'] ?>" ><?php echo $type['type'] ?><br>
+                    <input type="radio" name="status" value="<?php echo $type['code'] ?>" <?php if($type['code']==$offset){echo "checked";} ?> ><?php echo $type['type'] ?><br>
                 <?php } ?>
             </div>                  
         </div>
