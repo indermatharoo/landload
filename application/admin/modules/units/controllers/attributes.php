@@ -27,12 +27,12 @@ class Attributes extends Admin_Controller {
         $model = tableFields('units_attributes', true);
         $model['sort'] = 0;
         unset($model['id']);
-        self::save($model);
+        self::save($model, 0);
     }
 
     function edit($id) {
         $model = $this->commonmodel->getByPk($id, 'units_attributes');
-        self::save($model);
+        self::save($model, 1);
     }
 
     function delete($id) {
@@ -41,7 +41,7 @@ class Attributes extends Admin_Controller {
         redirect('units/attributes');
     }
 
-    function save($model) {
+    function save($model, $edit = false) {
         $this->load->library('form_validation');
 //        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('label', 'Label', 'required');
@@ -52,6 +52,7 @@ class Attributes extends Admin_Controller {
         if ($this->form_validation->run() == FALSE) {
             $inner = $page = array();
             $inner['model'] = $model;
+            $inner['edit'] = $edit;
             $page['content'] = $this->load->view('attributes/form', $inner, true);
             $this->load->view('themes/default/templates/customer', $page);
         } else {

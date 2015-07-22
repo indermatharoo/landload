@@ -1,4 +1,4 @@
-<?php //e($details); ?>
+<?php //e($details);     ?>
 <link rel="stylesheet" href="js/tagsystem/chosen.css">  
 <script src="js/tagsystem/chosen.jquery.js" type="text/javascript"></script>
 <header class="panel-heading">
@@ -18,137 +18,141 @@
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="col-sm-6">
-                <?php //e($propertiesType) ?>
-                <label>Property Type<span class="red">*</span></label>
-                <select name="ptype" class="form-control" autocomlete="off">
-                    <option value="">-Select Type-</option>
-                    <?php foreach($propertiesType as $ptype){ ?>
-                    <option value="<?php echo $ptype['short_code'] ?>" <?php if( $ptype['short_code'] == arrIndex($details, 'property_type')){echo "selected    ";} ?>><?php echo $ptype['type'] ?></option>
-                    
-                    <?php } ?>
-                </select>
-                
-            </div>
+            <?php //e($propertiesType) ?>
+            <label>Property Type<span class="red">*</span></label>
+            <select name="ptype" class="form-control" autocomlete="off">
+                <option value="">-Select Type-</option>
+                <?php foreach ($propertiesType as $ptype) { ?>
+                    <option value="<?php echo $ptype['short_code'] ?>" <?php
+                    if ($ptype['short_code'] == arrIndex($details, 'property_type')) {
+                        echo "selected    ";
+                    }
+                    ?>><?php echo $ptype['type'] ?></option>
 
-            <div class="col-sm-6">
-                <label>Unit Name<span class="red">*</span></label>
-                <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name" value="<?php echo arrIndex($details, 'unit_number') ?>">
-            </div>
-            <div class="col-sm-6">
-                <label>Photo<span class="red">*</span></label>
-                <input type="file"  name="photo"   >
-            </div>
-            <div class="col-sm-6">
-                <label>Owner<span class="red">*</span></label>
-                <input type="text" class="form-control" name="owner"  placeholder="Owner  *" value="<?php echo arrIndex($details, 'owner') ?>">
-            </div>
-            <div class="col-sm-6">
-                <label>Street<span class="red">*</span></label>
-                <input type="text" class="form-control" name="street"  placeholder="Street  *" value="<?php echo arrIndex($details, 'street') ?>">
-            </div>
-            <div class="col-sm-6">
-                <label>City<span class="red">*</span></label>
-                  <input type="text" class="form-control" name="city"  placeholder="City *" value="<?php echo arrIndex($details, 'city') ?>">
-            </div>
-            <div class="col-sm-6">
-                <label>Country<span class="red">*</span></label>
-                <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
-            </div>
-            <div class="col-sm-6">
-                <label>Photo<span class="red">*</span></label>
-                <input type="file"  name="photo" multiple="" >
-            </div>
-            <div class="col-sm-6">
-                <label>Gallery Images</label>
-                <input type="file"  name="galleryImages[]" multiple  >
-            </div>               
-            <div class="col-sm-6">
-                <label>Status<span class="red">*</span></label><br>
-                <?php foreach ($status as $st => $stval) { ?>
-                    <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st == $details['status']) ? 'checked' : ''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
-            </div>
-            <div class="col-sm-6">
-                <label>Rental Amount<span class="red">*</span></label>
-                <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *" value="<?php echo $details['amount']; ?>">
-            </div> 
-            <div class="col-sm-6">
-                <label>Features</label>
-                <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:324px;" name="features[]" tabindex="4">
-                    <?php
-                    $exp = explode('|', $details['features']);
-                    foreach ($features as $feature) {
-                        ?>
-                        <option value="<?php echo $feature['id'] ?>" <?php echo (in_array($feature['id'], $exp)) ? 'selected' : '' ?>><?php echo $feature['tag'] ?></option>
-                    <?php } ?>
-                </select>
-            </div> 
-            <div class="col-sm-6">
-                <label>Rent Types<span class="red">*</span></label>
-                <select name="amount_type" class="form-control">
-                    <option>Select</option>
-                    <?php foreach (Unitsmodel::$types as $val => $type): ?>
-                        <option <?php echo ($val == $details['amount_type']) ? 'selected="selected"' : ''; ?> value="<?php echo $val ?>"><?php echo $type ?></option>
-                    <?php endforeach; ?>
-                </select>
-            </div>
-            
-            <div class="col-sm-6">
-                <label>Map Image</label>
-                <input type="file"  name="map_image" style="height: 34px;"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
-            </div>
-            
-            <div class="col-sm-6">
-                <label>Featured</label><br />
-                <input type="radio" value="1"  name="is_featured" <?php echo ($details['is_featured']==1)?'checked="checked"':''; ?>>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="is_featured" <?php echo ($details['is_featured']==0)?'checked="checked"':''; ?>>&nbsp;&nbsp;No
-            </div>
-            
-           <div class="col-sm-6">
-                <label>Active</label><br />
-                <input type="radio" value="1" <?php echo ($details['is_active'] == 1) ? 'checked="checked"' : ''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active'] == 0) ? 'checked="checked"' : ''; ?>>&nbsp;&nbsp;No
-            </div>
+            </select>
 
-            <div class="col-sm-12">
-                <label>Description</label>
-                <textarea name="description" class="form-control"><?php echo $details['description']; ?></textarea>
-            </div>
+        </div>
 
-            <div class="col-sm-6">
-                <label>Unit Type<span class="red">*</span></label>
-                <select name="unit_type" class="form-control">
-                    <option value="">Select</option>
-                    <option <?php echo ($details['unit_type'] == 's') ? 'selected="selected"' : ''; ?> value="s">Shop</option>
-                    <option <?php echo ($details['unit_type'] == 'f') ? 'selected="selected"' : ''; ?> value="f">Flat</option>
-                </select>
-            </div>   
+        <div class="col-sm-6">
+            <label>Unit Name<span class="red">*</span></label>
+            <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name" value="<?php echo arrIndex($details, 'unit_number') ?>">
+        </div>
+        <div class="col-sm-6">
+            <label>Photo<span class="red">*</span></label>
+            <input type="file"  name="photo"   >
+        </div>
+        <div class="col-sm-6">
+            <label>Owner<span class="red">*</span></label>
+            <input type="text" class="form-control" name="owner"  placeholder="Owner  *" value="<?php echo arrIndex($details, 'owner') ?>">
+        </div>
+        <div class="col-sm-6">
+            <label>Street<span class="red">*</span></label>
+            <input type="text" class="form-control" name="street"  placeholder="Street  *" value="<?php echo arrIndex($details, 'street') ?>">
+        </div>
+        <div class="col-sm-6">
+            <label>City<span class="red">*</span></label>
+            <input type="text" class="form-control" name="city"  placeholder="City *" value="<?php echo arrIndex($details, 'city') ?>">
+        </div>
+        <div class="col-sm-6">
+            <label>Country<span class="red">*</span></label>
+            <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
+        </div>
+        <div class="col-sm-6">
+            <label>Photo<span class="red">*</span></label>
+            <input type="file"  name="photo" multiple="" >
+        </div>
+        <div class="col-sm-6">
+            <label>Gallery Images</label>
+            <input type="file"  name="galleryImages[]" multiple  >
+        </div>               
+        <div class="col-sm-6">
+            <label>Status<span class="red">*</span></label><br>
+            <?php foreach ($status as $st => $stval) { ?>
+                <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st == $details['status']) ? 'checked' : ''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
+            <?php } ?>
+        </div>
+        <div class="col-sm-6">
+            <label>Rental Amount<span class="red">*</span></label>
+            <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *" value="<?php echo $details['amount']; ?>">
+        </div> 
+        <div class="col-sm-6">
+            <label>Features</label>
+            <select data-placeholder="Choose a Feature..." class="chosen-select" multiple style="width:324px;" name="features[]" tabindex="4">
+                <?php
+                $exp = explode('|', $details['features']);
+                foreach ($features as $feature) {
+                    ?>
+                    <option value="<?php echo $feature['id'] ?>" <?php echo (in_array($feature['id'], $exp)) ? 'selected' : '' ?>><?php echo $feature['tag'] ?></option>
+                <?php } ?>
+            </select>
+        </div> 
+        <div class="col-sm-6">
+            <label>Rent Types<span class="red">*</span></label>
+            <select name="amount_type" class="form-control">
+                <option>Select</option>
+                <?php foreach (Unitsmodel::$types as $val => $type): ?>
+                    <option <?php echo ($val == $details['amount_type']) ? 'selected="selected"' : ''; ?> value="<?php echo $val ?>"><?php echo $type ?></option>
+                <?php endforeach; ?>
+            </select>
+        </div>
 
-            <div class="form-group extraAttributes">
-            </div>
+        <div class="col-sm-6">
+            <label>Map Image</label>
+            <input type="file"  name="map_image" style="height: 34px;"> <strong>(NOTE: Only browse the image if you want to replace existing)</strong>
+        </div>
 
-            <div class="col-sm-6">
-                
-                <?php foreach ($images['result'] as $image) { ?>
-                    <div class="koiclass col-sm-4 center" >
+        <div class="col-sm-6">
+            <label>Featured</label><br />
+            <input type="radio" value="1"  name="is_featured" <?php echo ($details['is_featured'] == 1) ? 'checked="checked"' : ''; ?>>&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="is_featured" <?php echo ($details['is_featured'] == 0) ? 'checked="checked"' : ''; ?>>&nbsp;&nbsp;No
+        </div>
+
+        <div class="col-sm-6">
+            <label>Active</label><br />
+            <input type="radio" value="1" <?php echo ($details['is_active'] == 1) ? 'checked="checked"' : ''; ?>  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active" <?php echo ($details['is_active'] == 0) ? 'checked="checked"' : ''; ?>>&nbsp;&nbsp;No
+        </div>
+
+        <div class="col-sm-12">
+            <label>Description</label>
+            <textarea name="description" class="form-control"><?php echo $details['description']; ?></textarea>
+        </div>
+
+        <div class="col-sm-6">
+            <label>Unit Type<span class="red">*</span></label>
+            <select name="unit_type" class="form-control">
+                <option value="">Select</option>
+                <option <?php echo ($details['unit_type'] == 's') ? 'selected="selected"' : ''; ?> value="s">Shop</option>
+                <option <?php echo ($details['unit_type'] == 'f') ? 'selected="selected"' : ''; ?> value="f">Flat</option>
+            </select>
+        </div>   
+
+        <div class="form-group extraAttributes">
+        </div>
+
+        <div class="col-sm-6">
+
+            <?php foreach ($images['result'] as $image) { ?>
+                <div class="koiclass col-sm-4 center" >
                     <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $image['image'] ?>" height="100px"  width="100px">
                     <input type="checkbox" name="deleteImage[]" value="<?php echo $image['image_id'] ?>" title="">delete
-                    </div>
-                <?php } ?>
-            </div>             
+                </div>
+            <?php } ?>
+        </div>             
 
-        </div>
-
-        <div class="form-group">
-            <div class="col-sm-12 text-center">
-                Fields mark with <span class="error">*</span> required
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-sm-12 center">
-                <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Add</button>
-            </div>
-        </div>
-    </form>
 </div>
+
+<div class="form-group">
+    <div class="col-sm-12 text-center">
+        Fields mark with <span class="error">*</span> required
+    </div>
+</div>
+<div class="form-group">
+    <div class="col-sm-12 center">
+        <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Submit</button>
+    </div>
+</div>
+</form>
+
 <script type="text/javascript">
     var config = {
         '.chosen-select': {}
@@ -167,7 +171,7 @@
         var val = $('select[name="unit_type"]').val(),
                 unit_id = '<?php echo $unit_id; ?>';
         ;
-        $.post('units/attributes/getAttributeValue', {val: unit_id,type:val}, function (response) {
+        $.post('units/attributes/getAttributeValue', {val: unit_id, type: val}, function (response) {
             response = JSON.parse(response);
             if (!response.success) {
                 $('.extraAttributes').html('');
@@ -175,7 +179,7 @@
             }
             var html = '';
             response.data.forEach(function (elm) {
-                if(elm.value == null)
+                if (elm.value == null)
                     elm.value = '';
                 l(elm);
                 var row = '';
