@@ -160,6 +160,9 @@
                 $('#grpLabel').html('');
                 $('#grpSelect').html('');
                 var req_url = '<?= createUrl('virtcab/getGrpUsers/'); ?>' + grp_id;
+<?php if ($this->aauth->isCustomer()): ?>
+                req_url = '<?= createUrl('virtcab/getGrpUsersCompany/'); ?>' + grp_id;    
+<?php endif; ?>
                 $('#virCabShareMainId').val(grp_id);
                 $.ajax({
                     url: req_url,
