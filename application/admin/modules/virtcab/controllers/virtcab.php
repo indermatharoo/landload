@@ -38,7 +38,7 @@ class virtcab extends Admin_Controller {
         }
     }
 
-    function index($file = null) {
+    function index_old($file = null) {
         $this->load->model('user/usermodel');
         $page = array();
         $inner = array();
@@ -121,7 +121,85 @@ class virtcab extends Admin_Controller {
         $this->load->view($this->default, $page);
     }
 
-    function listing() {        
+    function index($listingCompany = null) {
+        $this->load->model('user/usermodel');
+        $page = array();
+        $inner = array();
+        $this->load->helper('text');
+        $this->load->helper('form');
+        $this->load->library('pagination');
+        $this->load->library('form_validation');
+        $company_id = null;
+        if (!$listingCompany):
+            if ($this->aauth->isCompany()):
+                $company_id = curUsrId();
+            elseif ($this->aauth->isCompany()):
+                $company_id = curUsrPid();
+            else:
+                $company_id = curUsrId();
+            endif;
+        else:
+            $company_id = $listingCompany;
+        endif;
+        $inner['users'] = $this->Usermodel->listAll(0, 0, 'id, name');
+        $inner['userOwnFiles'] = null;
+        $inner['userSharedFiles'] = null;
+        $inner['countfiles'] = $this->VirtualCabinetmodel->getAllGroupBy('filetype');
+        $inner['allAvailGrps'] = $this->aauth->list_groups();
+        foreach ($inner['allAvailGrps'] as $kval) {
+            if ($kval->id != 6) {
+                continue;
+            }
+            $inner['AvailGrps'][$kval->id] = $kval->name;
+        }
+        $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes,creator_id',
+            'order-field' => 'filetype',
+            'order-by' => 'desc',
+            $this->VirtualCabinetmodel->creator_id => $company_id,
+        );
+
+        $othrShareFile = array('shared' => true,
+            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name,assignes',
+            $this->VirtualCabinetmodel->assignes => $company_id,
+            'order-field' => 'aauth_users.name',
+            'order-by' => 'desc',
+        );
+
+        $tab1 = ' active ';
+        $tab2 = '';
+        if (isset($_POST['searchfile'])) {
+            if ($_POST['currentTab'] == 2) {
+                $tab1 = '  ';
+                $tab2 = ' active ';
+                $myShareFileOpt['searchKey'] = $_POST['searchfile'];
+            }
+            if ($_POST['currentTab'] == 1) {
+                $tab2 = '  ';
+                $tab1 = ' active ';
+                $othrShareFile['searchKey'] = $_POST['searchfile'];
+            }
+        }
+        $inner['tab1'] = $tab1;
+        $inner['tab2'] = $tab2;
+        $inner['myShareFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $myShareFileOpt);
+        ///$inner['allFiles'] = $inner['userOwnFiles'];
+        $inner['userSharedFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $othrShareFile);
+        
+        $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles'],true,!$listingCompany);
+        
+        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true, false);
+        $inner['addEditJs'] = false;
+        if (!is_null($inner['myFilesHtml']) || !empty($inner['myFilesHtml'])) {
+            $inner['addEditJs'] = true;
+        }
+        $inner['imgArray'] = $this->imgArray;
+        $inner['docArray'] = $this->docArray;
+        $inner['extImgArray'] = $this->extImgArray;
+        $page['content'] = $this->load->view('index', $inner, TRUE);
+        $this->load->view($this->default, $page);
+    }
+
+    function listing() {
         $inner = $page = array();
         $inner['models'] = $this->usermodel->getCompanies();
         $page['content'] = $this->load->view('listing', $inner, true);
