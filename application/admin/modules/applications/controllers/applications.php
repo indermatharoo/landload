@@ -23,9 +23,9 @@ class Applications extends Admin_Controller {
         $config['total_rows'] = $this->Applicationsmodel->countAll($this->ids);
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
-        
+
         $Listing = $this->Applicationsmodel->listAll($this->ids);
-        
+
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',
@@ -336,13 +336,21 @@ class Applications extends Admin_Controller {
         }
         $getApplication = $this->commonmodel->getByPk($appID, 'dpd_applications');
         if (arrIndex($getApplication, 'is_deal_start')) {
-            self::saveInvoices($getApplication);
-            
-        } 
+//            self::saveInvoices($getApplication);
+            if (arrIndex($getApplication, 'applicant_id')):
+                self::updateAppToTan(arrIndex($getApplication, 'applicant_id'));
+            endif;
+        }
         redirect(createUrl('applications/index/'));
     }
-    
-//    fun
+
+    function updateAppToTan($applicant_id) {
+        $data = array();
+        $data['type'] = 'tnt';
+        $this->db->where('applicant_id', $applicant_id);
+        $this->db->update('applicants', $data);
+    }
+
     function saveInvoices($application) {
         $type = arrIndex($application, 'invoice_type');
 //        $type = 'M';

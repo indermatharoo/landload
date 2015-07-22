@@ -24,17 +24,17 @@ class Calendermodel extends CI_Model {
         return $rs;
     }
 
-    function getCompanyInvoices($ids = array(),$where = array()) {
+    function getCompanyInvoices($ids = array(), $where = array()) {
         $this->db->select('t1.*,t3.unit_number,t3.unit_image,t3.description,UNIX_TIMESTAMP(created_on) * 1000 as start,UNIX_TIMESTAMP(created_on) * 1000 as end');
         if (count($ids)) {
-            $this->db->where_in('company_id',$ids);
+            $this->db->where_in('company_id', $ids);
         }
-        foreach ($where as $key => $value):
-            $this->db->where($key,$value);
-        endforeach;
         $this->db->from('invoice_new t1');
-        $this->db->join('applications t2','t2.id=t1.application_id');
-        $this->db->join('units t3','t3.id=t2.unit_id');
+        foreach ($where as $key => $value):
+            $this->db->where($key, $value);
+        endforeach;
+        $this->db->join('applications t2', 't2.id=t1.application_id');
+        $this->db->join('units t3', 't3.id=t2.unit_id');
         $rs = $this->db->get()->result_array();
         return $rs;
     }

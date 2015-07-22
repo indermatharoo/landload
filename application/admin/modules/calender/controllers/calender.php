@@ -33,23 +33,26 @@ class Calender extends Admin_Controller {
         $inner = $page = array();
         $this->load->model('Calendermodel');
         $inner['events'] = $this->Calendermodel->getApplications();
-//        e($inner['events']);
         $page['content'] = $this->load->view('event/event-index', $inner, TRUE);
         $this->load->view('themes/default/templates/customer', $page);
     }
 
     function event() {
-        $from = arrIndex($this->GET, 'from')/1000;
-        $to = arrIndex($this->GET, 'to')/1000;
+        $from = arrIndex($this->GET, 'from') / 1000;
+        $to = arrIndex($this->GET, 'to') / 1000;
         if ($from)
             $from = date('Y-m-d', $from);
         if ($to)
             $to = date('Y-m-d', $to);
         $this->load->model('Calendermodel');
-        $applications = $this->Calendermodel->getCompanyInvoices($this->ids,array(
+        $multiple_where = array(
             'created_on >= ' => $from,
             'created_on <= ' => $to,
-        ));
+        );
+        if ($this->aauth->isCustomer()):
+            $multiple_where['t1.applicant_id'] = curUsrId();
+        endif;
+        $applications = $this->Calendermodel->getCompanyInvoices($this->ids,$multiple_where);
 //        e($applications);
         $return['success'] = true;
         $return['result'] = $applications;

@@ -90,7 +90,11 @@ function curUser($user_id = false) {
 }
 
 function curUsrId() {
-    return getThis()->session->userdata('id');
+    if (getThis()->aauth->isCustomer()):
+        return getThis()->session->userdata('applicant_id');
+    else:
+        return getThis()->session->userdata('id');
+    endif;
 }
 
 function curUsrPid() {
@@ -276,7 +280,7 @@ function getUnitsTypes() {
 function addDate($strDate, $interval) {
     $temp = new DateTime($strDate);
     $temp->add(new DateInterval('P1Y'));
-    
+
 //    $temp = (array)$temp;
 //    return arrIndex($temp,'date');
 }

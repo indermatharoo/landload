@@ -32,7 +32,7 @@
                     </div>
                     <div class="col-lg-5 pad-top25">
                         <?php if ($this->aauth->isCustomer()): ?>
-                            <?php $this->load->view(THEME . 'layout/inc-menu-customer-dashboard'); ?>
+                            <?php $this->load->view(THEME . 'layout/inc-menu-tanet'); ?>
                         <?php else : ?>
                             <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
                         <?php endif; ?>
