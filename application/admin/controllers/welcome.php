@@ -28,9 +28,6 @@ class Welcome extends CMS_Controller {
     }
 
     function index() {
-        if (curUsrId()) {
-            redirect(createUrl('user/dashboard'));
-        }
         $this->load->library('form_validation');
         $this->load->helper('form');
         $this->load->library('encrypt');

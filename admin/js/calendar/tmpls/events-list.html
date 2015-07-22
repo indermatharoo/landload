@@ -2,22 +2,28 @@
 <div id="cal-slide-content" class="cal-event-list">
     <ul class="unstyled list-unstyled">
         <% _.each(events, function(event) { %>
+        <script>
+            console.log('<%= events %>');</script>
         <li style="line-height: 20px; border-bottom: 1px solid #E1E1E1; padding-bottom: 10px">
             <div class="row-fluid mar-top10">
                 <div class="col-lg-4 ev" style="height: 90px; overflow: hidden;">
-                    <img src="http://localhost/desktopdeli/upload/events/<%= event.img %>" alt="" width="150"  />
+                    <img src="http://localhost/landlord/upload/property/units/<%= event.unit_image %>" alt="" width="150"  />
                 </div>
                 <div class="col-lg-8">
-                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="text-transform: capitalize; color: <%= event.color %>; font-size: 20px"><%= event.title %></div>
-                    <div><i class="fa fa-clock-o"></i>&nbsp;<%= event.time %></div>
-                    <div><i class="fa fa-map-marker"></i>&nbsp;<%= event.location %></div>
-                    <div>
-                        <button title="Event Complete" onclick="eventcomplete(<%= event.id %>)" class="btn btn-success btn-xs complete-event"><span class="fa fa-check-circle"></span></button>
-                        <button title="Event Edit" onclick="eventedit(<%= event.id %>)" class="btn btn-primary btn-xs"><span class="fa fa-edit"></span></button>
-                        <button title="Event Attendance" onclick="eventattendance(<%= event.id %>)" class="btn btn-default btn-xs"  ><span class="fa fa-list-alt"></span></button>
-                        <button title="Event Delete" onclick="eventdelete(<%= event.id %>)" class="btn btn-danger btn-xs"  ><span class="fa fa-trash"></span></button>
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="text-transform: capitalize; color: <%= event.color %>; font-size: 20px"><%= event.unit_number %></div>
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;"><%= event.description %></div>
+<!--                    <div>&nbsp;Created On :&nbsp;<%= event.created_on %></div>
+                    <div>&nbsp;Due Date :&nbsp;<%= event.due_on %></div>-->
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
+                        Created On :&nbsp;<%= event.created_on %>
                     </div>
-            </div>
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
+                        Due Date :&nbsp;<%= event.due_on %>
+                    </div>
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
+                       Payment : <%= (event.is_paid == 1) ? 'Paid' : 'Pending' %>
+                    </div>                    
+                </div>
         </li>
         <% }) %>
     </ul>

@@ -114,15 +114,15 @@ class Checkoutmodel extends CI_Model {
 
         $emailData = array();
         $emailData['DATE'] = date("jS F, Y");
-        $emailData['FIRSTNAME'] = arrIndex($booking, '')['first_name'];
-        $emailData['LASTNAME'] = arrIndex($booking, '')['last_name'];
-        $emailData['ADDRESS'] = arrIndex($booking, '')['delivery_address1'];
-        $emailData['ADDRESS2'] = arrIndex($booking, '')['delivery_address2'];
-        $emailData['CITY'] = arrIndex($booking, '')['delivery_city'];
-        $emailData['STATE'] = arrIndex($booking, '')['delivery_state'];
-        $emailData['POSTCODE'] = arrIndex($booking, '')['delivery_zipcode'];
-        $emailData['PHONE'] = arrIndex($booking, '')['delivery_phone'];
-        $emailData['EMAIL'] = arrIndex($booking, '')['email'];
+        $emailData['FIRSTNAME'] = arrIndex($booking, 'first_name');
+        $emailData['LASTNAME'] = arrIndex($booking, 'last_name');
+        $emailData['ADDRESS'] = arrIndex($booking, 'delivery_address1');
+        $emailData['ADDRESS2'] = arrIndex($booking, 'delivery_address2');
+        $emailData['CITY'] = arrIndex($booking, 'delivery_city');
+        $emailData['STATE'] = arrIndex($booking, 'delivery_state');
+        $emailData['POSTCODE'] = arrIndex($booking, 'delivery_zipcode');
+        $emailData['PHONE'] = arrIndex($booking, 'delivery_phone');
+        $emailData['EMAIL'] = arrIndex($booking, 'email');
 
         $emailData['BTNO'] = $booking['unique_id'];
         $emailData['CTN'] = $booking['ctn'];
