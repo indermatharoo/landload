@@ -23,7 +23,7 @@ class Applications extends Admin_Controller {
         $config['total_rows'] = $this->Applicationsmodel->countAll($this->ids);
         $config['per_page'] = $perpage;
         $this->pagination->initialize($config);
-
+        
         $Listing = $this->Applicationsmodel->listAll($this->ids);
         
         $inner = array();
@@ -217,7 +217,7 @@ class Applications extends Admin_Controller {
 
             $unit_id = $this->Applicationsmodel->updateRecord($offset);
             e($unit_id);
-            
+
             $this->session->set_flashdata('SUCCESS', 'application_updated');
             redirect(createUrl('applications/index/'));
         }
@@ -258,7 +258,7 @@ class Applications extends Admin_Controller {
         if (is_numeric($value)) {
             return true;
         } else {
-            $this->form_validation->set_message('checkPrice','Rent Amount Must Be A Numeric');
+            $this->form_validation->set_message('checkPrice', 'Rent Amount Must Be A Numeric');
             return false;
         }
     }
@@ -334,7 +334,83 @@ class Applications extends Admin_Controller {
                 $virtual_event_id = $this->VirtualCabinetmodel->insertRecord($data, true);
             }
         }
+        $getApplication = $this->commonmodel->getByPk($appID, 'dpd_applications');
+        if (arrIndex($getApplication, 'is_deal_start')) {
+            self::saveInvoices($getApplication);
+            
+        } 
         redirect(createUrl('applications/index/'));
+    }
+    
+//    fun
+    function saveInvoices($application) {
+        $type = arrIndex($application, 'invoice_type');
+//        $type = 'M';
+        $amount = arrIndex($application, 'invoice_amount');
+        $day = arrIndex($application, 'day_of_week');
+        if ($day)
+            $day = strtolower($day);
+        $month = arrIndex($application, 'date_of_month');
+//        $month = '2015-07-22';
+        $startdate = arrIndex($application, 'startdate');
+        $enddateTemp = new DateTime($startdate);
+        $enddateTemp->add(new DateInterval('P1Y'));
+        switch ($type):
+            case 'W':
+                $enddateTemp->sub(new DateInterval('P1W'));
+                break;
+            case 'M':
+                $enddateTemp->sub(new DateInterval('P1M'));
+                break;
+        endswitch;
+//        e($enddateTemp);
+        $enddate = $enddateTemp->format('Y-m-d');
+        while ($startdate <= $enddate):
+            $temp = new DateTime($startdate);
+            $interval = null;
+            switch ($type):
+                case 'W':
+                    $temp->modify('next ' . $day);
+                    $startdate = $temp->format('Y-m-d');
+                    $temp->add(new DateInterval('P5D'));
+                    $duedate = $temp->format('Y-m-d');
+                    break;
+                case 'M':
+                    if ($startdate < $month):
+                        $temp = new DateTime($month);
+                        $startdate = $temp->format('Y-m-d');
+                        $temp->add(new DateInterval('P5D'));
+                        $duedate = $temp->format('Y-m-d');
+                    else:
+                        $temp = new DateTime($startdate);
+                        $temp->add(new DateInterval('P1M'));
+                        $startdate = $temp->format('Y-m-d');
+                        $temp->add(new DateInterval('P5D'));
+                        $duedate = $temp->format('Y-m-d');
+                    endif;
+                    break;
+            endswitch;
+            self::addInvoice(array(
+                'application_id' => arrIndex($application, 'id'),
+                'applicant_id' => arrIndex($application, 'applicant_id'),
+                'company_id' => arrIndex($application, 'company_id'),
+                'installment_fees' => arrIndex($application, 'rent_amount'),
+                'vat' => '20',
+                'total_amount' => arrIndex($application, 'rent_amount') + (arrIndex($application, 'rent_amount') * .20),
+                'invoice_code' => '0',
+                'created_on' => $startdate,
+                'due_on' => $duedate,
+                'invoice_type' => $type,
+                'paid_on' => '0000-00-00 00:00:00',
+                'is_paid' => '0'
+            ));
+        endwhile;
+        e('end');
+    }
+
+    function addInvoice($attributes = array()) {
+        //e($data);
+        return $this->db->insert('invoice_new', $attributes);
     }
 
     function delete($id) {

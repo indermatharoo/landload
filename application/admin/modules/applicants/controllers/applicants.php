@@ -68,6 +68,7 @@ class Applicants extends Admin_Controller {
         $this->form_validation->set_rules('passwd', 'password', 'trim|required');
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
         $this->form_validation->set_rules('conpasswd', 'confirm password', 'trim|required|matches[passwd]');
+        $this->form_validation->set_rules('address', 'Address', 'trim|required');
         // get applicant type
 
         $applicantsType = $this->Applicantsmodel->getApplicantType();

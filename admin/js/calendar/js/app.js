@@ -9,9 +9,9 @@
     var today = now.getFullYear() + "-" + (month) + "-" + (day);
 
     var options = {
-        events_source: document.location.origin+'/desktopdeli/admin/calender/event/?uid=' + teri,
+        events_source: document.location.origin+'/landlord/admin/calender/event/?uid=' + teri,
         view: 'month',
-        tmpl_path: document.location.origin+'/desktopdeli/admin/js/calendar/tmpls/',
+        tmpl_path: document.location.origin+'/landlord/admin/js/calendar/tmpls/',
         tmpl_cache: false,
         day: today,
         onAfterEventsLoad: function (events) {

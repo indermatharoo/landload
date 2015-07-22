@@ -272,3 +272,11 @@ function getUnitsTypes() {
         'f' => 'Flat'
     );
 }
+
+function addDate($strDate, $interval) {
+    $temp = new DateTime($strDate);
+    $temp->add(new DateInterval('P1Y'));
+    
+//    $temp = (array)$temp;
+//    return arrIndex($temp,'date');
+}

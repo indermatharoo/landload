@@ -46,13 +46,16 @@
                                 </div>
                             <?php endif; ?>
                             <?php foreach ($property as $row) { ?>
+                            <?php
+//                            e($row);
+                            ?>
                                 <div class="col-md-3">
                                     <div class="property_list_box">
                                         <div class="view view-first property_img">
 
                                             <img src="<?= $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>">
                                             <div class="mask">
-                                                <h2><?= $row['pname'] ?></h2>
+                                                <h2><?= $row['unit_number'] ?></h2>
                                                 <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
                                                 <p class="prop_price"><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p>
 

@@ -1,3 +1,6 @@
+<?php
+//e($this->session->all_userdata());
+?>
 <div class="top">
     <div class="row">
         <div class="col-lg-6 col-sm-3">
@@ -11,12 +14,19 @@
                     <?php
                     $curUser = $this->aauth->get_user();
                     $edit_url = '';
+                    $name = '';
                     if ($this->aauth->isAdmin()):
                         $edit_url = createUrl('user/editt/' . curUsrId());
-                    elseif($this->aauth->isCompany()):
+                        $name = $curUser->name;
+                    elseif ($this->aauth->isCompany()):
                         $edit_url = createUrl('company/edit/' . curUsrId());
-                    elseif($this->aauth->isUser()):
-                        $edit_url = createUrl('user/edit/' . curUsrId());                        
+                        $name = $curUser->name;
+                    elseif ($this->aauth->isUser()):
+                        $edit_url = createUrl('user/edit/' . curUsrId());
+                        $name = $curUser->name;
+                    elseif ($this->aauth->isCustomer()):
+                        $session = $this->session->all_userdata();
+                        $name = arrIndex($session, 'fname');
                     endif;
                     ?>
                 </div>
@@ -52,7 +62,7 @@
                     </span>
                     <span style="">Welcome 
                         <a style="text-decoration: underline;" href="<?php echo $edit_url ?>">
-                            <?php echo ucfirst($curUser->name); ?>
+                            <?php echo ucfirst($name); ?>
                         </a>
                     </span> | 
                     <a href="<?= createUrl('user/logout') ?>">
