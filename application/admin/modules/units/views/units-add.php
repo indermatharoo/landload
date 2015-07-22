@@ -62,9 +62,18 @@
                 <label>City<span class="red">*</span></label>
                   <input type="text" class="form-control" name="city"  placeholder="City *">
             </div>
+            
             <div class="col-sm-6">
                 <label>Country<span class="red">*</span></label>
-                <input type="text" class="form-control"  name="country"  placeholder="County *">
+                <select name="country"  class="form-control" >
+                    <!--<option value=""></option>-->
+                    <?php foreach ($country as $val) { ?>
+                        <?php
+                        $selected = (arrIndex($val, 'iso') == 'GB') ? true : false;
+                        ?>
+                        <option <?php echo ($selected) ? "selected" : ""; ?> value="<?php echo $val['iso'] ?>" ><?php echo $val['nicename'] ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="col-sm-6">
                 <label>Gallery Images</label>

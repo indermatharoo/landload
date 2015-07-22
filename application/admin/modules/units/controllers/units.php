@@ -77,6 +77,7 @@ class Units extends Admin_Controller {
             $inner['features'] = $features;
             $inner['propertyList'] = $propertyList;
             $inner['propertiesType'] = $propertiesType;
+            $inner['country'] = $countryData;
            // $inner['unitsType'] = $unitsType;
             $page = array();
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
