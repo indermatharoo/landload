@@ -292,7 +292,12 @@ class Unitsmodel extends Basemodel {
         $res = $this->db->get('dpd_unit_image');
         return array('num_rows' => $res->num_rows(), 'result' => $res->result_array());
     }
-
+    function getCountrydata()
+    {
+        $this->db->select('iso,nicename');
+        $res = $this->db->get('country');
+        return $res->result_array();
+    }
     function getUnitsByPropertyId($id) {
    
         $res = $this->db->get('units');

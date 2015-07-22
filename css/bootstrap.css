@@ -6581,4 +6581,7 @@ button.close {
     display: none !important;
   }
 }
+.redEr{
+    color : #DD4B39;
+}
 /*# sourceMappingURL=bootstrap.css.map */

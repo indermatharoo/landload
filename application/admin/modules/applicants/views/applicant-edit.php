@@ -18,55 +18,55 @@
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
             <div class="col-sm-6">
-                <label>Last name</label>
+                <label>Last name<span class="red">*</span></label>
                 <input type="text" class="form-control" name="lname"  placeholder="Last name *"  value="<?= $details['lname']?>">
             </div>
             <div class="col-sm-6">
-                <label>First name</label>
+                <label>First name<span class="red">*</span></label>
                 <input type="text" class="form-control" name="fname"  placeholder="First name *" value="<?= $details['fname']?>">
             </div>
             <div class="col-sm-6">
-                <label>Email </label>
+                <label>Email <span class="red">*</span></label>
                 <input type="text" class="form-control" name="email"  placeholder="Email *" value="<?= $details['email']?>">
             </div>
             <div class="col-sm-6">
-                <label>password </label>
+                <label>password <span class="red">*</span></label>
                 <input type="password" class="form-control" name="passwd"  placeholder="password *">
             </div>            
             <div class="col-sm-6">
-                <label>Confirm password </label>
+                <label>Confirm password <span class="red">*</span></label>
                 <input type="password" class="form-control" name="conpasswd"  placeholder="password *">
             </div>            
             <div class="col-sm-6">
-                <label>Address </label>
+                <label>Address <span class="red">*</span></label>
                 <input type="text" class="form-control" name="address"  placeholder="Address *" value="<?= $details['address']?>">
             </div>               
             <div class="col-sm-6">
-                <label>Phone </label>
+                <label>Phone <span class="red">*</span></label>
                 <input type="text" class="form-control" name="phone"  placeholder="Phone *" value="<?= $details['phone']?>">
             </div>
             <div class="col-sm-6">
-                <label>Birth date </label>
+                <label>Birth date <span class="red">*</span></label>
                  <input type="text" class="form-control" name="birth_date" id="datepicker" placeholder="Birth date *" value="<?= date('m/d/Y',strtotime($details['birthdate']))?>">
             </div>   
             <div class="col-sm-6">
-                <label>Driver License Number </label>
+                <label>Driver License Number <span class="red">*</span></label>
                 <input type="text" class="form-control" name="license"  placeholder="Driver License Number *" value="<?= $details['license']?>">
             </div>
             <div class="col-sm-6">
-                <label>Monthly Gross Pay </label>
+                <label>Monthly Gross Pay <span class="red">*</span></label>
                 <input type="text" class="form-control" name="monthly_gross"  placeholder="Monthly Gross Pay *" value="<?= $details['monthly_gross']?>">
             </div>
             <div class="col-sm-6">
                 <label>Additional Income </label>
                 <input type="text" class="form-control" name="additional_income"  placeholder="Additional Income *" value="<?= $details['additional']?>">
             </div>      
-            <div class="col-sm-6">
+<!--            <div class="col-sm-6">
                 <label>Assets </label>
                 <input type="text" class="form-control" name="assets"  placeholder="Assets *" value="<?= $details['asset']?>">
-            </div> 
+            </div> -->
             <div class="col-sm-6">
-                <label> Status </label><br>
+                <label> Status <span class="red">*</span></label><br>
                 <?php foreach($applicantsType as $type){ ?>
                 <input type="radio" name="status" value="<?php echo $type['code'] ?>" <?php echo ($type['code']==$details['type'])?'checked':''; ?> ><?php echo $type['type'] ?><br>
                 <?php } ?>

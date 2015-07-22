@@ -29,13 +29,10 @@ class Units extends Admin_Controller {
         $Listing = $this->Unitsmodel->listAll($this->ids);
         $inner = array();
         $inner['labels'] = array(
-            'pname' => 'Name',
-//            'area' => 'Area',
-//            'room' => 'Room',
-//            'bathroom' => 'Bathroom',
+            'unit_number'=>'Unit Name',
             'amount' => 'Amount',
             'owner' => 'Owner',
-            'state' => 'State',
+            'city' => 'City',
             -1 => 'Action'
         );
         $inner['Listing'] = $Listing;
@@ -56,7 +53,7 @@ class Units extends Admin_Controller {
         $propertyList = $this->Propertiesmodel->getPropertiesList();
         $propertiesType = $this->Unitsmodel->getPropertiesType();
         //$unitsType = $this->Unitsmodel->getUnitType();
-        
+        $countryData = $this->Unitsmodel->getCountrydata();
         $this->form_validation->set_rules('ptype', 'Property type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
         if (empty($_FILES['photo']['name'])) {

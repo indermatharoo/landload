@@ -1,4 +1,6 @@
 <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
+<?php //e($Listing); ?>
+
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <header class="panel-heading">
     <div class="row">
