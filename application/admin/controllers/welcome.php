@@ -39,11 +39,32 @@ class Welcome extends CMS_Controller {
 
         if ($this->form_validation->run() == FALSE && !isset($this->session->userdata['loggedin'])
         ) {
+//            print_r($_POST);
+            if (gParam('username') && gParam('passwd')) {
+                self::checkApplicantLogin(gParam('username'), gParam('passwd'));
+            }
             $data = array();
             $this->load->view(THEME . 'login', $data);
         } else {
             redirect(createUrl('user/dashboard'));
         }
+    }
+
+    function checkApplicantLogin($email, $password) {
+        $this->db->where('email', $email);
+        $this->db->where('password', md5($password));
+        $result = $this->db->get('applicants')->row_array();
+//        e($result);
+        if (count($result) && arrIndex($result, 'type') == 'tnt'):
+            $result['isAdmin'] = 0;
+            $result['isCompany'] = 0;
+            $result['isUser'] = 0;
+            $result['isCustomer'] = 1;
+            $result['loggedin'] = 1;
+            $this->session->set_userdata($result);
+//            e(123);
+            redirect(createUrl('applicants/dashboard'));
+        endif;
     }
 
     function lostpasswd() {

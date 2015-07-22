@@ -43,7 +43,7 @@
 
         <div id="franchise_performance" style=" border: 1px solid #aaa; border-radius: 5px;">
             <div class="panel-group" id="accordion" style="margin: 0;">
-<!--                <div class="panel panel-default">
+                <div class="panel panel-default">
                     <div class="panel-heading" style="padding: 0;">
                         <h4 class="panel-title">
                             <a data-toggle="collapse" data-parent="#accordion" href="#collapse1"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Properties<img src="../imgs/right-triangle.png" style="float: right;"></h3></a>
@@ -52,7 +52,7 @@
                     <div id="collapse1" class="panel-collapse collapse in">
                         <div class="panel-body"> <?php $this->load->view("dashboard/dashboardListing"); ?></div>
                     </div>
-                </div>-->
+                </div>
                 <?php if ($this->aauth->isAdmin()): ?>
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding: 0;">
