@@ -173,7 +173,7 @@ $(document).ready(function(){
             <div class="tab-pane" id="tabs-3">
                 <form name="propDetails" id="propDetails" action="applications" method="post" >
                 <div class="form-group">
-                    <div class="col-sm-6">
+<!--                    <div class="col-sm-6">
                 <label>Property </label>
                 <select class="form-control" name="property_id">
                     <option></option>
@@ -181,7 +181,7 @@ $(document).ready(function(){
                         <option value="<?php echo $property['id'] ?>" <?php echo ($property['id'] == arrIndex($details, 'property_id')) ? 'selected' : '' ?>><?php echo $property['pname'] ?></option>
                     <?php } ?>
                 </select>
-                    </div>
+                    </div>-->
                     <div class="col-sm-6">
                 <label>Unit Applied For </label>
                 <?php

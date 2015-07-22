@@ -1,3 +1,4 @@
+<?php //e($details); ?>
 <link rel="stylesheet" href="js/tagsystem/chosen.css">  
 <script src="js/tagsystem/chosen.jquery.js" type="text/javascript"></script>
 <header class="panel-heading">
@@ -16,25 +17,42 @@
 <div class="col-lg-12 padding-0 mar-top15">
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
-        <div class="form-group">
-            <div class="col-sm-6">
-                <label>Property </label>
-
-                <select name="property_id" class="form-control">
-                    <option></option>
-                    <?php
-                    foreach ($propertyList as $list) {
-                        ?>
-                        <option value="<?php echo $list['id'] ?>" <?php echo ($list['id'] == $details['property_id']) ? 'selected' : ''; ?>><?php echo $list['pname'] ?></option>
-                        <?php
-                    }
-                    ?>
+        <div class="col-sm-6">
+                <?php //e($propertiesType) ?>
+                <label>Property Type</label>
+                <select name="ptype" class="form-control" autocomlete="off">
+                    <option value="">-Select Type-</option>
+                    <?php foreach($propertiesType as $ptype){ ?>
+                    <option value="<?php echo $ptype['short_code'] ?>" <?php if( $ptype['short_code'] == arrIndex($details, 'property_type')){echo "selected    ";} ?>><?php echo $ptype['type'] ?></option>
+                    
+                    <?php } ?>
                 </select>
+                
             </div>
 
             <div class="col-sm-6">
                 <label>Unit Name</label>
-                <input type="text" class="form-control" name="unit_number" value="<?php echo $details['unit_number']; ?>"  placeholder="units Number">
+                <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name" value="<?php echo arrIndex($details, 'unit_number') ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>Photo</label>
+                <input type="file"  name="photo"   >
+            </div>
+            <div class="col-sm-6">
+                <label>Owner</label>
+                <input type="text" class="form-control" name="owner"  placeholder="Owner  *" value="<?php echo arrIndex($details, 'owner') ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>Street</label>
+                <input type="text" class="form-control" name="street"  placeholder="Street  *" value="<?php echo arrIndex($details, 'street') ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>City</label>
+                  <input type="text" class="form-control" name="city"  placeholder="City *" value="<?php echo arrIndex($details, 'city') ?>">
+            </div>
+            <div class="col-sm-6">
+                <label>Country</label>
+                <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Photo</label>
