@@ -17,7 +17,7 @@ class VirtualCabinetmodel extends CI_Model {
         parent::__construct();
 
         $this->tblalias = 'virtualCab';
-        
+
         $this->id = 'id';
         $this->assignes = 'assignes';
         $this->filetype = 'filetype';
@@ -31,16 +31,16 @@ class VirtualCabinetmodel extends CI_Model {
 
     function insertRecord($param = array(), $insert = false) {
         if ($insert) {
-            $this->db->insert($this->tblalias, $param);                        
+            $this->db->insert($this->tblalias, $param);
             return $this->db->insert_id();
         }
     }
 
-    function updateRecord($param = array()) {     
+    function updateRecord($param = array()) {
         return $this->db->where('id', $param['id'])
-                ->update($this->tblalias, $param['data']);
+                        ->update($this->tblalias, $param['data']);
     }
-    
+
     function countAll() {
         $this->db->from($this->tblalias);
         return $this->db->count_all_results();
@@ -48,12 +48,16 @@ class VirtualCabinetmodel extends CI_Model {
 
     //List All Records
     function listAll($offset = FALSE, $limit = FALSE, $param = array()) {
+//        e($param);
         if ($limit) {
             $this->db->limit($limit);
         }
         if ($offset) {
             $this->db->offset($offset);
         }
+        if ($this->aauth->isCustomer()):
+            $this->db->where('is_applicant', 1);
+        endif;
         if (isset($param['columns'])) {
             $this->db->select($param['columns']);
         }
@@ -107,8 +111,10 @@ class VirtualCabinetmodel extends CI_Model {
         if (!$fld)
             return false;
         $rs = $this->db->select('count(id) as total,' . $fld)
-                ->group_by($fld)->from($this->tblalias)->get();
-        if ($rs)return $rs->result_array();
+                        ->group_by($fld)->from($this->tblalias)->get();
+        if ($rs)
+            return $rs->result_array();
         return FALSE;
     }
+
 }

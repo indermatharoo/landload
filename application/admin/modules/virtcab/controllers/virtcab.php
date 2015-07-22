@@ -65,14 +65,14 @@ class virtcab extends Admin_Controller {
             }
             $inner['AvailGrps'][$kval->id] = $kval->name;
         }
-        $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes',
+        $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes,creator_id',
             'order-field' => 'filetype',
             'order-by' => 'desc',
             $this->VirtualCabinetmodel->creator_id => $company_id,
         );
 
         $othrShareFile = array('shared' => true,
-            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name',
+            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name,assignes',
             $this->VirtualCabinetmodel->assignes => $company_id,
             'order-field' => 'aauth_users.name',
             'order-by' => 'desc',
@@ -100,7 +100,7 @@ class virtcab extends Admin_Controller {
         $inner['userSharedFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $othrShareFile);
 //        echo $this->db->last_query();//exit;
         $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles']);
-        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true);
+        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true,false);
         $inner['addEditJs'] = false;
         if (!is_null($inner['myFilesHtml']) || !empty($inner['myFilesHtml'])) {
             $inner['addEditJs'] = true;
@@ -396,7 +396,7 @@ class virtcab extends Admin_Controller {
         exit;
     }
 
-    function localFileDisplay($allFiles = null, $setDelPer = false) {
+    function localFileDisplay($allFiles = null, $setDelPer = false, $flix = true) {
         $listHtml = null;
         $typeext = null;
         $listingHtml = null;
@@ -405,6 +405,12 @@ class virtcab extends Admin_Controller {
         $docArray = $this->docArray;
         $videoArray = $this->videoArray;
         foreach ($allFiles as $kval) {
+//            e($kval);
+            $assignes = explode(',', arrIndex($kval, 'assignes'));
+            if ($flix)
+                if (!in_array(curUsrId(), $assignes)) {
+                    continue;
+                }
             $lastIndex = strrpos($kval['actual_name'], '.');
             $ext = substr($kval['actual_name'], $lastIndex + 1);
             $ext = strtolower($ext);
