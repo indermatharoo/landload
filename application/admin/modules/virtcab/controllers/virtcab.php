@@ -100,7 +100,7 @@ class virtcab extends Admin_Controller {
         $inner['userSharedFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $othrShareFile);
 //        echo $this->db->last_query();//exit;
         $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles']);
-        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true,false);
+        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true, false);
         $inner['addEditJs'] = false;
         if (!is_null($inner['myFilesHtml']) || !empty($inner['myFilesHtml'])) {
             $inner['addEditJs'] = true;
@@ -118,6 +118,13 @@ class virtcab extends Admin_Controller {
 //        e($inne)
 //        e($this->default);
         $page['content'] = $this->load->view('index', $inner, TRUE);
+        $this->load->view($this->default, $page);
+    }
+
+    function listing() {        
+        $inner = $page = array();
+        $inner['models'] = $this->usermodel->getCompanies();
+        $page['content'] = $this->load->view('listing', $inner, true);
         $this->load->view($this->default, $page);
     }
 

@@ -1002,6 +1002,15 @@ class Usermodel extends Basemodel {
         return count($rs);
     }
 
+    function getCompanies() {
+        $this->db->select('t1.*');
+        $this->db->from('aauth_users t1');
+        $this->db->join('aauth_user_to_group t2', 't2.user_id=t1.id');
+        $this->db->join('aauth_groups t3', 't3.id=t2.group_id and t3.id = 3');
+        $rs = $this->db->get()->result_array();
+        return $rs;
+    }
+
     function getCompanyUsersId($id = NULL) {
         if (!$id)
             $id = curUsrId();
