@@ -19,7 +19,7 @@
     <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="col-sm-6">
                 <?php //e($propertiesType) ?>
-                <label>Property Type</label>
+                <label>Property Type<span class="red">*</span></label>
                 <select name="ptype" class="form-control" autocomlete="off">
                     <option value="">-Select Type-</option>
                     <?php foreach($propertiesType as $ptype){ ?>
@@ -31,31 +31,31 @@
             </div>
 
             <div class="col-sm-6">
-                <label>Unit Name</label>
+                <label>Unit Name<span class="red">*</span></label>
                 <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name" value="<?php echo arrIndex($details, 'unit_number') ?>">
             </div>
             <div class="col-sm-6">
-                <label>Photo</label>
+                <label>Photo<span class="red">*</span></label>
                 <input type="file"  name="photo"   >
             </div>
             <div class="col-sm-6">
-                <label>Owner</label>
+                <label>Owner<span class="red">*</span></label>
                 <input type="text" class="form-control" name="owner"  placeholder="Owner  *" value="<?php echo arrIndex($details, 'owner') ?>">
             </div>
             <div class="col-sm-6">
-                <label>Street</label>
+                <label>Street<span class="red">*</span></label>
                 <input type="text" class="form-control" name="street"  placeholder="Street  *" value="<?php echo arrIndex($details, 'street') ?>">
             </div>
             <div class="col-sm-6">
-                <label>City</label>
+                <label>City<span class="red">*</span></label>
                   <input type="text" class="form-control" name="city"  placeholder="City *" value="<?php echo arrIndex($details, 'city') ?>">
             </div>
             <div class="col-sm-6">
-                <label>Country</label>
+                <label>Country<span class="red">*</span></label>
                 <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
             </div>
             <div class="col-sm-6">
-                <label>Photo</label>
+                <label>Photo<span class="red">*</span></label>
                 <input type="file"  name="photo" multiple="" >
             </div>
             <div class="col-sm-6">
@@ -63,13 +63,13 @@
                 <input type="file"  name="galleryImages[]" multiple  >
             </div>               
             <div class="col-sm-6">
-                <label>Status</label><br>
+                <label>Status<span class="red">*</span></label><br>
                 <?php foreach ($status as $st => $stval) { ?>
                     <input type="radio" name="status" value="<?php echo $st ?>" <?php echo ($st == $details['status']) ? 'checked' : ''; ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
             <div class="col-sm-6">
-                <label>Rental Amount</label>
+                <label>Rental Amount<span class="red">*</span></label>
                 <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *" value="<?php echo $details['amount']; ?>">
             </div> 
             <div class="col-sm-6">
@@ -84,7 +84,7 @@
                 </select>
             </div> 
             <div class="col-sm-6">
-                <label>Rent Types</label>
+                <label>Rent Types<span class="red">*</span></label>
                 <select name="amount_type" class="form-control">
                     <option>Select</option>
                     <?php foreach (Unitsmodel::$types as $val => $type): ?>
@@ -114,7 +114,7 @@
             </div>
 
             <div class="col-sm-6">
-                <label>Unit Type</label>
+                <label>Unit Type<span class="red">*</span></label>
                 <select name="unit_type" class="form-control">
                     <option value="">Select</option>
                     <option <?php echo ($details['unit_type'] == 's') ? 'selected="selected"' : ''; ?> value="s">Shop</option>
