@@ -16,7 +16,7 @@
             </div>
         </div>
     </header>
-    <?php if (!$this->aauth->isAdmin()): ?>
+    <?php // if (!$this->aauth->isAdmin()): ?>
         <div class="form-group form-bg col-sm-12 mar-top15 padding-0">
             <form method="POST" action="<?= createUrl('virtcab/fillcab') ?>" enctype="multipart/form-data" name="multiVir" id="multiVir">
                 <div class="col-sm-9 padding-0">
@@ -52,7 +52,7 @@
                 </div>
             </form>
         </div>
-    <?php endif; ?>
+    <?php // endif; ?>
     <div class="col-sm-12 mar-bot10 padding-0">
         <div class="input-group custom-search-form" style="width: 100%;">
             <form name="search_file" id="search_file" action="virtcab/" method="POST" class="form-horizontal">
