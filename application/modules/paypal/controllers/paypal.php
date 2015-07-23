@@ -39,7 +39,8 @@ class Paypal extends CI_Controller {
                 $p->add_field('notify_url', $this_script . '?action=ipn&invoice_id=1234');
                 $p->add_field('item_name', 'Paypal Test Transaction');
                 $p->add_field('amount', '1.99');
-
+                $p->add_field('custom', '123321');
+                
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
@@ -81,8 +82,9 @@ class Paypal extends CI_Controller {
                 // you try and use an echo or printf function here it's not going to do you
                 // a bit of good.  This is on the "backend".  That is why, by default, the
                 // class logs all IPN data to a text file.
+                
                 $this->db->insert('test', array('value' => json_encode($_REQUEST)));
-
+                
                 if ($p->validate_ipn()) {
                     $this->db->insert('test', array('id' => 1));
 
