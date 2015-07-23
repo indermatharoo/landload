@@ -10,3 +10,51 @@ Content-Length: 0
 
 
 
+[07/23/2015 11:32 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=1.99, protection_eligibility=Eligible, address_status=confirmed, payer_id=25XMPZEYA6WGY, tax=0.00, address_street=1 Main St, payment_date=03:33:10 Jul 23, 2015 PDT, payment_status=Pending, charset=windows-1252, address_zip=95131, first_name=Vivek, address_country_code=US, address_name=Vivek Jamwal, notify_version=3.8, custom=, payer_status=verified, business=devrohit46@gmail.com, address_country=United States, address_city=San Jose, quantity=1, verify_sign=AwD4sJJmdrzDKNGw7KMAMuZSx1AHAHiGhzMTXWr1VS5JkQ7V7w5WxXZt, payer_email=vivekjamwal91@gmail.com, txn_id=37S06004R71914926, payment_type=instant, last_name=Jamwal, address_state=CA, receiver_email=devrohit46@gmail.com, receiver_id=5YUQG9M8A2JAG, pending_reason=verify, txn_type=web_accept, item_name=Paypal Test Transaction, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, handling_amount=0.00, transaction_subject=, payment_gross=1.99, shipping=0.00, ipn_track_id=833369f44ae29, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[07/23/2015 11:34 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=1.99, protection_eligibility=Ineligible, address_status=confirmed, payer_id=25XMPZEYA6WGY, tax=0.00, address_street=1 Main St, payment_date=03:28:08 Jul 23, 2015 PDT, payment_status=Pending, charset=windows-1252, address_zip=95131, first_name=Vivek, address_country_code=US, address_name=Vivek Jamwal, notify_version=3.8, custom=, payer_status=verified, business=harrymatharoo.matharoo@gmail.com, address_country=United States, address_city=San Jose, quantity=1, verify_sign=ALWHuhPQmuEeZLprb-zYnlBl-3JvA2wgtG9gvp88JdWemeClNFsE1X0d, payer_email=vivekjamwal91@gmail.com, txn_id=39Y51741JV389604P, payment_type=instant, last_name=Jamwal, address_state=CA, receiver_email=harrymatharoo.matharoo@gmail.com, pending_reason=unilateral, txn_type=web_accept, item_name=Paypal Test Transaction, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, handling_amount=0.00, transaction_subject=, payment_gross=1.99, shipping=0.00, ipn_track_id=217760dbbfe9e, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[07/23/2015 11:44 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=1.99, protection_eligibility=Ineligible, address_status=confirmed, payer_id=25XMPZEYA6WGY, tax=0.00, address_street=1 Main St, payment_date=03:30:47 Jul 23, 2015 PDT, payment_status=Pending, charset=windows-1252, address_zip=95131, first_name=Vivek, address_country_code=US, address_name=Vivek Jamwal, notify_version=3.8, custom=, payer_status=verified, business=harrymatharoo.matharoo@gmail.com, address_country=United States, address_city=San Jose, quantity=1, verify_sign=Ae4eqEPlvFwYuXka2cAk7D9prwKzAGCYV55NrwXLKCIa0PmSu0c1zPKw, payer_email=vivekjamwal91@gmail.com, txn_id=4A704506JE8025938, payment_type=instant, last_name=Jamwal, address_state=CA, receiver_email=harrymatharoo.matharoo@gmail.com, pending_reason=unilateral, txn_type=web_accept, item_name=Paypal Test Transaction, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, handling_amount=0.00, transaction_subject=, payment_gross=1.99, shipping=0.00, ipn_track_id=db78ac1f9b2bc, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+
+[07/23/2015 11:45 AM] - FAIL: IPN Validation Failed.
+IPN POST Vars from Paypal:
+mc_gross=1.99, protection_eligibility=Eligible, address_status=confirmed, payer_id=25XMPZEYA6WGY, tax=0.00, address_street=1 Main St, payment_date=03:45:55 Jul 23, 2015 PDT, payment_status=Pending, charset=windows-1252, address_zip=95131, first_name=Vivek, address_country_code=US, address_name=Vivek Jamwal, notify_version=3.8, custom=123321, payer_status=verified, business=devrohit46@gmail.com, address_country=United States, address_city=San Jose, quantity=1, verify_sign=AWqw60yoIFbkv0k3xH5aeMJKrOWHAX7Qm0r2LuVFEYyz4g05Tczgs42T, payer_email=vivekjamwal91@gmail.com, txn_id=0TU42978E8529940P, payment_type=instant, last_name=Jamwal, address_state=CA, receiver_email=devrohit46@gmail.com, receiver_id=5YUQG9M8A2JAG, pending_reason=verify, txn_type=web_accept, item_name=Paypal Test Transaction, mc_currency=USD, item_number=, residence_country=US, test_ipn=1, handling_amount=0.00, transaction_subject=123321, payment_gross=1.99, shipping=0.00, ipn_track_id=56b6f665a46f8, 
+IPN Response from Paypal Server:
+ HTTP/1.0 302 Found
+Location: https://www.sandbox.paypal.com
+Server: BigIP
+Connection: close
+Content-Length: 0
+
+
+

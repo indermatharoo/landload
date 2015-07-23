@@ -36,7 +36,7 @@ class Paypal extends CI_Controller {
                 $p->add_field('business', 'devrohit46@gmail.com');
                 $p->add_field('return', $this_script . '?action=success');
                 $p->add_field('cancel_return', $this_script . '?action=cancel');
-                $p->add_field('notify_url', $this_script . '?action=ipn&invoice_id=1234');
+                $p->add_field('notify_url', $this_script . '?action=ipn');
                 $p->add_field('item_name', 'Paypal Test Transaction');
                 $p->add_field('amount', '1.99');
                 $p->add_field('custom', '123321');
