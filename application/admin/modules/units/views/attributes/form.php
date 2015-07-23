@@ -62,7 +62,7 @@
     <div class="form-group">
         <br/><br/>
         <div class="col-sm-12">
-            <input type="submit" class="btn btn-primary preview-add-button btn-fix-width" value="Submit"/>
+            <input type="submit" class="btn btn-primary preview-add-button btn-fix-width" value="<?php echo (!$edit) ? 'Add' : 'Submit'; ?>"/>
         </div>
     </div>
 </form>

@@ -125,7 +125,7 @@ $muser = $user;
       
         <div class="form-group">
             <div class="col-sm-12 center">
-                <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Add</button>
+                <button type="submit" name="button" id="button" class="btn btn-primary preview-add-button btn-fix-width">Submit</button>
             </div>
         </div>
     </form>

@@ -30,74 +30,33 @@ class Calender extends Admin_Controller {
 //*************************************validation End********************************
 
     function index($offset = 0) {
-        
+        $inner = $page = array();
         $this->load->model('Calendermodel');
-        $this->load->model('user/usermodel');
-        $this->load->library('form_validation');
-        $this->load->helper('form');
-        $this->load->library('pagination');
-        $this->load->helper('url');
-        $this->load->helper('text');
-
-        $perpage = 100;
-        $config = array();
-        $config['base_url'] = base_url() . "calender/index/";
-        $config['uri_segment'] = 3;
-        $config['total_rows'] = $this->Calendermodel->countAll();
-        $config['per_page'] = $perpage;
-        $config['first_link'] = 'First';
-        $config['last_link'] = 'Last';
-        $this->pagination->initialize($config);
-
-        $event = array();
-        $event = $this->Calendermodel->getEvents($this->ids);
-        if ($this->aauth->isFranshisee()) {
-            $ids = $this->usermodel->getFranchiseUsersId(curUsrId());
-            $event = $this->Calendermodel->getEvents($offset, $perpage, $ids);
-        }
-        $inner = array();
-        $inner['event'] = $event;
-        $inner['pagination'] = $this->pagination->create_links();
-        $inner['labels'] = array(
-            '' => '',
-            'date' => 'Date',
-            'title' => 'Event Title',
-            'status' => 'Status',
-            'action' => 'Actions'
-        );
-        
-        $page = array();
+        $inner['events'] = $this->Calendermodel->getApplications();
         $page['content'] = $this->load->view('event/event-index', $inner, TRUE);
-        $this->load->view($this->event, $page);
+        $this->load->view('themes/default/templates/customer', $page);
     }
 
     function event() {
+        $from = arrIndex($this->GET, 'from') / 1000;
+        $to = arrIndex($this->GET, 'to') / 1000;
+        if ($from)
+            $from = date('Y-m-d', $from);
+        if ($to)
+            $to = date('Y-m-d', $to);
         $this->load->model('Calendermodel');
-        $franchisee = $this->Calendermodel->getEventUser($this->ids);
-        $event = array();
-        $count = 0;
-        foreach ($franchisee as $row) {
-            $url = base_url() . "booking/index/" . $row['event_id'];
-            $row['start'] = strtotime(trim($row['event_start_ts'])) * 1000;
-            $row['end'] = strtotime(trim($row['event_end_ts'])) * 1000;
-            $row['time'] = 'From ' . date('d-m-Y h:m', strtotime(trim($row['event_start_ts']))) . ' till ' . date('d-m-Y h:m', strtotime(trim($row['event_end_ts'])));
-            $event[$count] = array(
-                "id" => $row['event_id'],
-                "img" => $row['event_img'],
-                "title" => $row['event_title'],
-                "time" => $row['time'],
-                "color" => $row['event_color'],
-                "location" => $row['venue_name'],
-                "class" => $row['event_type'],
-                "url" => $url,
-                "start" => $row['start'],
-                "end" => $row['end']);
-            $count ++;
-        }
-        $output = array();
-        $output['success'] = 1;
-        $output['result'] = $event;
-        echo json_encode($output);
+        $multiple_where = array(
+            'created_on >= ' => $from,
+            'created_on <= ' => $to,
+        );
+        if ($this->aauth->isCustomer()):
+            $multiple_where['t1.applicant_id'] = curUsrId();
+        endif;
+        $applications = $this->Calendermodel->getCompanyInvoices($this->ids,$multiple_where);
+//        e($applications);
+        $return['success'] = true;
+        $return['result'] = $applications;
+        echo json_encode($return);
     }
 
     function add() {
@@ -112,7 +71,7 @@ class Calender extends Admin_Controller {
         //locaton of event
         $venues = array();
         $venues = $this->Calendermodel->getVenues();
-        
+
         $this->form_validation->set_rules('event_type_id', 'Event Type', 'trim|required');
         $this->form_validation->set_rules('eventdate', 'Event Date', 'trim|required');
         $this->form_validation->set_rules('event_title', 'Event Title', 'trim|required');
@@ -256,6 +215,11 @@ class Calender extends Admin_Controller {
             redirect("calender/index", 'location');
             exit();
         }
+    }
+
+    function test() {
+        $test = $this->db->query('call testProcedure()')->result_array();
+        e($test);
     }
 
 }

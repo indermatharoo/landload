@@ -21,9 +21,8 @@ class Propertymodel extends CI_Model {
         } else {
             $valueWhere = '';
         }
-        $this->db->select('t1.id as unit_id,t1.*,t2.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
+        $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
         $this->db->from('units t1');
-        $this->db->join('properties t2', 't1.property_id=t2.id');
         $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere);
         $this->db->group_by('unit_id');
         if (count($attributeWhere))

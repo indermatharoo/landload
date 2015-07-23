@@ -29,13 +29,10 @@ class Units extends Admin_Controller {
         $Listing = $this->Unitsmodel->listAll($this->ids);
         $inner = array();
         $inner['labels'] = array(
-            'pname' => 'Name',
-//            'area' => 'Area',
-//            'room' => 'Room',
-//            'bathroom' => 'Bathroom',
+            'unit_number'=>'Unit Name',
             'amount' => 'Amount',
             'owner' => 'Owner',
-            'state' => 'State',
+            'city' => 'City',
             -1 => 'Action'
         );
         $inner['Listing'] = $Listing;
@@ -54,17 +51,21 @@ class Units extends Admin_Controller {
         $this->load->library('form_validation');
         $features = $this->Featuresmodel->getAllfeatures();
         $propertyList = $this->Propertiesmodel->getPropertiesList();
-
+        $propertiesType = $this->Unitsmodel->getPropertiesType();
         //$unitsType = $this->Unitsmodel->getUnitType();
-        
-        $this->form_validation->set_rules('property_id', 'Property ', 'trim|required');
+        $countryData = $this->Unitsmodel->getCountrydata();
+        $this->form_validation->set_rules('ptype', 'Property type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
         if (empty($_FILES['photo']['name'])) {
             $this->form_validation->set_rules('photo', 'photo', 'trim|required');
         }
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
-//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
+        $this->form_validation->set_rules('owner', 'owner', 'trim|required');
+        $this->form_validation->set_rules('city', 'city', 'trim|required');
+        $this->form_validation->set_rules('street', 'street', 'trim|required');
+        $this->form_validation->set_rules('country', 'country', 'trim|required');
+            
 //        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
@@ -75,6 +76,8 @@ class Units extends Admin_Controller {
             $inner['status'] = array('0' => 'Ocupied', '1' => 'Listed', '2' => 'Unlisted');
             $inner['features'] = $features;
             $inner['propertyList'] = $propertyList;
+            $inner['propertiesType'] = $propertiesType;
+            $inner['country'] = $countryData;
            // $inner['unitsType'] = $unitsType;
             $page = array();
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
@@ -95,22 +98,21 @@ class Units extends Admin_Controller {
         $this->load->library('parser');
         $this->load->library('email');
         $features = $this->Featuresmodel->getAllfeatures();
-//        $unitsType = $this->Unitsmodel->getUnitType();
         $unitsType = null;
         $propertyList = $this->Propertiesmodel->getPropertiesList();
         $details = $this->Unitsmodel->getUnitDetails($offset);
+         $propertiesType = $this->Unitsmodel->getPropertiesType();
         $images = $this->Unitsmodel->getUnitImages($offset);
        
-        $this->form_validation->set_rules('property_id', 'Property Type', 'trim|required');
+        $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
-//        if(empty($_FILES['photo']['name'])){
-//            $this->form_validation->set_rules('photo', 'photo', 'trim|required');
-//        }
+
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
-//        $this->form_validation->set_rules('area', 'Area', 'trim|required|integer');
-//        $this->form_validation->set_rules('room', 'Room', 'trim|required|integer');
-//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+        $this->form_validation->set_rules('owner', 'owner', 'trim|required');
+        $this->form_validation->set_rules('city', 'city', 'trim|required');
+        $this->form_validation->set_rules('street', 'street', 'trim|required');
+        $this->form_validation->set_rules('country', 'country', 'trim|required');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
 
         $Countries = $this->Usermodel->getCountries();
@@ -122,6 +124,7 @@ class Units extends Admin_Controller {
             $inner['propertyList'] = $propertyList;
             $inner['details'] = $details;
             $inner['unitsType'] = $unitsType;
+            $inner['propertiesType'] = $propertiesType;
             $inner['unit_id'] = $offset;
             $page = array();
             $page['content'] = $this->load->view('unit-edit', $inner, TRUE);

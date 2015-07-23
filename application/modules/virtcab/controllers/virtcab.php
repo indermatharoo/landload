@@ -226,7 +226,6 @@ class virtcab extends Cms_Controller {
 //                            'event_id' => $virtual_event_id,
 //                            'filter' => '',
 //                        );
-
 //                        $this->notification->notify($notify_data);
                         //$data = array('success' => 1, 'msg' => 'done');
                     }
@@ -416,7 +415,7 @@ class virtcab extends Cms_Controller {
             }
             if ($typeext == 'pdf' || $typeext == 'txt' || $typeext == 'doc' || $typeext == 'xlsx' || $typeext == 'docx' || $typeext == 'docx') {
                 //'onClick="window.open=('path', '_blank', 'fullscreen=yes'); return false;'
-                $listHtml[$typeext] .= '<li class="litypes col-sm-2">'
+                $listHtml[$typeext] .= '<li class="litypes col-sm-2 mar-bot10">'
                         . '<div class="comn">' .
                         ($setDelPer ? '<div><span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="editPermission fa fa-send-o"></span> 
                                             <span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="removeFile fa fa-remove"></span>
@@ -428,7 +427,7 @@ class virtcab extends Cms_Controller {
             } else {
 //                echo $typeext;
 //                echo "<br>";
-                $listHtml[$typeext] .= '<li class="litypes col-sm-2">'
+                $listHtml[$typeext] .= '<li class="litypes col-sm-2 mar-bot10">'
                         . '<div class="comn">' .
                         ($setDelPer ? '<div><span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="editPermission fa fa-send-o"></span> 
                                             <span style="cursor: pointer; cursor: hand;" data-id="' . $kval['id'] . '" class="removeFile fa fa-remove"></span>
@@ -441,7 +440,7 @@ class virtcab extends Cms_Controller {
         }
         if ($listHtml) {
             foreach ($listHtml as $key => $val) {
-                $listingHtml .= '<div id="' . $key . '" class="portion clearfix"><ul class="list">' . $val . '</ul></div>';
+                $listingHtml .= '<div id="' . $key . '" class="portion clearfix" style="max-height: 220px; overflow: auto;border-bottom:1px solid #aaa"><ul class="list" style="list-style: none; margin: 0; padding: 0;">' . $val . '</ul></div>';
             }
         }
         return $listingHtml;

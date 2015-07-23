@@ -207,9 +207,11 @@ function call($params = array()) {
 
 function getCompany($id) {
     getThis()->db->select('*')
-            ->from('properties')
-            ->join('aauth_users', 'properties.company_id=aauth_users.id');
+            ->from('units')
+            ->join('aauth_users', 'units.company_id=aauth_users.id');
+    
     $result = getThis()->db->get();
+  //  echo getThis()->db->last_query();
     $result = $result->row();
     return $result;
 }
@@ -220,7 +222,7 @@ function getAttributes() {
             ->from('units_attributes')
             ->where('searchable', 1)
             ->get()
-            ->result_array()
+            ->result_array() 
     ;
     return $results;
 }

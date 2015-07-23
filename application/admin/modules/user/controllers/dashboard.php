@@ -6,9 +6,8 @@ if (!defined('BASEPATH'))
 class Dashboard extends Admin_Controller {
 
     function index($syear = 2014, $eyear = 2015) {
-
         if ($this->aauth->isCustomer()):
-            redirect('customer/dashboard');
+            redirect('applicants/dashboard');
         endif;
         $this->load->library('pagination');
         $this->load->helper('text');

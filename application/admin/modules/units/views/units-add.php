@@ -17,7 +17,7 @@
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
-            <div class="col-sm-6">
+            <!-- <div class="col-sm-6">
                 <label>Property </label>
                 <select name="property_id" class="form-control">
                     <option></option>
@@ -29,33 +29,68 @@
                     }
                     ?>
                 </select>
+            </div>-->
+            <div class="col-sm-6">
+                <?php //e($propertiesType) ?>
+                <label>Property Type<span class="red">*</span></label>
+                <select name="ptype" class="form-control" autocomlete="off">
+                    <option value="">-Select Type-</option>
+                    <?php foreach($propertiesType as $ptype){ ?>
+                        <option value="<?php echo $ptype['short_code'] ?>"><?php echo $ptype['type'] ?></option>
+                    <?php } ?>
+                </select>
+                
             </div>
 
-
             <div class="col-sm-6">
-                <label>Unit Name</label>
+                <label>Unit Name<span class="red">*</span></label>
                 <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name">
             </div>
             <div class="col-sm-6">
-                <label>Photo</label>
+                <label>Photo<span class="red">*</span></label>
                 <input type="file"  name="photo"   >
+            </div>
+            <div class="col-sm-6">
+                <label>Owner<span class="red">*</span></label>
+                <input type="text" class="form-control" name="owner"  placeholder="Owner  *">
+            </div>
+            <div class="col-sm-6">
+                <label>Street<span class="red">*</span></label>
+                <input type="text" class="form-control" name="street"  placeholder="Street  *">
+            </div>
+            <div class="col-sm-6">
+                <label>City<span class="red">*</span></label>
+                  <input type="text" class="form-control" name="city"  placeholder="City *">
+            </div>
+            
+            <div class="col-sm-6">
+                <label>Country<span class="red">*</span></label>
+                <select name="country"  class="form-control" >
+                    <!--<option value=""></option>-->
+                    <?php foreach ($country as $val) { ?>
+                        <?php
+                        $selected = (arrIndex($val, 'iso') == 'GB') ? true : false;
+                        ?>
+                        <option <?php echo ($selected) ? "selected" : ""; ?> value="<?php echo $val['iso'] ?>" ><?php echo $val['nicename'] ?></option>
+                    <?php } ?>
+                </select>
             </div>
             <div class="col-sm-6">
                 <label>Gallery Images</label>
                 <input type="file"  name="galleryImages[]" multiple  >
             </div>            
             <div class="col-sm-6">
-                <label>Status</label><br>
+                <label>Status<span class="red">*</span></label><br>
                 <?php foreach ($status as $st => $stval) { ?>
                     <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
-            <div class="col-sm-6">
+<!--            <div class="col-sm-6">
                 <label>Active</label><br />
                 <input type="radio" value="1" checked="checked"  name="active" >&nbsp;&nbsp;Yes&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" value="0"  name="active">&nbsp;&nbsp;No
-            </div>
+            </div>-->
             <div class="col-sm-6">
-                <label>Rental Amount</label>
+                <label>Rental Amount<span class="red">*</span></label>
                 <input type="text" class="form-control"  name="amount"  placeholder="rental Amount *">
             </div>
             <div class="col-sm-6">
@@ -67,7 +102,7 @@
                 </select>
             </div>
             <div class="col-sm-6">
-                <label>Rent Types</label>
+                <label>Rent Types<span class="red">*</span></label>
                 <select name="amount_type" class="form-control">
                     <option>Select</option>
                     <?php foreach (Unitsmodel::$types as $val => $type): ?>
@@ -98,7 +133,7 @@
             </div>
         </div>
         <div class="col-sm-6">
-            <label>Unit Type</label><br>
+            <label>Unit Type<span class="red">*</span></label><br>
             <select name="unit_type" class="form-control">
                 <option value="">Select</option>
                 <option value="s">Shop</option>

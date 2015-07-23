@@ -16,11 +16,10 @@ class Applicationsmodel extends Basemodel {
     }
 
     function listAll($ids = array()) {
-        $this->db->select('t1.id as application_id,t1.*,t2.*,t3.*,t4.*');
+        $this->db->select('t1.id as application_id,t1.*,t2.*,t3.*');
         $this->db->from('applications t1');
         $this->db->join('applicants t2', 't2.applicant_id=t1.applicant_id');
-        $this->db->join('properties t3', 't3.id=t1.property_id');
-        $this->db->join('user_extra_detail t4', 't4.id=t3.company_id');
+        $this->db->join('user_extra_detail t3', 't3.id=t1.company_id');
         if (count($ids)):
             $this->db->where_in('t1.company_id', $ids);
         endif;
@@ -61,7 +60,7 @@ class Applicationsmodel extends Basemodel {
         $data = array();
         $data['applicant_id'] = $this->input->post('applicant_id');
         $data['application_status'] = $this->input->post('application_status');
-        $data['property_id'] = $this->input->post('property_id');
+        //   $data['property_id'] = $this->input->post('property_id');
         $data['unit_id'] = $this->input->post('unit_id');
         $data['lease_type'] = $this->input->post('lease_type');
         $data['occupants'] = $this->input->post('occupants');
@@ -92,7 +91,7 @@ class Applicationsmodel extends Basemodel {
         $data = array();
         $data['applicant_id'] = $this->input->post('applicant_id');
         $data['application_status'] = $this->input->post('application_status');
-        $data['property_id'] = $this->input->post('property_id');
+        // $data['property_id'] = $this->input->post('property_id');
         $data['unit_id'] = $this->input->post('unit_id');
         $data['lease_type'] = $this->input->post('lease_type');
         $data['occupants'] = $this->input->post('occupants');
@@ -123,10 +122,9 @@ class Applicationsmodel extends Basemodel {
     }
 
     function getUserDetails($id) {
-        $this->db->select('applications.*,applicants.*,properties.pname,job_details.current_job,job_details.previous_job,job_details.experience');
+        $this->db->select('applications.*,applicants.*,job_details.current_job,job_details.previous_job,job_details.experience');
         $this->db->from('applications');
         $this->db->join('applicants', 'applications.applicant_id=applicants.applicant_id');
-        $this->db->join('properties', 'applications.property_id=properties.id');
         $this->db->join('job_details', 'applications.applicant_id=job_details.applicant_id', 'left');
         $this->db->where('applications.id', $id);
         $results = $this->db->get();
@@ -178,7 +176,7 @@ class Applicationsmodel extends Basemodel {
 
     function savePropertyDetails($id) {
         $data = array();
-        $data['property_id'] = $this->input->post('property_id');
+
         $data['unit_id'] = $this->input->post('unit_id');
         $this->db->where('id', $id);
         $this->db->update('applications', $data);
@@ -192,7 +190,7 @@ class Applicationsmodel extends Basemodel {
         $data = $this->db->get()->row_array();
         $unit_id = arrIndex($data, 'unit_id');
         if ($unit_id) {
-            $sql = "UPDATE `dpd_units` SET `status` = '0' WHERE `id` = ".$unit_id;           
+            $sql = "UPDATE `dpd_units` SET `status` = '0' WHERE `id` = " . $unit_id;
             $this->db->query($sql);
 //            e($this->db->last_query());
         }

@@ -26,7 +26,11 @@
                         <tr>
                             <td class="col-sm-4 col-md-4">
                                 <div class="media">
-                                    <a class="thumbnail pull-left" href="#"> <img class="media-object" src="<?= resize($this->config->item('UPLOAD_URL_EVENTS') . $item['image'], 100, 75, 'event_img'); ?>" > </a>
+                                    <a class="thumbnail pull-left" href="#"> 
+                                        <img class="media-object" src="<?php
+                                        echo arrIndex($item,'image') ? resize($this->config->item('UPLOAD_URL_EVENTS') . $item['image'], 100, 75, 'event_img') : '' ; 
+                                        ?>" > 
+                                    </a>
                                     <div class="media-body">
                                         <h3 class="media-heading"><a href="#"><?php echo $item['name']; ?></a></h3>
                                         <!--<h5 class="media-heading"> by <a href="#">Brand name</a></h5>-->

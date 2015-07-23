@@ -436,7 +436,11 @@ class User extends Admin_Controller {
 //        return $server_output;
         return json_decode($server_output, 1);
     }
-
+    
+    function test(){
+        $rs = $this->db->query(' call testProcedure(1)')->result_array();
+        e($rs);
+    }
 }
 
 ?>

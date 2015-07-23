@@ -38,7 +38,7 @@ class virtcab extends Admin_Controller {
         }
     }
 
-    function index($file = null) {
+    function index($listingCompany = null) {
         $this->load->model('user/usermodel');
         $page = array();
         $inner = array();
@@ -47,12 +47,16 @@ class virtcab extends Admin_Controller {
         $this->load->library('pagination');
         $this->load->library('form_validation');
         $company_id = null;
-        if ($this->aauth->isCompany()):
-            $company_id = curUsrId();
-        elseif ($this->aauth->isCompany()):
-            $company_id = curUsrPid();
+        if (!$listingCompany):
+            if ($this->aauth->isCompany()):
+                $company_id = curUsrId();
+            elseif ($this->aauth->isCompany()):
+                $company_id = curUsrPid();
+            else:
+                $company_id = curUsrId();
+            endif;
         else:
-            $company_id = curUsrId();
+            $company_id = $listingCompany;
         endif;
         $inner['users'] = $this->Usermodel->listAll(0, 0, 'id, name');
         $inner['userOwnFiles'] = null;
@@ -60,19 +64,26 @@ class virtcab extends Admin_Controller {
         $inner['countfiles'] = $this->VirtualCabinetmodel->getAllGroupBy('filetype');
         $inner['allAvailGrps'] = $this->aauth->list_groups();
         foreach ($inner['allAvailGrps'] as $kval) {
-            if ($kval->id != 6) {
-                continue;
-            }
+            if ($this->aauth->isCustomer()):
+                if ($kval->id != 3):
+                    continue;
+                endif;
+            elseif ($this->aauth->isCompany()):
+                if ($kval->id != 6):
+                    continue;
+                endif;
+            endif;
             $inner['AvailGrps'][$kval->id] = $kval->name;
         }
-        $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes',
+//        e($inner['AvailGrps']);
+        $myShareFileOpt = array('columns' => 'filetype, id, visible_name, actual_name, assignes,creator_id',
             'order-field' => 'filetype',
             'order-by' => 'desc',
             $this->VirtualCabinetmodel->creator_id => $company_id,
         );
 
         $othrShareFile = array('shared' => true,
-            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name',
+            'columns' => 'virtualCab.id, visible_name, filetype, actual_name, creator_id, aauth_users.name,assignes',
             $this->VirtualCabinetmodel->assignes => $company_id,
             'order-field' => 'aauth_users.name',
             'order-by' => 'desc',
@@ -95,29 +106,27 @@ class virtcab extends Admin_Controller {
         $inner['tab1'] = $tab1;
         $inner['tab2'] = $tab2;
         $inner['myShareFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $myShareFileOpt);
-//        echo $this->db->last_query();echo "<br/>";
         ///$inner['allFiles'] = $inner['userOwnFiles'];
         $inner['userSharedFiles'] = $this->VirtualCabinetmodel->listAll(0, 0, $othrShareFile);
-//        echo $this->db->last_query();//exit;
-        $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles']);
-        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true);
+
+        $inner['sharedWithMeHtml'] = $this->localFileDisplay($inner['userSharedFiles'], true, !$listingCompany);
+
+        $inner['myFilesHtml'] = $this->localFileDisplay($inner['myShareFiles'], true, false);
         $inner['addEditJs'] = false;
         if (!is_null($inner['myFilesHtml']) || !empty($inner['myFilesHtml'])) {
             $inner['addEditJs'] = true;
         }
-//        e($inner);
         $inner['imgArray'] = $this->imgArray;
         $inner['docArray'] = $this->docArray;
         $inner['extImgArray'] = $this->extImgArray;
-//        if join make slow then down will help
-//        print_r($inner['userSharedFiles']);
-//        foreach($inner['userSharedFiles'] as $key => $val){
-//            
-//        }
-//        exit; 
-//        e($inne)
-//        e($this->default);
         $page['content'] = $this->load->view('index', $inner, TRUE);
+        $this->load->view($this->default, $page);
+    }
+
+    function listing() {
+        $inner = $page = array();
+        $inner['models'] = $this->usermodel->getCompanies();
+        $page['content'] = $this->load->view('listing', $inner, true);
         $this->load->view($this->default, $page);
     }
 
@@ -316,6 +325,47 @@ class virtcab extends Admin_Controller {
         exit;
     }
 
+    function getGrpUsersCompany($grpId = null, $internal = array()) {
+        if (!$grpId)
+            return null;
+//        $result = $this->Usermodel->listAllAsGrp(False, false, 'id, name', array('where' => 'group_id = ' . $grpId));
+        $this->load->model('user/Usermodel');
+//        $result = $this->Usermodel->getApplicants($this->company_id);
+        $result = $this->Usermodel->getCompanys();
+        $datamsg = null;
+        $selectRes = array();
+        if ($result) {
+            foreach ($result as $key => $kval) {
+                $selectRes[$kval['id']] = $kval['company_name'];
+            }
+        }
+        $selectedArr = array();
+        if (isset($internal['assignTo'])) {
+            $selectedArr = explode(',', $internal['assignTo']);
+        }
+        $js = 'id="file_share_id" multiple';
+        $retHtml = '<div>' . form_dropdown('file_share_id[]', $selectRes, $selectedArr, $js) . '</div>';
+        $retHtml .= '<script>
+                        $(document).ready(
+                            function () {
+                                        $("#file_share_id").multiselect({
+                                        onChange: function (option, checked, select) {                                            
+                                            $("#virCabShareMainGrpId").val($("#file_share_id").val());
+                                        },
+                                        includeSelectAllOption: true,
+                                        enableFiltering:true,
+                                        });
+                            });
+                    </script>
+            ';
+        if ($internal) {
+            return $retHtml;
+        }
+        $datamsg = array('success' => 1, 'msg' => $retHtml);
+        echo json_encode($datamsg);
+        exit;
+    }
+
     function getFilePermissionOpt($fileId) {
         if (!$fileId || !intval($fileId))
             return null;
@@ -396,7 +446,7 @@ class virtcab extends Admin_Controller {
         exit;
     }
 
-    function localFileDisplay($allFiles = null, $setDelPer = false) {
+    function localFileDisplay($allFiles = null, $setDelPer = false, $flix = true) {
         $listHtml = null;
         $typeext = null;
         $listingHtml = null;
@@ -405,6 +455,12 @@ class virtcab extends Admin_Controller {
         $docArray = $this->docArray;
         $videoArray = $this->videoArray;
         foreach ($allFiles as $kval) {
+//            e($kval);
+            $assignes = explode(',', arrIndex($kval, 'assignes'));
+            if ($flix)
+                if (!in_array(curUsrId(), $assignes)) {
+                    continue;
+                }
             $lastIndex = strrpos($kval['actual_name'], '.');
             $ext = substr($kval['actual_name'], $lastIndex + 1);
             $ext = strtolower($ext);

@@ -79,12 +79,24 @@ class Usermodel extends Basemodel {
     }
 
     function getApplicants($company_id) {
-        $sql = "SELECT DISTINCT(t1.email),`t1`.* FROM (`dpd_applicants` t1) JOIN "
-                . "`dpd_applications` t2 ON `t2`.`applicant_id`=`t1`.`applicant_id` JOIN "
-                . "`dpd_properties` t3 ON `t3`.`company_id`= $company_id and t3.id=t2.property_id";
-        $results = $this->db->query($sql);
-        $results = $results->result_array();
-//        e($results);
+        $this->db->select('DISTINCT(t1.email),t1.*');
+        $this->db->from('applicants t1');
+        $this->db->join('applications t2', 't2.applicant_id=t1.applicant_id');
+        $this->db->join('units t3', 't3.company_id=t2.company_id');
+        $rs = $this->db->get()->result_array();
+//        e($rs);
+        return $rs;
+    }
+
+    function getCompanys() {
+        $session = $this->session->all_userdata();
+        $applicant_id = arrIndex($session, 'applicant_id');
+        $this->db->select('t3.*');
+        $this->db->from('applications t1');
+        $this->db->join('properties t2', 't2.id=t1.property_id');
+        $this->db->join('user_extra_detail t3', 't3.id=t2.company_id');
+        $this->db->where('t1.applicant_id', $applicant_id);
+        $results = $this->db->get()->result_array();
         return $results;
     }
 
@@ -1000,6 +1012,15 @@ class Usermodel extends Basemodel {
         $this->db->where('user_id', curUsrId());
         $rs = $this->db->get('page')->result_array();
         return count($rs);
+    }
+
+    function getCompanies() {
+        $this->db->select('t1.*');
+        $this->db->from('aauth_users t1');
+        $this->db->join('aauth_user_to_group t2', 't2.user_id=t1.id');
+        $this->db->join('aauth_groups t3', 't3.id=t2.group_id and t3.id = 3');
+        $rs = $this->db->get()->result_array();
+        return $rs;
     }
 
     function getCompanyUsersId($id = NULL) {
