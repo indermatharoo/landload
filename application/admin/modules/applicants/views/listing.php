@@ -1,6 +1,6 @@
 <?php
-//echo "<pre>";
-//print_r($Listing);
+e($Listing);
+
 ?> 
 
 <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
@@ -39,7 +39,7 @@
 <!--                 <td><?= arrIndex($item, 'additional'); ?></td>
                  <td><?= arrIndex($item, 'asset'); ?></td>
                  <td><?= arrIndex($item, 'type'); ?></td>-->
-                    <td><a href="<?= createUrl('applicants/edit/') . arrIndex($item, 'id'); ?>">Edit</a>  | <a href="<?= createUrl('applicants/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
+                    <td><a href="<?= createUrl('applicants/edit/') . arrIndex($item, 'applicant_id'); ?>">Edit</a>  | <a href="<?= createUrl('applicants/delete/') . $item['applicant_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>
