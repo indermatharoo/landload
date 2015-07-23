@@ -222,7 +222,7 @@ function getAttributes() {
             ->from('units_attributes')
             ->where('searchable', 1)
             ->get()
-            ->result_array()
+            ->result_array() 
     ;
     return $results;
 }
