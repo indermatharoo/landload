@@ -81,7 +81,7 @@ class Paypal extends CI_Controller {
                 // you try and use an echo or printf function here it's not going to do you
                 // a bit of good.  This is on the "backend".  That is why, by default, the
                 // class logs all IPN data to a text file.
-                $this->db->insert('test', array('text' => json_encode($_REQUEST)));
+                $this->db->insert('test', array('value' => json_encode($_REQUEST)));
 
                 if ($p->validate_ipn()) {
                     $this->db->insert('test', array('id' => 1));
