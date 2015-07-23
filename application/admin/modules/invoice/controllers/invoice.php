@@ -373,7 +373,6 @@ class Invoice extends Admin_Controller {
         $p = new paypal_class;             // initiate an instance of the class
         $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
         //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
-        $this_script = base_url() . 'paypal';
         $this_script = createUrl('invoice/pay/' . $code);
         if (empty($_GET['action']))
             $_GET['action'] = 'process';
@@ -408,7 +407,6 @@ class Invoice extends Admin_Controller {
                 echo "</body></html>";
                 break;
             case 'ipn':          // Paypal is calling page for IPN validation...
-                $this->db->insert('test', array('value' => 'test'));
                 if ($p->validate_ipn()) {
                     $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 } else {
