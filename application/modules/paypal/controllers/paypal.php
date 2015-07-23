@@ -8,9 +8,6 @@ class Paypal extends CI_Controller {
     }
 
     function index() {
-//        ini_set('error_log', dirname(__FILE__).'/ipn_errors.log');
-        $file =  dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))).'/ipn_errors.log';
-        ini_set('error_log', $file);
         $p = new paypal_class;             // initiate an instance of the class
         $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
@@ -36,13 +33,14 @@ class Paypal extends CI_Controller {
       // $p->add_field('first_name', $_POST['first_name']);
                 // $p->add_field('last_name', $_POST['last_name']);
 
-                $p->add_field('business', 'harrymatharoo.matharoo@gmail.com');
+                $p->add_field('business', 'devrohit46@gmail.com');
                 $p->add_field('return', $this_script . '?action=success');
                 $p->add_field('cancel_return', $this_script . '?action=cancel');
                 $p->add_field('notify_url', $this_script . '?action=ipn&invoice_id=1234');
                 $p->add_field('item_name', 'Paypal Test Transaction');
                 $p->add_field('amount', '1.99');
-
+                $p->add_field('custom', '123321');
+                
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
@@ -71,7 +69,7 @@ class Paypal extends CI_Controller {
 
             case 'cancel':       // Order was canceled...
                 // The order was canceled before being completed.
-                
+
                 echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
                 echo "</body></html>";
 
@@ -84,8 +82,11 @@ class Paypal extends CI_Controller {
                 // you try and use an echo or printf function here it's not going to do you
                 // a bit of good.  This is on the "backend".  That is why, by default, the
                 // class logs all IPN data to a text file.
-
+                
+                $this->db->insert('test', array('value' => json_encode($_REQUEST)));
+                
                 if ($p->validate_ipn()) {
+                    $this->db->insert('test', array('id' => 1));
 
                     // Payment has been recieved and IPN is verified.  This is where you
                     // update your database to activate or process the order, or setup
@@ -106,8 +107,6 @@ class Paypal extends CI_Controller {
 //                        $body .= "\n$key: $value";
 //                    }
 //                    mail($to, $subject, $body);
-            
-             error_log('ipn notification-'.$_REQUEST['invoice_id']);
                 }
                 break;
         }
