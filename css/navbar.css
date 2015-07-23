@@ -1,9 +1,9 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+    font-family: 'Open Sans', sans-serif;
 }
 
 .navbar {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 .full_topbar_container {
     background: #3e4d52 none repeat scroll 0 0;
@@ -31,8 +31,8 @@ body {
     font-weight:600;
 }
 .topbar_left_section  ul li:nth-child(2){
-   font-weight:100;
-   font-size: 12.5px;
+    font-weight:100;
+    font-size: 12.5px;
 }
 .navbar-default{
     background: none;
@@ -297,7 +297,7 @@ footer {
     color: #fff;
 }
 .footer_abt_descright{
-    
+
 }
 .footer_abt_descright p {
     font-size: 13.4px;
@@ -312,7 +312,7 @@ footer {
 }
 .footer_abt_heading {
     color: #fff;
-    
+
 }
 .footer_abt_heading .text-white{
     color: #fff;
@@ -323,7 +323,7 @@ footer h3{
     color: #000;
 }
 .popular_heading_text{
-    
+
 }
 .footer_menu_links li {
     padding: 3px 0;
@@ -364,7 +364,7 @@ footer h3{
     border-right: none;
 }
 .footer_social_links_right {
-    
+
 }
 .footer_social_links_right ul li i {
     font-size: 28px;
@@ -607,8 +607,8 @@ hr{
     padding: 10px;
 }
 .unit-inf .lft {
-/*    float: left;
-    width: 80%;*/
+    /*    float: left;
+        width: 80%;*/
 }
 .unit-inf .rgt {
     /*float: left;*/
@@ -683,7 +683,7 @@ hr{
     transition: background 0.1s linear;
     font-size: 75%;
 }
-	
+
 .required-field-block .required-icon {
     background-color: transparent;
     position: absolute;
@@ -719,8 +719,13 @@ hr{
 }
 
 .required-field-block .required-icon .text {
-	color: #B80000;
-	font-size: 26px;
-	margin: -3px 0 0 12px;
+    color: #B80000;
+    font-size: 26px;
+    margin: -3px 0 0 12px;
 }
 /* Required field END */
+/*23 july*/
+.panel-heading {
+    background: #d37602 none repeat scroll 0 0;
+    color: #fff;
+}
