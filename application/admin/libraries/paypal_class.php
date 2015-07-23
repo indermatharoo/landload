@@ -171,7 +171,7 @@ class paypal_class {
 
       // parse the paypal URL
       $url_parsed=parse_url($this->paypal_url);        
-
+      e($url_parsed);
       // generate the post string from the _POST vars aswell as load the
       // _POST vars into an arry so we can play with them from the calling
       // script.
@@ -182,7 +182,7 @@ class paypal_class {
       }
       $post_string.="cmd=_notify-validate"; // append ipn command
 
-      // open the connection to paypal
+      // open the connection to paypal      
       $fp = fsockopen($url_parsed['host'],"80",$err_num,$err_str,30); 
       if(!$fp) {
           
