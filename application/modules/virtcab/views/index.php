@@ -73,10 +73,10 @@
             <li data-id="1" class="<?= $tab1 ?>"><a href="#tabs-1" data-toggle="tab">Shared with me.</a></li>
             <li data-id="2" class="<?= $tab2 ?>"><a href="#tabs-2" data-toggle="tab">My Files</a></li>
         </ul>
-        <div class="tab-content clearfix">
+        <div class="tab-content clearfix pad-top10" style="box-shadow: 0px 0px 2px ">
             <div class="tab-pane <?= $tab1 ?>" id="tabs-1">
-                <div class="form-group col-sm-12 padding-0">                       
-                    <div class="" style="width: 100%; height:500px; padding: 0; overflow: auto">
+                <div class="form-group col-sm-12 padding-0" style="margin-bottom: 0">                       
+                    <div class="" style="width: 100%; max-height:660px; padding: 0; overflow: auto">
                         <?php
                         echo $sharedWithMeHtml;
                         ?>
