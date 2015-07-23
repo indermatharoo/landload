@@ -32,7 +32,7 @@ class Customermodel extends CI_Model {
         $data['license'] = 0;
         $data['monthly_gross'] = 0;
         $data['asset'] = 0;
-        $data['type'] = 'applicant';
+        $data['type'] = 'app';
 //        e($data);
 //        $data['auth_user_id'] = 0;
         
