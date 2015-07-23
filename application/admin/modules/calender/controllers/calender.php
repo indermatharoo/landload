@@ -52,8 +52,8 @@ class Calender extends Admin_Controller {
         if ($this->aauth->isCustomer()):
             $multiple_where['t1.applicant_id'] = curUsrId();
         endif;
-        e($multiple_where);
-        $applications = $this->Calendermodel->getCompanyInvoices($this->ids,$multiple_where);
+//        e($multiple_where);
+        $applications = $this->Calendermodel->getCompanyInvoices($this->ids);
 //        e($applications);
         $return['success'] = true;
         $return['result'] = $applications;
