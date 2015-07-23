@@ -20,6 +20,7 @@ class Applicantsmodel extends Basemodel {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
             $this->db->where_in('created_by', $ids);
         endif;
+        $this->db->select('applicants.id as id ,applicants.*,applicant_type.*');
         $this->db->where('applicants.type',$userType);
         $this->db->join('applicant_type', 'applicant_type.code=applicants.type','left');
         
