@@ -36,6 +36,7 @@
                 //echo '<pre>'; print_r($item);
                 ?>
                 <tr>
+                    <td><?php if( arrIndex($item, 'is_deal_start')=="1"){echo "green";}else{echo "red";}  ?></td>
                     <td><?= arrIndex($item, 'fname') . ' ' . arrIndex($item, 'lname'); ?></td>
                     <td><?= arrIndex($item, 'pname') ?></td>
                     <td><?= arrIndex($item, 'company_name') ?></td>

@@ -226,7 +226,6 @@ class virtcab extends Cms_Controller {
 //                            'event_id' => $virtual_event_id,
 //                            'filter' => '',
 //                        );
-
 //                        $this->notification->notify($notify_data);
                         //$data = array('success' => 1, 'msg' => 'done');
                     }

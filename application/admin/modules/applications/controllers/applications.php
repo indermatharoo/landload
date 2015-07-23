@@ -28,12 +28,14 @@ class Applications extends Admin_Controller {
 
         $inner = array();
         $inner['labels'] = array(
+            'deal_status' => 'status',
             'name' => 'Name',
             'property' => 'Property',
             'compnay_name' => 'Company Name',
             'applied_date' => 'Applied Date',
             'Action' => 'Action',
         );
+        
         $inner['Listing'] = $Listing;
         $inner['pagination'] = $this->pagination->create_links();
         $page = array();
@@ -244,8 +246,8 @@ class Applications extends Admin_Controller {
 
     function properties_details($offset) {
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('property_id', 'First Name', 'trim|required');
-        $this->form_validation->set_rules('unit_id', 'Last Name', 'trim|required');
+        //$this->form_validation->set_rules('property_id', 'First Name', 'trim|required');
+        $this->form_validation->set_rules('unit_id', 'Unit Number', 'trim|required');
 
         if ($this->form_validation->run() == FALSE) {
             echo json_encode(array('response' => 'false', 'msg' => validation_errors()));

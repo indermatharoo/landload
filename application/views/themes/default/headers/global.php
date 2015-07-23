@@ -42,7 +42,7 @@ $CI->assets->addFooterJS('js/bootstrap.min.js');
 //$CI->assets->addFooterJS('js/stellar.js');
 //$CI->assets->addFooterJS('js/jquery.appear.js');
 //$CI->assets->addFooterJS('js/main.js');
-//$CI->assets->addFooterJS('js/bPopup.js');
+$CI->assets->addFooterJS('js/jquery.bpopup.min.js');
 //$CI->assets->addFooterJS('js/globel.js');
 ?>
 

@@ -176,7 +176,7 @@ class Applicationsmodel extends Basemodel {
 
     function savePropertyDetails($id) {
         $data = array();
-        $data['property_id'] = $this->input->post('property_id');
+
         $data['unit_id'] = $this->input->post('unit_id');
         $this->db->where('id', $id);
         $this->db->update('applications', $data);
