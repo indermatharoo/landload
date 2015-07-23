@@ -12,8 +12,8 @@
                 <div class="col-lg-8">
                     <div class="mar-top0 mar-bot5 <%= event.class %> " style="text-transform: capitalize; color: <%= event.color %>; font-size: 20px"><%= event.unit_number %></div>
                     <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;"><%= event.description %></div>
-<!--                    <div>&nbsp;Created On :&nbsp;<%= event.created_on %></div>
-                    <div>&nbsp;Due Date :&nbsp;<%= event.due_on %></div>-->
+                    <!--                    <div>&nbsp;Created On :&nbsp;<%= event.created_on %></div>
+                                        <div>&nbsp;Due Date :&nbsp;<%= event.due_on %></div>-->
                     <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
                         Created On :&nbsp;<%= event.created_on %>
                     </div>
@@ -21,7 +21,11 @@
                         Due Date :&nbsp;<%= event.due_on %>
                     </div>
                     <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
-                       Payment : <%= (event.is_paid == 1) ? 'Paid' : 'Pending' %>
+                        Payment : <%= (event.is_paid == 1) ? 'Paid' : 'Pending' %>
+                    </div>                    
+                    <div class="mar-top0 mar-bot5 <%= event.class %> " style="color: <%= event.color %>;">
+                        View Invoice : 
+                        <button title="Event Complete" onclick="gotoinvoice( <%= event.invoice_id %> )" class="btn btn-default btn-xs"><span class="fa fa-eye"></span></button>
                     </div>                    
                 </div>
         </li>
