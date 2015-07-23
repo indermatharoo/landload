@@ -387,7 +387,8 @@ class Invoice extends Admin_Controller {
                 $p->add_field('cancel_return', $this_script . '?action=cancel');
                 $p->add_field('notify_url', $this_script . '?action=ipn');
                 $p->add_field('item_name', 'Invoice Payment');
-                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
+                $p->add_field('amount', 1);
+//                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
                 $p->add_field('invoice_code', $code);
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
@@ -407,9 +408,9 @@ class Invoice extends Admin_Controller {
                 break;
             case 'ipn':          // Paypal is calling page for IPN validation...
                 if ($p->validate_ipn()) {
-                    $this->db->insert('test', array('value' => json_encode($_REQUEST), 'success' => 1));
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 } else {
-                    $this->db->insert('test', array('value' => json_encode($_REQUEST), 'success' => 0));
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 }
                 break;
         }
