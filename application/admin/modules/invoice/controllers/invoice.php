@@ -30,7 +30,7 @@ class Invoice extends Admin_Controller {
 //*************************************validation End********************************
 
     function index($arg = "") {
-        if($this->aauth->isCustomer()):
+        if ($this->aauth->isCustomer()):
             self::tanetData();
             return;
         endif;
@@ -49,7 +49,7 @@ class Invoice extends Admin_Controller {
 
             ///Setup pagination            
             $inner["total"] = $this->invoicemodel->countAll($this->ids);
-            
+
             $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly($this->ids);
             $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly($this->ids);
             $inner["weekly_data"] = $this->invoicemodel->getWeeklyInvoice($this->ids);
@@ -362,6 +362,56 @@ class Invoice extends Admin_Controller {
             $this->session->set_flashdata('SUCCESS', 'Invoice Generated');
             redirect(createUrl('invoice/manual/'));
             exit();
+        }
+    }
+
+    function pay($code) {
+        $this->load->library('paypal_class');
+        $invoice = $this->commonmodel->getByPk($code, 'invoice_new', 'invoice_code');
+        $applicant = $this->commonmodel->getByPk(arrIndex($invoice, 'applicant_id'), 'applicants', 'applicant_id');
+        $p = new paypal_class;             // initiate an instance of the class
+        $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
+        //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
+        $this_script = base_url() . 'paypal';
+        $this_script = createUrl('invoice/pay/' . $code);
+        if (empty($_GET['action']))
+            $_GET['action'] = 'process';
+        switch ($_GET['action']) {
+            case 'process':      // Process and order...
+//                e($invoice);
+                $paypal_id = getConfig('PAYPAL_MERCHENT_EMAIL');
+                $p->add_field('first_name', arrIndex($applicant, 'fname'));
+                $p->add_field('last_name', arrIndex($applicant, 'lname'));
+                $p->add_field('business', $paypal_id);
+                $p->add_field('return', $this_script . '?action=success');
+                $p->add_field('cancel_return', $this_script . '?action=cancel');
+                $p->add_field('notify_url', $this_script . '?action=ipn');
+                $p->add_field('item_name', 'Invoice Payment');
+                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
+                $p->add_field('invoice_code', $code);
+                $p->submit_paypal_post(); // submit the fields to paypal
+                //$p->dump_fields();      // for debugging, output a table of all the fields
+                break;
+            case 'success':      // Order was successful...
+                echo "<html><head><title>Success</title></head><body><h3>Thank you for your order.</h3>";
+                foreach ($_POST as $key => $value) {
+                    echo "$key: $value<br>";
+                }
+                echo "</body></html>";
+                break;
+            case 'cancel':       // Order was canceled...
+                // The order was canceled before being completed.
+
+                echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
+                echo "</body></html>";
+                break;
+            case 'ipn':          // Paypal is calling page for IPN validation...
+                if ($p->validate_ipn()) {
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST), 'success' => 1));
+                } else {
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST), 'success' => 0));
+                }
+                break;
         }
     }
 

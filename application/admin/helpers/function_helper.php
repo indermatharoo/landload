@@ -284,3 +284,11 @@ function addDate($strDate, $interval) {
 //    $temp = (array)$temp;
 //    return arrIndex($temp,'date');
 }
+
+function getConfig($key) {
+    getThis()->db->select('config_value');
+    getThis()->db->where('config_key', $key);
+    getThis()->db->from('config');
+    $rs = getThis()->db->get()->row_array();
+    return arrIndex($rs,'config_value');
+}
