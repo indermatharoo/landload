@@ -8,6 +8,7 @@ class Propertymodel extends CI_Model {
 
 
     function listAll($attributes = array()) {
+        
         $attributeWhere = $valueWhere = array();
         foreach ($attributes as $id => $value):
             if (empty($value))
@@ -23,11 +24,13 @@ class Propertymodel extends CI_Model {
         }
         $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
         $this->db->from('units t1');
-        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere);
+        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere,'left');
         $this->db->group_by('unit_id');
+        
         if (count($attributeWhere))
             $this->db->where_in('attribute_id', $attributeWhere);
         $results = $this->db->get()->result_array();
+        echo $this->db->last_query();
 //        e($results);
         return $results;
     }
