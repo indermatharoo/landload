@@ -8,13 +8,19 @@
                 <div class="carousel-inner" style="height: 292px;">
                     <?php
                     $c = '';
+                    if($gallery!=false){
                     foreach ($gallery as $slide) {
                         ++$c;
                         ?>
                         <div class="item <?php echo $c == 1 ? 'active' : ''; ?> ">
                             <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>" height="300px"/>
                         </div>
+                    <?php }} 
+                     else{ ?>
+                    <h3>No Images found</h3>
+                    
                     <?php } ?>
+                    
                 </div>
 
                 <a class="left carousel-control" href="#carousel-example" data-slide="prev">
@@ -69,7 +75,7 @@
                     <div><b>Owner : </b><i><?= $property['owner']; ?></i></div>
                     <br />
                     <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
-                    <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>
+                  <?php  /*<div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div> */ ?>
                     <br />
                     <div style="font-size: 20px"><b>  <?= DWS_CURRENCY_SYMBOL.$property['amount']; ?></b></div>
 
@@ -82,14 +88,14 @@
                                 </div>-->
                 <div class="col-sm-12 push-right">
                     <?php
-                    
+                   
                     //e($this->session->all_userdata());
                     if ($this->session->userdata('applicant_id') != '') {
 
                         $attributes = array('class' => 'apply', 'id' => 'myform', 'name' => 'myform');
                         echo form_open('property/apply', $attributes);
                         echo form_hidden('unit_id', $property['unit_id']);
-                        echo form_hidden('property_id', $property['property_id']);
+                        echo form_hidden('company_id', $property['company_id']);
                         echo form_hidden('rent_amount', $property['amount']);
                         echo form_hidden('applicant_id', $this->session->userdata('applicant_id'));
                         ?>
