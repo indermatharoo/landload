@@ -26,10 +26,10 @@ class Calendermodel extends CI_Model {
 
     function getCompanyInvoices($ids = array(), $where = array()) {
         $this->db->select('t1.*,t3.unit_number,t3.unit_image,t3.description,UNIX_TIMESTAMP(created_on) * 1000 as start,UNIX_TIMESTAMP(created_on) * 1000 as end');
-        if (count($ids)) {
-            $this->db->where_in('company_id', $ids);
-        }
         $this->db->from('invoice_new t1');
+        if (count($ids)) {
+            $this->db->where_in('t1.company_id', $ids);
+        }
         foreach ($where as $key => $value):
             $this->db->where($key, $value);
         endforeach;

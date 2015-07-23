@@ -8,21 +8,10 @@
 <script type="text/javascript" src="<?= base_url() ?>js/calendar/js/app.js"></script>
 <script type="text/javascript" src="<?= base_url() ?>js/jquery.bpopup.min.js"></script>
 <script type="text/javascript">
-    function eventcomplete(eid) {
-        window.location = "<?= base_url(); ?>calender/complete/" + eid;
-    }
-
-    function eventedit(eid) {
-        window.location = "<?= base_url(); ?>calender/edit/" + eid;
-    }
-    
-    function eventattendance(eid) {
-        window.location = "<?= base_url(); ?>calender/attendance/index/" + eid;
-    }
-
-
-    function eventdelete(eid) {
-        window.location = "<?= base_url(); ?>calender/delete/" + eid;
+    function gotoinvoice(eid) {
+        if (!eid)
+            return false;
+        window.location = "<?= base_url(); ?>invoice/invoicedetail/" + eid;
     }
 
     function l(v) {
