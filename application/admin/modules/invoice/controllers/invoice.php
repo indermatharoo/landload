@@ -407,6 +407,7 @@ class Invoice extends Admin_Controller {
                 echo "</body></html>";
                 break;
             case 'ipn':          // Paypal is calling page for IPN validation...
+                $this->db->insert('test', array('value' => 'test'));
                 if ($p->validate_ipn()) {
                     $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 } else {
