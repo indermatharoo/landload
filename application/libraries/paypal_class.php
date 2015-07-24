@@ -104,8 +104,8 @@ class paypal_class {
 
    
    function paypal_class() {
-
-       // initialization constructor.  Called when class is created.
+       
+      // initialization constructor.  Called when class is created.
       
       $this->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';
       
@@ -250,7 +250,6 @@ class paypal_class {
       
       // Write to log
       $fp=fopen($this->ipn_log_file,'a');
-      $text = $this;
       fwrite($fp, $text . "\n\n"); 
 
       fclose($fp);  // close file
