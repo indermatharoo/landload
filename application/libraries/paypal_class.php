@@ -185,7 +185,7 @@ class paypal_class {
             $this->log_ipn_results(false);
             return false;
         } else {
-
+            file_put_contents(FCPATH . 'log.log',$url_parsed);
             // Post the data back to paypal
             fputs($fp, "POST $url_parsed[path] HTTP/1.1\r\n");
             fputs($fp, "Host: $url_parsed[host]\r\n");
@@ -201,7 +201,6 @@ class paypal_class {
 
             fclose($fp); // close connection
         }
-        file_put_contents(FCPATH . 'log.log',$this->ipn_response);
         if (preg_match("/VERIFIED/i", $this->ipn_response)) {
 
             // Valid IPN transaction.
