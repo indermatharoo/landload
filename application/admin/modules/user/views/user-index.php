@@ -8,7 +8,9 @@
             <h3 style="margin: 0; text-align: center">Users Management</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
+            <?php if($this->aauth->isCompany()){ ?>
             <a href="user/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New user"></i></h3></a>
+            <?php } ?>
         </div>
     </div>
 </header>
