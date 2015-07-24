@@ -7,7 +7,8 @@ class Paypal extends CI_Controller {
         $this->load->library('paypal_class');
     }
 
-    function index() {
+    function index() {        
+        
         $p = new paypal_class;             // initiate an instance of the class
         $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
