@@ -201,7 +201,7 @@ class paypal_class {
 
             fclose($fp); // close connection
         }
-        file_put_contents(FCPATH . '/log.log', $this->ipn_response);
+        
         if (preg_match("~VERIFIED~i", $this->ipn_response)) {
 
             // Valid IPN transaction.
@@ -210,7 +210,8 @@ class paypal_class {
         } else {
 
             // Invalid IPN transaction.  Check the log for details.
-            $this->last_error = 'IPN Validation Failed.';
+//            $this->last_error = 'IPN Validation Failed.';
+            $this->last_error = $this->ipn_response;
             $this->log_ipn_results(false);
             return false;
         }
