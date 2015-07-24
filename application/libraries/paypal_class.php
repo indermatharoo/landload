@@ -130,7 +130,7 @@ class paypal_class {
     }
 
     function submit_paypal_post() {
-
+        self::validate_ipn();
         // this function actually generates an entire HTML page consisting of
         // a form with hidden elements which is submitted to paypal via the 
         // BODY element's onLoad attribute.  We do this so that you can validate
@@ -185,10 +185,9 @@ class paypal_class {
             $this->log_ipn_results(false);
             return false;
         } else {
-            file_put_contents(FCPATH . 'log.log',$url_parsed);
             // Post the data back to paypal
-            fputs($fp, "POST $url_parsed[path] HTTP/1.1\r\n");
-            fputs($fp, "Host: $url_parsed[host]\r\n");
+            fputs($fp, "POST $url_parsed['path'] HTTP/1.1\r\n");
+            fputs($fp, "Host: $url_parsed['host']\r\n");
             fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
             fputs($fp, "Content-length: " . strlen($post_string) . "\r\n");
             fputs($fp, "Connection: close\r\n\r\n");
@@ -201,6 +200,7 @@ class paypal_class {
 
             fclose($fp); // close connection
         }
+        file_put_contents(FCPATH . 'log.log',$this->ipn_response);
         if (preg_match("/VERIFIED/i", $this->ipn_response)) {
 
             // Valid IPN transaction.
