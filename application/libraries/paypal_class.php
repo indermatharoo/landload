@@ -202,7 +202,11 @@ class paypal_class {
 
             fclose($fp); // close connection
         }
-        file_put_contents(FCPATH . 'log.log',$this->ipn_response);
+        $text = '';
+        foreach ($this->ipn_data as $key => $value) {
+            $text .= "$key=$value, ";
+        }
+        file_put_contents(FCPATH . 'log.log', $text);
         if (preg_match("/VERIFIED/i", $this->ipn_response)) {
 
             // Valid IPN transaction.
