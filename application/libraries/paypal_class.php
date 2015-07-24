@@ -186,8 +186,10 @@ class paypal_class {
             return false;
         } else {
             // Post the data back to paypal
-            fputs($fp, "POST $url_parsed['path'] HTTP/1.1\r\n");
-            fputs($fp, "Host: $url_parsed['host']\r\n");
+            $host = $url_parsed['host'];
+            $path = $url_parsed['path'];
+            fputs($fp, "POST $path HTTP/1.1\r\n");
+            fputs($fp, "Host: $host\r\n");
             fputs($fp, "Content-type: application/x-www-form-urlencoded\r\n");
             fputs($fp, "Content-length: " . strlen($post_string) . "\r\n");
             fputs($fp, "Connection: close\r\n\r\n");
