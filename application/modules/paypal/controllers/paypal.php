@@ -39,7 +39,7 @@ class Paypal extends CI_Controller {
                 $p->add_field('notify_url', $this_script . '?action=ipn');
                 $p->add_field('item_name', 'Paypal Test Transaction');
                 $p->add_field('amount', '1.99');
-                $p->add_field('custom', '123321');
+                $p->add_field('custom', 123321);
                 
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
