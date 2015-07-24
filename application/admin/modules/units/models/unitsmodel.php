@@ -59,6 +59,7 @@ class Unitsmodel extends Basemodel {
         $data['amount_type'] = $this->input->post('amount_type');
         $data['is_featured'] = $this->input->post('is_featured');
         $data['property_type'] = $this->input->post('ptype');
+        $data['post_code'] = $this->input->post('post_code');
        // $data['country'] = $this->input->post('country');
        $data['country'] = 'IN';
        // $data['amount'] = $this->input->post('amount');
@@ -234,6 +235,7 @@ class Unitsmodel extends Basemodel {
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
         $data['is_featured'] = $this->input->post('is_featured');
+        $data['post_code'] = $this->input->post('post_code');
 
         if (!empty($_POST['features'])) {
             $data['features'] = implode($_POST['features'], '|');

@@ -62,7 +62,10 @@
                 <label>City<span class="red">*</span></label>
                   <input type="text" class="form-control" name="city"  placeholder="City *">
             </div>
-            
+            <div class="col-sm-6">
+                <label>Post Code<span class="red">*</span></label>
+                  <input type="text" class="form-control" name="post_code"  placeholder="Post Code *">
+            </div>
             <div class="col-sm-6">
                 <label>Country<span class="red">*</span></label>
                 <select name="country"  class="form-control" >

@@ -65,6 +65,7 @@ class Units extends Admin_Controller {
         $this->form_validation->set_rules('city', 'city', 'trim|required');
         $this->form_validation->set_rules('street', 'street', 'trim|required');
         $this->form_validation->set_rules('country', 'country', 'trim|required');
+        $this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
             
 //        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
@@ -106,7 +107,7 @@ class Units extends Admin_Controller {
        
         $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
-
+        $this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('owner', 'owner', 'trim|required');
