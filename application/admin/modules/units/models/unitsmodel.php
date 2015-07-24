@@ -203,9 +203,9 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
-
+        
         if (!empty($_FILES['photo']['name'])) {
-
+          //  e($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
             $mainimage = $this->getUnitDetails($id);
             @unlink($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
 
@@ -221,6 +221,8 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
+        
+        
         $data['unit_number'] = $this->input->post('unit_number');
         $data['property_type'] = $this->input->post('ptype');
         $data['owner'] = $this->input->post('owner');

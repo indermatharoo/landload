@@ -41,6 +41,7 @@
         <div class="col-sm-6">
             <label>Photo<span class="red">*</span></label>
             <input type="file"  name="photo"   >
+            <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').  arrIndex($details,  'unit_image'); ?>" height="50" width="50">
         </div>
         <div class="col-sm-6">
             <label>Owner<span class="red">*</span></label>
@@ -62,10 +63,7 @@
             <label>Country<span class="red">*</span></label>
             <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
         </div>
-        <div class="col-sm-6">
-            <label>Photo<span class="red">*</span></label>
-            <input type="file"  name="photo" multiple="" >
-        </div>
+
         <div class="col-sm-6">
             <label>Gallery Images</label>
             <input type="file"  name="galleryImages[]" multiple  >
