@@ -386,7 +386,7 @@ class Invoice extends Admin_Controller {
                 $p->add_field('business', $paypal_id);
                 $p->add_field('return', $this_script . '?action=success');
                 $p->add_field('cancel_return', $this_script . '?action=cancel');
-                $p->add_field('notify_url', $this_script . '?action=ipn');
+                $p->add_field('notify_url', site_url1(base_url()) . 'paypal?action=ipn');
                 $p->add_field('item_name', 'Invoice Payment');
                 $p->add_field('amount', 1);
 //                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
