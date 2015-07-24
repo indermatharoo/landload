@@ -367,7 +367,6 @@ class Invoice extends Admin_Controller {
 
     function pay($code) {
         ini_set('display_errors', 'On');
-        $this->db->insert('test', array('value' => 'test'));
         $this->load->library('paypal_class');
         $invoice = $this->commonmodel->getByPk($code, 'invoice_new', 'invoice_code');
         $applicant = $this->commonmodel->getByPk(arrIndex($invoice, 'applicant_id'), 'applicants', 'applicant_id');

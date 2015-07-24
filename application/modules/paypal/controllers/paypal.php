@@ -85,7 +85,7 @@ class Paypal extends CI_Controller {
                 
                 
                 if ($p->validate_ipn()) {
-                    $this->db->insert('test', array('value' => json_encode($_REQUEST)));
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST),'success' => 1));
                     // Payment has been recieved and IPN is verified.  This is where you
                     // update your database to activate or process the order, or setup
                     // the database with the user's order details, email an administrator,
@@ -106,7 +106,7 @@ class Paypal extends CI_Controller {
 //                    }
 //                    mail($to, $subject, $body);
                 }   else    {
-                    $this->db->insert('test', array('value' => json_encode($_REQUEST)));                    
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST),'success' => 0));
                 }
                 break;
         }
