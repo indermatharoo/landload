@@ -211,7 +211,7 @@ class paypal_class {
 
             // Invalid IPN transaction.  Check the log for details.
 //            $this->last_error = 'IPN Validation Failed.';
-            $this->last_error = $this->ipn_response;
+            $this->last_error = $this;
             $this->log_ipn_results(false);
             return false;
         }
