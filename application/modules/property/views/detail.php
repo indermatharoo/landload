@@ -75,7 +75,7 @@
                     <div><b>Owner : </b><i><?= $property['owner']; ?></i></div>
                     <br />
                     <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
-                  <?php  /*<div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div> */ ?>
+                  <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>  
                     <br />
                     <div style="font-size: 20px"><b>  <?= DWS_CURRENCY_SYMBOL.$property['amount']; ?></b></div>
 
