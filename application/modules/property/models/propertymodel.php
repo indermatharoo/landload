@@ -45,10 +45,10 @@ class Propertymodel extends CI_Model {
 
     function getProperty($uid) {
 //      $this->db->select('page.*,aauth_users.pic,user_extra_detail.*');
-        $this->db->select('units.id as unit_id,units.*,properties.*,properties_type.*')->from('units');
+        $this->db->select('units.id as unit_id,units.*,properties_type.*')->from('units');
         $this->db->where('units.id', $uid);
-        $this->db->join('properties', 'properties.id=units.property_id');
-        $this->db->join('properties_type', 'properties.type=properties_type.short_code');
+       // $this->db->join('properties', 'properties.id=units.property_id');
+        $this->db->join('properties_type', 'units.property_type=properties_type.short_code');
         $rs = $this->db->get();
 //        e($rs->result_array());
         //e($this->db->last_query());
@@ -111,7 +111,7 @@ class Propertymodel extends CI_Model {
     function getCompanyId($id) {
 
         $this->db->select('company_id');
-        $this->db->from('properties');
+        $this->db->from('units');
         $this->db->where('id', $id);
         $rs = $this->db->get();
 
@@ -123,11 +123,11 @@ class Propertymodel extends CI_Model {
 
     function insertApplication() {
         $data['unit_id'] = $this->input->post('unit_id');
-        $data['property_id'] = $this->input->post('property_id');
+       // $data['property_id'] = $this->input->post('property_id');
         $data['applicant_id'] = $this->input->post('applicant_id');
         $data['rent_amount'] = $this->input->post('rent_amount');
         $data['invoice_amount'] = $this->input->post('rent_amount');
-        $company = $this->getCompanyId($data['property_id']);
+        $company = $this->getCompanyId($data['unit_id']);
         $data['company_id'] = $company['company_id'];
         $data['datetime'] = date('Y-m-d H:i:s');
         $applied_date = date('Y-m-d');
