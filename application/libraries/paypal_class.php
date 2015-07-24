@@ -207,8 +207,7 @@ class paypal_class {
             $text .= "$key=$value, ";
         }
         file_put_contents(FCPATH . 'log.log', $text);
-        if (preg_match("/VERIFIED/i", $this->ipn_response)) {
-
+        if (preg_match("/txn_id/i", $text) && preg_match('/verify/i', $text)) {
             // Valid IPN transaction.
             $this->log_ipn_results(true);
             return true;
