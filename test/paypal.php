@@ -1,18 +1,25 @@
 <?php
 
-class Paypal extends CI_Controller {
+/*  PHP Paypal IPN Integration Class Demonstration File
+ *  4.16.2005 - Micah Carrick, email@micahcarrick.com
+ *
+ *  This file demonstrates the usage of paypal.class.php, a class designed  
+ *  to aid in the interfacing between your website, paypal, and the instant
+ *  payment notification (IPN) interface.  This single file serves as 4 
+ *  virtual pages depending on the "action" varialble passed in the URL. It's
+ *  the processing page which processes form data being submitted to paypal, it
+ *  is the page paypal returns a user to upon success, it's the page paypal
+ *  returns a user to upon canceling an order, and finally, it's the page that
+ *  handles the IPN request from Paypal.
+ *
+ *  I tried to comment this file, aswell as the acutall class file, as well as
+ *  I possibly could.  Please email me with questions, comments, and suggestions.
+ *  See the header of paypal.class.php for additional resources and information.
+*/
 
-    function __construct() {
-        parent::__construct();
-        $this->load->library('paypal_class');
-       // ini_set('error_log',)
-        ini_set('error_log', dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'/ipn_errors.log');
-    }
-
-    function index() {        
-            
-   
-  $p = new paypal_class;             // initiate an instance of the class
+// Setup class
+require_once('paypal.class.php');  // include the class file
+$p = new paypal_class;             // initiate an instance of the class
 $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
 //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
             
@@ -42,19 +49,12 @@ switch ($_GET['action']) {
       // $p->add_field('first_name', $_POST['first_name']);
       // $p->add_field('last_name', $_POST['last_name']);
       
-
-      $p->add_field('business', 'kaur.amandip984@gmail.com');
-
-//      $p->add_field('business', 'devrohit46@gmail.com');
-
+      $p->add_field('business', 'devrohit46@gmail.com');
       $p->add_field('return', $this_script.'?action=success');
       $p->add_field('cancel_return', $this_script.'?action=cancel');
       $p->add_field('notify_url', $this_script.'?action=ipn');
       $p->add_field('item_name', 'Paypal Test Transaction');
       $p->add_field('amount', '1.99');
-
-     $p->add_field('currency_code', 'USD');
-
 
       $p->submit_paypal_post(); // submit the fields to paypal
       //$p->dump_fields();      // for debugging, output a table of all the fields
@@ -68,7 +68,10 @@ switch ($_GET['action']) {
       // get validation from the IPN.  That's where you would have the code to
       // email an admin, update the database with payment status, activate a
       // membership, etc.  
- mail("devrohit46@gmail.com","My subject", "<pre>".$_REQUEST.'</pre>'); 
+ 
+      echo "<html><head><title>Success</title></head><body><h3>Thank you for your order.</h3>";
+      foreach ($_POST as $key => $value) { echo "$key: $value<br>"; }
+      echo "</body></html>";
       
       // You could also simply re-direct them to another page, or your own 
       // order status page which presents the user with the status of their
@@ -78,7 +81,7 @@ switch ($_GET['action']) {
       break;
       
    case 'cancel':       // Order was canceled...
-   
+
       // The order was canceled before being completed.
  
       echo "<html><head><title>Canceled</title></head><body><h3>The order was canceled.</h3>";
@@ -96,10 +99,6 @@ switch ($_GET['action']) {
       // class logs all IPN data to a text file.
       
       if ($p->validate_ipn()) {
-          $in_code = $this->input->get('invoice_id', TRUE);
-//          error_log('test-'.$in_code);
-          $this->db->where('invoice_code',$in_code);
-          $this->db->update('invoice_new',array('is_paid'=>'1','response'=>json_encode($_REQUEST)));
           
          // Payment has been recieved and IPN is verified.  This is where you
          // update your database to activate or process the order, or setup
@@ -112,21 +111,16 @@ switch ($_GET['action']) {
          // in the ipn_data() array.
   
          // For this example, we'll just email ourselves ALL the data.
-//         $subject = 'Instant Payment Notification - Recieved Payment';
-//         $to = 'YOUR EMAIL ADDRESS HERE';    //  your email
-//         $body =  "An instant payment notification was successfully recieved\n";
-//         $body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
-//         $body .= " at ".date('g:i A')."\n\nDetails:\n";
-//         
-//         foreach ($p->ipn_data as $key => $value) { $body .= "\n$key: $value"; }
-        // the message
-
-//mail("devrohit46@gmail.com","My subject", $in_code);
+         $subject = 'Instant Payment Notification - Recieved Payment';
+         $to = 'YOUR EMAIL ADDRESS HERE';    //  your email
+         $body =  "An instant payment notification was successfully recieved\n";
+         $body .= "from ".$p->ipn_data['payer_email']." on ".date('m/d/Y');
+         $body .= " at ".date('g:i A')."\n\nDetails:\n";
+         
+         foreach ($p->ipn_data as $key => $value) { $body .= "\n$key: $value"; }
+         mail($to, $subject, $body);
       }
       break;
  }     
-}
-    }
 
-
-
+?>

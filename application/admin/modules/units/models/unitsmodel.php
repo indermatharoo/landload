@@ -23,7 +23,7 @@ class Unitsmodel extends Basemodel {
 
     function listAll($ids = array()) {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
-         //   $this->db->where_in('company_id', $ids);
+            $this->db->where_in('company_id', $ids);
         endif;
         $this->db->select('units.id as unit_id,units.*');
         $results = $this->db->get('units')->result_array();

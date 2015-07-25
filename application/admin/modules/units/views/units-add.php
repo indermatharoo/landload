@@ -85,7 +85,7 @@
             <div class="col-sm-6">
                 <label>Status<span class="red">*</span></label><br>
                 <?php foreach ($status as $st => $stval) { ?>
-                    <input type="radio" name="status" value="<?php echo $st ?>">&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <input type="radio" name="status" value="<?php echo $st ?>" <?php if($st=="1"){echo "checked";} ?>>&nbsp;&nbsp;<?php echo $stval ?>&nbsp;&nbsp;&nbsp;&nbsp;
                 <?php } ?>
             </div>
 <!--            <div class="col-sm-6">

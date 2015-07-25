@@ -27,7 +27,7 @@
                     <td><?= arrIndex($item, 'name'); ?></td>
                     <td><?= arrIndex($item, 'email'); ?></td>
                     <td><?= $this->aauth->get_group_name(arrIndex($item, 'group_id')); ?></td>
-                    <td><a href="<?= createUrl('company/edit/') . arrIndex($item, 'id'); ?>">Edit</a><?php if ($item['id'] > 1) { ?>  | <a href="<?= createUrl('user/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a><?php } ?> </td>
+                    <td><a href="<?= createUrl('company/edit/') . arrIndex($item, 'id'); ?>">Edit</a><?php if ($item['id'] > 1) { ?>  | <a href="<?= createUrl('company/delete/') . $item['id']; ?>" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a><?php } ?> </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

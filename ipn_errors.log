@@ -1,4 +1,2 @@
-[23-Jul-2015 08:28:41 Europe/London] 1
-[23-Jul-2015 08:30:06 Europe/London] PHP Warning:  error_log() expects parameter 1 to be string, array given in /var/www/vhosts/webnseo.co.uk/landlord/landlord/callback.php on line 17
-[23-Jul-2015 08:30:45 Europe/London] 1
-[23-Jul-2015 08:31:04 Europe/London] 1
+[24-Jul-2015 13:50:13 Europe/Berlin] {"\/invoice\/pay\/355591":""}
+[24-Jul-2015 13:50:25 Europe/Berlin] {"\/invoice\/pay\/355591":""}
