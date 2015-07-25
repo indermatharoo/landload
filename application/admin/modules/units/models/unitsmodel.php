@@ -308,7 +308,7 @@ class Unitsmodel extends Basemodel {
             $this->db->where_in('company_id', $ids);
         }
         $res = $this->db->get('units');
-        echo $this->db->last_query();
+        
         return $res->result_array();
     }
 
