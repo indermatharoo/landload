@@ -36,8 +36,7 @@
         <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     </div>
     <div class="table-responsive">
-        <table id="pagination-table" class="table table-bordered table-striped">
-            
+        <table id="pagination-table" class="table table-bordered table-striped hidden">            
             <tbody>
                 <tr>    
                     <td>
