@@ -165,27 +165,27 @@ class Notification {
             if (arrIndex($data, 'class') != 'virtcab') {
                 continue;
             }
-            $ci = & get_instance();
-            $ci->load->library('parser');
-            $ci->load->library('email');
-            $ci->load->model('commonmodel');
-            $to_user = $ci->commonmodel->getByPk(arrIndex($data, 'assigne_id'), 'aauth_users');
-            $to_email = arrIndex($to_user, 'email');
-            $to_name = arrIndex($to_user, 'name');
-            $form_user =  $ci->commonmodel->getByPk(arrIndex($data, 'creator_id'), 'aauth_users');
-            $form_name = arrIndex($form_user,'name');
-            $emailData = array();
-            $emailData['DATE'] = date("jS F, Y");
-            $emailData['to_name'];
-            $emailData['to_email'];
-            $emailData['from_name'];            
-            $emailBody = $ci->parser->parse('user/emails/user-information', $emailData, TRUE);            
-            $msg_body = $emailBody;
-            $ci->email->initialize($ci->config->item('EMAIL_CONFIG'));
-            $ci->email->from('invoice@checksample.co.uk', 'The Creative Station'); // change it to yours
-            $ci->email->to('inder@multichannelcreative.co.uk'); // change it to yours
-            $ci->email->subject('Virtual Cabinet Notification');
-            $ci->email->message($msg_body);
+//            $ci = & get_instance();
+//            $ci->load->library('parser');
+//            $ci->load->library('email');
+//            $ci->load->model('commonmodel');
+//            $to_user = $ci->commonmodel->getByPk(arrIndex($data, 'assigne_id'), 'aauth_users');
+//            $to_email = arrIndex($to_user, 'email');
+//            $to_name = arrIndex($to_user, 'name');
+//            $form_user =  $ci->commonmodel->getByPk(arrIndex($data, 'creator_id'), 'aauth_users');
+//            $form_name = arrIndex($form_user,'name');
+//            $emailData = array();
+//            $emailData['DATE'] = date("jS F, Y");
+//            $emailData['to_name'];
+//            $emailData['to_email'];
+//            $emailData['from_name'];            
+//            $emailBody = $ci->parser->parse('user/emails/user-information', $emailData, TRUE);            
+//            $msg_body = $emailBody;
+//            $ci->email->initialize($ci->config->item('EMAIL_CONFIG'));
+//            $ci->email->from('invoice@checksample.co.uk', 'The Creative Station'); // change it to yours
+//            $ci->email->to('inder@multichannelcreative.co.uk'); // change it to yours
+//            $ci->email->subject('Virtual Cabinet Notification');
+//            $ci->email->message($msg_body);
 //            if ($ci->email->send()) {
 //                e('email sent');
 //            } else {
