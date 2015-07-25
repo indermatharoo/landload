@@ -3,6 +3,7 @@
 ?>
 <div class="row">
     <div class="col-lg-8">
+        <?php if($gallery != ''):?>
         <div class="col-lg-12 padding-0 unit-imgs" style="height: 300px;">
             <div id="carousel-example" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" style="height: 292px;">
@@ -31,6 +32,7 @@
                 </a>
             </div>
         </div>
+        <?php endif;?>
         <div class="col-lg-12 padding-0 mar-top30">
             <div class="head_desc">
                 <h2><?php echo $property['unit_number']; ?></h2>
