@@ -79,12 +79,12 @@ class Usermodel extends Basemodel {
     }
 
     function getApplicants($company_id) {
-        $this->db->select('DISTINCT(t1.email),t1.*');
+        $this->db->select('DISTINCT(t1.email),t1.*,t3.company_id');
         $this->db->from('applicants t1');
         $this->db->join('applications t2', 't2.applicant_id=t1.applicant_id');
         $this->db->join('units t3', 't3.company_id=t2.company_id');
-        $rs = $this->db->get()->result_array();
-//        e($rs);
+        $this->db->where('t3.company_id',$company_id);
+        $rs = $this->db->get()->result_array();        
         return $rs;
     }
 
