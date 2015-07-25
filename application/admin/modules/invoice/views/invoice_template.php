@@ -256,7 +256,9 @@ function vat($price_without_vat = NULL) {
 </div>
 
 <input type="button" value="Print" id="btnPrint" class="btn btn-success"/>
-
+<?php
+echo arrIndex($invoice_detail, 'invoice_code');
+?>
 <?php if ($this->aauth->isCustomer() && arrIndex($invoice_detail, 'invoice_code')): ?>
     <button class="btn btn-success mar-left10" onclick="payInvoice()">Pay Online</button>
 <?php endif; ?>
