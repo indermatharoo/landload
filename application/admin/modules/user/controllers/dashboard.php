@@ -20,7 +20,7 @@ class Dashboard extends Admin_Controller {
 //        e($this->ids);
         $recentProperties = $this->Propertiesmodel->getRecentProperties($this->ids);
         $recentCompanies = $this->Companymodel->getRecentCompany();
-        //e($recentCompanies);
+//        e($recentProperties);
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
             $recentUser = $this->Applicantsmodel->getRecentApplicantsCompany($this->ids);
         else:
