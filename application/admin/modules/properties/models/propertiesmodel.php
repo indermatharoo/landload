@@ -96,7 +96,7 @@ class Propertiesmodel extends Basemodel {
     }
 
     function getRecentProperties($ids = array()) {
-        e($ids);
+//        e($ids);
         if (count($ids)) {
             $this->db->where_in('company_id', $ids);
         }
