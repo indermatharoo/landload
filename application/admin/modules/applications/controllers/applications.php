@@ -370,9 +370,9 @@ class Applications extends Admin_Controller {
         $enddateTemp->add(new DateInterval('P1Y'));
         switch ($type):
             case 'W':
-                e($enddateTemp,0);
+//                e($enddateTemp,0);
                 $enddateTemp->sub(new DateInterval('P2W'));
-                e($enddateTemp);
+//                e($enddateTemp);
                 break;
             case 'M':
                 $enddateTemp->sub(new DateInterval('P1M'));
