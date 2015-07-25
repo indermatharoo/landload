@@ -1,61 +1,38 @@
-<h2><?php // echo $page['page_title']; ?></h2>
-<?php //echo $page['page_contents']; ?>
-<?php //load_form('contact-us'); ?>
-
-<div class="col-sm-12 padding-0">
-    <div class="row">
-        <?php $this->load->view('inc-messages'); ?>
+<h1><?php echo $page['title']; ?></h1>
+<div id="form_address">
+    <?php $this->load->view('inc-messages'); ?>
+    <div id="address">
+        <div>
+            <?php echo $this->cmscore->block('block_main'); ?>
+        </div>
+        <div style="clear: both"></div>
     </div>
-    <form method="post" name="">
-        <?php echo form_hidden('ispost', 1); ?>
-        <div class="form-group clearfix">
-            <div class="col-sm-6">
-                <input id="fname" class="form-control" name="first_name" required="required" type="text" value="" placeholder="First name *"/>
+    <div id="contact_form">
+        <form name="form2" method="post" action="contact-us">
+            <div class="con-left">
+                <div class="">
+                    <label>Name <span class="error">*</span></label>
+                    <input name="name" type="text" class="textfield" id="textfield2" value="<?php echo set_value('name'); ?>">
+                </div>
+                <div class="">
+                    <label>Phone <span class="error">*</span></label>
+                    <input name="phone" type="text" class="textfield" id="textfield3" value="<?php echo set_value('phone'); ?>">
+                </div>
+                <div class="">
+                    <label>Email <span class="error">*</span></label>
+                    <input name="email" type="text" class="textfield" id="textfield4" value="<?php echo set_value('email'); ?>">
+                </div>
             </div>
-            <div class="col-sm-6">
-                <input id="lname" class="form-control" name="last_name" required="required" type="text" value="" placeholder="Last name *"/>
+            <div class="con-right">
+                <div class="">
+                    <label>Message <span class="error">*</span></label>
+                    <textarea name="message" cols="45" rows="5" class="textfield" id="textarea" style="height:126px;"></textarea>
+                </div>
             </div>
-        </div>
-        <div class="form-group clearfix">
-            <div class="col-sm-6">
-                <input id="tele" class="form-control" name="tel_number" required="required" type="text" value="" placeholder="Telephone number *"/>
+            <div class="div-submit">
+                <input type="submit" name="button" value="Submit" class="btn-sub">
             </div>
-            <div class="col-sm-6">
-                <input id="email" class="form-control" name="email_addr" required="required" type="text" value="" placeholder="Email *"/>
-            </div>
-        </div>
-        <div class="form-group clearfix">
-            <div class="col-sm-6">
-                <input id="pcode" class="form-control" name="post_code" required="required" type="text" value="" placeholder="Post code *"/>
-            </div>
-            <div class="col-sm-6">
-                <?php
-                $optionArr = array();
-                $selected = array();
-                $extra = ' id="reason" class="col-sm-9 form-control" placeholder="Reason for enquiry"';
-                foreach ($enquiryList as $key => $keyVal) {
-                    $optionArr[arrIndex($keyVal, 'id')] = arrIndex($keyVal, 'desc');
-                }
-                echo form_dropdown('enq_reason', $optionArr, $selected, $extra);
-                ?>
-            </div>
-        </div>
-        <div class="form-group clearfix">
-            <div class="col-sm-12">
-                <textarea id="contents" class="form-control" name="enquiry" placeholder="Enquiry *"></textarea>
-            </div>
-        </div>
-        <div class="form-group clearfix">
-            <div class="col-sm-6">
-                <input name="receive_update_news" type="checkbox" value="1" />&nbsp;&nbsp;Receive news and updates
-            </div>
-            <div class="col-sm-6">
-                <input id="hear" class="form-control" name="how_reach" type="text" value="" placeholder="How did you hear about us"/>
-            </div>
-        </div>
-        <div class="form-group clearfix">
-            <p style="text-align: center;"><input id="button" class="btn btn-primary" name="button" type="submit" value="Submit" /></p>
-            <p style="text-align: center;">Fields marked with <span class="error">*</span> are required.</p>
-        </div>
-    </form>
+        </form>
+    </div>
 </div>
+<div id="contact_map"><?php echo $this->cmscore->block('contact_map'); ?></div>

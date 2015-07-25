@@ -368,14 +368,16 @@ class Applications extends Admin_Controller {
         $startdate = arrIndex($application, 'startdate');
         $enddateTemp = new DateTime($startdate);
         $enddateTemp->add(new DateInterval('P1Y'));
-//        switch ($type):
-//            case 'W':
-//                $enddateTemp->sub(new DateInterval('P1W'));
-//                break;
-//            case 'M':
-//                $enddateTemp->sub(new DateInterval('P1M'));
-//                break;
-//        endswitch;
+        switch ($type):
+            case 'W':
+//                e($enddateTemp,0);
+                $enddateTemp->sub(new DateInterval('P2W'));
+//                e($enddateTemp);
+                break;
+            case 'M':
+                $enddateTemp->sub(new DateInterval('P1M'));
+                break;
+        endswitch;
 //        e($enddateTemp);
         $enddate = $enddateTemp->format('Y-m-d');
         while ($startdate < $enddate):
