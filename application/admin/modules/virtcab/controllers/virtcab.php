@@ -248,7 +248,7 @@ class virtcab extends Admin_Controller {
                             'filter' => '',
                         );
 
-                        $this->notification->notify($notify_data);
+//                        $this->notification->notify($notify_data);
                         //$data = array('success' => 1, 'msg' => 'done');
                     }
                 }
