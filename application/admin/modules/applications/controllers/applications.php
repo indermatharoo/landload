@@ -37,6 +37,7 @@ class Applications extends Admin_Controller {
         );
         
         $inner['Listing'] = $Listing;
+        
         $inner['pagination'] = $this->pagination->create_links();
         $page = array();
         //$inner['user'] = $this->getUser();
@@ -210,6 +211,7 @@ class Applications extends Admin_Controller {
             $inner['applicationType'] = $ApplicationType;
             $inner['applicantsType'] = $applicantsType;
             $inner['uploadedDocuments'] = $uploadedDocuments;
+            $inner['idsArray'] = $this->ids;            
             $inner['days'] = $days;
             $inner['offset'] = $id;
             $page = array();
@@ -416,7 +418,6 @@ class Applications extends Admin_Controller {
                 'is_paid' => '0'
             ));
         endwhile;
-        e('end');
     }
 
     function addInvoice($attributes = array()) {
