@@ -92,14 +92,15 @@
             function drawChart() {
                 var data = google.visualization.arrayToDataTable([
                     ['Stats', ''],
-                    ['Total Properties', total.applicants],
-                    ['Total Companies', total.companies],
-                    ['Total Applicants', total.properties]
+                    ['Total Properties(' + total.applicants + ')', total.applicants],
+                    ['Total Companies(' + total.companies + ')', total.companies],
+                    ['Total Applicants(' + total.properties + ')', total.properties]
                 ]);
 
                 var options = {
                     title: 'Statistics',
                     is3D: true,
+                    backgroundColor:'transparent'
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -107,7 +108,7 @@
             }
         </script>        
         <div class="col-lg-12 menu padding-0">
-            <div id="piechart_3d" style="width: 525px; height:300px;"></div>
+            <div id="piechart_3d" style="width: 600px; height:300px;background-color:rgba(0,0,0)"></div>
         </div>
     </div>
     <div class="col-lg-12 menu padding-0">
