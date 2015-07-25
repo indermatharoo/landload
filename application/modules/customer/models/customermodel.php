@@ -16,6 +16,16 @@ class Customermodel extends CI_Model {
         }
         return false;
     }
+    
+    function userByID($cid) {
+        $this->db->from('applicants');
+        $this->db->where('applicant_id', $cid);
+        $rs = $this->db->get();
+        if ($rs->num_rows() == 1) {
+            return $rs->row_array();
+        }
+        return false;
+    }
 
     //Insert customer
     function insertRecord() {

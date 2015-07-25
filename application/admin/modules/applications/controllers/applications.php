@@ -378,7 +378,7 @@ class Applications extends Admin_Controller {
         endswitch;
 //        e($enddateTemp);
         $enddate = $enddateTemp->format('Y-m-d');
-        while ($startdate <= $enddate):
+        while ($startdate < $enddate):
             $temp = new DateTime($startdate);
             $interval = null;
             switch ($type):
