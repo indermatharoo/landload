@@ -7,8 +7,8 @@ class Invoice extends Admin_Controller {
 
     function __construct() {
         parent::__construct();
-        ini_set('error_log', dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'/ipn_errors.log');
-     //   echo  dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'\ipn_errors.log';  
+        ini_set('error_log', dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))) . '/ipn_errors.log');
+        //   echo  dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'\ipn_errors.log';  
         isLogged();
         $this->load->model('user/usermodel');
     }
@@ -54,7 +54,7 @@ class Invoice extends Admin_Controller {
             $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly($this->ids);
             $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly($this->ids);
             $inner["weekly_data"] = $this->invoicemodel->getWeeklyInvoice($this->ids);
-            
+
             $page = array();
             $page['content'] = $this->load->view('invoice-index', $inner, TRUE);
             $this->load->view($this->default, $page);
@@ -285,7 +285,7 @@ class Invoice extends Admin_Controller {
 
 
         $inner["invoice_detail"] = $this->invoicemodel->getInvoiceDetail($invoiceid);
-        
+
         $page = array();
         //if ($this->aauth->isFranshisor()) {
         $page['content'] = $this->load->view('invoice_template', $inner, TRUE);
@@ -382,24 +382,24 @@ class Invoice extends Admin_Controller {
             case 'process':      // Process and order...
 //                e($invoice);
                 $paypal_id = getConfig('PAYPAL_MERCHENT_EMAIL');
- 
+
                 $p->add_field('business', 'kaur.amandip984@gmail.com');
-                $p->add_field('return', $this_script.'?action=success');
-                $p->add_field('cancel_return', $this_script.'?action=cancel');
-                $p->add_field('notify_url', $ipn_url.'?action=ipn&invoice_id='.$code);
+                $p->add_field('return', $this_script . '?action=success');
+                $p->add_field('cancel_return', $this_script . '?action=cancel');
+                $p->add_field('notify_url', $ipn_url . '?action=ipn&invoice_id=' . $code);
                 //$p->add_field('ipn_notification_url', $ipn_url);
                 $p->add_field('item_name', 'Paypal Test Transaction');
-                $p->add_field('amount', '1.99');
+                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
                 $p->add_field('currency_code', 'GBP');
                 $p->add_field('custom', $code);
-                $p->add_field('invoice_code',$code);
-                
+                $p->add_field('invoice_code', $code);
+
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
             case 'success':      // Order was successful...
-                $page=array();
-                $page['content'] = $this->load->view('thankyou',array(),true);
+                $page = array();
+                $page['content'] = $this->load->view('thankyou', array(), true);
                 $this->load->view($this->default, $page);
 //                foreach ($_POST as $key => $value) {
 //                    echo "$key: $value<br>";
@@ -412,14 +412,13 @@ class Invoice extends Admin_Controller {
                 echo "</body></html>";
                 break;
             case 'ipn':          // Paypal is calling page for IPN validation...
-                
                 //error_log(json_encode($_REQUEST));
                 if ($p->validate_ipn()) {
                     $in_code = $this->input->get('invoice_id', TRUE);
-                   
-                    $this->db->insert('test', array('value' => json_encode($_REQUEST),'status' => 1));
+
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST), 'status' => 1));
                 } else {
-                   // $this->db->insert('test', array('value' => json_encode($_REQUEST)));
+                    // $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 }
                 break;
         }
