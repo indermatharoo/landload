@@ -399,11 +399,10 @@ class Invoice extends Admin_Controller {
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
             case 'success':      // Order was successful...
-                echo "<html><head><title>Success</title></head><body><h3>Thank you for your order.</h3>";
-                foreach ($_POST as $key => $value) {
-                    echo "$key: $value<br>";
-                }
-                echo "</body></html>";
+                $this->load->view('thankyou');
+//                foreach ($_POST as $key => $value) {
+//                    echo "$key: $value<br>";
+//                }
                 break;
             case 'cancel':       // Order was canceled...
                 // The order was canceled before being completed.
