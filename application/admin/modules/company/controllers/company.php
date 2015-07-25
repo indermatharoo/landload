@@ -247,30 +247,30 @@ class Company extends Admin_Controller {
         $this->load->helper('form');
         $this->load->helper('string');
 
-        if (!$this->checkAccess('DELETE_USER')) {
-            $this->utility->accessDenied();
-            return;
-        }
+//        if (!$this->checkAccess('DELETE_USER')) {
+//            $this->utility->accessDenied();
+//            return;
+//        }
 
         //Fetch user details
         $user = array();
-        $user = $this->Usermodel->fetchByID($uid);
+        $user = $this->Companymodel->fetchByID($uid);
         if (!$user) {
             $this->utility->show404();
             return;
         }
-        if ($user['id'] == 1) {
-            $this->session->set_flashdata('ERROR', 'user_cnonot_deleted');
+//        if ($user['id'] == 1) {
+//            $this->session->set_flashdata('ERROR', 'user_cnonot_deleted');
+//
+//            redirect('/company/index/', 'location');
+//            exit();
+//        }
 
-            redirect('/user/index/', 'location');
-            exit();
-        }
-
-        $this->Usermodel->deleteRecord($user);
+        $this->Companymodel->deleteRecord($uid);
 
         $this->session->set_flashdata('SUCCESS', 'user_deleted');
 
-        redirect(createUrl('user/index/'));
+        redirect(createUrl('company/index/'));
         exit();
     }
 

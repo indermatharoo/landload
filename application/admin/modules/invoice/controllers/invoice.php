@@ -8,7 +8,7 @@ class Invoice extends Admin_Controller {
     function __construct() {
         parent::__construct();
         ini_set('error_log', dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'/ipn_errors.log');
-        echo  dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'\ipn_errors.log';
+     //   echo  dirname(dirname(dirname(dirname((dirname(dirname(__FILE__))))))).'\ipn_errors.log';  
         isLogged();
         $this->load->model('user/usermodel');
     }
@@ -376,6 +376,7 @@ class Invoice extends Admin_Controller {
         $p->paypal_url = 'https://www.sandbox.paypal.com/cgi-bin/webscr';   // testing paypal url
         //$p->paypal_url = 'https://www.paypal.com/cgi-bin/webscr';     // paypal url
         $this_script = createUrl('invoice/pay/' . $code);
+        $ipn_url = 'http://landlord.webnseo.co.uk/paypal';
         if (empty($_GET['action']))
             $_GET['action'] = 'process';
         switch ($_GET['action']) {
@@ -386,12 +387,14 @@ class Invoice extends Admin_Controller {
                 $p->add_field('business', 'kaur.amandip984@gmail.com');
                 $p->add_field('return', $this_script.'?action=success');
                 $p->add_field('cancel_return', $this_script.'?action=cancel');
-                $p->add_field('notify_url', $this_script.'?action=ipn');
+                $p->add_field('notify_url', $ipn_url.'?action=ipn&invoice_id='.$code);
+                //$p->add_field('ipn_notification_url', $ipn_url);
                 $p->add_field('item_name', 'Paypal Test Transaction');
                 $p->add_field('amount', '1.99');
-               $p->add_field('currency_code', 'USD');
-//                $p->add_field('amount', arrIndex($invoice, 'total_amount'));
-                $p->add_field('invoice_code', $code);
+                $p->add_field('currency_code', 'GBP');
+                $p->add_field('custom', $code);
+                $p->add_field('invoice_code',$code);
+                
                 $p->submit_paypal_post(); // submit the fields to paypal
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
@@ -410,9 +413,11 @@ class Invoice extends Admin_Controller {
                 break;
             case 'ipn':          // Paypal is calling page for IPN validation...
                 
-                error_log(json_encode($_REQUEST));
+                //error_log(json_encode($_REQUEST));
                 if ($p->validate_ipn()) {
-                    //$this->db->insert('test', array('value' => json_encode($_REQUEST)));
+                    $in_code = $this->input->get('invoice_id', TRUE);
+                   
+                    $this->db->insert('test', array('value' => json_encode($_REQUEST),'status' => 1));
                 } else {
                    // $this->db->insert('test', array('value' => json_encode($_REQUEST)));
                 }

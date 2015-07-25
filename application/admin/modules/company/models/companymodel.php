@@ -293,9 +293,12 @@ class Companymodel extends Basemodel {
 
     //Delete User
     function deleteRecord($user) {
-        $this->db->where('id', $user['id']);
-        $this->db->where('id !=', 0);
-        $this->db->delete(convertToAuthStr('users'));
+        $this->db->where('id', $user);
+       // $this->db->where('id !=', 0);
+        $this->db->delete('aauth_users');
+        
+        $this->db->where('id',$user);
+        $this->db->delete('user_extra_detail');
     }
 
     //Get User Detial
