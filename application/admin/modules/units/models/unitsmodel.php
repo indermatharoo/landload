@@ -302,9 +302,13 @@ class Unitsmodel extends Basemodel {
         $res = $this->db->get('country');
         return $res->result_array();
     }
-    function getUnitsByPropertyId($id) {
-   
+    function getUnitsByPropertyId($ids=array()) {
+        
+         if (count($ids)) {
+            $this->db->where_in('company_id', $ids);
+        }
         $res = $this->db->get('units');
+        echo $this->db->last_query();
         return $res->result_array();
     }
 

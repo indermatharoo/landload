@@ -187,7 +187,7 @@ $(document).ready(function(){
                 <?php
                 $ci = &get_instance();
                 $ci->load->model('units/Unitsmodel');
-                $res = $ci->Unitsmodel->getUnitsByPropertyId(arrIndex($details,'property_id'));
+                $res = $ci->Unitsmodel->getUnitsByPropertyId($idsArray);
                 ?>
                 <select class="form-control" name="unit_id">
                     <option></option>
