@@ -2,11 +2,11 @@
 <html >
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-        <title>Private Therapy - Contact Us</title>
+        <title>Creation Station Store- Contact Us</title>
     </head>
     <body>
         <div style="font-family:Verdana, Arial, Helvetica, sans-serif; font-size:11px">
-            <p style="font: 18px Arial, Helvetica, sans-serif; margin-bottom:2px">Electro Flock - Contact Us</p>
+            <p style="font: 18px Arial, Helvetica, sans-serif; margin-bottom:2px">Creation Station Store- Contact Us</p>
             <p style="margin-top:0px">Dated - {DATE}</p>
             <div style="margin-bottom: 12px; border-bottom: 2px solid #666; clear: both;"></div>
             <table width="100%" border="0" cellpadding="2" cellspacing="0">
@@ -15,12 +15,20 @@
                     <td width="74%">{NAME}</td>
                 </tr>
                 <tr>
+                    <td width="26%" valign="top"><b> Company Name</b></td>
+                    <td width="74%">{COMPANY}</td>
+                </tr>
+                <tr>
                     <td valign="top"><b>Email</b></td>
                     <td>{EMAIL}</td>
                 </tr>
                 <tr>
                     <td valign="top"><b>Phone</b></td>
                     <td>{PHONE}</td>
+                </tr>
+                <tr>
+                    <td valign="top"><b>Postcode</b></td>
+                    <td>{POSTCODE}</td>
                 </tr>
                 <tr>
                     <td valign="top"><b>Message</b></td>
