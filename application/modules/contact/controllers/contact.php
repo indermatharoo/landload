@@ -36,7 +36,7 @@ class Contact extends Cms_Controller {
 			
 			$shell = array();
 			$shell['contents'] = $this->load->view('contact-form', $inner, true);
-			$this->load->view("themes/" . THEME . "/templates/{$page['template_alias']}", $shell);
+			$this->load->view("themes/" . THEME . "/templates/default", $shell);
 		} else {
 			$emailData = array();
 			$emailData['DATE'] = date("jS F, Y");
@@ -58,7 +58,7 @@ class Contact extends Cms_Controller {
 			$status = $this->email->send();
 			$status = true;
 			if ($status == TRUE) {
-				redirect('/contact-us/thank-you');
+				redirect('/thank-you');
 				exit();
 			}
 			redirect('/contact-us/error');
