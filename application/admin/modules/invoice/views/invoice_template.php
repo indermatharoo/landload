@@ -104,7 +104,7 @@ function vat($price_without_vat = NULL) {
                                     <<td width="25%" align="left" style="line-height: 22px">
                                         <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
 
-                                        <span><?php //echo $invoice_detail["bussiness_address"];    ?></span>
+                                        <span><?php //echo $invoice_detail["bussiness_address"];     ?></span>
                                         </font>
                                     </td>
                                     <td width="25%" align="right" style="line-height: 22px">
@@ -119,7 +119,7 @@ function vat($price_without_vat = NULL) {
                                     <td width="25%" align="left" style="line-height: 22px">
                                         <font style="font-family:'Myriad Pro', Helvetica, Arial, sans-serif; color:#68696a; font-size:13px; text-transform:uppercase;">
 
-                                        <span><?php //echo $invoice_detail["territory_name"];    ?></span>
+                                        <span><?php //echo $invoice_detail["territory_name"];     ?></span>
                                         </font>
                                     </td>
                                     <td width="25%" align="right" style="line-height: 22px">
@@ -257,10 +257,10 @@ function vat($price_without_vat = NULL) {
 
 <input type="button" value="Print" id="btnPrint" class="btn btn-success"/>
 
-<?php if ($this->aauth->isCustomer()): ?>
+<?php if ($this->aauth->isCustomer() && arrIndex($invoice_detail, 'invoice_code') != 0): ?>
     <button class="btn btn-success mar-left10" onclick="payInvoice()">Pay Online</button>
 <?php endif; ?>
-    
+
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
 <script type="text/javascript">
     function payInvoice() {

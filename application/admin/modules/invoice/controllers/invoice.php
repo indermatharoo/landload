@@ -285,7 +285,7 @@ class Invoice extends Admin_Controller {
 
 
         $inner["invoice_detail"] = $this->invoicemodel->getInvoiceDetail($invoiceid);
-
+        
         $page = array();
         //if ($this->aauth->isFranshisor()) {
         $page['content'] = $this->load->view('invoice_template', $inner, TRUE);
