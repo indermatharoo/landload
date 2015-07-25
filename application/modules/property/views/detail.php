@@ -3,7 +3,7 @@
 ?>
 <div class="row">
     <div class="col-lg-8">
-        <?php if($gallery != ''):?>
+        <?php if(count($gallery)!=0):?>
         <div class="col-lg-12 padding-0 unit-imgs" style="height: 300px;">
             <div id="carousel-example" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" style="height: 292px;">
