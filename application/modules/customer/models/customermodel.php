@@ -74,7 +74,11 @@ class Customermodel extends CI_Model {
             return $status;
         }
     }
-
+    function changePassword()
+    {
+        $this->db->where('applicant_id',  curUsrId());
+        $this->db->update('applicants',array('password'=>md5($this->input->post('password'))));
+    }
 }
 
 ?>
