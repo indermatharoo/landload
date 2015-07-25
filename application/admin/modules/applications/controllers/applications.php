@@ -416,7 +416,6 @@ class Applications extends Admin_Controller {
                 'is_paid' => '0'
             ));
         endwhile;
-        e('end');
     }
 
     function addInvoice($attributes = array()) {
