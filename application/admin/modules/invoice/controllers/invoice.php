@@ -399,7 +399,9 @@ class Invoice extends Admin_Controller {
                 //$p->dump_fields();      // for debugging, output a table of all the fields
                 break;
             case 'success':      // Order was successful...
-                $this->load->view('thankyou');
+                $page=array();
+                $page['content'] = $this->load->view('thankyou',array(),true);
+                $this->load->view($this->default, $page);
 //                foreach ($_POST as $key => $value) {
 //                    echo "$key: $value<br>";
 //                }
