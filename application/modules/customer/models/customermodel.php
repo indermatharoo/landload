@@ -74,6 +74,15 @@ class Customermodel extends CI_Model {
             return $status;
         }
     }
+    function getAppliedProperties()
+    {
+        $this->db->select('units.*,applications.*');
+        $this->db->where('applicants.applicant_id',  curUsrId());
+        $this->db->join('applicants','applicants.applicant_id = applications.applicant_id','left');
+        $this->db->join('units','units.id = applications.unit_id','left');
+        $res = $this->db->get('applications');
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
+    }
     function changePassword()
     {
         $this->db->where('applicant_id',  curUsrId());
