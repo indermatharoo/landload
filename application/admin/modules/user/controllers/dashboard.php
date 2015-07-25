@@ -24,12 +24,18 @@ class Dashboard extends Admin_Controller {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
             $recentUser = $this->Applicantsmodel->getRecentApplicantsCompany($this->ids);
         else:
-            $recentUser = $this->Applicantsmodel->getRecentApplicants();
+            $recentUser = $this->Applicantsmodel->getRecentApplicants('app');
         endif;
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $recentTnt = $this->Applicantsmodel->getRecentTenantCompany($this->ids);
+        else:
+            $recentTnt = $this->Applicantsmodel->getRecentApplicants('tnt');
+        endif;        
         $inner = array();
         $inner['recentProperties'] = $recentProperties;
         $inner['recentCompanies'] = $recentCompanies;
         $inner['recentApplicants'] = $recentUser;
+        $inner['recentTenant'] = $recentTnt;
         $inner['total']['applicants'] = $this->commonmodel->count('applicants', array('created_by' => $this->ids));
         $inner['total']['properties'] = $this->commonmodel->count('properties',array('company_id' => $this->ids));
         $inner['total']['companies'] = $this->Companymodel->countCompany($this->ids);

@@ -75,6 +75,17 @@
                         <div class="panel-body"><?php $this->load->view("dashboard/recentUsers"); ?></div>
                     </div>
                 </div>
+                <div class="panel panel-default">
+                    <div class="panel-heading" style="padding: 0;">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapse4"><h3 style="margin: 0; text-align: center; background: #d37602 none repeat scroll 0 0; color: #fff; padding: 5px;">Recent Tenants<img src="../imgs/down-triangle.png" style="float: right;"></h3></a>
+                        </h4>
+                    </div>
+                    <div id="collapse4" class="panel-collapse collapse">
+                        <div class="panel-body"><?php $this->load->view("dashboard/recentTenant"); ?></div>
+                    </div>
+                </div>
+
             </div>
 
         </div>
