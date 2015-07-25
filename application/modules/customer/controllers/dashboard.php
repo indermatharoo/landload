@@ -36,7 +36,25 @@ class Dashboard extends Cms_Controller {
         $shell['contents'] = $this->load->view('dashboard', $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
-
+    function change_pass()
+    {
+        $this->load->library('form_validation');
+        $this->load->model('Customermodel');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
+        $this->form_validation->set_rules('passconf', 'Password', 'trim|required|matches[password]');
+        
+        if ($this->form_validation->run() == FALSE) {
+        $inner = array();
+        $shell['contents'] = $this->load->view('change_pass', $inner, true);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+        }
+        else
+        {
+            $this->Customermodel->changePassword();
+            $this->session->set_flashdata('SUCCESS', 'pass_changed');
+            redirect('customer/dashboard');
+        }
+    }
     function message() {
         $this->load->model('Ordermodel');
         $uid = $_SESSION['my_id'];
