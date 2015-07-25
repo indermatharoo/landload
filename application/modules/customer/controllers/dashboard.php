@@ -13,13 +13,13 @@ class Dashboard extends Cms_Controller {
         $this->load->helper('text');
         $this->load->library('form_validation');
         $this->load->helper('form');
-         $this->load->model('Customermodel');
-              // $this->load->library('Memberauth');
+        $this->load->model('Customermodel');
+        // $this->load->library('Memberauth');
 
         $customer = array();
         //$customer = $this->Memberauth->checkAuth();
-         $id =  $this->aauth->isCustomer();
-         $customer = $this->Customermodel->fetchByID($id);
+        $id = $this->aauth->isCustomer();
+        $customer = $this->Customermodel->fetchByID($id);
 //         e($customer);
         if (!$customer) {
             //$this->Hooksmodel->setReturnURL();
@@ -74,16 +74,31 @@ class Dashboard extends Cms_Controller {
         $shell['contents'] = $this->load->view('order-edit', '', true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
-	
-	 function loyaltypoints(){
+
+    function loyaltypoints() {
         $this->load->model('cart/Cartmodel');
-         $this->load->model('product/Productmodel');
+        $this->load->model('product/Productmodel');
         $inner['alloffers'] = $this->Cartmodel->starOffers();
         //$shell['contents'] = $this->load->view('loyaltyshow','', true);
-       // $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
-	   $this->load->view('loyaltyshow', $inner);
+        // $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+        $this->load->view('loyaltyshow', $inner);
     }
 
+    function profile() {
+        $id = curUsrId();
+        $this->load->model('Customermodel');
+
+        $customer = array();
+        $customer = $this->Customermodel->userByID($id);
+        
+
+        $inner = array();
+        $inner['customer'] = $customer;
+
+
+        $shell['contents'] = $this->load->view('profile', $inner, true);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+    }
 
 }
 
