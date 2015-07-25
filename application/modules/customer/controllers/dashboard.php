@@ -8,7 +8,7 @@ class Dashboard extends Cms_Controller {
     function __construct() {
         parent::__construct();
     }
-
+    
     function index() {
         $this->load->helper('text');
         $this->load->library('form_validation');
@@ -34,6 +34,17 @@ class Dashboard extends Cms_Controller {
 
 
         $shell['contents'] = $this->load->view('dashboard', $inner, true);
+        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+    }
+    function applied_properties()
+    {
+        $this->load->model('Customermodel');
+        $properties = $this->Customermodel->getAppliedProperties();
+        $inner = array();
+        
+
+        $inner['properties'] = $properties;
+        $shell['contents'] = $this->load->view('applied_properties', $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
     function change_pass()
