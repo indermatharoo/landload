@@ -259,6 +259,7 @@ function vat($price_without_vat = NULL) {
 <?php
 echo arrIndex($invoice_detail, 'invoice_code');
 $invoice_code = arrIndex($invoice_detail, 'invoice_code');
+e($this->aauth);
 ?>
 <?php if ($this->aauth->isCustomer()): ?>
     <button class="btn btn-success mar-left10" onclick="payInvoice()">Pay Online</button>
