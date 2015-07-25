@@ -203,7 +203,7 @@ class virtcab extends Admin_Controller {
                 $virCabPath = $this->config->item('UPLOAD_PATH_VIRCAB_VIDEO');
             }
             $uniqueTime = time();
-            $userId = $this->session->userdata['id'];
+            $userId = curUsrId();
             $config['file_name'] = $uniqueTime . $userId . '.' . $ext;
             $newFileName = $config['file_name'];
             $config['upload_path'] = $virCabPath;
