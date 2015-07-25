@@ -106,9 +106,10 @@ class Applicantsmodel extends Basemodel {
         $this->db->delete('applicants');
     }
 
-    function getRecentApplicants() {
+    function getRecentApplicants($type) {
         $this->db->order_by("applicant_id", "desc");
         $this->db->limit(10);
+        $this->db->where('type',$type);
         $res = $this->db->get('applicants');
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }
@@ -119,9 +120,21 @@ class Applicantsmodel extends Basemodel {
         $this->db->join('applicants t2', 't1.applicant_id=t2.applicant_id');
 //        $this->db->where('t1.company_id', curUsrId());
         $this->db->where_in('t1.company_id', $ids);
+        $this->db->where('t2.type','app');
         $this->db->order_by("t2.applicant_id", "desc");
         $res = $this->db->get();
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }
+    function getRecentTenantCompany($ids = array()) {
+        $this->db->select('t2.*');
+        $this->db->from('applications t1');
+        $this->db->join('applicants t2', 't1.applicant_id=t2.applicant_id');
+//        $this->db->where('t1.company_id', curUsrId());
+        $this->db->where_in('t1.company_id', $ids);
+        $this->db->where('t2.type','tnt');
+        $this->db->order_by("t2.applicant_id", "desc");
+        $res = $this->db->get();
+        return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
+    }    
 
 }

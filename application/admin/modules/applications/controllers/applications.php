@@ -218,7 +218,7 @@ class Applications extends Admin_Controller {
         } else {
 
             $unit_id = $this->Applicationsmodel->updateRecord($offset);
-            e($unit_id);
+//            e($unit_id);
 
             $this->session->set_flashdata('SUCCESS', 'application_updated');
             redirect(createUrl('applications/index/'));
@@ -342,6 +342,7 @@ class Applications extends Admin_Controller {
             if (arrIndex($getApplication, 'applicant_id')):
                 self::updateAppToTan(arrIndex($getApplication, 'applicant_id'));
             endif;
+            self::saveInvoices($getApplication);
         }
         redirect(createUrl('applications/index/'));
     }
