@@ -19,7 +19,7 @@ function p() {
     echo "<pre>";
 }
 
-function gParam($index = null,$return = null) {
+function gParam($index = null, $return = null) {
     $params = $_REQUEST;
     $return = isset($params[$index]) ? $params[$index] : $return;
     return $return;
@@ -85,7 +85,11 @@ function curUser($user_id = false) {
 }
 
 function curUsrId() {
-    return getThis()->session->userdata('id');
+    if (getThis()->aauth->isCustomer()):
+        return getThis()->session->userdata('applicant_id');
+    else:
+        return getThis()->session->userdata('id');
+    endif;
 }
 
 function curUsrPid() {
@@ -209,9 +213,9 @@ function getCompany($id) {
     getThis()->db->select('*')
             ->from('units')
             ->join('aauth_users', 'units.company_id=aauth_users.id');
-    
+
     $result = getThis()->db->get();
-  //  echo getThis()->db->last_query();
+    //  echo getThis()->db->last_query();
     $result = $result->row();
     return $result;
 }
@@ -222,7 +226,7 @@ function getAttributes() {
             ->from('units_attributes')
             ->where('searchable', 1)
             ->get()
-            ->result_array() 
+            ->result_array()
     ;
     return $results;
 }
