@@ -51,11 +51,10 @@ class Invoice extends Admin_Controller {
 
             ///Setup pagination            
             $inner["total"] = $this->invoicemodel->countAll($this->ids);
-
             $inner['total_rows_weekly'] = $this->invoicemodel->countAllWeekly($this->ids);
             $inner['total_rows_monthly'] = $this->invoicemodel->countAllMonthly($this->ids);
             $inner["weekly_data"] = $this->invoicemodel->getWeeklyInvoice($this->ids);
-
+            
             $page = array();
             $page['content'] = $this->load->view('invoice-index', $inner, TRUE);
             $this->load->view($this->default, $page);

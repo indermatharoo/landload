@@ -86,9 +86,9 @@ class Invoicemodel extends CI_Model {
 
     function getWeeklyInvoice($ids = array()) {
         if (count($ids)):
-            $sql = "SELECT concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' and company_id in (" . implode(',', $ids) . ")  GROUP BY test";
+            $sql = "SELECT invoice_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' and company_id in (" . implode(',', $ids) . ")  GROUP BY test";
         else:
-            $sql = "SELECT concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' GROUP BY test";
+            $sql = "SELECT invoice_id,concat(week(created_on),year(created_on)) as test, week(created_on) as week, year(created_on) as year, SUM(total_amount) as final_price, SUM(IF(is_paid = '1', total_amount, 0)) AS 'paid_amount',SUM(IF(is_paid = '0', total_amount, 0)) AS 'unpaid_amount' FROM dpd_invoice_new  WHERE 1 and invoice_type='W' GROUP BY test";
         endif;
         $sql_query = $this->db->query($sql);
         return $sql_query->result_array();

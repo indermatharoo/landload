@@ -27,7 +27,7 @@
             <i class="fa fa-file-text fa-2x"></i>
         </div>
         <div class="col-sm-10">
-            <a href="invoice/index"><h3 style="margin: 0; text-align: center; color: #fff;">Reports (Weekly)</h3></a>
+            <a href="invoice/index"><h3 style="margin: 0; text-align: center; color: #fff;">Reports</h3></a>
         </div>
         <div class="col-sm-1" style="text-align: right">
          <!--   <a href="invoice/manual"><h3 style="cursor: pointer; margin: 0; color: #fff;"><i class="fa fa-plus-square" title="Generate Manual Invoice"></i></h3></a>-->
@@ -39,8 +39,7 @@
         <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     </div>
     <div class="table-responsive">
-        <table id="pagination-table" class="table table-bordered table-striped">
-
+        <table id="pagination-table" class="table table-bordered table-striped hidden">
             <tbody>
                 <tr>    
                     <td>
@@ -52,11 +51,9 @@
                             $count = number_format($count2, 0);
                             return $count;
                         }
-                            
+
                         $total_records = $total;
 //                        $week = arrIndex($row, 'W');
-                        
-                      
 //                        $monthly = arrIndex($row, 'M');
 //                        $quarterly = arrIndex($row, 'Q');
 //                        $halfyearly = arrIndex($row, 'HF');
@@ -81,8 +78,6 @@
 //                        } else {
 //                            $halfyearly_percent = "0";
 //                        }
-                        
-                      
                         ?>
                         <a href="invoice/index">
                             <div class="circle">
@@ -131,8 +126,6 @@
 
         </table>
 
-        <br /><br />
-
         <table id="pagination-table" class="table table-bordered table-striped">
             <thead>
                 <tr>                        
@@ -152,6 +145,7 @@ $i = 1;
 
 if (!empty($weekly_data)) {
     foreach ($weekly_data as $ev) {
+//        e($ev);
         ?>
                         <tr>
                             <td><?= $i; ?></td>
@@ -159,13 +153,13 @@ if (!empty($weekly_data)) {
                             <td>&pound;<?= $ev['paid_amount']; ?></td>
                             <td>&pound;<?= $ev['paid_amount']; ?></td>
                             <td>&pound;<?php echo $ev["final_price"] - $ev['paid_amount']; ?>.00</td>
-                            <td><a href="invoice/index/detail">View Detail</a></td>
+                            <td><a href="<?php echo createUrl('invoice/invoicedetail/'.  arrIndex($ev,'invoice_id')) ?>">View Detail</a></td>
                         </tr>
-                        <?php
-                        $i++;
-                    }
-                } else {
-                    ?>
+        <?php
+        $i++;
+    }
+} else {
+    ?>
                     <tr>
                         <td colspan="6" algin="center"><h4 style="color:#000;">No Invoice found</h4></td>
                     </tr>
@@ -187,11 +181,11 @@ if (!empty($weekly_data)) {
 
 
         <div class="clearfix"></div>
-        <div><?php //echo $pagination;    ?></div>
+        <div><?php //echo $pagination;     ?></div>
     </div>
 </div>
-<?php //$this->load->view('header/event_index');   ?>
-<?php //$this->load->view('header/common-pagination', array('base_url' => base_url()));   ?>
+<?php //$this->load->view('header/event_index');    ?>
+<?php //$this->load->view('header/common-pagination', array('base_url' => base_url()));    ?>
 <script type="text/javascript">
     jQuery(document).ready(function ($) {
         $('.counter').counterUp({
