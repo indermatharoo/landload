@@ -16,7 +16,7 @@ $action = $this->router->fetch_method();
     <?php } else { ?>
         <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'virtcab') ? 'active-btn' : ''; ?>"><a href="virtcab"><i class="fa fa-desktop siz"></i><h3>Virtual Cabinet</h3></a></div></div>
     <?php } ?>
-    <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'applicants') ? 'active-btn' : ''; ?>"><a href="applicants"><i class="fa fa-user siz"></i><h3>Applicant</h3></a></div></div>
+    <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path.$action == 'applicantsindex') ? 'active-btn' : ''; ?>"><a href="applicants"><i class="fa fa-user siz"></i><h3>Applicant</h3></a></div></div>
     <div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'applicants') ? 'active-btn' : ''; ?>"><a href="applicants/tenants"><i class="fa fa-user siz"></i><h3>Tenants</h3></a></div></div>
 
 <!--<div class="col-bs-15 col-sm-2"><div class="men <?php echo ($path == 'properties') ? 'active-btn' : ''; ?>"><a href="properties"><i class="fa fa-building siz"></i><h3>Property</h3></a></div></div>-->
