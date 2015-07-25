@@ -95,6 +95,10 @@
         <div class="col-lg-12 menu padding-0">
             <?php $this->load->view(THEME . 'layout/inc-menu'); ?>
         </div>
+        <?php
+//        e($recentTenant);
+        $recents = arrIndex($recentTenant,'num_rows');
+        ?>
         <script type="text/javascript">
             var total = <?php echo json_encode($total); ?>;
             console.log(total);
@@ -105,13 +109,14 @@
                     ['Stats', ''],
                     ['Total Properties(' + total.applicants + ')', total.applicants],
                     ['Total Companies(' + total.companies + ')', total.companies],
-                    ['Total Applicants(' + total.properties + ')', total.properties]
+                    ['Total Applicants(' + total.properties + ')', total.properties],
+                    ['Total Tenants(<?php echo $recents ?>)', <?php echo $recents ?>],
                 ]);
 
                 var options = {
                     title: 'Statistics',
                     is3D: true,
-                    backgroundColor:'transparent'
+                    backgroundColor: 'transparent'
                 };
 
                 var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
