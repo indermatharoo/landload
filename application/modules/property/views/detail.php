@@ -116,7 +116,7 @@
             <div class="unit-inf mar-top30">
                 <div class="col-sm-12 lft"><span>Contact Us</span></div>
                 <div class="col-sm-12 mar-top20">
-                    <form action="contact" method="post">
+                    <form action="<?= createUrl('contact')?>" method="post">
                         <div class="col-sm-12">
                             <div class="form-group required-field-block">
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required=""/>
