@@ -120,7 +120,7 @@ class Applicantsmodel extends Basemodel {
         $this->db->join('applicants t2', 't1.applicant_id=t2.applicant_id');
 //        $this->db->where('t1.company_id', curUsrId());
         $this->db->where_in('t1.company_id', $ids);
-        $ths->db->where('t2.type','app');
+        $this->db->where('t2.type','app');
         $this->db->order_by("t2.applicant_id", "desc");
         $res = $this->db->get();
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
@@ -131,7 +131,7 @@ class Applicantsmodel extends Basemodel {
         $this->db->join('applicants t2', 't1.applicant_id=t2.applicant_id');
 //        $this->db->where('t1.company_id', curUsrId());
         $this->db->where_in('t1.company_id', $ids);
-        $ths->db->where('t2.type','app');
+        $this->db->where('t2.type','app');
         $this->db->order_by("t2.applicant_id", "desc");
         $res = $this->db->get();
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
