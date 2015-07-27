@@ -203,7 +203,7 @@ h1 span {
 
 .view {
     background: #fff url("../images/bgimg.jpg") no-repeat scroll center center;
-    border: 6px solid #2b1f0e;
+    /*border: 6px solid #2b1f0e;*/
     box-shadow: 1px 1px 2px #e6e6e6;
     cursor: default;
     float: left;
