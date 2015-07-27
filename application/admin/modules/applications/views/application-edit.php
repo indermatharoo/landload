@@ -46,7 +46,7 @@
                 <?php
                 $ci = &get_instance();
                 $ci->load->model('units/Unitsmodel');
-                $res = $ci->Unitsmodel->getUnitsByPropertyId($details['property_id']);
+                $res = $ci->Unitsmodel->getUnitsByPropertyId($details['unit_id']);
                 ?>
                 <select class="form-control" name="unit_id">
                     <option></option>
