@@ -208,7 +208,7 @@ h1 span {
     cursor: default;
     float: left;
     /*    height: 350px;*/
-    height: 206px;
+    height: 275px;
     margin: 10px 0;
     overflow: hidden;
     position: relative;
@@ -216,7 +216,7 @@ h1 span {
     width: 275px;
 }
 .view .mask, .view .content {
-    height: 206px;
+    height: 275px;
     left: 0;
     overflow: hidden;
     position: absolute;

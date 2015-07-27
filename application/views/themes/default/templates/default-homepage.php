@@ -53,7 +53,7 @@
                                     <div class="property_list_box">
                                         <div class="view view-first property_img">
 
-                                            <img src="timthumb.php?src=<?php echo $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>&h=206&w=275&q=100&zc=0" class="img-responsive">
+                                            <img src="timthumb.php?src=<?php echo $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>&h=275&w=275&q=100&zc=0" class="img-responsive">
                                             <div class="mask">
                                                 <h2><?= $row['unit_number'] ?></h2>
                                                 <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
