@@ -84,8 +84,9 @@
                     <!--<div><b>Listing ID : </b><i>< ?= $property['id']; ?></i></div>-->
                     <div><b>Type : </b><i><?= $property['type']; ?></i></div>
                     <div><b>Owner : </b><i><?= $property['owner']; ?></i></div>
-                    <br />
+                    <br />                                        
                     <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
+                    <div><b>Street : </b><i><?= arrIndex($property, 'street'); ?></i></div>
                     <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>  
                     <br />
                     <div style="font-size: 20px"><b>  <?= DWS_CURRENCY_SYMBOL . $property['amount']; ?></b></div>
