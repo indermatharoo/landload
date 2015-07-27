@@ -1,7 +1,7 @@
 <div class="full_top_searchbar_container">
     <div class="property_searchbar_section">
         <div class="container">
-            <div class="row">
+            <div class="row" style="text-align: center">
                 <div class="col-md-12">
                     <div class="property_searchbar_option">
                         <form role="form" class="navbar-form" id="signin" method="post">
