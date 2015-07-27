@@ -33,7 +33,7 @@
             <div class="col-sm-6">
                 <?php //e($propertiesType) ?>
                 <label>Property Type<span class="red">*</span></label>
-                <select name="ptype" class="form-control" autocomlete="off">
+                <select name="ptype" class="form-control" autocomlete="off" >
                     <option value="">-Select Type-</option>
                     <?php foreach($propertiesType as $ptype){ ?>
                         <option value="<?php echo $ptype['short_code'] ?>"><?php echo $ptype['type'] ?></option>
@@ -67,6 +67,16 @@
                   <input type="text" class="form-control" name="post_code"  placeholder="Post Code *">
             </div>
             <div class="col-sm-6">
+                <label>County<span class="red">*</span></label>
+                <select name="county" class="form-control">
+                    <option></option>
+                    <?php foreach($county as $counties){ ?>
+                    <option value="<?php echo $counties['county'] ?>"><?php echo $counties['county'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>
+            <?php /* ?>
+            <div class="col-sm-6">
                 <label>Country<span class="red">*</span></label>
                 <select name="country"  class="form-control" >
                     <!--<option value=""></option>-->
@@ -78,6 +88,8 @@
                     <?php } ?>
                 </select>
             </div>
+            <?php */ ?>
+            <input type="hidden" name="country"  value="GB" >
             <div class="col-sm-6">
                 <label>Gallery Images</label>
                 <input type="file"  name="galleryImages[]" multiple  >

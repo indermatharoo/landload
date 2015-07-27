@@ -60,6 +60,7 @@ class Unitsmodel extends Basemodel {
         $data['is_featured'] = $this->input->post('is_featured');
         $data['property_type'] = $this->input->post('ptype');
         $data['post_code'] = $this->input->post('post_code');
+        $data['county'] = $this->input->post('county');
        // $data['country'] = $this->input->post('country');
        $data['country'] = 'IN';
        // $data['amount'] = $this->input->post('amount');
@@ -238,7 +239,7 @@ class Unitsmodel extends Basemodel {
         $data['description'] = $this->input->post('description');
         $data['is_featured'] = $this->input->post('is_featured');
         $data['post_code'] = $this->input->post('post_code');
-
+        $data['county'] = $this->input->post('county');
         if (!empty($_POST['features'])) {
             $data['features'] = implode($_POST['features'], '|');
         }
@@ -311,5 +312,9 @@ class Unitsmodel extends Basemodel {
         
         return $res->result_array();
     }
-
+    function getCountyList()
+    {
+        $res = $this->db->get('county_list');
+        return $res->result_array();
+    }
 }
