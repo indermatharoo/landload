@@ -49,7 +49,7 @@
                                 <?php
 //                            e($row);
                                 ?>
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     <div class="property_list_box">
                                         <div class="view view-first property_img">
 
