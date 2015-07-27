@@ -59,7 +59,7 @@
                                                 <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
                                                 <p class="prop_price"><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p>
 
-                                                <a class="info" href="property/detail/<?= $row['unit_id'] ?>">Read More</a>
+                                                <a class="info" href="property/detail/<?= $row['unit_id'] ?>">View</a>
                                             </div>
                                         </div> 
                                         <div class="property_text">
