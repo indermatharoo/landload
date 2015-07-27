@@ -32,7 +32,7 @@
                 </select>
             </div>
             
-            <div class="col-sm-6">
+<!--            <div class="col-sm-6">
                 <label>Property </label>
                 <select class="form-control" name="property_id">
                     <option></option>
@@ -40,9 +40,9 @@
                         <option value="<?php echo $property['id'] ?>" <?php echo ($property['id'] == $details['property_id']) ? 'selected' : '' ?>><?php echo $property['pname'] ?></option>
                     <?php } ?>
                 </select>
-            </div>
+            </div>-->
             <div class="col-sm-6">
-                <label>Unit Applied For </label>
+                <label>Property Applied For </label>
                 <?php
                 $ci = &get_instance();
                 $ci->load->model('units/Unitsmodel');
