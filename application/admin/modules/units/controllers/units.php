@@ -29,7 +29,7 @@ class Units extends Admin_Controller {
         $Listing = $this->Unitsmodel->listAll($this->ids);
         $inner = array();
         $inner['labels'] = array(
-            'unit_number'=>'Unit Name',
+            'unit_number'=>'Property Name',
             'amount' => 'Amount',
             'owner' => 'Owner',
             'city' => 'City',
@@ -66,12 +66,12 @@ class Units extends Admin_Controller {
         $this->form_validation->set_rules('street', 'street', 'trim|required');
         $this->form_validation->set_rules('country', 'country', 'trim|required');
         $this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
-            
-//        $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
+        $this->form_validation->set_rules('county', 'County', 'trim|required');
+//      $this->form_validation->set_rules('bathroom', 'Bathroom', 'trim|required|integer');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
         $this->form_validation->set_rules('amount_type', 'Rent Type', 'trim|required|integer');
         //$this->form_validation->set_rules('description', 'Rent Type', 'trim|required|integer');
-
+        $countyData = $this->Unitsmodel->getCountyList();
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['status'] = array('0' => 'Ocupied', '1' => 'Listed', '2' => 'Unlisted');
@@ -79,6 +79,7 @@ class Units extends Admin_Controller {
             $inner['propertyList'] = $propertyList;
             $inner['propertiesType'] = $propertiesType;
             $inner['country'] = $countryData;
+            $inner['county'] = $countyData;
            // $inner['unitsType'] = $unitsType;
             $page = array();
             $page['content'] = $this->load->view('units-add', $inner, TRUE);
@@ -104,6 +105,7 @@ class Units extends Admin_Controller {
         $details = $this->Unitsmodel->getUnitDetails($offset);
          $propertiesType = $this->Unitsmodel->getPropertiesType();
         $images = $this->Unitsmodel->getUnitImages($offset);
+        $countryData = $this->Unitsmodel->getCountrydata();
        
         $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
@@ -114,9 +116,11 @@ class Units extends Admin_Controller {
         $this->form_validation->set_rules('city', 'city', 'trim|required');
         $this->form_validation->set_rules('street', 'street', 'trim|required');
         $this->form_validation->set_rules('country', 'country', 'trim|required');
+        $this->form_validation->set_rules('county', 'County', 'trim|required');
         $this->form_validation->set_rules('amount', 'Amount', 'trim|required|integer');
 
         $Countries = $this->Usermodel->getCountries();
+        $Counties = $this->Unitsmodel->getCountyList();
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
             $inner['status'] = array('0' => 'Ocupied', '1' => 'Listed', '2' => 'Unlisted');
@@ -124,6 +128,7 @@ class Units extends Admin_Controller {
             $inner['images'] = $images;
             $inner['propertyList'] = $propertyList;
             $inner['details'] = $details;
+            $inner['county'] = $Counties;
             $inner['unitsType'] = $unitsType;
             $inner['propertiesType'] = $propertiesType;
             $inner['unit_id'] = $offset;

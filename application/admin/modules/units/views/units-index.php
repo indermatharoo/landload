@@ -8,10 +8,10 @@
             <i class="fa fa-user fa-2x"></i>
         </div>
         <div class="col-sm-10">
-            <h3 style="margin: 0; text-align: center">Units Management</h3>
+            <h3 style="margin: 0; text-align: center">Property Management</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
-            <?php if (!$this->aauth->isAdmin()) { ?><a href="units/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New unit"></i></h3></a><?php } ?>
+            <?php if (!$this->aauth->isAdmin()) { ?><a href="units/add"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-plus-square" title="Add New property"></i></h3></a><?php } ?>
         </div>
     </div>
 </header>
@@ -30,7 +30,7 @@
                     <?php
                     $data = arrIndex($item, $key, FALSE);
                     if ($key == -1) {
-                        $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . arrIndex($item, 'unit_id') . ' onclick="return confirm(\'Are you sure you want to delete this unit?\');">Delete</a>';
+                        $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . arrIndex($item, 'unit_id') . ' onclick="return confirm(\'Are you sure you want to delete this property?\');">Delete</a>';
                     }
                     ?>
                 <td><?php echo $data ?></td>

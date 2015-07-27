@@ -59,11 +59,22 @@
                 <label>Post Code<span class="red">*</span></label>
                   <input type="text" class="form-control" name="post_code"  placeholder="Post Code *" value="<?php echo arrIndex($details, 'post_code') ?>">
         </div>
+            <div class="col-sm-6">
+                <label>County<span class="red">*</span></label>
+                <select name="county" class="form-control">
+                    <option></option>
+                    <?php foreach($county as $counties){ ?>
+                    <option value="<?php echo $counties['county'] ?>"><?php echo $counties['county'] ?></option>
+                    <?php } ?>
+                </select>
+            </div>      
+        <?php /* ?>
         <div class="col-sm-6">
             <label>Country<span class="red">*</span></label>
             <input type="text" class="form-control"  name="country"  placeholder="County *" value="<?php echo arrIndex($details, 'country') ?>">
         </div>
-
+        <?php */ ?>
+        <input type="hidden" name="country"  value="GB" >
         <div class="col-sm-6">
             <label>Gallery Images</label>
             <input type="file"  name="galleryImages[]" multiple  >
