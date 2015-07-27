@@ -1,13 +1,14 @@
 <?php
-//e($property);
+
 ?>
 <div class="row">
     <div class="col-lg-8">
         <div class="col-lg-12 padding-0 unit-imgs" style="height: 300px;">
             <div id="carousel-example" class="carousel slide" data-ride="carousel">
                 <div class="carousel-inner" style="height: 292px;">
+                    <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="300px" width="764px" />
                     <?php
-                    $c = '';
+                  /*  $c = '';
                     if ($gallery != false) {
                         foreach ($gallery as $slide) {
                             ++$c;
@@ -21,7 +22,7 @@
                         ?>
                         <h3>No Images found</h3>
 
-                    <?php } ?>
+                    <?php }*/ ?>
 
                 </div>
 
