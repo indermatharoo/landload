@@ -39,8 +39,11 @@ class Applicationsmodel extends Basemodel {
         $this->db->select('*');
         $this->db->where('id', $id);
         $this->db->from('applications');
-        $this->db->join('job_details', 'job_details.applicant_id = applications.applicant_id');
+        $this->db->join('job_details', 'job_details.applicant_id = applications.applicant_id','left');
+        $this->db->join('applicants', 'applicants.applicant_id = applications.applicant_id','left');
         $res = $this->db->get();
+        
+        
         if ($res->num_rows() > 0) {
             return $res->row_array();
         } else {

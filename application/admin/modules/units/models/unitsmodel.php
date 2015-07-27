@@ -305,7 +305,7 @@ class Unitsmodel extends Basemodel {
     }
     function getUnitsByPropertyId($ids=array()) {
         
-         if (count($ids)) {
+        if (count($ids)) {
             $this->db->where_in('company_id', $ids);
         }
         $res = $this->db->get('units');
