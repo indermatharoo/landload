@@ -46,17 +46,16 @@ class Register extends Cms_Controller {
         $this->form_validation->set_rules('address', 'Address', 'trim|required');
 
         $this->form_validation->set_error_delimiters('<li>', '</li>');
-
+        
         //Render View
         if ($this->form_validation->run() == FALSE) {
-
             $inner = array();
             $shell = array();
+            $inner['post'] = $_POST;
             $shell['contents'] = $this->load->view('register', $inner, true);
             $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
         } else {
             $customer = $this->Customermodel->insertRecord();
-//             print_R($customer); exit(); 
             if ($customer) {
                 redirect('customer/register/success');
                 exit();
