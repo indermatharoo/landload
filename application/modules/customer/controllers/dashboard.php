@@ -8,7 +8,7 @@ class Dashboard extends Cms_Controller {
     function __construct() {
         parent::__construct();
     }
-    
+
     function index() {
         $this->load->helper('text');
         $this->load->library('form_validation');
@@ -36,36 +36,35 @@ class Dashboard extends Cms_Controller {
         $shell['contents'] = $this->load->view('dashboard', $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
-    function applied_properties()
-    {
+
+    function applied_properties() {
         $this->load->model('Customermodel');
         $properties = $this->Customermodel->getAppliedProperties();
         $inner = array();
-        
-
         $inner['properties'] = $properties;
+        $inner['customer'] = $customer = $this->Customermodel->userByID(curUsrId());
         $shell['contents'] = $this->load->view('applied_properties', $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
-    function change_pass()
-    {
+
+    function change_pass() {
         $this->load->library('form_validation');
         $this->load->model('Customermodel');
         $this->form_validation->set_rules('password', 'Password', 'trim|required');
         $this->form_validation->set_rules('passconf', 'Password', 'trim|required|matches[password]');
-        
+
         if ($this->form_validation->run() == FALSE) {
-        $inner = array();
-        $shell['contents'] = $this->load->view('change_pass', $inner, true);
-        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
-        }
-        else
-        {
+            $inner = array();
+            $inner['customer'] = $customer = $this->Customermodel->userByID(curUsrId());
+            $shell['contents'] = $this->load->view('change_pass', $inner, true);
+            $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+        } else {
             $this->Customermodel->changePassword();
             $this->session->set_flashdata('SUCCESS', 'pass_changed');
             redirect('customer/dashboard');
         }
     }
+
     function message() {
         $this->load->model('Ordermodel');
         $uid = $_SESSION['my_id'];
@@ -119,7 +118,7 @@ class Dashboard extends Cms_Controller {
 
         $customer = array();
         $customer = $this->Customermodel->userByID($id);
-        
+
 
         $inner = array();
         $inner['customer'] = $customer;

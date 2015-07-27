@@ -30,24 +30,27 @@
         </thead>
         <tbody>
             <?php
-            if(count($Listing) > 0)
-            {
-            foreach ($Listing as $item):
-                //echo '<pre>'; print_r($item);
-                ?>
-                <tr>
-                    <td><?php if( arrIndex($item, 'is_deal_start')=="1"){echo "green";}else{echo "red";}  ?></td>
-                    <td><?= arrIndex($item, 'fname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                    <td><?= arrIndex($item, 'pname') ?></td>
-                    <td><?= arrIndex($item, 'company_name') ?></td>
-                    <td><?= arrIndex($item, 'lease_from') ?></td>
-                    <td><a href="<?= createUrl('applications/manage/') . arrIndex($item, 'application_id'); ?>">Manage</a>  |<a href="<?= createUrl('applications/edit/') . arrIndex($item, 'application_id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['application_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
-                </tr>
-            <?php endforeach; 
-            
-            }
-            else
-            {
+            if (count($Listing) > 0) {
+                foreach ($Listing as $item):
+                    //echo '<pre>'; print_r($item);
+                    ?>
+                    <tr>
+                        <td><?php
+                            if (arrIndex($item, 'is_deal_start') == "1") {
+                                echo "<div style='width:20px;height:20px;background-color:green;border-radius:15px' title='Completed'></div>";
+                            } else {
+                                echo "<div style='width:20px;height:20px;background-color:red;border-radius:15px' title='Incomplete'></div>";
+                            }
+                            ?></td>
+                        <td><?= arrIndex($item, 'fname') . ' ' . arrIndex($item, 'lname'); ?></td>
+                        <td><?= arrIndex($item, 'pname') ?></td>
+                        <td><?= arrIndex($item, 'company_name') ?></td>
+                        <td><?= arrIndex($item, 'lease_from') ?></td>
+                        <td><a href="<?= createUrl('applications/manage/') . arrIndex($item, 'application_id'); ?>">Manage</a>  |<a href="<?= createUrl('applications/edit/') . arrIndex($item, 'application_id'); ?>">Edit</a>  | <a href="<?= createUrl('applications/delete/') . $item['application_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
+                    </tr>
+                    <?php
+                endforeach;
+            } else {
                 ?>
                 <tr><td colspan="5">No Record Found</td></tr>
                 <?php
@@ -56,12 +59,12 @@
         </tbody>
         <tfoot>
             <?php /* ?>
-            <tr>                        
-                <?php foreach ($labels as $label): ?>
-                    <th><?php echo $label ?></th>
-                <?php endforeach; ?>
-            </tr>
-            <?php */ ?>
+              <tr>
+              <?php foreach ($labels as $label): ?>
+              <th><?php echo $label ?></th>
+              <?php endforeach; ?>
+              </tr>
+              <?php */ ?>
         </tfoot>
     </table>
 </div>

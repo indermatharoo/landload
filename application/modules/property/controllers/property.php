@@ -33,6 +33,7 @@ class Property extends Cms_Controller {
         $inner['attributes'] = $attributes;
         $inner['features'] = $this->propertymodel->features(arrIndex($property, 'features'));
         $inner['uid'] = $uid;
+//        e($inner);
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
