@@ -64,7 +64,7 @@
                 <select name="county" class="form-control">
                     <option></option>
                     <?php foreach($county as $counties){ ?>
-                    <option value="<?php echo $counties['county'] ?>"><?php echo $counties['county'] ?></option>
+                    <option value="<?php echo $counties['county'] ?>" <?php if(arrIndex($details, 'county')==$counties['county']){echo "selected";} ?> ><?php echo $counties['county'] ?></option>
                     <?php } ?>
                 </select>
             </div>      
