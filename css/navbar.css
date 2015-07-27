@@ -207,7 +207,8 @@ h1 span {
     box-shadow: 1px 1px 2px #e6e6e6;
     cursor: default;
     float: left;
-    height: 350px;
+    /*    height: 350px;*/
+    height: 275px;
     margin: 10px 0;
     overflow: hidden;
     position: relative;
@@ -215,12 +216,13 @@ h1 span {
     width: 275px;
 }
 .view .mask, .view .content {
-    height: 350px;
+    height: 275px;
     left: 0;
     overflow: hidden;
     position: absolute;
     top: 0;
-    width: 265px;
+    /*width: 265px;*/
+    width: 100%;
 }
 .view img {
     display: block;
