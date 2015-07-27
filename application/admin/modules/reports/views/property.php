@@ -1,6 +1,6 @@
 <?php
 //echo "<pre>";
-//print_r($Listing);
+//print_r($occupiedList);
 //die();
 ?> 
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
@@ -12,11 +12,11 @@
             <tr>                        
                 <?php
                 $labels = array(
-                    'pname' => 'Property Name',
-                    'unitname' => 'Unit Number',
-                    'type' => 'Type',
-                    'unit' => 'Amount',
-                    'Unit' => 'Unit type',
+                 //   'pname' => 'Property Name',
+                    'unitname' => 'Property Name',
+                    'type' => 'Property Type',
+                    'unit' => 'Postcode',
+                    'Unittype' => 'Amount',
                 );
                 foreach ($labels as $label):
                     ?>
@@ -26,17 +26,15 @@
         </thead>
         <tbody>
             <?php
-            //e($occupiedList);
-            //$Listing =array();
             if ($occupiedList['num_rows'] > 0) {
                 foreach ($occupiedList['result'] as $item):
                     ?>
                     <tr>
-                        <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                          <td><?= arrIndex($item, 'unit_number')  ?></td>
-                        <td><?= arrIndex($item, 'type') ?></td>
+              <?php /* ?>   <td><?php arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td><?php */ ?>
+                        <td><?= arrIndex($item, 'unit_number')  ?></td>
+                        <td><?= arrIndex($item, 'property_type') ?></td>
+                        <td><?= arrIndex($item, 'post_code') ?></td>
                         <td><?= arrIndex($item, 'amount') ?></td>
-                        <td><?= arrIndex($item, 'unit_type') ?></td>
                     </tr>
                     <?php
                 endforeach;
@@ -78,11 +76,10 @@
                 foreach ($UnOccupiedUnitsList['result'] as $item):
                     ?>
                     <tr>
-                        <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                          <td><?= arrIndex($item, 'unit_number')  ?></td>
-                        <td><?= arrIndex($item, 'type') ?></td>
+                        <td><?= arrIndex($item, 'unit_number')  ?></td>
+                        <td><?= arrIndex($item, 'property_type') ?></td>
+                        <td><?= arrIndex($item, 'post_code') ?></td>
                         <td><?= arrIndex($item, 'amount') ?></td>
-                        <td><?= arrIndex($item, 'unit_type') ?></td>
                     </tr>
                     <?php
                 endforeach;

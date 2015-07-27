@@ -183,7 +183,7 @@ $(document).ready(function(){
                 </select>
                     </div>-->
                     <div class="col-sm-6">
-                <label>Unit Applied For </label>
+                <label>Property Applied For </label>
                 <?php
                 $ci = &get_instance();
                 $ci->load->model('units/Unitsmodel');
