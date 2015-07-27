@@ -55,7 +55,7 @@
 
                                             <img src="timthumb.php?src=<?php echo $this->config->item('UNIT_IMAGE_URL') . $row['unit_image'] ?>&h=275&w=275&q=100&zc=0" class="img-responsive">
                                             <div class="mask">
-                                                <h2><?= substr($row['unit_number'],0,4) ?></h2>
+                                                <h2><?= substr($row['unit_number'],0,25) ?></h2>
                                                 <p><?php echo substr($row['description'], 0, 50) . ".."; ?></p>
                                                 <p class="prop_price"><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p>
 
