@@ -13,12 +13,48 @@
             <div class="topbar_left_section text-right">
                 <div class="col-md-6">
                     <ul class="list-unstyled list-inline">
-                        <li>Open 24 hrs 7 days a week  | </li> 
-                        <li>Mon - Sat: 7.00 - 18.00 - Sunday: Closed</li>
-                    </ul>
-
+                        <li><i class="fa fa-clock-o fa-lg"></i><span id="curdate">Monday 7/27/2015 – 11:33:37 am</span></li>
+                    </ul>                    
                 </div>
             </div>
+            <script>
+                $(document).ready(function () {
+                    DisplayCurrentTime();
+                });
+                function DisplayCurrentTime() {
+                    var dt = new Date();
+                    var refresh = 1000; //Refresh rate 1000 milli sec means 1 sec
+                    var cDate = (dt.getMonth() + 1) + "/" + dt.getDate() + "/" + dt.getFullYear();
+                    var d = new Date();
+                    var n = d.getDay();
+                    var dayname = '';
+                    switch (n) {
+                        case 0:
+                            dayname = 'Sunday';
+                            break;
+                        case 1:
+                            dayname = 'Monday';
+                            break;
+                        case 2:
+                            dayname = 'Tuesday';
+                            break;
+                        case 3:
+                            dayname = 'Wednesday';
+                            break;
+                        case 4:
+                            dayname = 'Thursday';
+                            break;
+                        case 5:
+                            dayname = 'Friday';
+                            break;
+                        case 6:
+                            dayname = 'Saturday';
+                            break;
+                    }
+                    document.getElementById('curdate').innerHTML = dayname + ' ' + cDate + " – " + dt.toLocaleTimeString();
+                    window.setTimeout('DisplayCurrentTime()', refresh);
+                }
+            </script>
         </div>
     </div>
 </div>

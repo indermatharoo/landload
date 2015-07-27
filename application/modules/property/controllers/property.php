@@ -27,12 +27,11 @@ class Property extends Cms_Controller {
         $property = $this->propertymodel->getProperty($uid);
         $gallery_images = $this->propertymodel->getGalleryImages($uid);
         $attributes = $this->propertymodel->getAttributeValue($uid);
-
         $inner = array();
         $inner['property'] = $property;
         $inner['gallery'] = $gallery_images;
         $inner['attributes'] = $attributes;
-        // e($inner);
+        $inner['features'] = $this->propertymodel->features(arrIndex($property, 'features'));
         $inner['uid'] = $uid;
         $shell['contents'] = $this->load->view("detail", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);

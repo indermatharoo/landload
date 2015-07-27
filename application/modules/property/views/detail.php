@@ -8,19 +8,21 @@
                 <div class="carousel-inner" style="height: 292px;">
                     <?php
                     $c = '';
-                    if($gallery!=false){
-                    foreach ($gallery as $slide) {
-                        ++$c;
+                    if ($gallery != false) {
+                        foreach ($gallery as $slide) {
+                            ++$c;
+                            ?>
+                            <div class="item <?php echo $c == 1 ? 'active' : ''; ?> ">
+                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>" height="300px"/>
+                            </div>
+                            <?php
+                        }
+                    } else {
                         ?>
-                        <div class="item <?php echo $c == 1 ? 'active' : ''; ?> ">
-                            <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>" height="300px"/>
-                        </div>
-                    <?php }} 
-                     else{ ?>
-                    <h3>No Images found</h3>
-                    
+                        <h3>No Images found</h3>
+
                     <?php } ?>
-                    
+
                 </div>
 
                 <a class="left carousel-control" href="#carousel-example" data-slide="prev">
@@ -54,6 +56,15 @@
                             <?php
                         }
                     }
+                    foreach ($features as $feature):
+//                        e($feature);
+                        ?>
+                        <div class="col-sm-3">
+                            <div class="attr-lab"><?php echo arrIndex($feature, 'tag'); ?></div>
+                            <div class="attrb">Yes</div>
+                        </div>
+                        <?php
+                    endforeach;
                     ?>
                     <div class="clearfix"></div>
                 </div>
@@ -70,14 +81,14 @@
             </div>
             <div class="unit-inf con-deta mar-top20">
                 <div class="col-sm-10 lft">
-                    <div><b>Listing ID : </b><i><?= $property['id']; ?></i></div>
+                    <!--<div><b>Listing ID : </b><i>< ?= $property['id']; ?></i></div>-->
                     <div><b>Type : </b><i><?= $property['type']; ?></i></div>
                     <div><b>Owner : </b><i><?= $property['owner']; ?></i></div>
                     <br />
                     <div><b>City Name : </b><i><?= $property['city']; ?></i></div>
-                  <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>  
+                    <div><b>Area Code : </b><i><?= $property['post_code']; ?></i></div>  
                     <br />
-                    <div style="font-size: 20px"><b>  <?= DWS_CURRENCY_SYMBOL.$property['amount']; ?></b></div>
+                    <div style="font-size: 20px"><b>  <?= DWS_CURRENCY_SYMBOL . $property['amount']; ?></b></div>
 
                 </div>
                 <!--                <div class="col-sm-2 rgt">
@@ -88,7 +99,6 @@
                                 </div>-->
                 <div class="col-sm-12 push-right">
                     <?php
-                   
                     //e($this->session->all_userdata());
                     if ($this->session->userdata('applicant_id') != '') {
 
@@ -104,7 +114,6 @@
                         <?php
                         echo form_close();
                     } else {
-                       
                         ?>
                         <button name="" onclick="window.location = '<?php echo base_url(); ?>customer/login'" type="button" class="btn btn-primary subbmint">Apply</button>
                         <?php
@@ -116,7 +125,7 @@
             <div class="unit-inf mar-top30">
                 <div class="col-sm-12 lft"><span>Contact Us</span></div>
                 <div class="col-sm-12 mar-top20">
-                    <form action="<?= createUrl('contact')?>" method="post">
+                    <form action="<?= createUrl('contact') ?>" method="post">
                         <div class="col-sm-12">
                             <div class="form-group required-field-block">
                                 <input type="text" name="name" id="name" class="form-control" placeholder="Your Name" required=""/>

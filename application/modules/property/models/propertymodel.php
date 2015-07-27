@@ -6,9 +6,8 @@ class Propertymodel extends CI_Model {
         parent::__construct();
     }
 
-
     function listAll($attributes = array()) {
-        
+
         $attributeWhere = $valueWhere = array();
         foreach ($attributes as $id => $value):
             if (empty($value))
@@ -24,9 +23,9 @@ class Propertymodel extends CI_Model {
         }
         $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
         $this->db->from('units t1');
-        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere,'left');
+        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere, 'left');
         $this->db->group_by('unit_id');
-        
+
         if (count($attributeWhere))
             $this->db->where_in('attribute_id', $attributeWhere);
         $results = $this->db->get()->result_array();
@@ -47,7 +46,7 @@ class Propertymodel extends CI_Model {
 //      $this->db->select('page.*,aauth_users.pic,user_extra_detail.*');
         $this->db->select('units.id as unit_id,units.*,properties_type.*')->from('units');
         $this->db->where('units.id', $uid);
-       // $this->db->join('properties', 'properties.id=units.property_id');
+        // $this->db->join('properties', 'properties.id=units.property_id');
         $this->db->join('properties_type', 'units.property_type=properties_type.short_code');
         $rs = $this->db->get();
 //        e($rs->result_array());
@@ -123,7 +122,7 @@ class Propertymodel extends CI_Model {
 
     function insertApplication() {
         $data['unit_id'] = $this->input->post('unit_id');
-       // $data['property_id'] = $this->input->post('property_id');
+        // $data['property_id'] = $this->input->post('property_id');
         $data['applicant_id'] = $this->input->post('applicant_id');
         $data['rent_amount'] = $this->input->post('rent_amount');
         $data['invoice_amount'] = $this->input->post('rent_amount');
@@ -144,6 +143,12 @@ class Propertymodel extends CI_Model {
         $this->db->where('unit_id', $unit_id);
         $results = $this->db->get()->result_array();
         return $results;
+    }
+
+    function features($feature = '') {
+        $ids = explode('|', $feature);
+        $this->db->where_in('id', $ids);
+        return $this->db->get('features')->result_array();
     }
 
 }

@@ -46,9 +46,9 @@
                                 </div>
                             <?php endif; ?>
                             <?php foreach ($property as $row) { ?>
-                            <?php
+                                <?php
 //                            e($row);
-                            ?>
+                                ?>
                                 <div class="col-md-3">
                                     <div class="property_list_box">
                                         <div class="view view-first property_img">
@@ -64,7 +64,7 @@
                                         </div> 
                                         <div class="property_text">
                                             <div class="col-md-9"> 
-                                                <div class="property-city-name"><p>United States</p></div>
+                                                <div class="property-city-name"><p>United Kingdom</p></div>
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="price-text-note"> <p><?= DWS_CURRENCY_SYMBOL . $row['amount'] ?></p></div> 
