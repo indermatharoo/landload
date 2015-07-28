@@ -366,7 +366,7 @@ class Applications extends Admin_Controller {
         $this->db->where('company_id', arrIndex($attributes, 'company_id'));
         $this->db->delete('invoice_new');
         self::createNewInvoices($attributes, $arr);
-        e($attributes);
+//        e($attributes);
     }
 
     function saveInvoices($application, $lastDate = null) {
@@ -459,8 +459,9 @@ class Applications extends Admin_Controller {
     }
 
     function createNewInvoices($attr, $exts) {
+//        e(1);
         $sub = '';
-        $attr['invoice_type'] = 'M';
+//        $attr['invoice_type'] = 'M';
         switch (arrIndex($attr, 'invoice_type')):
             case 'W':
                 $count = self::getcount(arrIndex($attr, 'lastivoice'));
@@ -468,16 +469,17 @@ class Applications extends Admin_Controller {
                 $startdate->add(new DateInterval('P' . $count . 'W'));
                 $sub = $count . 'W';
                 $attr['startdate'] = $startdate->format('Y-m-d');
+                self::saveInvoices($attr, $sub);
                 break;
             case 'M':
                 $count = self::getcount(arrIndex($attr, 'lastivoice')) / 4;
                 $startdate = new DateTime(arrIndex($attr, 'startdate'));
                 $startdate->add(new DateInterval('P' . $count . 'M'));
-                $sub = $count . 'W';
+                $sub = $count . 'M';
                 $attr['startdate'] = $startdate->format('Y-m-d');
+                self::saveInvoices($attr, $sub);
                 break;
         endswitch;
-        self::saveInvoices($attr, $sub);
     }
 
     function getcount($length) {
