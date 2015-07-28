@@ -72,8 +72,6 @@
                         <li> <a href="<?php echo createUrl('customer/dashboard'); ?>"> <i class="fa fa-dashcube"></i> <?php echo $this->session->userdata('fname') ?></a></li>
                         <li> <a href="<?php echo createUrl('customer/logout'); ?>"> <i class="fa fa-dashcube"></i> Sign out</a></li>
                     <?php } ?>
-
-
                 </ul>
             </div>
         </div>

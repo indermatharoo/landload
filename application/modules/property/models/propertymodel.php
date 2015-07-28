@@ -126,7 +126,7 @@ class Propertymodel extends CI_Model {
         $data['applicant_id'] = $this->input->post('applicant_id');
         $data['rent_amount'] = $this->input->post('rent_amount');
         $data['invoice_amount'] = $this->input->post('rent_amount');
-        $data['applied_date'] = 'now()';
+        $data['applied_date'] = date("Y-m-d H:i:s");
         $company = $this->getCompanyId($data['unit_id']);
         $data['company_id'] = $company['company_id'];
         $data['datetime'] = date('Y-m-d H:i:s');

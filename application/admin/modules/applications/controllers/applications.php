@@ -35,9 +35,9 @@ class Applications extends Admin_Controller {
             'applied_date' => 'Applied Date',
             'Action' => 'Action',
         );
-        
+
         $inner['Listing'] = $Listing;
-        
+
         $inner['pagination'] = $this->pagination->create_links();
         $page = array();
         //$inner['user'] = $this->getUser();
@@ -211,7 +211,7 @@ class Applications extends Admin_Controller {
             $inner['applicationType'] = $ApplicationType;
             $inner['applicantsType'] = $applicantsType;
             $inner['uploadedDocuments'] = $uploadedDocuments;
-            $inner['idsArray'] = $this->ids;            
+            $inner['idsArray'] = $this->ids;
             $inner['days'] = $days;
             $inner['offset'] = $id;
             $page = array();
@@ -344,6 +344,7 @@ class Applications extends Admin_Controller {
             if (arrIndex($getApplication, 'applicant_id')):
                 self::updateAppToTan(arrIndex($getApplication, 'applicant_id'));
             endif;
+            self::deleteAll($getApplication);
             self::saveInvoices($getApplication);
         }
         redirect(createUrl('applications/index/'));
@@ -356,23 +357,34 @@ class Applications extends Admin_Controller {
         $this->db->update('applicants', $data);
     }
 
-    function saveInvoices($application) {
+    function deleteAll($attributes = array()) {
+        $arr = self::getLastSendedInvoice($attributes);
+        $result = self::getInvoiceU_S_I_D($arr);
+        $this->db->where('invoice_id >', $result);
+        $this->db->where('application_id', arrIndex($attributes, 'id'));
+        $this->db->where('applicant_id', arrIndex($attributes, 'applicant_id'));
+        $this->db->where('company_id', arrIndex($attributes, 'company_id'));
+        $this->db->delete('invoice_new');
+        self::createNewInvoices($attributes, $arr);
+        e($attributes);
+    }
+
+    function saveInvoices($application, $lastDate = null) {
         $type = arrIndex($application, 'invoice_type');
-//        $type = 'M';
         $amount = arrIndex($application, 'invoice_amount');
         $day = arrIndex($application, 'day_of_week');
         if ($day)
             $day = strtolower($day);
         $month = arrIndex($application, 'date_of_month');
-//        $month = '2015-07-22';
         $startdate = arrIndex($application, 'startdate');
         $enddateTemp = new DateTime($startdate);
         $enddateTemp->add(new DateInterval('P1Y'));
+        if ($lastDate):
+            $enddateTemp->sub(new DateInterval('P' . $lastDate));
+        endif;
         switch ($type):
             case 'W':
-//                e($enddateTemp,0);
-                $enddateTemp->sub(new DateInterval('P2W'));
-//                e($enddateTemp);
+                $enddateTemp->sub(new DateInterval('P1W'));
                 break;
             case 'M':
                 $enddateTemp->sub(new DateInterval('P1M'));
@@ -420,6 +432,64 @@ class Applications extends Admin_Controller {
                 'is_paid' => '0'
             ));
         endwhile;
+    }
+
+    function getLastSendedInvoice($application = array()) {
+//        e($application);
+        $this->db->select('count(*) as lastivoice, max(invoice_id) as invoice_id,invoice_type');
+        $this->db->from('invoice_new');
+        $this->db->where('invoice_code !=', 0);
+        $this->db->where('application_id', arrIndex($application, 'id'));
+        $this->db->where('company_id', arrIndex($application, 'company_id'));
+        $this->db->where('applicant_id', arrIndex($application, 'applicant_id'));
+        $this->db->order_by('invoice_id', 'desc');
+        $rs = $this->db->get()->row_array();
+        return $rs;
+    }
+
+    function getInvoiceU_S_I_D($options = array()) {
+        $type = arrIndex($options, 'invoice_type');
+        $invoice_id = arrIndex($options, 'invoice_id');
+        $current_count = arrIndex($options, 'lastivoice');
+        if ($type == 'W'):
+            $result = self::getcount(arrIndex($options, 'lastivoice'));
+            $delete_from_id = $invoice_id + $result - $current_count;
+        endif;
+        return $delete_from_id;
+    }
+
+    function createNewInvoices($attr, $exts) {
+        $sub = '';
+        $attr['invoice_type'] = 'M';
+        switch (arrIndex($attr, 'invoice_type')):
+            case 'W':
+                $count = self::getcount(arrIndex($attr, 'lastivoice'));
+                $startdate = new DateTime(arrIndex($attr, 'startdate'));
+                $startdate->add(new DateInterval('P' . $count . 'W'));
+                $sub = $count . 'W';
+                $attr['startdate'] = $startdate->format('Y-m-d');
+                break;
+            case 'M':
+                $count = self::getcount(arrIndex($attr, 'lastivoice')) / 4;
+                $startdate = new DateTime(arrIndex($attr, 'startdate'));
+                $startdate->add(new DateInterval('P' . $count . 'M'));
+                $sub = $count . 'W';
+                $attr['startdate'] = $startdate->format('Y-m-d');
+                break;
+        endswitch;
+        self::saveInvoices($attr, $sub);
+    }
+
+    function getcount($length) {
+        $weekArray = [52, 48, 44, 40, 36, 32, 28, 24, 20, 16, 12, 8, 4];
+        $previous = 0;
+        $result = 0;
+        foreach ($weekArray as $days):
+            if ($length < $days) {
+                $result = $days;
+            }
+        endforeach;
+        return $result;
     }
 
     function addInvoice($attributes = array()) {
