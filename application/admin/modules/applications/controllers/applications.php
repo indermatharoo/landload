@@ -345,7 +345,7 @@ class Applications extends Admin_Controller {
                 self::updateAppToTan(arrIndex($getApplication, 'applicant_id'));
             endif;
             self::deleteAll($getApplication);
-            self::saveInvoices($getApplication);
+//            self::saveInvoices($getApplication);
         }
         redirect(createUrl('applications/index/'));
     }
@@ -464,7 +464,7 @@ class Applications extends Admin_Controller {
 //        $attr['invoice_type'] = 'M';
         switch (arrIndex($attr, 'invoice_type')):
             case 'W':
-                $count = self::getcount(arrIndex($attr, 'lastivoice'));
+                $count = self::getcount(arrIndex($exts, 'lastivoice'));
                 $startdate = new DateTime(arrIndex($attr, 'startdate'));
                 $startdate->add(new DateInterval('P' . $count . 'W'));
                 $sub = $count . 'W';
@@ -483,6 +483,9 @@ class Applications extends Admin_Controller {
     }
 
     function getcount($length) {
+        if ($length == 0) {
+            return 0;
+        }
         $weekArray = [52, 48, 44, 40, 36, 32, 28, 24, 20, 16, 12, 8, 4];
         $previous = 0;
         $result = 0;
