@@ -1,13 +1,13 @@
 <link href="<?php echo base_url() ?>/css/datatables/dataTables.bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
-<div class="col-lg-12">
+<!--<div class="col-lg-12">
     <form name="" action="">
         <div class="col-sm-5">FROM <input type="text" class="form-control datepicker" /></div>
         <div class="col-sm-5">TO <input type="text" class="form-control datepicker" /></div>
         <div class="col-sm-2 mar-top20"><button name="" value="search" class="btn btn-primary">Search</button></div>
     </form>
-</div>
+</div>-->
 <div class="col-lg-12 padding-0" style="padding-top: 15px;">
     <h3>Paid </h3>
     <table id="table" class="table table-bordered table-striped">
@@ -15,11 +15,11 @@
             <tr>                        
                 <?php
                 $labels = array(
-                    'pname' => 'Property Name',
-                    'unitname' => 'Unit Number',
-                    'type' => 'Type',
-                    'unit' => 'Amount',
-                    'Unit' => 'Unit type',
+                 //   'pname' => 'Property Name',
+                    'unitname' => 'Property Name',
+                    'type' => 'Property Type',
+                    'unit' => 'Postcode',
+                    'Unittype' => 'Amount',
                 );
                 foreach ($labels as $label):
                     ?>
@@ -36,11 +36,10 @@
             foreach ($paidUnits['result'] as $item):
                 ?>
                 <tr>
-                    <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                    <td><?= arrIndex($item, 'unit_number')  ?></td>
-                    <td><?= arrIndex($item, 'type') ?></td>
-                    <td><?= arrIndex($item, 'amount') ?></td>
-                    <td><?= arrIndex($item, 'unit_type') ?></td>
+                        <td><?= arrIndex($item, 'unit_number')  ?></td>
+                        <td><?= arrIndex($item, 'property_type') ?></td>
+                        <td><?= arrIndex($item, 'post_code') ?></td>
+                        <td><?= arrIndex($item, 'amount') ?></td>
                 </tr>
             <?php endforeach; 
               }
@@ -83,11 +82,10 @@
             foreach ($UnPaidUnits['result'] as $item):
                 ?>
                 <tr>
-                    <td><?= arrIndex($item, 'pname') . ' ' . arrIndex($item, 'lname'); ?></td>
-                    <td><?= arrIndex($item, 'unit_number')  ?></td>
-                    <td><?= arrIndex($item, 'type') ?></td>
-                    <td><?= arrIndex($item, 'amount') ?></td>
-                    <td><?= arrIndex($item, 'unit_type') ?></td>
+                        <td><?= arrIndex($item, 'unit_number')  ?></td>
+                        <td><?= arrIndex($item, 'property_type') ?></td>
+                        <td><?= arrIndex($item, 'post_code') ?></td>
+                        <td><?= arrIndex($item, 'amount') ?></td>
                 </tr>
             <?php endforeach; 
               }

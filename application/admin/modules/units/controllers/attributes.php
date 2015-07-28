@@ -14,7 +14,7 @@ class Attributes extends Admin_Controller {
 //            'class' => 'Class',
 //            'name' => 'Name',
             'label' => 'Label',
-            'unit_type' => 'Unit Type',
+            'unit_type' => 'Property Type',
             'sort' => 'Sort',
 //            'searchable' => 'Searchable',
             -1 => 'Action'

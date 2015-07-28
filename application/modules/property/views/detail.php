@@ -1,20 +1,37 @@
 <?php
 //e($property);
 ?>
+<script type="text/javascript" src="/landlord/js/jquery.bxslider.js"></script>
+<link href="/landlord/css/jquery.bxslider.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" >
+$(document).ready(function(){
+  $('.bxslider').bxSlider({
+        buildPager: function(slideIndex){
+    switch(slideIndex){
+      case 0:
+        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
+      case 1:
+        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
+      case 2:
+        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
+    }
+  }
+  });
+});
+</script>
 <div class="row">
     <div class="col-lg-8">
-        <div class="col-lg-12 padding-0 unit-imgs" style="height: 300px;">
-            <div id="carousel-example" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" style="height: 292px;">
-                    <?php
-                    $c = '';
-                    if ($gallery != false) {
+         <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="300px" width="350px" />
+         <ul class="bxslider">
+             <?php
+             $gallery = array(0,1);
+                if ($gallery != false) {
                         foreach ($gallery as $slide) {
-                            ++$c;
+                           
                             ?>
-                            <div class="item <?php echo $c == 1 ? 'active' : ''; ?> ">
-                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image']; ?>" height="300px"/>
-                            </div>
+             <li>
+                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $property['unit_image'] ; ?>" height="300px"/>
+             </li>          
                             <?php
                         }
                     } else {
@@ -23,16 +40,8 @@
 
                     <?php } ?>
 
-                </div>
-
-                <a class="left carousel-control" href="#carousel-example" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
-            </div>
-        </div>
+         </ul>
+        
         <div class="col-lg-12 padding-0 mar-top30">
             <div class="head_desc">
                 <h2><?php echo $property['unit_number']; ?></h2>

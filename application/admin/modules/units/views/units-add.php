@@ -6,10 +6,10 @@
             <i class="fa fa-user fa-2x"></i>
         </div>
         <div class="col-sm-10">
-            <h3 style="margin: 0; text-align: center">Add Unit</h3>
+            <h3 style="margin: 0; text-align: center">Add Property</h3>
         </div>
         <div class="col-sm-1" style="text-align: right">
-            <a href="units"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-home" title="Manage Units"></i></h3></a>
+            <a href="units"><h3 style="cursor: pointer; margin: 0; color: #fff"><i class="fa fa-home" title="Manage Property"></i></h3></a>
         </div>
     </div>
 </header>
@@ -17,7 +17,7 @@
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
         <div class="form-group">
-            <!-- <div class="col-sm-6">
+            <?php /* <div class="col-sm-6">
                 <label>Property </label>
                 <select name="property_id" class="form-control">
                     <option></option>
@@ -29,7 +29,7 @@
                     }
                     ?>
                 </select>
-            </div>-->
+            </div> */ ?>
             <div class="col-sm-6">
                 <?php //e($propertiesType) ?>
                 <label>Property Type<span class="red">*</span></label>
@@ -43,8 +43,8 @@
             </div>
 
             <div class="col-sm-6">
-                <label>Unit Name<span class="red">*</span></label>
-                <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name">
+                <label>Property Name<span class="red">*</span></label>
+                <input type="text" class="form-control" name="unit_number"  placeholder="Property Name">
             </div>
             <div class="col-sm-6">
                 <label>Photo<span class="red">*</span></label>

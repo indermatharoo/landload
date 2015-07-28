@@ -16,10 +16,11 @@ class Applicationsmodel extends Basemodel {
     }
 
     function listAll($ids = array()) {
-        $this->db->select('t1.id as application_id,t1.*,t2.*,t3.*');
+        $this->db->select('t1.id as application_id,t1.*,t2.*,t3.*,t4.*');
         $this->db->from('applications t1');
         $this->db->join('applicants t2', 't2.applicant_id=t1.applicant_id');
         $this->db->join('user_extra_detail t3', 't3.id=t1.company_id');
+        $this->db->join('units t4', 't4.id=t1.unit_id');
         if (count($ids)):
             $this->db->where_in('t1.company_id', $ids);
         endif;

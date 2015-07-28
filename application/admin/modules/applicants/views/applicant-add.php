@@ -50,12 +50,12 @@
                 <input type="text" class="form-control" name="birth_date" id="datepicker" placeholder="Birth date *" value="<?php echo arrIndex($postdata, 'birth_date') ?>">
             </div>   
             <div class="col-sm-6">
-                <label>Driver License Number <span class="red">*</span></label>
+                <label>Passport Number </label>
                 <input type="text" class="form-control" name="license"  placeholder="Driver License Number *" value="<?php echo arrIndex($postdata, 'license') ?>">
             </div>
             <div class="col-sm-6">
-                <label>Monthly Gross Pay <span class="red">*</span></label>
-                <input type="text" class="form-control" name="monthly_gross"  placeholder="Monthly Gross Pay *" value="<?php echo arrIndex($postdata, 'monthly_gross') ?>">
+                <label>Monthly Income </label>
+                <input type="text" class="form-control" name="monthly_gross"  placeholder="Monthly Income *" value="<?php echo arrIndex($postdata, 'monthly_gross') ?>">
             </div>
             <div class="col-sm-6">
                 <label>Additional Income </label>

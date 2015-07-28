@@ -30,7 +30,7 @@ class Applicants extends Admin_Controller {
             'email' => 'Email',
             'phone' => 'phone',
             'birthdate' => 'birthdate',
-            'license' => 'license',
+            'license' => 'Passport',
             'monthly_gross' => 'monthly_gross',
             'Action' => 'Action',
         );
@@ -94,8 +94,8 @@ class Applicants extends Admin_Controller {
         if (trim($this->input->post('additional_income')) != "") {
             $this->form_validation->set_rules('additional_income', 'Additional Income', 'trim|required|integer');
         }
-        $this->form_validation->set_rules('license', 'Driving License Number', 'trim|required');
-        $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
+//        $this->form_validation->set_rules('license', 'Passport Number', 'trim|required');
+//        $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
 //        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
         $this->form_validation->set_rules('passwd', 'password', 'trim|required');
@@ -148,7 +148,7 @@ class Applicants extends Admin_Controller {
             $this->form_validation->set_rules('conpasswd', 'confirm password', 'trim|required|matches[passwd]');
         }
 
-        $this->form_validation->set_rules('license', 'Driving License Number', 'trim|required');
+//        $this->form_validation->set_rules('license', 'Passport Number', 'trim|required');
         $this->form_validation->set_rules('monthly_gross', 'Monthly Gross', 'trim|required|integer');
 //        $this->form_validation->set_rules('assets', 'Assets', 'trim|required|integer');
         $this->form_validation->set_rules('status', 'Status', 'trim|required');
