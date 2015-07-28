@@ -29,7 +29,7 @@
                     <h4>Choose to whom you want to share file, if not selected it remain private</h4>
                     <div class="col-sm-4">
                         <?php
-                        $js = 'class="form-control" id="virCabShare" ';
+                        $js = ' class="form-control" id="virCabShare" ';
                         $AvailGrps['0'] = 'Choose';
                         ksort($AvailGrps);
                         echo form_dropdown('virCabShare', $AvailGrps, '', $js);
