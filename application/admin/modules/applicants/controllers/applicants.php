@@ -54,6 +54,7 @@ class Applicants extends Admin_Controller {
         $this->pagination->initialize($config);
 
         $Listing = $this->Applicantsmodel->listAll($this->ids,"tnt");
+        
         $inner = array();
         $inner['labels'] = array(
             'name' => 'Name',
@@ -176,5 +177,47 @@ class Applicants extends Admin_Controller {
         $this->session->set_flashdata('SUCCESS', 'applicant_deleted');
         redirect(createUrl('applicants/index/'));
     }
-
+    function message()
+    {
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('company_id', 'Company', 'trim|required');
+        $this->form_validation->set_rules('message', 'Message', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+           $inner = array();
+           $data = $this->Applicantsmodel->getAppliedCompanies();
+           $allConverstation = $this->Applicantsmodel->getAllConversations();
+           $inner['appliedCompany'] = $data ;
+           $inner['converstaion'] = $allConverstation ;
+           $page['content'] = $this->load->view('message', $inner, TRUE);
+           $this->load->view('themes/default/templates/customer', $page);        
+        }
+        else
+        { 
+            $this->Applicantsmodel->addMessage();
+            $this->session->set_flashdata('SUCCESS', 'message_added');
+            redirect(createUrl('applicants/index/'));
+        }
+    }
+    function reply($offset)
+    {
+        $this->load->model('user/messagemodel');
+                 $this->load->library('form_validation');
+        if(!$offset)
+        {
+            redirect('user/messages');
+            return false;
+        }       
+        $this->form_validation->set_rules('message', 'Message', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {
+            $messages = $this->Applicantsmodel->getMessagesByUserId($offset);
+            $inner['allMessages'] = $messages;
+            $page['content'] = $this->load->view('reply', $inner, TRUE);
+            $this->load->view($this->default, $page);
+        }
+        else{
+            $messages = $this->Applicantsmodel->addReply($offset);
+            $this->session->set_flashdata('SUCCESS', 'message_deleted');
+            redirect(createUrl('applicants/reply/'.$offset));     
+        }
+    }
 }

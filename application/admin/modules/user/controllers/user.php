@@ -441,6 +441,7 @@ class User extends Admin_Controller {
         $rs = $this->db->query(' call testProcedure(1)')->result_array();
         e($rs);
     }
+
 }
 
 ?>

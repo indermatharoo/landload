@@ -223,3 +223,6 @@ $lang['applicant_deleted'] = 'Applicant Deleted Successfully.';
 $lang['application_added'] = 'Application Added Successfully.';
 $lang['application_updated'] = 'Application Updated Successfully.';
 $lang['application_deleted'] = 'Application Deleted Successfully.';
+
+$lang['message_added'] = 'Message Successfully Sent.';
+$lang['message_deleted'] = 'All message of the selected conversation are deleted.';

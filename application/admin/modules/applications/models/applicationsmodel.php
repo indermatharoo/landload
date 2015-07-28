@@ -16,6 +16,7 @@ class Applicationsmodel extends Basemodel {
     }
 
     function listAll($ids = array()) {
+        
         $this->db->select('t1.id as application_id,t1.*,t2.*,t3.*,t4.*');
         $this->db->from('applications t1');
         $this->db->join('applicants t2', 't2.applicant_id=t1.applicant_id');

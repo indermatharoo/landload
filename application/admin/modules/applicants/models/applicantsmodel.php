@@ -136,5 +136,53 @@ class Applicantsmodel extends Basemodel {
         $res = $this->db->get();
         return array('num_rows' => $res->num_rows(), 'results' => $res->result_array());
     }    
-
+    function getAppliedCompanies()
+    {
+        $this->db->select('aauth_users.*');
+        $this->db->from('aauth_users');
+     //   $this->db->where('applications.applicant_id',  curUsrId());
+        $this->db->where('applications.applicant_id', 3);
+        $this->db->group_by('applications.company_id');
+        $this->db->join('applications','applications.company_id = aauth_users.id');
+        $res = $this->db->get();
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
+    }
+    function addMessage()
+    {
+        $data = array();
+        $data['user_id'] = curUsrId();
+        $data['company_id'] = $this->input->post('company_id');
+        $data['message'] = $this->input->post('message');
+        $this->db->insert('messages',$data);
+        return true;
+    }
+    function getAllConversations()
+    {
+        $this->db->select('messages.*,applicants.*');
+        $this->db->group_by('messages.user_id');
+        //$this->db->where('messages.company_id',  curUsrId());
+        $this->db->join('applicants','applicants.applicant_id = messages.user_id');
+        $res = $this->db->get('messages');  
+        echo $this->db->last_query();
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
+    }
+    function getMessagesByUserId($usrID)
+    {
+        $this->db->select('messages.*,applicants.fname,applicants.lname,user_extra_detail.company_name');
+        $this->db->where('messages.company_id',$usrID);
+        $this->db->join('applicants','applicants.applicant_id = messages.user_id');
+        $this->db->join('user_extra_detail','user_extra_detail.id = messages.company_id');
+        $res = $this->db->get('messages');               
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
+    }    
+    function addReply($offset)
+    {
+        $data = array();
+        $data['user_id'] = curUsrId();
+        $data['company_id'] = $offset;
+        $data['message'] = $this->input->post('message');
+        $this->db->insert('messages',$data);
+        return true;
+    }    
+    
 }

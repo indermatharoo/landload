@@ -7,6 +7,10 @@ class Applications extends Admin_Controller {
 
     function __construct() {
         parent::__construct();
+        if($this->aauth->isCustomer())
+        {
+            redirect('user');
+        }
 //        $this->load->model('calender/event');
         $this->load->model('user/Usermodel');
         $this->load->model('Applicationsmodel');
