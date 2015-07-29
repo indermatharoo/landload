@@ -52,12 +52,12 @@ class Calender extends Admin_Controller {
 //        e($this->session->all_userdata());
  //       die();
         if ($this->aauth->isCustomer()):
-        echo "hiiii";
+      
         
             $multiple_where['t1.applicant_id'] = curUsrId();
         endif;
 //        e($multiple_where);
-        $applications = $this->Calendermodel->getCompanyInvoices($this->ids);
+        $applications = $this->Calendermodel->getCompanyInvoices($this->ids,$multiple_where);
 //        e($applications);
         $return['success'] = true;
         $return['result'] = $applications;
