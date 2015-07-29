@@ -1,6 +1,6 @@
 <?php
-// echo "<pre>";
-//print_r($details);
+ //echo "<pre>";
+//e($details);
 ?>
 <script type="text/javascript" src="js/jquery-ui.js"></script>
 <link href="css/smoothness/jquery-ui.css" rel="stylesheet"/>
@@ -46,7 +46,7 @@
                 <?php
                 $ci = &get_instance();
                 $ci->load->model('units/Unitsmodel');
-                $res = $ci->Unitsmodel->getUnitsByPropertyId($details['unit_id']);
+                $res = $ci->Unitsmodel->getUnitsByPropertyId($idss);
                 ?>
                 <select class="form-control" name="unit_id">
                     <option></option>

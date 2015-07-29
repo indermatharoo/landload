@@ -144,6 +144,7 @@ class Applications extends Admin_Controller {
             $inner['applicationType'] = $ApplicationType;
             $inner['propertiesList'] = $propertiesList;
             $inner['leaseTypes'] = $LeaseTypes;
+            $inner['idss'] = $this->ids;
             $page = array();
             $page['content'] = $this->load->view('application-edit', $inner, TRUE);
             $this->load->view($this->customer, $page);
