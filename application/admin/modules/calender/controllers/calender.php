@@ -49,7 +49,11 @@ class Calender extends Admin_Controller {
             'created_on >= ' => $from,
             'created_on <= ' => $to,
         );
+//        e($this->session->all_userdata());
+ //       die();
         if ($this->aauth->isCustomer()):
+        echo "hiiii";
+        
             $multiple_where['t1.applicant_id'] = curUsrId();
         endif;
 //        e($multiple_where);
