@@ -23,6 +23,9 @@ $(document).ready(function(){
 <div class="row">
     <div class="col-lg-8">
          <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="300px" width="350px" />
+         <div class="head_desc">
+             <h2> Gallery</h2>
+         </div>
          <ul class="bxslider">
              <?php
             // $gallery = array(0,1);
