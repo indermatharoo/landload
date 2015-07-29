@@ -1,5 +1,5 @@
 <?php
-//e($property);
+//e($gallery);
 ?>
 <script type="text/javascript" src="/js/jquery.bxslider.js"></script>
 <link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css">
@@ -8,12 +8,13 @@ $(document).ready(function(){
   $('.bxslider').bxSlider({
         buildPager: function(slideIndex){
     switch(slideIndex){
-      case 0:
-        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
-      case 1:
-        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
-      case 2:
-        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="50px" width="50px">';
+        <?php $i=0;
+        foreach($gallery as $img)
+        {
+        ?>
+      case <?php echo $i ?>:
+        return '<img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$img['image'] ?>" height="50px" width="50px">';
+        <?php $i++; } ?>
     }
   }
   });
@@ -24,13 +25,13 @@ $(document).ready(function(){
          <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$property['unit_image'] ?>" height="300px" width="350px" />
          <ul class="bxslider">
              <?php
-             $gallery = array(0,1);
+            // $gallery = array(0,1);
                 if ($gallery != false) {
                         foreach ($gallery as $slide) {
                            
                             ?>
              <li>
-                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $property['unit_image'] ; ?>" height="300px"/>
+                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL') . $slide['image'] ; ?>" height="300px"/>
              </li>          
                             <?php
                         }
