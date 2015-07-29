@@ -1,8 +1,8 @@
 <?php
 //e($property);
 ?>
-<script type="text/javascript" src="/landlord/js/jquery.bxslider.js"></script>
-<link href="/landlord/css/jquery.bxslider.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/js/jquery.bxslider.js"></script>
+<link href="/css/jquery.bxslider.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" >
 $(document).ready(function(){
   $('.bxslider').bxSlider({
