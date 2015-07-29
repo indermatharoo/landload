@@ -32,7 +32,7 @@ class Propertymodel extends CI_Model {
         if (count($attributeWhere))
             $this->db->where_in('attribute_id', $attributeWhere);
         $results = $this->db->get()->result_array();
-        echo $this->db->last_query();
+        
         //echo $this->db->last_query();
 //        e($results);
         return $results;
