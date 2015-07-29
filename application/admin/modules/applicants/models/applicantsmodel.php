@@ -163,7 +163,7 @@ class Applicantsmodel extends Basemodel {
         //$this->db->where('messages.company_id',  curUsrId());
         $this->db->join('applicants','applicants.applicant_id = messages.user_id');
         $res = $this->db->get('messages');  
-        echo $this->db->last_query();
+        
         return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());
     }
     function getMessagesByUserId($usrID)
