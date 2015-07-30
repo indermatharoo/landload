@@ -39,7 +39,7 @@
 <!--                 <td><?= arrIndex($item, 'additional'); ?></td>
                  <td><?= arrIndex($item, 'asset'); ?></td>
                  <td><?= arrIndex($item, 'type'); ?></td>-->
-                    <td><a href="<?= createUrl('applicants/edit/') . arrIndex($item, 'applicant_id'); ?>">Edit</a>  | <a href="<?= createUrl('applicants/delete/') . $item['applicant_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
+                    <td><a href="<?= createUrl('applicants/assign_property/') . arrIndex($item, 'applicant_id'); ?>">Assign Property</a> | <a href="<?= createUrl('applicants/edit/') . arrIndex($item, 'applicant_id'); ?>">Edit</a>  | <a href="<?= createUrl('applicants/delete/') . $item['applicant_id']; ?>" onclick="return confirm('Are you sure you want to delete this Feature?');">Delete</a> </td>
                 </tr>
             <?php endforeach; ?>
         </tbody>

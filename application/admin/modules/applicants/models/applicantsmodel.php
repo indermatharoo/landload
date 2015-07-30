@@ -184,5 +184,19 @@ class Applicantsmodel extends Basemodel {
         $this->db->insert('messages',$data);
         return true;
     }    
-    
+    function addApplication($offset)
+    {
+        $this->db->where('id',$this->input->post('property_id'));
+        $res = $this->db->get('units');
+        $unit_data = $res->row_array();
+        $data = array();
+        $data['applicant_id'] = $offset;
+        $data['application_status'] = 'app';
+        $data['company_id'] = $unit_data['company_id'];
+        $data['unit_id'] = $this->input->post('property_id');
+        $data['is_active'] = '1';
+        $data['applied_date'] = date("Y-m-d H:i:s");
+        $this->db->insert('applications',$data);
+        return true;
+    }
 }

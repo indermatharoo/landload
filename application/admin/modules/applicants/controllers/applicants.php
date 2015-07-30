@@ -72,6 +72,27 @@ class Applicants extends Admin_Controller {
         $page['content'] = $this->load->view('tenants_listing', $inner, true);
         $this->load->view('themes/default/templates/customer', $page);
     }
+    public function assign_property($offset)
+    {
+                $this->load->library('form_validation');
+        $this->form_validation->set_rules('property_id', 'Propert', 'trim|required');
+        if ($this->form_validation->run() == FALSE) {        
+        $this->load->model('units/Unitsmodel');
+        
+        $properties = $this->Unitsmodel->getUnOccupiedPropertyList();
+        $inner = array();
+        $inner['properties'] = $properties;
+        $page['content'] = $this->load->view('assign', $inner, true);
+        $this->load->view('themes/default/templates/customer', $page);
+        }
+        else
+        {
+            $userid = $this->Applicantsmodel->addApplication($offset);
+            $this->session->set_flashdata('SUCCESS', 'application_added');
+            redirect(createUrl('applicants/index/'));
+        }
+       
+    }
     public function valid_date($date) {
         if (strtotime(trim(date('m/d/Y ', strtotime($date)))) == strtotime($date)) {
             return true;

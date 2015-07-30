@@ -334,7 +334,15 @@ class Unitsmodel extends Basemodel {
         $data['company_id'] = $unit_data['company_id'];
         $data['unit_id'] = $offset;
         $data['is_active'] = '1';
+        $data['applied_date'] = date("Y-m-d H:i:s");
         $this->db->insert('applications',$data);
         return true;
+    }
+    function getUnOccupiedPropertyList()
+    {
+        $this->db->select('id,unit_number');
+        $this->db->where('status != "0"');
+        $res =  $this->db->get('units');
+        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());        
     }
 }
