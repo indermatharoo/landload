@@ -289,7 +289,7 @@ class Unitsmodel extends Basemodel {
         $this->db->delete('units');
 
         $imgar = $this->getUnitImages($id);
-        print_r($imgar);
+     
         foreach ($imgar['result'] as $img) {
             @unlink($this->config->item('UNIT_IMAGE_PATH') . $img['image']);
         }
