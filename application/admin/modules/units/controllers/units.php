@@ -143,7 +143,28 @@ class Units extends Admin_Controller {
             redirect(createUrl('units/index/'));
         }
     }
+    function assign($offset)
+{
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('applicant_id', 'Applicant', 'trim|required');
+        $this->load->model('applicants/Applicantsmodel');
+        $Listing = $this->Applicantsmodel->listAll($this->ids,"tnt");
 
+        if ($this->form_validation->run() == FALSE) {
+            $inner = array();
+            $inner['unit_id'] = $offset;
+            $inner['listing'] = $Listing;
+            $page = array();
+            $page['content'] = $this->load->view('assign', $inner, TRUE);
+            $this->load->view($this->customer, $page);
+        } else {
+
+            $userid = $this->Unitsmodel->AssignTenantsToProperty($offset);
+
+            $this->session->set_flashdata('SUCCESS', 'unit_updated');
+            redirect(createUrl('units/index/'));
+        }
+    }
     function delete($id) {
         $this->Unitsmodel->DeleteRecord($id);
         $this->session->set_flashdata('SUCCESS', 'unit_deleted');

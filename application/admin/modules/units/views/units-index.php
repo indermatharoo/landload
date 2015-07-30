@@ -30,7 +30,7 @@
                     <?php
                     $data = arrIndex($item, $key, FALSE);
                     if ($key == -1) {
-                        $data = '<a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . arrIndex($item, 'unit_id') . ' onclick="return confirm(\'Are you sure you want to delete this property?\');">Delete</a>';
+                        $data = '<a href=' . createUrl('units/assign/') . arrIndex($item, 'unit_id') . '>Assign</a> | <a href=' . createUrl('units/edit/') . arrIndex($item, 'unit_id') . '>Edit</a> |  <a href=' . createUrl('units/delete/') . arrIndex($item, 'unit_id') . ' onclick="return confirm(\'Are you sure you want to delete this property?\');">Delete</a>';
                     }
                     ?>
                 <td><?php echo $data ?></td>

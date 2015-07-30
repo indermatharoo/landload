@@ -29,7 +29,15 @@ class Unitsmodel extends Basemodel {
         $results = $this->db->get('units')->result_array();
         return $results;
     }
-
+    function getVacantTenantOnly()
+    {
+        if ($this->aauth->isCompany() || $this->aauth->isUser()):
+            $this->db->where_in('company_id', $ids);
+        endif;
+        $this->db->select('units.id as unit_id,units.*');
+        $results = $this->db->get('units')->result_array();
+        return $results;
+    }
     function getUnitType() {
         return $this->db->get('unit_type')->result_array();
     }
@@ -285,9 +293,6 @@ class Unitsmodel extends Basemodel {
         foreach ($imgar['result'] as $img) {
             @unlink($this->config->item('UNIT_IMAGE_PATH') . $img['image']);
         }
-
-
-
         $this->db->where('unit_id', $id);
         $this->db->delete('unit_image');
     }
@@ -316,5 +321,20 @@ class Unitsmodel extends Basemodel {
     {
         $res = $this->db->get('county_list');
         return $res->result_array();
+    }
+    
+    function AssignTenantsToProperty($offset)
+    {
+        $this->db->where('id',$offset);
+        $res = $this->db->get('units');
+        $unit_data = $res->row_array();
+        $data = array();
+        $data['applicant_id'] = $this->input->post('applicant_id');
+        $data['application_status'] = 'app';
+        $data['company_id'] = $unit_data['company_id'];
+        $data['unit_id'] = $offset;
+        $data['is_active'] = '1';
+        $this->db->insert('applications',$data);
+        return true;
     }
 }
