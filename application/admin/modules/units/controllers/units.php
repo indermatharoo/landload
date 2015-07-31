@@ -148,7 +148,7 @@ class Units extends Admin_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('applicant_id', 'Applicant', 'trim|required');
         $this->load->model('applicants/Applicantsmodel');
-        $Listing = $this->Applicantsmodel->listAll($this->ids,"tnt");
+        $Listing = $this->Applicantsmodel->getUnAppliedTenants($offset);
 
         if ($this->form_validation->run() == FALSE) {
             $inner = array();
@@ -160,7 +160,6 @@ class Units extends Admin_Controller {
         } else {
 
             $userid = $this->Unitsmodel->AssignTenantsToProperty($offset);
-
             $this->session->set_flashdata('SUCCESS', 'unit_updated');
             redirect(createUrl('units/index/'));
         }

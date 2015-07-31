@@ -27,7 +27,20 @@
                             <?php foreach (getAttributes() as $attribute): ?>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
+                                    <?php if(arrIndex($attribute, 'type')=="text"){ ?>
                                     <input type="text" placeholder="<?php echo ucfirst(arrIndex($attribute, 'label')); ?>" value="" name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
+                                    <?php }else{ ?>
+                                    <select name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
+                                        <?php 
+                                        foreach(getAttributesValue(arrIndex($attribute, 'id')) as $drpdown)
+                                        {
+                                            ?>
+                                        <option value="<?php echo $drpdown['id'] ?>"><?php echo $drpdown['value'] ?></option>
+                                            <?php
+                                        }
+                                        ?>
+                                    </select>
+                                    <?php } ?>
                                 </div>
                             <?php endforeach; ?>
 

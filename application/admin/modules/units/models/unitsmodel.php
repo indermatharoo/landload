@@ -29,8 +29,8 @@ class Unitsmodel extends Basemodel {
         $results = $this->db->get('units')->result_array();
         return $results;
     }
-    function getVacantTenantOnly()
-    {
+
+    function getVacantTenantOnly() {
         if ($this->aauth->isCompany() || $this->aauth->isUser()):
             $this->db->where_in('company_id', $ids);
         endif;
@@ -38,6 +38,7 @@ class Unitsmodel extends Basemodel {
         $results = $this->db->get('units')->result_array();
         return $results;
     }
+
     function getUnitType() {
         return $this->db->get('unit_type')->result_array();
     }
@@ -51,10 +52,12 @@ class Unitsmodel extends Basemodel {
             redirect('units/index');
         }
     }
+
     function getPropertiesType() {
         $res = $this->db->get('properties_type');
         return $res->result_array();
     }
+
     function insertRecord() {
         $data = array();
         $data = rSF('units');
@@ -69,9 +72,9 @@ class Unitsmodel extends Basemodel {
         $data['property_type'] = $this->input->post('ptype');
         $data['post_code'] = $this->input->post('post_code');
         $data['county'] = $this->input->post('county');
-       // $data['country'] = $this->input->post('country');
-       $data['country'] = 'IN';
-       // $data['amount'] = $this->input->post('amount');
+        // $data['country'] = $this->input->post('country');
+        $data['country'] = 'IN';
+        // $data['amount'] = $this->input->post('amount');
 
         $config_slug = array(
             'field' => 'uri',
@@ -131,7 +134,7 @@ class Unitsmodel extends Basemodel {
             $data['company_id'] = curUsrPid();
         endif;
         $status = $this->db->insert('units', $data);
-      // echo $this->db->last_query();
+        // echo $this->db->last_query();
 
         if ($status) {
             $unit_id = $this->db->insert_id();
@@ -212,9 +215,9 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
-        
+
         if (!empty($_FILES['photo']['name'])) {
-          //  e($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
+            //  e($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
             $mainimage = $this->getUnitDetails($id);
             @unlink($this->config->item('UNIT_IMAGE_PATH') . $mainimage['unit_image']);
 
@@ -230,8 +233,8 @@ class Unitsmodel extends Basemodel {
                 }
             }
         }
-        
-        
+
+
         $data['unit_number'] = $this->input->post('unit_number');
         $data['property_type'] = $this->input->post('ptype');
         $data['owner'] = $this->input->post('owner');
@@ -289,7 +292,7 @@ class Unitsmodel extends Basemodel {
         $this->db->delete('units');
 
         $imgar = $this->getUnitImages($id);
-     
+
         foreach ($imgar['result'] as $img) {
             @unlink($this->config->item('UNIT_IMAGE_PATH') . $img['image']);
         }
@@ -302,30 +305,30 @@ class Unitsmodel extends Basemodel {
         $res = $this->db->get('dpd_unit_image');
         return array('num_rows' => $res->num_rows(), 'result' => $res->result_array());
     }
-    function getCountrydata()
-    {
+
+    function getCountrydata() {
         $this->db->select('iso,nicename');
         $res = $this->db->get('country');
         return $res->result_array();
     }
-    function getUnitsByPropertyId($ids=array()) {
-        
+
+    function getUnitsByPropertyId($ids = array()) {
+
         if (count($ids)) {
             $this->db->where_in('company_id', $ids);
         }
         $res = $this->db->get('units');
-        
+
         return $res->result_array();
     }
-    function getCountyList()
-    {
+
+    function getCountyList() {
         $res = $this->db->get('county_list');
         return $res->result_array();
     }
-    
-    function AssignTenantsToProperty($offset)
-    {
-        $this->db->where('id',$offset);
+
+    function AssignTenantsToProperty($offset) {
+        $this->db->where('id', $offset);
         $res = $this->db->get('units');
         $unit_data = $res->row_array();
         $data = array();
@@ -335,14 +338,13 @@ class Unitsmodel extends Basemodel {
         $data['unit_id'] = $offset;
         $data['is_active'] = '1';
         $data['applied_date'] = date("Y-m-d H:i:s");
-        $this->db->insert('applications',$data);
+        $this->db->insert('applications', $data);
         return true;
     }
-    function getUnOccupiedPropertyList()
-    {
-        $this->db->select('id,unit_number');
-        $this->db->where('status != "0"');
-        $res =  $this->db->get('units');
-        return array('num_rows'=>$res->num_rows(),'result'=>$res->result_array());        
+
+    function getUnOccupiedPropertyList($test) {
+      $res =  $this->db->query('select * from dpd_units where id not in (select unit_id from `dpd_applications` where applicant_id = "'.  $test.'")');
+        return array('num_rows' => $res->num_rows(), 'result' => $res->result_array());
     }
+
 }

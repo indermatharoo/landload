@@ -79,7 +79,7 @@ class Applicants extends Admin_Controller {
         if ($this->form_validation->run() == FALSE) {        
         $this->load->model('units/Unitsmodel');
         
-        $properties = $this->Unitsmodel->getUnOccupiedPropertyList();
+        $properties = $this->Unitsmodel->getUnOccupiedPropertyList($offset);
         $inner = array();
         $inner['properties'] = $properties;
         $page['content'] = $this->load->view('assign', $inner, true);

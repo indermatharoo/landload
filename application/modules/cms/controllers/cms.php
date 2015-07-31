@@ -133,7 +133,9 @@ class Cms extends Cms_Controller {
 //            $this->assets->loadFromFile("themes/" . THEME . "/headers/cms/" . $file_name);
 //        }
 //
+        
         if (file_exists($file_path)) {
+            
             $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . $file_name, $inner, true);
         } else if ($this->COMPANY == TRUE && $inner['page']['template_alias'] == 'homepage') {
             $shell['contents'] = $this->load->view("themes/" . THEME . "/cms/" . 'default', $inner, true);
@@ -147,6 +149,7 @@ class Cms extends Cms_Controller {
         }
 
         if ($this->COMPANY == TRUE && $page['page_uri'] == 'homepage') {
+            
             $this->load->view("themes/" . THEME . "/templates/default-subpage", $shell);
        } else {
             if ($page['page_uri'] == 'homepage-global' || $page['page_uri'] == 'homepage') {

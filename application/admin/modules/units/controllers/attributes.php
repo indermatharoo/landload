@@ -5,6 +5,7 @@ class Attributes extends Admin_Controller {
     function __construct() {
         parent::__construct();
         $this->load->model('attributesmodel');
+        $this->load->model('units/Unitsmodel');
     }
 
     function index() {
@@ -24,6 +25,14 @@ class Attributes extends Admin_Controller {
     }
 
     function add() {
+         $this->load->library('form_validation');
+        if(arrIndex($_POST, 'type')=="dropdown")
+        {
+            if(empty(array_filter($_POST['drop'])))
+            {
+            $this->form_validation->set_rules('dropdown', 'Dropdown values', 'trim|required');
+            }
+        }
         $model = tableFields('units_attributes', true);
         $model['sort'] = 0;
         unset($model['id']);
@@ -31,6 +40,7 @@ class Attributes extends Admin_Controller {
     }
 
     function edit($id) {
+         $this->load->library('form_validation');
         $model = $this->commonmodel->getByPk($id, 'units_attributes');
         self::save($model, 1);
     }
@@ -42,17 +52,23 @@ class Attributes extends Admin_Controller {
     }
 
     function save($model, $edit = false) {
-        $this->load->library('form_validation');
+       
+       $propertiesType = $this->Unitsmodel->getPropertiesType();
 //        $this->form_validation->set_rules('name', 'Name', 'required');
         $this->form_validation->set_rules('label', 'Label', 'required');
         $this->form_validation->set_rules('searchable', 'Searchable', 'required');
         $this->form_validation->set_rules('unit_type', 'Attribute Type', 'required');
         $this->form_validation->set_rules('sort', 'Sort Order', 'numeric');
+        $this->form_validation->set_rules('type', 'Type', 'trim|required');
+        
+
+        
         $this->form_validation->set_error_delimiters('<li>', '</li>');
         if ($this->form_validation->run() == FALSE) {
             $inner = $page = array();
             $inner['model'] = $model;
             $inner['edit'] = $edit;
+            $inner['propertiesType'] = $propertiesType;
             $page['content'] = $this->load->view('attributes/form', $inner, true);
             $this->load->view('themes/default/templates/customer', $page);
         } else {

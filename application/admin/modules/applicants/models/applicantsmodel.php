@@ -28,7 +28,10 @@ class Applicantsmodel extends Basemodel {
 //        e($results);
         return $results;
     }
-
+    function getUnAppliedTenants($test) {
+       $res =  $this->db->query('select * from dpd_applicants where type = "tnt" and applicant_id not in (select applicant_id from `dpd_applications` where unit_id = "'.  $test.'")');
+        return $res->result_array();
+    }
     function getApplicantType() {
         return $this->db->get('applicant_type')->result_array();
     }

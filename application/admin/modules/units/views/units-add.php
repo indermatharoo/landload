@@ -30,7 +30,7 @@
                     ?>
                 </select>
             </div> */ ?>
-            <div class="col-sm-6">
+<!--            <div class="col-sm-6">
                 <?php //e($propertiesType) ?>
                 <label>Property Type<span class="red">*</span></label>
                 <select name="ptype" class="form-control" autocomlete="off" >
@@ -40,7 +40,7 @@
                     <?php } ?>
                 </select>
                 
-            </div>
+            </div>-->
 
             <div class="col-sm-6">
                 <label>Property Name<span class="red">*</span></label>
@@ -151,8 +151,11 @@
             <label>Unit Type<span class="red">*</span></label><br>
             <select name="unit_type" class="form-control">
                 <option value="">Select</option>
-                <option value="s">Shop</option>
-                <option value="f">Flat</option>
+<!--                <option value="s">Shop</option>
+                <option value="f">Flat</option>-->
+                    <?php foreach($propertiesType as $ptype){ ?>
+                        <option value="<?php echo $ptype['short_code'] ?>"><?php echo $ptype['type'] ?></option>
+                    <?php } ?>                
             </select>
         </div>            
         <div class="form-group extraAttributes">
@@ -190,12 +193,25 @@
                 }
                 var html = '';
                 response.data.forEach(function (elm) {
+                    if(elm.type=="text")
+                    {
                     var row = '';
                     row += '<div class="col-sm-6">';
                     row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
                     row += '<input type="text" class="form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.label) + '">';
                     row += '</div>';
                     html += row;
+                    }
+                    else
+                    {
+                        
+                    var row = '';
+                    row += '<div class="col-sm-6">';
+                    row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
+                    row += '';
+                    row += '</div>';
+                    html += row;                        
+                    }
                 });
                 $('.extraAttributes').html(html);
             });

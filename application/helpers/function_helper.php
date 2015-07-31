@@ -226,11 +226,15 @@ function getAttributes() {
             ->from('units_attributes')
             ->where('searchable', 1)
             ->get()
-            ->result_array()
-    ;
+            ->result_array();
     return $results;
 }
-
+function getAttributesValue($id)
+{
+     $result = getThis()->db->where('dropdown_id',$id)->get('units_attributes_dropdown')->result_array();
+     return $result;
+    
+}
 function lQ() {
     e(getThis()->db->last_query());
 }
