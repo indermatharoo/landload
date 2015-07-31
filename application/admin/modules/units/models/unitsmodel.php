@@ -245,7 +245,7 @@ class Unitsmodel extends Basemodel {
         $data['status'] = $this->input->post('status');
         $data['amount'] = $this->input->post('amount');
         $data['amount_type'] = $this->input->post('amount_type');
-        $data['unit_type'] = $this->input->post('unit_type');
+   //     $data['unit_type'] = $this->input->post('unit_type');
         $data['is_active'] = $this->input->post('active');
         $data['description'] = $this->input->post('description');
         $data['is_featured'] = $this->input->post('is_featured');

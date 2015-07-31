@@ -198,19 +198,28 @@
                     var row = '';
                     row += '<div class="col-sm-6">';
                     row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                    row += '<input type="text" class="form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.label) + '">';
+                    row += '<input type="text" class="form-control "  name="attributes[' + elm.id + ']"   placeholder="' + capitalizeFirstLetter(elm.label) + '">';
                     row += '</div>';
                     html += row;
                     }
                     else
                     {
-                        
+
                     var row = '';
                     row += '<div class="col-sm-6">';
                     row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                    row += '';
+                    row += '<select name="attributes[' + elm.id + ']"  class="form-control drpdown-' + elm.id + '" ></select>';
                     row += '</div>';
-                    html += row;                        
+                    html += row;      
+                    $.ajax({
+                        url:'units/attributes/getAttributeVals',
+                        type:'post',
+                        
+                        data:{val: elm.id}                        
+                    }).done(function(htm){
+                      
+                        $('.drpdown-' + elm.id ).html(htm);
+                    })
                     }
                 });
                 $('.extraAttributes').html(html);

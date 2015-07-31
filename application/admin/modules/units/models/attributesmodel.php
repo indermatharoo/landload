@@ -79,6 +79,12 @@ class Attributesmodel extends Basemodel {
         $results = $this->db->get()->result_array();
         return $results;
     }
+    function getAttributeVals($id)
+    {
+        
+        $this->db->where('dropdown_id',$id);
+        return $this->db->get('units_attributes_dropdown')->result_array();
+    }
     function getDropdownExists($id)
     {
         $this->db->where('dropdown_id',$id);

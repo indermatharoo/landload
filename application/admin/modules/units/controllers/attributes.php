@@ -88,7 +88,19 @@ class Attributes extends Admin_Controller {
         }
         echo json_encode($return);
     }
-
+    function getAttributeVals($id=0)
+    {
+        $html = "";
+        $drpdown = gParam('val');
+        
+        $drpdownVal = $this->attributesmodel->getAttributeVals($drpdown);
+        
+        foreach($drpdownVal as $val)
+        {
+            $html .= "<option value='".$val['id']."'>".$val['value']."</option>"; 
+        }
+        echo $html;
+    }
     function getAttributeValue() {
         $unit_id = gParam('val');
         $type = gParam('type');

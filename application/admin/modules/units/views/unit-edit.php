@@ -17,6 +17,7 @@
 <div class="col-lg-12 padding-0 mar-top15">
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
+        <?php /* ?>
         <div class="col-sm-6">
             <?php //e($propertiesType) ?>
             <label>Property Type<span class="red">*</span></label>
@@ -33,6 +34,7 @@
             </select>
 
         </div>
+        <?php */ ?>
 
         <div class="col-sm-6">
             <label>Unit Name<span class="red">*</span></label>
@@ -132,10 +134,16 @@
 
         <div class="col-sm-6">
             <label>Unit Type<span class="red">*</span></label>
-            <select name="unit_type" class="form-control">
-                <option value="">Select</option>
-                <option <?php echo ($details['unit_type'] == 's') ? 'selected="selected"' : ''; ?> value="s">Shop</option>
-                <option <?php echo ($details['unit_type'] == 'f') ? 'selected="selected"' : ''; ?> value="f">Flat</option>
+            <select name="unit_type" class="form-control" autocomlete="off">
+                <option value="">-Select Type-</option>
+                <?php foreach ($propertiesType as $ptype) { ?>
+                    <option value="<?php echo $ptype['short_code'] ?>" <?php
+                    if ($ptype['short_code'] == arrIndex($details, 'property_type')) {
+                        echo "selected    ";
+                    }
+                    ?>><?php echo $ptype['type'] ?></option>
+
+                <?php } ?>
             </select>
         </div>   
 
@@ -192,15 +200,34 @@
             }
             var html = '';
             response.data.forEach(function (elm) {
-                if (elm.value == null)
-                    elm.value = '';
-                l(elm);
-                var row = '';
-                row += '<div class="col-sm-6">';
-                row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                row += '<input value="' + elm.value + '" type="text" class=" form-control"  name="attributes[' + elm.id + ']"  placeholder="' + capitalizeFirstLetter(elm.label) + '">';
-                row += '</div>';
-                html += row;
+                    if(elm.type=="text")
+                    {
+                    var row = '';
+                    row += '<div class="col-sm-6">';
+                    row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
+                    row += '<input type="text" class="form-control "  name="attributes[' + elm.id + ']"   placeholder="' + capitalizeFirstLetter(elm.label) + '">';
+                    row += '</div>';
+                    html += row;
+                    }
+                    else
+                    {
+
+                    var row = '';
+                    row += '<div class="col-sm-6">';
+                    row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
+                    row += '<select name="attributes[' + elm.id + ']"  class="form-control drpdown-' + elm.id + '" ></select>';
+                    row += '</div>';
+                    html += row;      
+                    $.ajax({
+                        url:'units/attributes/getAttributeVals',
+                        type:'post',
+                        
+                        data:{val: elm.id}                        
+                    }).done(function(htm){
+                      
+                        $('.drpdown-' + elm.id ).html(htm);
+                    })
+                    }
             });
             $('.extraAttributes').html(html);
         });

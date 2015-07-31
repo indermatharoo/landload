@@ -54,7 +54,7 @@ class Units extends Admin_Controller {
         $propertiesType = $this->Unitsmodel->getPropertiesType();
         //$unitsType = $this->Unitsmodel->getUnitType();
         $countryData = $this->Unitsmodel->getCountrydata();
-        $this->form_validation->set_rules('ptype', 'Property type', 'trim|required');
+      //  $this->form_validation->set_rules('ptype', 'Property type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unite Number', 'trim|required');
         if (empty($_FILES['photo']['name'])) {
             $this->form_validation->set_rules('photo', 'photo', 'trim|required');
@@ -107,7 +107,7 @@ class Units extends Admin_Controller {
         $images = $this->Unitsmodel->getUnitImages($offset);
         $countryData = $this->Unitsmodel->getCountrydata();
        
-        $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
+      //  $this->form_validation->set_rules('ptype', 'Property Type', 'trim|required');
         $this->form_validation->set_rules('unit_number', 'Unit Name', 'trim|required');
         $this->form_validation->set_rules('post_code', 'Post Code', 'trim|required');
         $this->form_validation->set_rules('unit_type', 'Unit Type', 'trim|required');
