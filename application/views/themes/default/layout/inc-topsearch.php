@@ -27,10 +27,11 @@
                             <?php foreach (getAttributes() as $attribute): ?>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
-                                    <?php if(arrIndex($attribute, 'type')=="text"){ ?>
-                                    <input type="text" placeholder="<?php echo ucfirst(arrIndex($attribute, 'label')); ?>" value="" name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
-                                    <?php }else{ ?>
-                                    <select name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
+                                    <?php if(arrIndex($attribute, 'type')=="dropdown"){ ?>
+                                    
+                                    
+                                    
+                                                                        <select name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
                                         <?php 
                                         foreach(getAttributesValue(arrIndex($attribute, 'id')) as $drpdown)
                                         {
@@ -40,7 +41,11 @@
                                         }
                                         ?>
                                     </select>
-                                    <?php } ?>
+                                    <?php 
+                                    }
+                                    else{ ?>
+                                        <input type="text" placeholder="<?php echo ucfirst(arrIndex($attribute, 'label')); ?>" value="" name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
+                                    <?php } ?>              
                                 </div>
                             <?php endforeach; ?>
 

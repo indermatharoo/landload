@@ -27,7 +27,7 @@ class Propertymodel extends CI_Model {
         
         $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere, 'left');
         $this->db->group_by('unit_id');
- $this->db->where('t1.status != "0"');
+        $this->db->where('t1.status != "0"');
  
         if (count($attributeWhere))
             $this->db->where_in('attribute_id', $attributeWhere);
