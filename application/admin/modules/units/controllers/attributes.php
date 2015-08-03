@@ -113,5 +113,17 @@ class Attributes extends Admin_Controller {
         }
         echo json_encode($return);
     }
+    function getAttributeValueByFields() {
+        $unit_id = gParam('val');
+        $type = gParam('type');
+        $return['success'] = false;
+        if ($unit_id || $type) {
+            $return['data'] = $this->attributesmodel->getAttributeValueByFields($unit_id, $type);
+            if (count($return['data'])) {
+                $return['success'] = true;
+            }
+        }
+        echo json_encode($return);
+    }
 
 }

@@ -17,25 +17,6 @@
 <div class="col-lg-12 padding-0 mar-top15">
     <?php $this->load->view(THEME . 'messages/inc-messages'); ?>
     <form autocomplete="off" action="" method="post" enctype="multipart/form-data" name="form1" id="form1" class="add-user">
-        <?php /* ?>
-        <div class="col-sm-6">
-            <?php //e($propertiesType) ?>
-            <label>Property Type<span class="red">*</span></label>
-            <select name="ptype" class="form-control" autocomlete="off">
-                <option value="">-Select Type-</option>
-                <?php foreach ($propertiesType as $ptype) { ?>
-                    <option value="<?php echo $ptype['short_code'] ?>" <?php
-                    if ($ptype['short_code'] == arrIndex($details, 'property_type')) {
-                        echo "selected    ";
-                    }
-                    ?>><?php echo $ptype['type'] ?></option>
-
-                <?php } ?>
-            </select>
-
-        </div>
-        <?php */ ?>
-
         <div class="col-sm-6">
             <label>Unit Name<span class="red">*</span></label>
             <input type="text" class="form-control" name="unit_number"  placeholder="Unit Name" value="<?php echo arrIndex($details, 'unit_number') ?>">
@@ -138,7 +119,7 @@
                 <option value="">-Select Type-</option>
                 <?php foreach ($propertiesType as $ptype) { ?>
                     <option value="<?php echo $ptype['short_code'] ?>" <?php
-                    if ($ptype['short_code'] == arrIndex($details, 'property_type')) {
+                    if ($ptype['short_code'] == arrIndex($details, 'unit_type')) {
                         echo "selected    ";
                     }
                     ?>><?php echo $ptype['type'] ?></option>
@@ -202,12 +183,12 @@
             response.data.forEach(function (elm) {
                     if(elm.type=="text")
                     {
-                    var row = '';
-                    row += '<div class="col-sm-6">';
-                    row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
-                    row += '<input type="text" class="form-control "  name="attributes[' + elm.id + ']"   placeholder="' + capitalizeFirstLetter(elm.label) + '">';
-                    row += '</div>';
-                    html += row;
+                        var row = '';
+                        row += '<div class="col-sm-6">';
+                        row += '<label>' + capitalizeFirstLetter(elm.label) + '</label><br />';
+                        row += '<input type="text" class="form-control " value="'+elm.value+'" name="attributes[' + elm.id + ']"   placeholder="' + capitalizeFirstLetter(elm.label) + '">';
+                        row += '</div>';
+                        html += row;
                     }
                     else
                     {
@@ -224,8 +205,8 @@
                         
                         data:{val: elm.id}                        
                     }).done(function(htm){
-                      
                         $('.drpdown-' + elm.id ).html(htm);
+                        $('.drpdown-' + elm.id +' option[value="'+elm.value+'"]').attr('selected',true);
                     })
                     }
             });
