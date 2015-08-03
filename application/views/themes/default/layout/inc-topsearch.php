@@ -28,10 +28,7 @@
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
                                     <?php if(arrIndex($attribute, 'type')=="dropdown"){ ?>
-                                    
-                                    
-                                    
-                                                                        <select name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
+                                    <select name="attributes[<?php echo arrIndex($attribute, 'id') ?>]" class="form-control">
                                         <?php 
                                         foreach(getAttributesValue(arrIndex($attribute, 'id')) as $drpdown)
                                         {
