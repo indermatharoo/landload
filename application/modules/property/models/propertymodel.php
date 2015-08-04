@@ -48,10 +48,8 @@ class Propertymodel extends CI_Model {
         $this->db->select('units.id as unit_id,units.*,properties_type.*')->from('units');
         $this->db->where('units.id', $uid);
         // $this->db->join('properties', 'properties.id=units.property_id');
-        $this->db->join('properties_type', 'units.property_type=properties_type.short_code');
+        $this->db->join('properties_type', 'units.unit_type=properties_type.short_code');
         $rs = $this->db->get();
-//        e($rs->result_array());
-        //e($this->db->last_query());
         return $rs->row_array();
     }
 
