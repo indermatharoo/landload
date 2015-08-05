@@ -192,7 +192,7 @@
                 <div class="col-md-12">
                     <div class="view-all-property">
                         <div class="property_heading_text btn-view-all">
-                            <a href="#">
+                            <a href="property/">
                                 <h4> View All </h4>
                             </a>
                         </div>
