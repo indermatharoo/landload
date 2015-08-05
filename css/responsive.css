@@ -1,0 +1,291 @@
+@media (min-width:320px){
+    .topbar_left_section ul {
+        display: table;
+        margin: 0 auto;
+    }
+    .logo {
+        margin-top: 15px;
+        padding-top: 15px;
+        text-align: center;
+    }
+    
+    .navbar-nav > li{
+        border-right: none;
+        border-bottom: 1px solid #434343 ;
+    }
+    .navbar-nav > li:last-child{
+        border: none;
+    }
+    
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover  {
+        background: #ee9300 none repeat scroll 0 0;
+        color: #fff;
+    }
+    
+    
+    .serv-box-section.serv-box-top2 {
+        padding-bottom: 25px;
+        padding-top: 25px;
+    }
+    .property-feature-main-heading h3{
+        margin: 0;
+        padding:10px 0 9px;
+    }
+    .property-feature-desc-content{
+        margin: 0 0 15px;
+        padding: 16px 5px;
+    }
+    .join-form-left-section h4{
+        text-align: center;
+    }
+    .join-form-left-section p {
+        padding-top: 10px;
+        text-align: center;
+    }
+    .join-form-right-section {
+        display: table;
+        margin: 0 auto;
+    }
+    .view-all-property{
+        width: 100%;
+    }
+    .full_footer_container{
+        height: auto;
+        max-height: 100%;
+    }
+    .property_heading_text h2{
+        padding: 12px 15px 9px;
+        display: table;
+        width: auto;
+    }
+    .popular_link_list_section{
+        text-align: center;
+    }
+    .footer_copyright_section{
+        text-align: center;
+    }
+    .designed_by_text_rightside p{
+        text-align: center;
+    }
+    .flexslider .slides > li{
+        margin: 5px 0 !important;
+    }
+    #navbar ul {
+        text-align: center;
+    }
+   .right_logo_container {
+        font-size: 14px;
+        padding-top: 20px;
+        text-align: center;
+    }
+}
+
+
+
+@media (min-width:360px){
+    .view{
+        width: 100%;
+    }
+    .view .mask, .view .content{
+        width: 100%;
+    }
+    .property-list-format li{
+        padding:0 4px 0 35px;
+    }
+}
+
+@media (min-width:600px){
+    
+    .property-list-format li{
+        width: 30%;
+    }
+    .property-list-format li:nth-child(2) {
+      text-align: center;
+      padding:0;
+    }
+    
+    }
+
+
+@media (min-width:768px){
+    .topbar_left_section ul {
+        display: block;
+        margin: 0 ;
+    }
+    .logo {
+        text-align: left;
+    }
+    .view-all-property {
+        display: table;
+        padding: 0 10px;
+        width: auto;
+    }
+    .popular_link_list_section {
+        text-align: left;
+    }
+    .serv-box-section.serv-box-top2{
+        padding: 0;
+    }
+    .serv-box-top-img {
+        height: 150px;
+        width: 150px;
+    }
+    .property-list-format li {
+        margin: 0 4px;
+        width: 30%;
+    }
+    .property-list-format li:nth-child(2) {
+        padding: 0 4px;
+        text-align: center;
+    }
+    .property-list-format li a{
+        font-size: 10px;
+    }
+    .view {
+        height: auto;
+        width: 100%;
+    }
+   .view .mask, .view .content{
+        height: auto;
+        width: 100%;
+   }
+   .right_logo_container {
+        font-size: 12px;
+        padding-top: 62px;
+        text-align: left;
+    }
+    .navbar-nav > li {
+        border-right: 1px solid #464646;
+        border-bottom: none;
+    }
+}
+
+
+@media (min-width:1024px){
+    .topbar_left_section ul {
+        display: block;
+        margin: 0;
+    }
+    .logo {
+        margin-top: 0px;
+        padding-top: 0px;
+        text-align: left;
+    }
+    .serv-box-section.serv-box-top2 {
+        padding-bottom: 0px;
+        padding-top: 0px;
+    }
+    .property-feature-main-heading h3{
+        margin: 0 0px;
+    }
+    .property-feature-desc-content{
+        margin: 0 0px;
+        padding: 16px 5px;
+    }
+    
+    
+    .join-form-left-section h4{
+        text-align: left;
+    }
+    .join-form-left-section p {
+        padding-top: 0px;
+        text-align: left;
+    }
+    .join-form-right-section {
+        display: block;
+        margin: 0;
+    }
+    .property-feature-main-heading h3{
+        padding: 14px 0 5px;
+    }
+    .view-all-property{
+        width: 10%;
+    }
+    .full_footer_container{
+        height: 460px;
+        max-height: 500px;
+    }
+    .property_heading_text h2{ 
+    }
+    
+    .popular_link_list_section{
+        text-align: left;
+    }
+    .footer_copyright_section   {
+        text-align: left;
+    }
+    .designed_by_text_rightside p{
+        text-align: right;
+    }
+    .flexslider .slides > li{
+        margin: 5px 8px !important;
+    }
+    .right_logo_container {
+        font-size: 12px;
+        padding-top: 40px;
+        text-align: left;
+    }
+    
+    .view{
+        width: 100%;
+    }
+    .view .mask, .view .content{
+        width: 100%;
+    }
+    .view p.prop_price {
+        font-size: 32px;
+    }
+    .property-list-format li{
+        padding:0 4px 0 12px;
+        margin: 0;
+        width: auto;
+    }
+    .property-list-format li:first-child {
+        border-left: 0 none;
+        padding-left: 4px;
+    }
+    .property-list-format li:nth-child(2) {
+        padding: 0 4px;
+        text-align: center;
+    }
+    .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus, .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover{
+        color: #000;
+    }
+    
+    .serv-box-section.serv-box-top2 {
+        padding-bottom:0px;
+        padding-top: 0px;
+    }
+    .serv-box-top-img {
+        height: 200px;
+        width: 200px;
+    }
+    
+}
+
+@media (min-width:1170px){
+    .view{
+        width: 263px;
+    }
+    .view .mask, .view .content{
+        width: 263px;
+    }
+    .view p.prop_price {
+        font-size: 40px;
+    }
+    .join-form-left-section{
+        padding: 17px 10px 0;
+    }
+    .join-form-left-section h4{
+        font-size: 25px;
+    }
+    .join-form-left-section p{
+        font-size: 13.3px;
+    }
+    .join-form-right-section .btn{
+         margin-top: 18px;
+    }
+    .property-list-format li:nth-child(2){
+        padding: 0 25px;
+    }
+}

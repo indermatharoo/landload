@@ -1,3 +1,4 @@
+<!--
 <div class="full_top_searchbar_container">
     <div class="property_searchbar_section">
         <div class="container">
@@ -5,7 +6,7 @@
                 <div class="col-md-12">
                     <div class="property_searchbar_option">
                         <form role="form" class="navbar-form" id="signin" method="post">
-                            <!--                            <div class="input-group">
+                                                        <div class="input-group">
                                                             <div class="srch_heading_text"><h4 style="">Find Now</h4></div>
                                                         </div>
                                                         <div class="input-group">
@@ -23,7 +24,7 @@
                                                         <div class="input-group">
                                                             <span class="input-group-addon"><i class="fa fa-globe"></i></span>
                                                             <input type="text" placeholder="Zipcode, Country" value="" name="password" class="form-control" id="password">                                        
-                                                        </div>-->
+                                                        </div>
                             <?php foreach (getAttributes() as $attribute): ?>
                                 <div class="input-group">
                                     <span class="input-group-addon"></span>
@@ -54,4 +55,4 @@
         </div>
 
     </div>
-</div>
+</div>-->

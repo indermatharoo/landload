@@ -4,8 +4,14 @@
             <div class="topbar_left_section">
                 <div class="col-md-6">
                     <ul class="list-unstyled list-inline">
-                        <li> <i class="fa fa-phone"></i><?= DWS_CONTACT_NUMBER; ?> </li>
-                        <li> <a href="mailto:<?= DWS_EMAIL_ADMIN; ?>"><i class="fa fa-envelope-o "></i><?= DWS_EMAIL_ADMIN; ?></a> </li>
+                        <li> <a href="#"><i class="fa fa-twitter"></i> </a> </li>
+                              <li> <a href="#"><i class="fa fa-facebook "></i></a> </li>
+                              <li> <a href="#"><i class="fa fa-google-plus"></i> </a> </li>
+                              <li> <a href="#"><i class="fa fa-linkedin"></i></a> </li>
+                              <li> <a href="#"><i class="fa fa-pinterest-p"></i> </a> </li>
+                              <li> <a href="#"><i class="fa fa-skype"></i> </a> </li>
+<!--                        <li> <i class="fa fa-phone"></i><?= DWS_CONTACT_NUMBER; ?> </li>
+                        <li> <a href="mailto:<?= DWS_EMAIL_ADMIN; ?>"><i class="fa fa-envelope-o "></i><?= DWS_EMAIL_ADMIN; ?></a> </li>-->
                     </ul>
                 </div>
             </div>
@@ -78,6 +84,33 @@
     </div>
 </div>
 <!-- Static navbar -->
+
+
+<div class="container">
+          <div class="row">
+              <div class="col-md-4 col-sm-6">
+                   <div class="logo_container">
+                        <div class="logo">
+                            <a href="#">
+                                <img src="imgs/logo.png" class="logo-img"/>
+                            </a>
+                        </div>
+                    </div>
+              </div>
+              
+              <div class="col-md-8 col-sm-6">
+                   <div class="right_logo_container  navbar-right">
+                        <div class="right_logo">
+                            <ul class="list-unstyled">
+                                <li><i class="fa fa-phone"></i> 215 -368- 1234</li>
+                                <li><i class="fa fa-envelope-o"></i> email@domainname.com</li>
+                            </ul>
+                        </div>
+                    </div>
+              </div>
+              
+          </div>
+</div>
 <nav class="navbar navbar-default navbar-static-top">
     <div class="container">
         <?php $this->load->view("themes/" . THEME . "/layout/inc-menu"); ?>

@@ -7,14 +7,14 @@
 
     <div class="carousel-inner">
         <div class="item active">
-            <a href="#"><img src="imgs/slider2.jpg" /></a>
+            <a href="#"><img src="imgs/slider1.jpg" /></a>
             <div class="carousel-caption">
                 <h3>Meow</h3>
                 <p>Just Kitten Around</p>
             </div>
         </div>
         <div class="item">
-            <a href="#"><img src="imgs/slider1.jpg" /></a>
+            <a href="#"><img src="imgs/slider2.jpg" /></a>
             <div class="carousel-caption">
                 <h3>Meow</h3>
                 <p>Just Kitten Around</p>

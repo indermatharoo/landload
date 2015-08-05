@@ -31,7 +31,22 @@
         <section id="topsearch">
             <?php $this->load->view("themes/" . THEME . "/layout/inc-topsearch"); ?>
         </section>
-
+        
+        <section id="mid-services-info">
+            <?php $this->load->view("themes/" . THEME . "/layout/inc-before-propertylist"); ?>
+        </section>
+        
+        
+        <section id="property-list-desc">
+            <?php $this->load->view("themes/" . THEME . "/layout/inc-propertylist-desc"); ?>
+        </section>
+        
+        
+        
+        
+        
+        
+        
         <section id="properties">
             <div class="full_middle_container">
                 <div class="container">
@@ -87,7 +102,11 @@
                 </div>
             </div> <!-- /container -->
         </section>
-
+        
+        <section id="partners">
+            <?php $this->load->view("themes/" . THEME . "/layout/our-partners"); ?>
+        </section>
+        
         <footer>
             <?php $this->load->view("themes/" . THEME . "/layout/inc-footer"); ?>
         </footer>   

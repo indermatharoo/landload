@@ -22,9 +22,10 @@ class Propertymodel extends CI_Model {
             $valueWhere = '';
         }
        
-        $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value');
+        $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value , pt.type as property_type,extra.company_name as company_id');
         $this->db->from('units t1');
-        
+        $this->db->join('properties_type pt', 'pt.short_code = t1.unit_type');
+        $this->db->join('user_extra_detail as extra', 'extra.id = t1.company_id');
         $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere, 'left');
         $this->db->group_by('unit_id');
         $this->db->where('t1.status != "0"');

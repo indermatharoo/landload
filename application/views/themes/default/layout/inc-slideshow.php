@@ -1,4 +1,13 @@
 <div id="carousel-example" class="carousel slide" data-ride="carousel">
+    <ol class="carousel-indicators">
+        <?php
+        $sliderCount  = 0; 
+        foreach ($slides as $slide) { ?>
+    <li data-target="#carousel-example" data-slide-to="<?php echo $sliderCount; ?>"  class="<?php if($sliderCount==0){echo "active";} ?>"></li>
+    
+        <?php $sliderCount++;  } ?>
+  </ol>
+    
     <div class="carousel-inner">
         <?php
         $c = '';
