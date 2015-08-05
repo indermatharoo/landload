@@ -92,7 +92,7 @@
                    <div class="logo_container">
                         <div class="logo">
                             <a href="#">
-                                <img src="imgs/logo.png" class="logo-img"/>
+                                <img src="/imgs/logo.png" class="logo-img"/>
                             </a>
                         </div>
                     </div>
