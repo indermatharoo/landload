@@ -46,11 +46,11 @@ $(document).ready(function(){
 
          </ul>
         
-        <div class="col-lg-12 padding-0 mar-top30">
+        <div class="padding-0 mar-top30">
             <div class="head_desc">
                 <h2><?php echo $property['unit_number']; ?></h2>
                 <hr>
-                <p style="font-size: 20px;"><b>Property Description</b></p>
+                <p style="font-size: 18px;"><b>Property Description</b></p>
                 <p><?php echo $property['description']; ?></p>
             </div>
         </div>
@@ -163,7 +163,7 @@ $(document).ready(function(){
                                 <textarea name="message" id="message" class="form-control" placeholder="Your Message" rows="5"></textarea>
                             </div>
                             <div class="form-group push-right">
-                                <input type="submit" name="submit" class="btn btn-black push-right"  value="Submit">
+                                <input type="submit" name="submit" class="btn btn-primary push-right"  value="Submit">
                             </div>
                         </div>
                     </form>

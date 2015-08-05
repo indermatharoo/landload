@@ -46,7 +46,7 @@
         
         
         
-        
+        <?php /* ?>
         <section id="properties">
             <div class="full_middle_container">
                 <div class="container">
@@ -102,6 +102,7 @@
                 </div>
             </div> <!-- /container -->
         </section>
+        <?php */ ?>
         
         <section id="partners">
             <?php $this->load->view("themes/" . THEME . "/layout/our-partners"); ?>
