@@ -5,11 +5,42 @@ class Propertymodel extends CI_Model {
     function __construct() {
         parent::__construct();
     }
+function countAll($attributes) {
 
-    function listAll($attributes = array(),$limit = false) {
+    $attributeWhere = $valueWhere = array();
+        foreach ($attributes as $id => $value):
+            if (empty($value))
+                continue;
+            $attributeWhere[] = $id;
+            $valueWhere[] = 't3.value like "%' . $value . '%"';
+        endforeach;
+        if (count($valueWhere)) {
+            $valueWhere = implode(' OR ', $valueWhere);
+            $valueWhere = 'AND ' . $valueWhere;
+        } else {
+            $valueWhere = '';
+        }
+       
+        $this->db->select('t1.id as unit_id,t1.*,t3.attribute_id as attribute_id,t3.value as attrbute_value , pt.type as property_type,extra.company_name as company_id');
+        $this->db->from('units t1');
+        $this->db->join('properties_type pt', 'pt.short_code = t1.unit_type');
+        $this->db->join('user_extra_detail as extra', 'extra.id = t1.company_id');
+        $this->db->join('units_attributes_value t3', 't3.unit_id=t1.id ' . $valueWhere, 'left');
+        $this->db->group_by('unit_id');
+        $this->db->where('t1.status != "0"');
+ 
+        if (count($attributeWhere))
+            $this->db->where_in('attribute_id', $attributeWhere);
+        return $this->db->count_all_results('units');
+    }
+    function listAll($attributes = array(),$limit = false,$offset=false) {
         if($limit)
         {
             $this->db->limit($limit);
+        }
+        if($offset)
+        {
+            $this->db->offset($offset);
         }
         $attributeWhere = $valueWhere = array();
         foreach ($attributes as $id => $value):

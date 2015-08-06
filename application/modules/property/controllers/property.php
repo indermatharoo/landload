@@ -9,13 +9,27 @@ class Property extends Cms_Controller {
         parent::__construct();
     }
 
-    function index() {
+    function index($offet=0) {
         $this->load->model('propertymodel');
-        $property = $this->propertymodel->listAll();
+        $this->load->library('pagination');
+        $attributes = gParam('attributes',array());
+        
+        
+        
+        
         //e($property);
-
+        $perpage = 8;
+        $config = array();
+        $config['base_url'] = base_url() . "property/index/";
+        $config['uri_segment'] = 3;
+        $config['total_rows'] = $this->propertymodel->countAll($attributes);
+        $config['per_page'] = $perpage;
+        $this->pagination->initialize($config);
+        
+        $property = $this->propertymodel->listAll($attributes,$perpage,$offet);
         $inner = array();
         $inner['property'] = $property;
+        $inner['pagination'] = $this->pagination->create_links();
         $shell['contents'] = $this->load->view("property-index", $inner, true);
         $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
     }
