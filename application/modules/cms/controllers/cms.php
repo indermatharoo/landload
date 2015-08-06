@@ -80,7 +80,7 @@ class Cms extends Cms_Controller {
         $slides = $this->Slidemodel->listAll();
         $attributes = gParam('attributes',array());
         $property = array();
-        $property = $this->Propertymodel->listAll($attributes);
+        $property = $this->Propertymodel->listAll($attributes,4);
         //Get all news
 //        $news = array();
 //        $news = $this->Newsmodel->listAll(0 ,2);

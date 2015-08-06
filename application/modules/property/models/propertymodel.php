@@ -6,8 +6,11 @@ class Propertymodel extends CI_Model {
         parent::__construct();
     }
 
-    function listAll($attributes = array()) {
-
+    function listAll($attributes = array(),$limit = false) {
+        if($limit)
+        {
+            $this->db->limit($limit);
+        }
         $attributeWhere = $valueWhere = array();
         foreach ($attributes as $id => $value):
             if (empty($value))
