@@ -87,68 +87,7 @@
 
                             <?php //e($row);
                             } ?>                
-                <div class="col-md-3 col-sm-6">
-                        <div class="property_list_box">
-                            <div class="view view-first property_img">
-                                <img src="imgs/property/property-01.jpg">
-                                <div class="mask">
-                                    <h2>Property Name Here</h2>
-                                    <p>A wonderful serenity has taken possession of my entire soul, like these sweet mornings of spring which I enjoy with my whole heart.</p>
-                                    <p class="prop_price">     $1,599.000 </p>
-                                    
-                                    <a href="#" class="info">Read More</a>
-                                </div>
-                            </div> 
-                            <div class="clearfix"></div>
-                            
-                            <div class="property_text">
-                                <div class="read-btn-left"> 
-                                    <div class="property-city-name"><p>  <span class="text-gold"> London, </span> UK </p></div>
-                                </div>
-                                <div class="read-btn-right">
-                                    <div class="buy-now-btn"> <a class="btn btn-primary" href="#">  Read More </a></div> 
-                                </div>
-                                <div class="clearfix"></div>
-                                
-                                <div class="col-md-12"> 
-                                    <ul class="list-unstyled list-inline property-list-format">
-                                        <li><a href="#"> <i class="fa fa fa-map-marker"></i> Residential</a></li>
-                                        <li><a href="#"> <i class="fa fa-map-marker"></i> 3BKH Room</a></li>
-                                        <li><a href="#"> <i class="fa fa-map-marker"></i> For Sale</a></li>
-                                    </ul>
-                                    <!--<div class="property-text-name"><h4> Property Tittle Name</h4></div>-->
-                                </div>
-                                <!--div class="col-md-3">
-                                    <div class="price-text-note"> <p>  $1,599.000 </p></div> 
-                                </div>-->
-                                <div class="clearfix"></div>
-                                <div class="property-contact-info">
-                                    <div class="read-btn-left"> 
-                                        <div class="property-agent-name"><p>   Agent Name </p></div>
-                                    </div>
-                                    <div class="read-btn-right"> 
-                                        <div class="property-company-name"><p>   Company Name </p></div>
-                                    </div>
-                                    <div class="clearfix"></div>
-                                </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                 
                    <!-- End First Column Line -->
-                     
                 </div>
             </div>
         </div><!-- container /-->
