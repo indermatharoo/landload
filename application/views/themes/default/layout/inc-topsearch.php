@@ -1,3 +1,4 @@
+<?php /* ?>
 <!--
 <div class="full_top_searchbar_container">
     <div class="property_searchbar_section">
@@ -57,7 +58,7 @@
     </div>
 </div>-->
 
-
+<?php */ ?>
 <div class="full_top_searchbar_container">
         <div class="property_searchbar_section">
             <div class="container">
