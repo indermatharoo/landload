@@ -7,7 +7,7 @@ class Propertymodel extends CI_Model {
     }
 function countAll($attributes) {
 
-    $attributeWhere = $valueWhere = array();
+        $attributeWhere = $valueWhere = array();
         foreach ($attributes as $id => $value):
             if (empty($value))
                 continue;
