@@ -36,7 +36,7 @@
 <div class="col-md-3 col-sm-6">
                         <div class="property_list_box">
                             <div class="view view-first property_img">
-                                <img src="imgs/property/property-01.jpg">
+                                <img src="<?php echo $this->config->item('UNIT_IMAGE_URL').$row['unit_image'] ?>" height="195px">
                                 <div class="mask">
                                     <h2><?php echo arrIndex($row, 'unit_number') ?></h2>
                                     <p><?php echo arrIndex($row, 'description')?></p>
