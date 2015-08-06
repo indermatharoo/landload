@@ -91,7 +91,7 @@
               <div class="col-md-4 col-sm-6">
                    <div class="logo_container">
                         <div class="logo">
-                            <a href="#">
+                            <a href="<?php echo  base_url() ?>">
                                 <img src="/imgs/logo.png" class="logo-img"/>
                             </a>
                         </div>
