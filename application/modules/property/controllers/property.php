@@ -18,7 +18,7 @@ class Property extends Cms_Controller {
         
         
         //e($property);
-        $perpage = 2;
+        $perpage = 8;
         $config = array();
         $config['base_url'] = base_url() . "property/index/";
         $config['uri_segment'] = 3;
