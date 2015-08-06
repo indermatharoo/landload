@@ -15,14 +15,15 @@
                     </ul>
                 </div>
             </div>
-
+            <?php /* ?>
             <div class="topbar_left_section text-right">
                 <div class="col-md-6">
                     <ul class="list-unstyled list-inline">
-                        <li><i class="fa fa-clock-o fa-lg"></i><span id="curdate">Monday 7/27/2015 – 11:33:37 am</span></li>
+                        <li><i class="fa fa-clock-o fa-lg"></i><span id="curdate">Monday 7/27/2015 â€“ 11:33:37 am</span></li>
                     </ul>                    
                 </div>
             </div>
+            
             <script>
                 $(document).ready(function () {
                     DisplayCurrentTime();
@@ -57,10 +58,11 @@
                             dayname = 'Saturday';
                             break;
                     }
-                    document.getElementById('curdate').innerHTML = dayname + ' ' + cDate + " – " + dt.toLocaleTimeString();
+                    document.getElementById('curdate').innerHTML = dayname + ' ' + cDate + " â€“ " + dt.toLocaleTimeString();
                     window.setTimeout('DisplayCurrentTime()', refresh);
                 }
             </script>
+            <?php */ ?>
         </div>
     </div>
 </div>
