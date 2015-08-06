@@ -31,7 +31,8 @@ function countAll($attributes) {
  
         if (count($attributeWhere))
             $this->db->where_in('attribute_id', $attributeWhere);
-        return $this->db->count_all_results('units');
+        $results = $this->db->get()->result_array();
+        return count($results);
     }
     function listAll($attributes = array(),$limit = false,$offset=false) {
         if($limit)
