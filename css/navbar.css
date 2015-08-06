@@ -130,7 +130,7 @@ body {
 
 /* Slider Style CSS Code */
 .carousel {
-    margin-bottom: 15px;
+/*    margin-bottom: 15px;*/
 }
 .full-serv-box-container {
     margin-top: 15px;
@@ -835,22 +835,32 @@ footer h3{
 .srch_heading_text h4 {
     color: #5b2b0f;
     font-family: oswald;
-    font-size: 22px;
-    font-weight: 600;
+    font-size: 19px;
+    font-weight: 900;
+    line-height: 32px;
+    margin-top: 0;
     padding-right: 12px;
+    text-align: center;
     text-transform: uppercase;
 }
 .property_searchbar_option .navbar-form .input-group > .form-control {
     width: 180px !important;
+    margin: 0 8px 8px 0;
+    border-radius: 3px;
 }
 .property_searchbar_option .navbar-form button {
+    font-family: oswald;
+    font-size: 18px;
     margin-left: 10px;
+    margin-top: 15px;
+    text-transform: uppercase;
     width: 120px;
+    
 }
 .property_searchbar_section {
     background: #fea310 none repeat scroll 0 0;
     border-top: 1px solid #ae5300;
-    padding: 20px;
+    padding: 15px 0px 18px;
 }
 .form-control{
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.09) inset;
@@ -864,7 +874,10 @@ footer h3{
 .property_searchbar_option .navbar-form button i {
     margin-left: 5px;
 }
-
+.property_searchbar_option .input-group .form-control{
+    font-size: 11px;
+    font-weight: 100;
+}
 .top-login-links a {
     background: #e59230 none repeat scroll 0 0;
     border-color: #d68a30;

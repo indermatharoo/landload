@@ -31,7 +31,7 @@ class Property extends Cms_Controller {
         $inner['property'] = $property;
         $inner['pagination'] = $this->pagination->create_links();
         $shell['contents'] = $this->load->view("property-index", $inner, true);
-        $this->load->view("themes/" . THEME . "/templates/subpage", $shell);
+        $this->load->view("themes/" . THEME . "/templates/property", $shell);
     }
 
     function detail($uid) {
